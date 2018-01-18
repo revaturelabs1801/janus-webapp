@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { RouteService } from '../../Caliber/services/route.service';
+import { RouteService } from '../../portals/Caliber/services/route.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Routes } from '@angular/router/src/config';
 import { OnDestroy } from '@angular/core/';
