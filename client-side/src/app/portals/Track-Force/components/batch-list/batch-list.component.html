@@ -1,4 +1,4 @@
-@Author Princewill Ibe
+<!-- @Author Princewill Ibe -->
 <app-navbar></app-navbar>
 <div class="container table-width-adjust">
   <div>
@@ -17,13 +17,13 @@
         </tr>
         </thead>
         <tbody>
-        <!-- <ng-container *ngIf="dataReady">
+        <ng-container *ngIf="dataReady">
           <tr *ngFor="let batch of batches" class="max-width">
             <td class="name-column"><a routerLink="/batch-details/{{batch.id}}">{{batch.batchName}}</a></td>
             <td class="date-column">{{batch.startDate | date:'MM/dd/yyyy'}}</td>
             <td class="date-column">{{batch.endDate| date:'MM/dd/yyyy'}}</td>
           </tr>
-        </ng-container> -->
+        </ng-container>
         </tbody>
       </table>
     </div>
@@ -43,7 +43,7 @@
           <input type="submit" value="Submit" (click)="applySelectedRange()"/>
         </div>
       </form>
-      <!-- <ng-container *ngIf="dataReady && !dataEmpty">
+      <ng-container *ngIf="dataReady && !dataEmpty">
         <canvas baseChart
                 id="pie" class="chart chart-pie"
                 [data]="curriculumCounts"
@@ -58,7 +58,7 @@
       </h3>
       <h3 class="data-status" *ngIf="!dataReady">
         Loading ...
-      </h3> -->
+      </h3>
     </div>
 
   </div>

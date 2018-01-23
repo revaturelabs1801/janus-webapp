@@ -1,7 +1,6 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
@@ -115,7 +114,6 @@ import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
     HttpClientModule,
     NgbModule.forRoot(),
     RouterModule.forChild(routes),

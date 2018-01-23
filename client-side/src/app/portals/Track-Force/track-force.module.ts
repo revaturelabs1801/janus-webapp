@@ -59,7 +59,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { routes } from './routing/routes';
 import { RouterLinkStubDirective, RouterOutletStubComponent } from './testing-helpers/router-stubs';
 import { FooterComponent } from './components/footer/footer/footer.component';
-import { CommonModule } from '@angular/common/src/common_module';
+
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -86,7 +87,7 @@ import { CommonModule } from '@angular/common/src/common_module';
   ],
   imports: [
     // BrowserModule,
-    // CommonModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forChild(routes),

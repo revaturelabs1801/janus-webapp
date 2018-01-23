@@ -11,7 +11,7 @@
 		<div class="col-lg-6">
 			<h3 class="text-center text-primary">{{selectedStatus}}</h3><br/>
 			<!-- TODO: figure out how to convert this['chart-click'],this['chart-colors'] to TypeScript -->
-			<!-- <canvas baseChart
+			<canvas baseChart
 				id="skillset"
 				class="chart chart-bar"
 				*ngIf="skillsetData && skillsetData.length && skillsetLabels && skillsetLabels.length; else noData"
@@ -22,7 +22,7 @@
 				[options]="chartOptions"
 				(chartClick)="goToAssociateList($event)"
 				>
-			</canvas> -->
+			</canvas>
 			<ng-template #noData>
 				<div class="centerBoth">
 					{{status}}

@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <!-- <canvas *ngIf="isDataReady && !isDataEmpty" baseChart id="bar"
+      <canvas *ngIf="isDataReady && !isDataEmpty" baseChart id="bar"
               [chartType]="chartType"
               [datasets]="dataSets"
               [labels]="statusNames"
@@ -14,7 +14,7 @@
       </h3>
       <h3 class="data-status" *ngIf="!isDataReady">
         Loading ...
-      </h3> -->
+      </h3>
     </div>
     <div class="col-md-6">
       <h3>Associates</h3>
@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        <!-- <ng-container *ngIf="associates">
+        <ng-container *ngIf="associates">
           <tr *ngFor="let associate of associates | orderBy:'id'">
             <td><a href="/form-comp/{{associate.id}}">{{associate.id}}</a></td>
             <td>{{associate.firstName}}</td>
@@ -37,7 +37,7 @@
             <td>{{associate.marketingStatus}}</td>
             <td>{{associate.client}}</td>
           </tr>
-        </ng-container> -->
+        </ng-container>
         </tbody>
       </table>
     </div>

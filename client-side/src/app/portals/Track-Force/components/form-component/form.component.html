@@ -57,7 +57,7 @@
                 <label for="client">Assign Client:</label>
                 <select class="form-control" id="client" [(ngModel)]="selectedClient">
                     <option selected="selected">None</option>
-                    <!-- <option *ngFor="let client of clients">{{client.name}}</option> -->
+                    <option *ngFor="let client of clients">{{client.name}}</option>
                 </select>
                 <p> </p>
                 <button (click)="updateAssociate()" class="btn btn-default" style="float: right">Update Status</button>
