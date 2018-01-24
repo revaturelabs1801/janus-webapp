@@ -1,4 +1,6 @@
 <!-- @Author Princewill Ibe -->
+<app-navbar></app-navbar>
+<div class="bk-color max-dim">
 <div class="container table-width-adjust">
   <div>
     <title class="text-center text-primary">Batch List</title>
@@ -18,7 +20,7 @@
         <tbody>
         <ng-container *ngIf="dataReady">
           <tr *ngFor="let batch of batches" class="max-width">
-            <td class="name-column"><a routerLink="/TrackForce/batch-details/{{batch.id}}">{{batch.batchName}}</a></td>
+            <td class="name-column"><a routerLink="/batch-details/{{batch.id}}">{{batch.batchName}}</a></td>
             <td class="date-column">{{batch.startDate | date:'MM/dd/yyyy'}}</td>
             <td class="date-column">{{batch.endDate| date:'MM/dd/yyyy'}}</td>
           </tr>
@@ -61,4 +63,5 @@
     </div>
 
   </div>
+</div>
 </div>

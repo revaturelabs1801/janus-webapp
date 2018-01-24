@@ -1,4 +1,4 @@
-body{
+body > .wrapper{
 	background-color: #ebedea;
 	background-size: cover;
 }
@@ -61,7 +61,28 @@ ul{
 li > a{
 	color: #757575;
 }
-
+li[_ngcontent-c6] {
+   padding: 5px;
+   margin-top: 0px;
+}
+ul, menu, dir {
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 40px;
+ }
+ul[_ngcontent-c6] {
+   margin: auto;
+   margin-top: 0px;
+   padding: 0;
+   list-style-type: none;
+}
+li {
+   display: list-item;
+   text-align: -webkit-match-parent;
+}
 li > a:hover{
 	color: #121212;
 }

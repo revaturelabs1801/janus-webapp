@@ -51,7 +51,9 @@
 /* Footer, set footer height to actual height of footer*/
 html, body {
     height: 100%;
+    background-color:transparent;
 }
+
 .img-responsive {
     padding-bottom: 1em;
 }
@@ -62,6 +64,7 @@ html, body {
     padding-bottom: 128px;
     max-width: 100%;
 }
+
 footer {
     min-height: 128px;
     padding: 10px;
@@ -69,15 +72,19 @@ footer {
     font-size: .75em;
     max-width: 100%;
 }
+
 .center {
     text-align: center;
 }
+
 .contact-info {
     color: #B9B9BA;
 }
+
 .fa-copyright {
     padding-right: .5em;
 }
+
 footer a, footer a:hover {
     color: #B9B9BA;
 }
