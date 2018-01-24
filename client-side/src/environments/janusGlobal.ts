@@ -19,7 +19,7 @@ export const janusGlobal = {
       name: 'Track Force',
       homeUrl: '/TrackForce/home',
       baseUrl: '/TrackForce',
-      imgUrl: '/'
+      imgUrl: '../../assets/track-force.png'
     }
   ]
 };
