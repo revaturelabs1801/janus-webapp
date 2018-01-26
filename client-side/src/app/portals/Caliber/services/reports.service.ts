@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AbstractApiService } from './abstract-api.service';
-import { EnvironmentService } from './environment.service';
 import { HttpClient } from '@angular/common/http/';
-import { AlertsService } from './alerts.service';
+import { urls } from './urls';
+
+// rxjs
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../../environments/environment';
 
 @Injectable()
-export class ReportsService extends AbstractApiService<any> {
+export class ReportsService {
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
+  constructor(public http: HttpClient) {
+    // super(httpClient, alertService);
   }
 
   /**
@@ -19,8 +19,7 @@ export class ReportsService extends AbstractApiService<any> {
    * @memberof ReportsService
    */
   public fetchReportsStackedBarCurrentWeek(): Observable<any[]> {
-
-    return super.doGetListObservable(environment.reportsStackedBarCurrentWeek);
+    return this.http.get<any>(urls.reportsStackedBarCurrentWeek);
   }
 
   /**
@@ -29,8 +28,7 @@ export class ReportsService extends AbstractApiService<any> {
    * @memberof ReportsService
    */
   public fetchReportsDashboard(): Observable<any[]> {
-
-    return super.doGetListObservable(environment.reportsDashBoard);
+    return this.http.get<any>(urls.reportsDashBoard);
   }
 
   /**
@@ -39,7 +37,6 @@ export class ReportsService extends AbstractApiService<any> {
    * @memberof ReportsService
    */
   public fetchReportsBiWeeklyPanel(): Observable<any[]> {
-
-    return super.doGetListObservable(environment.reportsBiWeeklyPanel);
+    return this.http.get<any>(urls.reportsBiWeeklyPanel);
   }
 }

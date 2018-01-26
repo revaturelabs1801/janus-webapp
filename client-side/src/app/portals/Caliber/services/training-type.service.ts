@@ -2,27 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // services
-import { AbstractApiService } from './abstract-api.service';
 import { AlertsService } from './alerts.service';
-import { environment } from '../../../../environments/environment';
+import { urls } from './urls';
 
+
+//Interfaces
+import { Fetch } from '../interfaces/api.interface';
+
+// rxjs
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * manages API calls for TrainingTypes
  */
 @Injectable()
-export class TrainingTypeService extends AbstractApiService<string> {
+export class TrainingTypeService implements Fetch<String> {
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
+  public listSubject = new BehaviorSubject<string[]>(new Array<string>()); 
 
-    this.initialize();
-  }
-
-  /**
-   * perform initialization processes
-   */
-  private initialize(): void {
+  constructor(private httpClient: HttpClient) {
     this.fetchAll();
   }
 
@@ -37,14 +36,9 @@ export class TrainingTypeService extends AbstractApiService<string> {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */
-  public fetchAll(): void {
-    const url = environment.trainingType.fetchAll();
-    const messages = {
-      success: 'Training Types retrieved successfully',
-      error: 'Training Types retrieval failed',
-    };
-
-    super.doGetList(url, messages);
+  public fetchAll(): Observable<string[]> {
+    this.httpClient.get<string[]>(urls.trainingType.fetchAll()).subscribe(x => this.listSubject.next(x));
+    return this.listSubject.asObservable();
   }
 
 }

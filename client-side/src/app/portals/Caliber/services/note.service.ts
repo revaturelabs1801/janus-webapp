@@ -8,30 +8,28 @@ import 'rxjs/add/operator/merge';
 import 'rxjs/add/observable/merge';
 
 // services
-import { EnvironmentService } from './environment.service';
-import { environment } from '../../../../environments/environment';
-import { AbstractApiService } from './abstract-api.service';
 import { AlertsService } from './alerts.service';
 
 // entities
 import { Note } from '../entities/Note';
 import { Trainee } from '../entities/Trainee';
 import { Batch } from '../entities/Batch';
+import { urls } from './urls';
 
 /**
 * this service manages calls to the web services
 * for Note objects
 */
 @Injectable()
-export class NoteService extends AbstractApiService<Note> {
+export class NoteService {
 
   /*
   * holds list of notes for one trainee
   */
+  private listSubject = new BehaviorSubject<Note[]>([]);
   private traineeListSubject: BehaviorSubject<Note[]>;
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
+  constructor(private httpClient: HttpClient, alertService: AlertsService) {
 
     this.traineeListSubject = new BehaviorSubject([]);
   }
@@ -45,27 +43,30 @@ export class NoteService extends AbstractApiService<Note> {
     return this.traineeListSubject.asObservable();
   }
 
+  public getList(): Observable<Note[]> {
+    return this.listSubject.asObservable();
+  }
   /*
    =====================
    BEGIN: API calls
    =====================
  */
 
- /**
-  * retrieves all notes associated with the passed
-  * batch ID and week number and pushes the results
-  * on the listSubject
-  *
-  * delegates the call to 4 separate Note API hooks for:
-  * -> batch notes entered by trainer
-  * -> trainee notes enetered by trainer
-  * -> batch notes enetered by quality control
-  * -> trainee notes by quality control
-  *
-  * @param batchId: number
-  * @param week: number
-  *
-  */
+  /**
+   * retrieves all notes associated with the passed
+   * batch ID and week number and pushes the results
+   * on the listSubject
+   *
+   * delegates the call to 4 separate Note API hooks for:
+   * -> batch notes entered by trainer
+   * -> trainee notes enetered by trainer
+   * -> batch notes enetered by quality control
+   * -> trainee notes by quality control
+   *
+   * @param batchId: number
+   * @param week: number
+   *
+   */
   public fetchByBatchIdByWeek(batchId: number, week: number): void {
     const $nonQcbatchNotes = this.fetchBatchNotesByBatchIdByWeek(batchId, week);
     const $nonQctraineeNotes = this.fetchTraineeNotesByBatchIdByWeek(batchId, week);
@@ -75,16 +76,14 @@ export class NoteService extends AbstractApiService<Note> {
     let results: Note[] = [];
 
     Observable.merge($nonQcbatchNotes, $nonQctraineeNotes, $qcBatchNotes, $qcTraineeNotes)
-      .subscribe( (notes) => {
-          results = results.concat(notes); // merge all results into one array
-        },
-        (error) => {
-          super.pushAlert('error', 'Notes retrieval failed');
-        }, // errors are already sent to the console in the SpringInterceptor
-        () => {
-          this.listSubject.next(results); // send the merged results
-          super.pushAlert('success', 'Notes retrieved successfully');
-        }
+      .subscribe((notes) => {
+        results = results.concat(notes); // merge all results into one array
+      },
+      (error) => {
+      }, // errors are already sent to the console in the SpringInterceptor
+      () => {
+        this.listSubject.next(results); // send the merged results
+      }
       );
   }
 
@@ -100,57 +99,57 @@ export class NoteService extends AbstractApiService<Note> {
   * @return Observable<Note[]>
   */
   public fetchQcBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = environment.note.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
+    const url = urls.note.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
 
-    return super.doGetListObservable(url);
+    return this.httpClient.get<Note[]>(url);
   }
 
- /**
-  * retrieves all quality control Trainee notes associated with
-  * the passed batch ID and week number and returns an observable
-  * which holds the array of notes found
-  *
-  * @param batchId: number
-  * @param week: number
-  *
-  * @return Observable<Note[]>
-  */
+  /**
+   * retrieves all quality control Trainee notes associated with
+   * the passed batch ID and week number and returns an observable
+   * which holds the array of notes found
+   *
+   * @param batchId: number
+   * @param week: number
+   *
+   * @return Observable<Note[]>
+   */
   public fetchQcTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = environment.note.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
+    const url = urls.note.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
 
-    return super.doGetListObservable(url);
+    return this.httpClient.get<Note[]>(url);
   }
 
- /**
-  * retrieves all trainer entered Batch notes associated with
-  * the passed batch ID and week number and returns an observable
-  * which holds the array of notes found
-  *
-  * @param batchId: number
-  * @param week: number
-  *
-  * @return Observable<Note[]>
-  */
+  /**
+   * retrieves all trainer entered Batch notes associated with
+   * the passed batch ID and week number and returns an observable
+   * which holds the array of notes found
+   *
+   * @param batchId: number
+   * @param week: number
+   *
+   * @return Observable<Note[]>
+   */
   public fetchBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = environment.note.fetchBatchNotesByBatchIdByWeek(batchId, week);
+    const url = urls.note.fetchBatchNotesByBatchIdByWeek(batchId, week);
 
-    return super.doGetListObservable(url);
+    return this.httpClient.get<Note[]>(url);
   }
 
- /**
-  * retrieves all trainer entered Trainee notes associated with
-  * the passed batch ID and week number and returns an observable
-  * which holds the array of notes found
-  *
-  * @param batchId: number
-  * @param week: number
-  *
-  * @return Observable<Note[]>
-  */
+  /**
+   * retrieves all trainer entered Trainee notes associated with
+   * the passed batch ID and week number and returns an observable
+   * which holds the array of notes found
+   *
+   * @param batchId: number
+   * @param week: number
+   *
+   * @return Observable<Note[]>
+   */
   public fetchTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = environment.note.fetchTraineeNotesByBatchIdByWeek(batchId, week);
+    const url = urls.note.fetchTraineeNotesByBatchIdByWeek(batchId, week);
 
-    return super.doGetListObservable(url);
+    return this.httpClient.get<Note[]>(url);
   }
 
   /**
@@ -166,15 +165,13 @@ export class NoteService extends AbstractApiService<Note> {
     const $qcNotes = this.fetchQcNotesByTrainee(trainee);
     let results: Note[] = [];
 
-    Observable.merge( $trainingNotes, $qcNotes)
-      .subscribe( (notes) => {
+    Observable.merge($trainingNotes, $qcNotes)
+      .subscribe((notes) => {
         results = results.concat(notes);
       }, (error) => {
-        super.pushAlert('error', 'Notes retrieval failed');
       }, // errors are already sent to the console in the SpringInterceptor
       () => {
         this.traineeListSubject.next(results); // send the merged results
-        super.pushAlert('success', 'Notes retrieved successfully');
       });
   }
 
@@ -187,9 +184,9 @@ export class NoteService extends AbstractApiService<Note> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public fetchTrainingNotesByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = environment.note.fetchTrainingNotesByTrainee(trainee.traineeId);
+    const url = urls.note.fetchTrainingNotesByTrainee(trainee.traineeId);
 
-    return super.doGetListObservable(url);
+    return this.httpClient.get<Note[]>(url);
   }
 
   /**
@@ -201,9 +198,9 @@ export class NoteService extends AbstractApiService<Note> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public fetchQcNotesByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = environment.note.fetchQcNotesByTrainee(trainee.traineeId);
+    const url = urls.note.fetchQcNotesByTrainee(trainee.traineeId);
 
-    return super.doGetListObservable(url);
+    return this.httpClient.get<Note[]>(url);
   }
 
 
@@ -216,13 +213,13 @@ export class NoteService extends AbstractApiService<Note> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public update(note: Note): void {
-    const url = environment.note.update();
+    const url = urls.note.update();
     const messages = {
       success: 'Note updated successfully',
       error: 'Note update failed',
     };
 
-    super.doPost(note, url, messages); // yes, the API implemented this as a POST method: @see EvaluationController
+    this.httpClient.post(url, note).subscribe(); // yes, the API implemented this as a POST method: @see EvaluationController
   }
 
   /**
@@ -246,46 +243,47 @@ export class NoteService extends AbstractApiService<Note> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public save(note: Note): void {
-    const url = environment.note.save();
+    const url = urls.note.save();
     const messages = {
       success: 'Note saved successfully',
+      
       error: 'Note save failed',
     };
 
-    super.doPost(note, url, messages);
+    this.httpClient.post(url, note).subscribe();
   }
 
-      /**
-   * Find all QC trainee notes in a batch for the week
-   *
-   * @param batch: Batch
-   * @param note: Note
-  */
+  /**
+* Find all QC trainee notes in a batch for the week
+*
+* @param batch: Batch
+* @param note: Note
+*/
   public getAllQCTraineeNotes(batch: Batch, note: Note): void {
-    const url = environment.note.getAllQCTraineeNotes(batch.batchId, note.week);
+    const url = urls.note.getAllQCTraineeNotes(batch.batchId, note.week);
 
     this.listSubject.next([]);
 
-    this.http.get<Note[]>(url).subscribe((notes) => {
+    this.httpClient.get<Note[]>(url).subscribe((notes) => {
       this.listSubject.next(notes);
     });
-}
+  }
 
- /**
- * Find the weekly QC batch note for the week
- *
- * @param batch: Batch
- * @param note: Note
-*/
+  /**
+  * Find the weekly QC batch note for the week
+  *
+  * @param batch: Batch
+  * @param note: Note
+ */
 
-public findQCBatchNotes(batch: Batch, note: Note): void {
-  const url = environment.note.findQCBatchNotes(batch.batchId, note.week);
+  public findQCBatchNotes(batch: Batch, note: Note): void {
+    const url = urls.note.findQCBatchNotes(batch.batchId, note.week);
 
-  this.listSubject.next([]);
+    this.listSubject.next([]);
 
-    this.http.get<Note[]>(url).subscribe((notes) => {
+    this.httpClient.get<Note[]>(url).subscribe((notes) => {
       this.listSubject.next(notes);
     });
-}
+  }
 
 }

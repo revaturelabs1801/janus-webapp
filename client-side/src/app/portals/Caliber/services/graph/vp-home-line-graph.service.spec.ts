@@ -1,11 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
-
+import { ColorService } from '../colors/color.service';
 import { VpHomeLineGraphService } from './vp-home-line-graph.service';
 
 describe('VpHomeLineGraphService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [VpHomeLineGraphService]
+      providers: [
+        VpHomeLineGraphService,
+        ColorService
+      ]
     });
   });
 

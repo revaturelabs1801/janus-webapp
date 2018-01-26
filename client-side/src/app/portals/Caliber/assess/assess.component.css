@@ -1,0 +1,215 @@
+#main-container {
+    margin-top:2%;
+    font-size: 14px;
+}
+#assessTable td{
+    padding: 8px;
+}
+.assessment-area {
+    width:80px;
+    text-align: center;
+    align-content: center;
+    font-size: 14px;
+}
+.batch-select:hover{
+    color: #23527c !important;
+    background-color: #f1f2f4;
+    transition: 1s;
+}
+#weekTabset .nav-tabs{
+    border-bottom: none;
+}
+#weekTabset .nav-link:hover{
+    color: #23527c !important;
+    background-color: #f1f2f4;
+    transition: 1s;
+}
+#weekTabset .nav-link b:hover{
+    color: #23527c !important;
+}
+#weekTabset .nav-link.active b{
+    color: #555 !important;
+}
+#weekTabset .nav-link.active:hover{
+    background-color: white;
+}
+.buttons{
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 7px;
+}
+#cAssess{
+    font-size: 14px;
+    font-family: 'Futura-Std-Heavy';
+}
+
+.p {
+    text-align:center;
+}
+
+.textarea-extra {
+    display: block;
+    margin-top:58px;
+    margin-left: 3%;
+    width: 97%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    border-radius: .5vmin;
+    font-size: 14px;
+    color: #555;
+}
+
+.save-button {
+	border: solid 1px;
+	padding: 6px;
+	box-shadow: 1px 3px 4px #888888;
+	color: #F26925 !important;
+	background: white;
+    border-radius: 5px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 6px;
+}
+
+.save-button:hover {
+    color: #0053b6 !important;
+    transition: 1s;
+}
+
+.extra {
+    margin-bottom: 1px !important;
+    padding-bottom: 10vmin !important;
+}
+
+.no-padding {
+    padding: 0px;
+    border: 0px;
+}
+
+.assessment-header {
+    height: 10%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.trainee-header {
+    min-width: 10%;
+    width: 10%;
+    margin-right: 13vmin !important;
+    text-align: center;
+    font-weight: bold;
+}
+
+.float-right {
+    float: right;
+}
+
+.revature-orange{
+    color: #F26925;
+}
+
+.centered {
+    text-align: center;
+}
+
+.divider {
+    margin: 10px;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.revature-button {
+    background-color: #F26925;
+}
+
+.revature-button:hover {
+    background-color: #f1f2f4;
+    border: 1px solid #f1f2f4;
+    color: #23527c;
+    transition: 1s;
+}
+
+.batch-select{
+    color: #F26925;
+    border: 0mm;
+    width: auto;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Futura-Std-Heavy';
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.note {
+    width: 100%;
+    font-size: 14px;
+}
+
+.btn-update {
+    background-color: #F26925;
+    color: white;
+}
+
+.btn-add {
+    background-color: #F26925;
+    color: white;
+}
+
+.fa-pencil {
+    cursor: pointer;
+}
+
+.fa-user {
+    cursor: pointer;
+}
+
+#addTrainerButton {
+    padding: 10px;
+}
+
+.col-sm-2 {
+    padding-top: 10px;
+}
+/* #tier { 
+    width:100%; 
+} 
+#tier option { 
+    width:100%; 
+} */
+
+.btn-secondary {
+    background-color: white;
+    color: #F26925;
+    border-bottom: 1px solid #ebe8e8;
+    border-color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #f1f2f4;
+    border: 1px solid #f1f2f4;
+    color: #23527c;
+    transition: 1s;
+}
+
+.btn-danger {
+    float: center !important;
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+ app-alerts {
+     position: absolute;
+     z-index: 99999;
+ }

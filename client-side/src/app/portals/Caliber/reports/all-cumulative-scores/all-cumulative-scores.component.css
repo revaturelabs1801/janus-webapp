@@ -1,0 +1,54 @@
+.data-box {
+    font-size: 80%;
+    text-align: center;
+    width: 10%;
+}
+.panel-heading {
+    background: #F26925;
+    color: white;
+    padding: 1vmin;
+    padding-left: 2vmin;
+    margin-top: 3vmin;
+    border-top-left-radius: .5vmin;
+    border-top-right-radius: .5vmin;
+}
+.chartContainer {
+    padding: 0.5vmin;
+    border: 1px solid lightgrey;
+    border-top: none;
+    background: white;
+}
+
+.data-head {
+    font-weight: bold; 
+}
+.data-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1vmin;
+}
+h2 {
+    text-align: center;
+}
+.container {
+    margin: 2vmin;
+}
+.panel-body {
+    border: 1px rgb(221, 221, 221) solid;
+    padding: 2.5vmin;
+    border-bottom-right-radius: .5vmin;
+    border-bottom-left-radius: .5vmin;
+    box-shadow: .3px .3px .3px lightgray;
+}
+.modal-body-row{
+    border-bottom: 1px solid LightGrey;
+    margin-bottom   : 5px;
+    margin-top: 500px;
+}
+.fa {
+    cursor: pointer;
+}
+
+.panel-default {
+    margin-right: -.8vmin;
+}

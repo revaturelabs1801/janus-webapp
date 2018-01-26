@@ -5,80 +5,44 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { forkJoin } from "rxjs/observable/forkJoin";
 
 // services
-import { AbstractApiService } from './abstract-api.service';
 import { environment } from '../../../../environments/environment';
 import { AlertsService } from './alerts.service';
 
 // entities
 import { Trainer } from '../entities/Trainer';
+import { urls } from './urls';
+
+//Interfaces
+import { CRUD } from '../interfaces/api.interface';
 
 /**
  * this service manages calls to the web service
  * for Trainer objects
  */
 @Injectable()
-export class TrainerService extends AbstractApiService<Trainer> {
+export class TrainerService implements CRUD<Trainer> {
 
-  private titlesSubject = new BehaviorSubject<string[]>([]);
-  private tiersSubject = new BehaviorSubject<string[]>([]);
+  public listSubject = new BehaviorSubject<Trainer[]>(null);
+  public titlesSubject = new BehaviorSubject<String[]>([]);
+  public tiersSubject = new BehaviorSubject<String[]>([]);
+  public currentTrainer = new BehaviorSubject<Trainer>(null);
 
-  /**
-  * current trainer for trainer profile page
-  */
-  private trainerSource = new BehaviorSubject<Trainer>(null);
-  currentTrainer = this.trainerSource.asObservable();
-
-  /**
-  * @deprecated
-  * -> retained for backwards compatibility
-  */
-  trainers$: Observable<any> = this.getList(); // this is how components should access the data if you want to cache it
-  titles$: Observable<any> = this.getTitlesList();
-  tiers$: Observable<any> = this.getTierList();
-
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
-
+  constructor(private httpClient: HttpClient, alertService: AlertsService) {
     this.populateOnStart();
   }
 
-  /**
+    /**
   *
   * fetches the data of the service initially and
   * bootstraps default responsive behavior with subscriptons
   */
   public populateOnStart(): void {
+    this.httpClient.get<String[]>(urls.trainer.getTitles()).subscribe(x => this.titlesSubject.next(x));
+    this.httpClient.get<String[]>(urls.trainer.getTiers()).subscribe(x => this.tiersSubject.next(x));
     this.fetchAll();
-    this.getTitles();
-    this.getTiers();
-
-    this.getSaved().subscribe( (saved) => {
-      this.fetchAll();
-
-      /*
-      * push the saved object on the deletedSubject
-      * if it is a soft delete
-      */
-      if ( saved.tier === Trainer.ROLE_INACTIVE) {
-        this.deletedSubject.next(saved);
-      }
-    });
-  }
-
-  /**
-  * returns an observable of trainer title strings
-  */
-  public getTitlesList(): Observable<string[]> {
-    return this.titlesSubject.asObservable();
-  }
-
-  /**
-  * returns an observable of TrainerRole values
-  */
-  public getTierList(): Observable<string[]> {
-    return this.tiersSubject.asObservable();
   }
 
   /**
@@ -86,7 +50,7 @@ export class TrainerService extends AbstractApiService<Trainer> {
   * sets current trainer
   */
   public changeCurrentTrainer(trainer: Trainer) {
-    this.trainerSource.next(trainer);
+    this.currentTrainer.next(trainer);
   }
 
   /*
@@ -106,9 +70,8 @@ export class TrainerService extends AbstractApiService<Trainer> {
    * @return Observable<Trainer>
    */
   public fetchByEmail(email: string): Observable<Trainer> {
-    const url = environment.trainer.fetchByEmail(email);
-
-    return super.doGetOneObservable(url);
+    this.httpClient.get<Trainer>(urls.trainer.fetchByEmail(email)).subscribe(x => this.currentTrainer.next(x));
+    return this.currentTrainer.asObservable();
   }
 
   /**
@@ -117,14 +80,9 @@ export class TrainerService extends AbstractApiService<Trainer> {
     *
     * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
     */
-  public fetchAll(): void {
-    const url = environment.trainer.fetchAll();
-    const messages = {
-      success: 'Trainers retrieved successfully',
-      error: 'Trainers retrieval failed',
-    };
-
-    super.doGetList(url, messages);
+  public fetchAll(): Observable<Trainer[]> {
+    this.httpClient.get<Trainer[]>(urls.trainer.fetchAll()).subscribe(x => this.listSubject.next(x));
+    return this.listSubject.asObservable();
   }
 
   /**
@@ -135,26 +93,8 @@ export class TrainerService extends AbstractApiService<Trainer> {
    *
    * @param trainer: Trainer
    */
-  public create(trainer: Trainer): void {
-    this.save(trainer);
-  }
-
-   /**
-   * creates a trainer and pushes the created trainer on the
-   * savedSubject
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP')")
-   *
-   * @param trainer: Trainer
-   */
-  public save(trainer: Trainer): void {
-    const url = environment.trainer.save();
-    const messages = {
-      success: 'Trainer saved successfully',
-      error: 'Trainer save failed',
-    };
-
-    super.doPost(trainer, url, messages);
+  public create(trainer: Trainer): Observable<Trainer> {
+    return this.httpClient.post<Trainer>(urls.trainer.save(), trainer);
   }
 
   /**
@@ -165,14 +105,8 @@ export class TrainerService extends AbstractApiService<Trainer> {
    *
    * @param trainer: Trainer
    */
-  public update(trainer: Trainer): void {
-    const url = environment.trainer.update();
-    const messages = {
-      success: 'Trainer updated successfully',
-      error: 'Trainer update failed',
-    };
-
-    super.doPut(trainer, url, messages);
+  public update(trainer: Trainer): Observable<Trainer> {
+    return this.httpClient.put<Trainer>(urls.trainer.update(), trainer);
   }
 
   /**
@@ -186,43 +120,8 @@ export class TrainerService extends AbstractApiService<Trainer> {
   *
   * @param trainer: Trainer
   */
-  public delete(trainer: Trainer): void {
-    const url = environment.trainer.update();
-    const messages = {
-      success: 'Trainer deactivated successfully',
-      error: 'Trainer deactivation failed',
-    };
-
-    trainer.tier = Trainer.ROLE_INACTIVE;
-
-    super.doPut(trainer, url, messages);
-  }
-
-  /**
-  * retrieves a list of trainer titles and pushes them on the
-  * titlesSubject
-  *
-  * if a list of titles is needed, we could just use a custom pipe
-  * that extracts if from the list of Trainers
-  */
-  public getTitles(): void {
-    const url = environment.trainer.getTitles();
-
-    this.http.get<string[]>(url).subscribe( (data) => this.titlesSubject.next(data) );
-  }
-
-  /**
-  * retrieves a list of TrainerRoles and pushes them on
-  * the tiersSubject
-  *
-  * this appears to be an API for the TrainerRole object
-  * there should probably be a separate service for those
-  * -> retained for backward compatibility
-  */
-  public getTiers(): void {
-    const url = environment.trainer.getTiers();
-
-    this.http.get<string[]>(url).subscribe( (data) => this.tiersSubject.next(data) );
+  public delete(trainer: Trainer): Observable<Trainer> {
+    return Observable.of(trainer);
   }
 
   /*
@@ -272,7 +171,7 @@ export class TrainerService extends AbstractApiService<Trainer> {
     trainer.email = email;
     trainer.tier = tier;
 
-    this.save(trainer);
+    this.create(trainer);
   }
 
   /**

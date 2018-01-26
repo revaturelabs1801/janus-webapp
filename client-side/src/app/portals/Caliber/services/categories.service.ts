@@ -25,8 +25,6 @@ import { AlertsService } from './alerts.service';
 @Injectable()
 export class CategoriesService extends CategoryService {
 
-  categories$ = this.listSubject.asObservable();
-
   constructor(httpClient: HttpClient, alertService: AlertsService) {
     super(httpClient, alertService);
 
@@ -39,7 +37,7 @@ export class CategoriesService extends CategoryService {
 
   // adds a new category to the database
   public addNewCategory(category: Category): void {
-    super.save(category);
+    super.create(category);
   }
 
   public editCurrentCategory(category: Category): void {

@@ -2,16 +2,19 @@ import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // rxjs
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 // services
-import { AbstractApiService } from './abstract-api.service';
-import { environment } from '../../../../environments/environment';
 import { AlertsService } from './alerts.service';
+
+//Interfaces
+import { CRUD } from '../interfaces/api.interface';
 
 // entities
 import { Location } from '../entities/Location';
+import { urls } from './urls';
 
 
 /**
@@ -20,7 +23,9 @@ import { Location } from '../entities/Location';
  *
  */
 @Injectable()
-export class LocationService extends AbstractApiService<Location> {
+export class LocationService implements CRUD<Location> {
+
+  listSubject: BehaviorSubject<Location[]>;
 
   /*
   * @deprecated
@@ -32,11 +37,10 @@ export class LocationService extends AbstractApiService<Location> {
   *
   * you can also use the getList() method directly going forward
   */
-  locations$: Observable<any> = super.getList();
 
-  constructor(httpClient: HttpClient, alertService: AlertsService ) {
-    super(httpClient, alertService);
-
+  constructor(public http: HttpClient, alertService: AlertsService ) {
+    // super(httpClient, alertService);
+    this.listSubject = new BehaviorSubject([]);
     this.initializeSubscriptions();
   }
 
@@ -44,17 +48,7 @@ export class LocationService extends AbstractApiService<Location> {
   * bootstrap any subscriptions
   */
   private initializeSubscriptions(): void {
-    /*
-    * adds any locations updated to not being active
-    * to the deletedSubject
-    *
-    * @see this.delete();
-    */
-    this.getSaved().subscribe( (saved) => {
-      if ( saved.active === false ) {
-        this.deletedSubject.next(saved);
-      }
-    });
+    
   }
 
 
@@ -70,14 +64,9 @@ export class LocationService extends AbstractApiService<Location> {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
   */
-  public fetchAll(): void {
-    const url = environment.location.fetchAll();
-    const messages = {
-      success: 'Locations retrieved successfully',
-      error: 'Failed to retrieve locations',
-    };
-
-    super.doGetList(url, messages);
+  public fetchAll(): Observable<Location[]> {
+    this.http.get<any[]>(urls.location.fetchAll()).subscribe((results) => this.listSubject.next(results));
+    return this.listSubject.asObservable();
   }
 
   /**
@@ -89,14 +78,8 @@ export class LocationService extends AbstractApiService<Location> {
   *
   * @param location: Location
   */
-  public save(location: Location): void {
-    const url = environment.location.save();
-    const messages = {
-      success: 'Location saved successfully!',
-      error: 'Location failed to save!',
-    };
-
-    super.doPost(location, url, messages);
+  public create(location: Location): Observable<Location> {
+    return this.http.post<any>(urls.location.save(), JSON.stringify(location));
   }
 
   /**
@@ -108,14 +91,8 @@ export class LocationService extends AbstractApiService<Location> {
   *
   * @param location: Location
   */
-  public update(location: Location): void {
-    const url = environment.location.update();
-    const messages = {
-      success: 'Location saved successfully!',
-      error: 'Location failed to save!',
-    };
-
-    super.doPut(location, url, messages);
+  public update(location: Location): Observable<Location> {
+    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
   }
 
   /**
@@ -135,18 +112,9 @@ export class LocationService extends AbstractApiService<Location> {
   *
   * @param location: Location
   */
-  public delete(location: Location): void {
-    const url = environment.location.update();
-    const messages = {
-      success: 'Location deactivated successfully!',
-      error: 'Location failed to deactivate!',
-    };
-
+  public delete(location: Location): Observable<Location> {
     location.active = false;
-
-    super.doPut(location, url, messages);
-
-    // @see savedSubscription in constructor for deletedSubject implementation
+    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
   }
 
   /**
@@ -163,16 +131,9 @@ export class LocationService extends AbstractApiService<Location> {
   *
   * @param location: Location
   */
-  public reactivate(location: Location) {
-    const url = environment.location.update();
-    const messages = {
-      success: 'Location reactivated successfully!',
-      error: 'Location failed to reactivate!',
-    };
-
+  public reactivate(location: Location): Observable<Location> {
     location.active = true;
-
-    super.doPut(location, url, messages);
+    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
   }
 
   /*
@@ -197,8 +158,8 @@ export class LocationService extends AbstractApiService<Location> {
   * using the "get" convention and API calls using the "fetch"
   * convention for now
   */
-  public getAll(): void {
-    this.fetchAll();
+  public getAll(): Observable<Location[]> {
+    return this.fetchAll();
   }
 
   /**
@@ -210,7 +171,7 @@ export class LocationService extends AbstractApiService<Location> {
   * retained to honor the initial design path
   */
   public addLocation(location: Location): void {
-    this.save(location);
+    this.create(location);
   }
 
   /**
@@ -247,5 +208,4 @@ export class LocationService extends AbstractApiService<Location> {
   public deleteLocation(location: Location) {
     this.delete(location);
   }
-
 }

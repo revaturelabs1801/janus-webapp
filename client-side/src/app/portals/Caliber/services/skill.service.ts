@@ -2,19 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // services
-import { AbstractApiService } from './abstract-api.service';
 import { AlertsService } from './alerts.service';
 import { environment } from '../../../../environments/environment';
+import { Fetch } from '../interfaces/api.interface';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { urls } from './urls';
 
 
 /**
  * manages API calls for skills
  */
 @Injectable()
-export class SkillService extends AbstractApiService<string> {
+export class SkillService implements Fetch<string> {
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
+  public listSubject = new BehaviorSubject<string[]>([]);
+
+  constructor(private httpClient: HttpClient) {
+
 
     this.initialize();
   }
@@ -37,13 +41,8 @@ export class SkillService extends AbstractApiService<string> {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */
-  public fetchAll(): void {
-    const url = environment.skill.fetchAll();
-    const messages = {
-      success: 'Skills retrieved successfully',
-      error: 'Skills retrieval failed',
-    };
-
-    super.doGetList(url, messages);
+  public fetchAll() {
+    this.httpClient.get<string[]>(urls.skill.fetchAll()).subscribe(res => this.listSubject.next(res));
+    return this.listSubject.asObservable();
   }
 }

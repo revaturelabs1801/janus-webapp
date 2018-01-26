@@ -1,0 +1,59 @@
+.panel-repeat-topics-passed {
+    color: rgb(252,221,115);
+}
+
+.panel-heading {
+    background: #F26925;
+    color: white;
+    border-top-left-radius: .5vmin;
+    border-top-right-radius: .5vmin;
+}
+
+.panel-body {
+    border-bottom-right-radius: .5vmin;
+    border-bottom-left-radius: .5vmin;
+    box-shadow: .3px .3px .3px lightgray;
+}
+
+.container {
+    border: 1px solid lightgrey;
+    padding: 0;
+    margin-left: 1vmin;
+    border-bottom-right-radius: .5vmin;
+    border-bottom-left-radius: .5vmin;
+    border-top-left-radius: .5vmin;
+    border-top-right-radius: .5vmin;
+}
+
+.panel-status-failed {
+    color: #ff7575;
+}
+
+.panel-status-pass {
+    color: #81f575;
+}
+
+.panel-heading {
+    border-top-left-radius: .5vmin;
+    border-top-right-radius: .5vmin;
+}
+
+.table td, .table th {
+    border-top: none !important;
+}
+
+thead {
+    font-weight: bold;
+    text-align: center;
+}
+
+.table tr {
+    border-top: 1px solid #e9ecef !important;
+    border-bottom-right-radius: .5vmin;
+    border-bottom-left-radius: .5vmin;
+    text-align: center;
+}
+
+.trainee-name {
+    text-align: left;
+}

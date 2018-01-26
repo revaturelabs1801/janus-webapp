@@ -7,22 +7,25 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // services
-import { AbstractApiService } from './abstract-api.service';
 import { AlertsService } from './alerts.service';
 import { environment } from '../../../../environments/environment';
 
 // entities
 import { Category } from '../entities/Category';
+import { CRUD } from '../interfaces/api.interface';
+import { urls } from './urls';
 
 /**
 * this service manages calls to the web services
 * for Category objects
 */
 @Injectable()
-export class CategoryService extends AbstractApiService<Category> {
+export class CategoryService implements CRUD<Category> {
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
+  public listSubject = new BehaviorSubject<Category[]>([]);
+
+  constructor(public httpClient: HttpClient, public alertService: AlertsService) {
+    this.listSubject = new BehaviorSubject([]);
   }
 
  /*
@@ -32,39 +35,30 @@ export class CategoryService extends AbstractApiService<Category> {
  */
 
 /**
- * retrieves all categories and pushes them on the list subject
+ * retrieves all categories
  *
  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
  *
  */
- public fetchAll(): void {
-   const url = environment.category.fetchAll();
-   const messages = {
-      success: 'Categories retrieved successfully',
-      error: 'Category retrieval failed',
-   };
-
-   super.doGetList(url, messages);
+ public fetchAll(): Observable<Category[]> {
+   this.httpClient.get<Category[]>(urls.category.fetchAll()).subscribe(res => this.listSubject.next(res));
+   return this.listSubject.asObservable();
  }
 
  /**
- * retrieves all ACTIVE categories and pushes them on the list subject
+ * retrieves all ACTIVE categories
  *
  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
  *
  */
- public fetchAllActive(): void {
-   const url = environment.category.fetchAllActive(); 
-   const messages = {
-     success: 'ACTIVE Categories retrieved successfully',
-     error: 'ACTIVE Category retrieval failed',
-   };
-
-
-   super.doGetList(url, messages);
+ public fetchAllActive(): Observable<Category[]> {
+   const url = urls.category.fetchAllActive(); 
+   this.httpClient.get<Category[]>(url)
+   .subscribe((results)=>this.listSubject.next(results));
+   return this.listSubject.asObservable();
  }
 
-  /**
+ /**
  * retrieves a category by its ID
  *
  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
@@ -74,45 +68,35 @@ export class CategoryService extends AbstractApiService<Category> {
  * @return Observable<Category>
  */
  public fetchById(id: number): Observable<Category> {
-   const url = environment.category.fetchById(id);
-
-   return super.doGetOneObservable(url);
+   const url = urls.category.fetchById(id);
+   return this.httpClient.get<Category>(url);
  }
 
   /**
-  * transmits a new Category to be created and pushes the
-  * created Category on the savedSubject
+  * transmits a new Category to be created.
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP')")
   *
   * @param category: Category
   */
-  public save(category: Category): void {
-    const url = environment.category.save();
-    const messages = {
-      success: 'Category saved successfully',
-      error: 'Category save failed',
-    };
-
-    super.doPost(category, url, messages);
+  public create(category: Category): Observable<Category> {
+    const url = urls.category.save();
+    return this.httpClient.post<Category>(url,JSON.stringify(category));
   }
 
   /**
-   * transmits a Category to be updated and pushes the updated
-   * version of the Category on the savedSubject
+   * transmits a Category to be updated.
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP')")
    *
    * @param category: Category
    */
-  public update(category: Category): void {
-    const url = environment.category.update();
-    const messages = {
-      success: 'Categories updated successfully',
-      error: 'Category updated failed',
-    };
-
-    super.doPut(category, url, messages);
+  public update(category: Category): Observable<Category> {
+    const url = urls.category.update();
+    return this.httpClient.put<Category>(url,JSON.stringify(category));
   }
 
+  public delete(category: Category): Observable<Category> {
+    return Observable.of(category);
+  }
 }

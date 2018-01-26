@@ -1,0 +1,118 @@
+.panel-repeat-topics-passed {
+    color: rgb(252,221,115);
+}
+
+.panel-status-failed {
+    color: red;
+}
+
+.panel-status-pass {
+    color: green;
+}
+
+.panel-heading {
+    padding: 1vmin;
+    padding-left: 2vmin;
+    margin-top: 3vmin;
+    border-top-left-radius: .5vmin;
+    border-top-right-radius: .5vmin;
+}
+
+.panel-body {
+    border-bottom-left-radius: .5vmin;
+    border-bottom-right-radius: .5vmin;
+}
+
+div {
+    display: block;
+}
+
+table {
+    border-bottom: none;
+    border-top: 1px rgb(221, 221, 221) solid;
+    border-collapse: collapse;
+}
+
+td {
+    border: none;
+}
+
+thead {
+    font-weight: bold;
+    text-align: center;
+}
+
+tr {
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.trainee-name {
+    text-align: left;
+}
+
+.container {
+    border: 1px rgb(221, 221, 221) solid;
+    border-radius: .5vmin;
+    padding: 0 !important;
+    margin-left: 1vmin;
+    margin-bottom: 2.8vmin;
+}
+
+.top5 {
+    margin-top: .5em;
+}
+
+.chart-container {
+    padding: .5em;
+    min-height: 25.8em;
+    background-color: #ffffff;
+    border-radius: .3em;
+}
+
+canvas {
+    padding: 3vmin;
+}
+
+tbody {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+th {
+    border: none !important;
+}
+
+.panel-heading {
+    background: #F26925;
+    color: white;
+    border-top-left-radius: .5vmin;
+    border-top-right-radius: .5vmin;
+    margin-top: 0 !important;
+    margin-left: auto;
+    margin-right: auto;
+ }
+ .panel-body {
+    border: 1px rgb(221, 221, 221) solid;
+    border-bottom-right-radius: .5vmin;
+    border-bottom-left-radius: .5vmin;
+    box-shadow: .3px .3px .3px lightgray;
+ }
+ 
+
+tr {
+    padding-right: none !important;
+    padding-left: none !important;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+tr:last-child, tr:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+}
+
+.fa {
+    cursor: pointer;
+}

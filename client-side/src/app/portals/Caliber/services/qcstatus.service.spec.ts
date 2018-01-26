@@ -1,12 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { QCStatusService } from './qcstatus.service';
+import { Dependencies } from '../caliber.test.module';
 
-describe('QcstatusService', () => {
+
+describe('QCStatusService', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [QCStatusService]
-    });
+    TestBed.configureTestingModule(Dependencies);
   });
 
   it('should be created', inject([QCStatusService], (service: QCStatusService) => {

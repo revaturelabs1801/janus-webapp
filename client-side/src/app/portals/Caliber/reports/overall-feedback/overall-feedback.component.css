@@ -1,0 +1,64 @@
+/* Tags */
+
+td {
+    text-align: center;
+}
+
+td:nth-child(5n+0){
+    padding-left: 10vmin;
+    padding-right: 10vmin;
+}
+
+td, th {
+    border: none;
+    padding-left: 5vmin;
+    padding-right: 5vmin;
+    padding-top: 1vmin;
+    padding-bottom: 1vmin;
+}
+
+td:last-child{
+    padding-bottom:0vmin;
+}
+
+.row-border {
+    border: none;
+    border-top: solid rgb(221, 221, 221);
+}
+
+thead {
+    font-weight: 800;
+}
+
+table {
+    border-top: 0px;
+    border-right: none;
+    border-left: none;
+}
+
+/* Classes */
+
+.feedback-heading {
+    background: rgb(242, 105, 37);
+    color: white;
+    padding: 1vmin;
+    border-top-left-radius: .5vmin;
+    border-top-right-radius: .5vmin;
+}
+
+.feedback-body {
+    border-top: 0px;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.container-extra {
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: .5vmin;
+    padding-right: none;
+    padding-left: none;
+    margin-left: 1.9vmin;
+    margin-right: 1.9vmin;
+}

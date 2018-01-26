@@ -2,22 +2,40 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // services
-import { AbstractApiService } from './abstract-api.service';
 import { AlertsService } from './alerts.service';
 import { environment } from '../../../../environments/environment';
 
+//Interfaces
+import { CRUD } from '../interfaces/api.interface';
+
+// rxjs
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+
 // entities
 import { Trainee } from '../entities/Trainee';
+import { urls } from './urls';
+
 
 /**
  * this service manages calls to the web service
  * for Trainee objects
  */
 @Injectable()
-export class TraineeService extends AbstractApiService<Trainee> {
+export class TraineeService implements CRUD<Trainee> {
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
+  public listSubject: BehaviorSubject<Trainee[]>;
+  public savedSubject: Subject<Trainee>;
+  public updatedSubject: Subject<Trainee>;
+  public deletedSubject: Subject<Trainee>;
+
+  constructor(public http: HttpClient, public alertService: AlertsService) {
+    // super(httpClient, alertService);
+    this.listSubject = new BehaviorSubject([]);
+    this.savedSubject = new Subject();
+    this.updatedSubject = new Subject();
+    this.deletedSubject = new Subject();
    }
 
 
@@ -36,15 +54,15 @@ export class TraineeService extends AbstractApiService<Trainee> {
    * @param batchId: number
    */
    public fetchAllByBatch(batchId: number): void {
-     const url = environment.trainee.fetchAllByBatch(batchId);
-     const messages = {
-        success: 'Trainees retrieved successfully',
-        error: 'Trainee retrieval failed',
-     };
-
-     super.doGetList(url, messages);
+    this.fetchAll(batchId);
    }
 
+
+   public fetchAll(batchId: number) {
+    this.http.get<any[]>(urls.trainee.fetchAllByBatch(batchId))
+       .subscribe((results) => this.listSubject.next(results));
+     return this.listSubject.asObservable();
+  }
 
   /**
   * creates a trainee and pushes the created trainee on the
@@ -54,29 +72,21 @@ export class TraineeService extends AbstractApiService<Trainee> {
   *
   * @param trainee: Trainee
   */
-  public create(trainee: Trainee): void {
-    this.save(trainee);
+  public create(trainee: Trainee) {
+    this.http.post<any>(urls.trainee.save(), JSON.stringify(trainee))
+      .subscribe((results) => this.savedSubject.next(results));
+    return this.savedSubject.asObservable();
   }
 
-   /**
-   * creates a trainee and pushes the created trainee on the
-   * savedSubject
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
-   *
-   * @param trainee: Trainee
-   */
-   public save(trainee: Trainee): void {
-    const url = environment.trainee.save();
-    const messages = {
-      success: 'Trainee saved successfully',
-      error: 'Trainee save failed',
-    };
+  /*
+    function that pushes a trainee into savedSubject
+  */
+  public pushToSaved(trainee: Trainee){
+    this.savedSubject.next(trainee);
+  }
 
-     super.doPost(trainee, url);
-   }
 
-   /**
+  /**
    * updates a trainee and pushes the updated trainee on the
    * savedSubject
    *
@@ -84,15 +94,11 @@ export class TraineeService extends AbstractApiService<Trainee> {
    *
    * @param trainee: Trainee
    */
-   public update(trainee: Trainee): void {
-     const url = environment.trainee.update();
-     const messages = {
-       success: 'Trainee updated successfully',
-       error: 'Trainee update failed',
-     };
-
-     super.doPut(trainee, url, messages);
-   }
+  public update(trainee: Trainee) {
+    this.http.put<any>(urls.trainee.update(), JSON.stringify(trainee))
+      .subscribe((results) => this.savedSubject.next(results));
+    return this.savedSubject.asObservable();
+  }
 
    /**
    * deletes a trainee and pushes the deleted trainee on the
@@ -102,16 +108,9 @@ export class TraineeService extends AbstractApiService<Trainee> {
    *
    * @param trainee: Trainee
    */
-   public delete(trainee: Trainee): void {
-     const url = environment.trainee.delete(trainee.traineeId);
-     const messages = {
-       success: 'Trainee deleted successfully',
-       error: 'Trainee deletion failed',
-     };
-
-     super.doDelete(trainee, url, messages);
-   }
-
-
-
+  public delete(trainee: Trainee) {
+    this.http.delete(urls.batch.delete(trainee.traineeId))
+      .subscribe((results: any) => this.deletedSubject.next(results));
+    return this.deletedSubject.asObservable();
+  }
 }

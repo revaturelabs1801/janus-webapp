@@ -1,11 +1,16 @@
 import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientModule, HttpClient} from '@angular/common/http';
 
 import { TrainingTypeService } from './training-type.service';
 
 describe('TrainingTypeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TrainingTypeService]
+      imports: [HttpClientModule],
+      providers: [
+        TrainingTypeService,
+        HttpClient
+      ]
     });
   });
 

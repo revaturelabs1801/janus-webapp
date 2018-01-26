@@ -22,8 +22,10 @@ import { Trainer } from './entities/Trainer';
 import { ReportingService } from './services/reporting.service';
 import { PDFService } from './services/pdf.service';
 import { CaliberModule } from './portals/Caliber/caliber.module';
-import { TraineeTechSkillsComponent } from './portals/Caliber/components/reports/trainee-tech-skills/trainee-tech-skills.component';
+import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RoleGuard } from './role-guard';
+import { CookieService } from 'ngx-cookie-service';
 
 
 // loading routes from child modules this way will lazy load them
@@ -64,6 +66,8 @@ const routes: Routes = [
     ChuckNorrisService,
     ReportingService,
     PDFService,
+    RoleGuard,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,20 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // services
-import { AbstractApiService } from './abstract-api.service';
 import { AlertsService } from './alerts.service';
-import { environment } from '../../../../environments/environment';
+import { urls } from './urls';
+
+//Interfaces
+import { Fetch } from '../interfaces/api.interface';
+
+// rxjs
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 
 /**
  * manages API calls for TraineeStatuses
  */
 @Injectable()
-export class TraineeStatusService extends AbstractApiService<string> {
+export class TraineeStatusService implements Fetch<string> {
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
+  public listSubject: BehaviorSubject<any[]>;
 
+  constructor(public http: HttpClient, alertService: AlertsService) {
+    // super(httpClient, alertService);
+    this.listSubject = new BehaviorSubject([]);
     this.initialize();
   }
 
@@ -37,14 +46,9 @@ export class TraineeStatusService extends AbstractApiService<string> {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */
-  public fetchAll(): void {
-    const url = environment.traineeStatus.fetchAll();
-    const messages = {
-      success: 'Trainee Status retrieved successfully',
-      error: 'Trainee Status retrieval failed',
-    };
-
-    super.doGetList(url, messages);
+  public fetchAll(): Observable<string[]> {
+     this.http.get<string[]>(urls.traineeStatus.fetchAll()).subscribe((data) => this.listSubject.next(data));
+     return this.listSubject.asObservable();
   }
 
 }

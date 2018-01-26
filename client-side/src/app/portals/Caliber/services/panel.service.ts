@@ -2,23 +2,34 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // services
-import { AbstractApiService } from './abstract-api.service';
 import { AlertsService } from './alerts.service';
+import { ApiService } from '../util/api.service';
 import { environment } from '../../../../environments/environment';
+
+// rxjs
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 // entities
 import { Trainee } from '../entities/Trainee';
 import { Panel } from '../entities/Panel';
+import { urls } from './urls';
+
+//Interfaces
+import { CRUD } from '../interfaces/api.interface';
 
 /**
 * this service manages calls to the web services
 * for Panel objects
 */
 @Injectable()
-export class PanelService extends AbstractApiService<Panel> {
+export class PanelService implements CRUD<Panel> {
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
+  listSubject: BehaviorSubject<Panel[]>;
+
+  constructor(public http: HttpClient, public apiService: ApiService) {
+    this.listSubject = new BehaviorSubject([]);
   }
 
   /*
@@ -32,14 +43,9 @@ export class PanelService extends AbstractApiService<Panel> {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchAll(): void {
-    const url = environment.panel.fetchAll();
-    const messages = {
-      success: 'Panels retrieved successfully',
-      error: 'Panel retrieval failed',
-    };
-
-    super.doGetList(url, messages);
+  public fetchAll(): Observable<Panel[]> {
+    this.http.get<any[]>(urls.panel.fetchAll()).subscribe((results) => this.listSubject.next(results));
+    return this.listSubject.asObservable();
   }
 
   /**
@@ -50,14 +56,9 @@ export class PanelService extends AbstractApiService<Panel> {
    *
    * @param trainee: Trainee
    */
-  public fetchAllByTrainee(trainee: Trainee): void {
-    const url = environment.panel.fetchAllByTrainee(trainee.traineeId);
-    const messages = {
-      success: 'Panels retrieved successfully',
-      error: 'Panel retrieval failed',
-    };
-
-    super.doGetList(url, messages);
+  public fetchAllByTrainee(trainee: Trainee): Observable<Panel[]> {
+    this.http.get<any[]>(urls.panel.fetchAllByTrainee(trainee.traineeId)).subscribe((results) => this.listSubject.next(results));
+    return this.listSubject.asObservable();
   }
 
   /**
@@ -68,27 +69,9 @@ export class PanelService extends AbstractApiService<Panel> {
   *
   * @param panel: Panel
   */
-  public create(panel: any): void {
-    this.save(panel);
-  }
-
-  /**
-  * creates a panel and pushes the created panel on the
-  * savedSubject
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP' , 'PANEL')")
-  *
-  * @param panel: Panel
-  */
-  public save(panel: Panel): void {
-    const url = environment.panel.save();
-    const messages = {
-      success: 'Panels saved successfully',
-      error: 'Panel save failed',
-    };
-    const clone = this.prepareForApi(panel);
-
-    super.doPost(panel, url, messages);
+  public create(panel: Panel): Observable<Panel> {
+    console.log(JSON.stringify(panel));
+    return this.http.post<Panel>(urls.panel.save(), JSON.stringify(panel));
   }
 
   /**
@@ -99,15 +82,8 @@ export class PanelService extends AbstractApiService<Panel> {
   *
   * @param panel: Panel
   */
-  public update(panel: Panel): void {
-    const url = environment.panel.update();
-    const messages = {
-      success: 'Panels updated successfully',
-      error: 'Panel udpated failed',
-    };
-    const clone = this.prepareForApi(panel);
-
-    super.doPut(clone, url, messages);
+  public update(panel: Panel): Observable<Panel> {
+    return this.http.put<any>(urls.panel.update(), JSON.stringify(this.prepareForApi(panel)));
   }
 
   /**
@@ -118,14 +94,8 @@ export class PanelService extends AbstractApiService<Panel> {
   *
   * @param panel: Panel
   */
-  public delete(panel: Panel): void {
-    const url = environment.panel.delete(panel.panelId);
-    const messages = {
-      success: 'Panels deleted successfully',
-      error: 'Panel deletion failed',
-    };
-
-    super.doDelete(panel, url, messages);
+  public delete(panel: Panel): Observable<Panel> {
+    return this.http.delete<any>(urls.batch.delete(panel.panelId));
   }
 
   /**
@@ -142,7 +112,7 @@ export class PanelService extends AbstractApiService<Panel> {
 
     Object.assign(output, panel);
 
-    output.interviewDate = super.stringifyDate(panel.interviewDate);
+    output.interviewDate = this.apiService.stringifyDate(panel.interviewDate);
 
     return output;
   }
