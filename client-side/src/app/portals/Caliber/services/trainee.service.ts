@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { environment } from '../../../environments/environment';
 
 //Interfaces
 import { CRUD } from '../interfaces/api.interface';

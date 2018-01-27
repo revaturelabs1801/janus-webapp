@@ -45,9 +45,4 @@ describe('ManageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('hello world', () => {
-    // expect(true).toBeTruthy();
-    expect(component.helloWorld()).toEqual('HelloWorld');
-  });
 });
