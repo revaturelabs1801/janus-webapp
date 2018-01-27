@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 //Interfaces
 import { CRUD } from '../interfaces/api.interface';
@@ -64,6 +64,10 @@ export class TraineeService implements CRUD<Trainee> {
      return this.listSubject.asObservable();
   }
 
+  fetchDroppedByBatch(batchId: number) {
+    return this.http.get<any[]>(urls.trainee.fetchDroppedByBatch(batchId));
+  }
+  
   /**
   * creates a trainee and pushes the created trainee on the
   * savedSubject
