@@ -1,4 +1,4 @@
-import { environment } from "../../../../environments/environment";
+import { environment } from "../../../environments/environment";
 
 var context = environment.context;
 
@@ -69,7 +69,8 @@ export const urls = {
     },
 
     trainee: {
-        fetchAllByBatch: (batchId: number) => `${context}all/trainee?batchId=${batchId}`,
+        fetchAllByBatch: (batchId: number) => `${context}all/trainee?batch=${batchId}`,
+        fetchDroppedByBatch: (batchId: number) => `${context}all/trainee/dropped?batch=${batchId}`,
         save: () => `${context}all/trainee/create`,
         update: () => `${context}all/trainee/update`,
         delete: (traineeId: number) => `${context}all/trainee/delete/${traineeId}`,
