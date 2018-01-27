@@ -174,9 +174,7 @@ export class CreatePanelComponent implements OnInit {
       '-' +
       this.panelObj.interviewForm.interviewDate.day +
       'T' +
-      this.panelObj.interviewForm.interviewTime.hour +
-      ':' +
-      this.panelObj.interviewForm.interviewTime.minute +
+      this.panelObj.interviewForm.interviewTime +
       ':00Z';
 
     this.reformatPanel.format = this.panelObj.interviewForm.format;

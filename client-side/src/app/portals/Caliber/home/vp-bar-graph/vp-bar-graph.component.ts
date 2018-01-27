@@ -168,7 +168,7 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     let batchNotes: Note;
 
     // open the Modal
-    const modalRef = this.modalService.open(BarGraphModalComponent);
+    const modalRef = this.modalService.open(BarGraphModalComponent, {size: 'lg'});
 
     // populate Technoloiges
     this.reportingService.fetchTechnologiesForTheWeek(chartInfo.id, chartInfo.week);
