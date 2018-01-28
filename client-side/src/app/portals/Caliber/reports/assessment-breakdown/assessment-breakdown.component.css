@@ -1,62 +1,5 @@
-table {
-    border: 1px rgb(221, 221, 221) solid;
-}
 
-td {
-    border: none;
-}
-
-.top5 {
-	margin-top: .5em;
-}
-
-.chart-container {
-	padding: .5em;
-	background-color: #ffffff;
-}
-
-.trainee-name {
-    text-align: left;
-}
-
-.container {
-    margin: 2vmin;
-}
-
-.panel {
-    border: 1px rgb(221, 221, 221) solid;
-    border-radius: .5vmin;
-}
-
-.panel-default {
-    margin-right: -.8vmin;
-}
-
-.panel-heading {
-    background: #F26925;
-    color: white;
-    padding: 1vmin;
-    padding-left: 2vmin;
-    border-top-left-radius: .5vmin;
-    border-top-right-radius: .5vmin;
-}
-
-.panel-body {
-    border: none;
-}
-
-.no-padding{
-    padding-left: 0vmin;
-    padding-right: 0vmin;
-    margin: 0vmin;
-    margin-left: -.5vmin;
-}
-
-table {
-    border: none;
-    border-top: 1px solid rgb(221, 221, 221); 
-}
-
+/* Tags */
 canvas {
     padding: 3vmin;
 }
@@ -66,17 +9,17 @@ tbody {
     margin-right: 0;
 }
 
+td {
+    width: auto !important;
+}
+
 th {
-    border: none !important;
     text-align: left;
 }
 
 tr {
     padding-right: none !important;
     padding-left: none !important;
-    border-left: none;
-    border-right: none;
-    border-top: none;
     border-bottom: 1px solid rgb(221, 221, 221);
 }
 
@@ -84,14 +27,50 @@ tr:last-child, tr:nth-last-child(2):nth-child(odd) {
     border-bottom: none;
 }
 
-td {
-    width: auto !important;
+/* Classes*/
+.chart-container {
+	padding: .5em;
+	background-color: #ffffff;
+}
+
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.top5 {
+	margin-top: .5em;
 }
 
 .topic-heading {
     font-weight: bolder;
 }
 
-.fa {
-    cursor: pointer;
+.trainee-name {
+    text-align: left;
+}
+
+@media only screen and (max-width: 765px) {
+    .table-mobile {
+       border: solid 1px #ddd;
+       border-radius: 3px;
+    }
 }

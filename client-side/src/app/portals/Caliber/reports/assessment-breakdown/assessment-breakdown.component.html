@@ -1,5 +1,4 @@
-<div class="container no-padding" *ngIf="viewReady" id="assessment-breakdown">
-    <div class="panel panel-default">
+<div class="container" *ngIf="viewReady" id="assessment-breakdown">
       <header class="panel-heading">Assessment Breakdown
         <i (click)="downloadPDF()" class="fa fa-download"></i>
       </header>
@@ -11,10 +10,10 @@
               [options]="options"
               [legend]="legend"
               [chartType]="chartType"></canvas>
-      </div>
+      
       <div class="chart-container top5">
-        <div class="table-responsive">
-          <table class="table" style="border-collapse: collapse;">
+        <div class="table-responsive table-mobile">
+          <table class="table table-hover" style="border-collapse: collapse;">
             <tbody>
               <tr>
                 <th></th>
