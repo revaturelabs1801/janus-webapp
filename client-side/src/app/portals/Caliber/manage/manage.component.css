@@ -1,6 +1,5 @@
-
 .btn-update {
-    background-color: #ff8e4d;
+    background-color: #F26925;
     color: white;
 }
 
@@ -34,7 +33,7 @@
 
 .btn-secondary {
     background-color: white;
-    color: #fa7427;
+    color: #F26925;
     border-bottom: 1px solid #ebe8e8;
     border-color: white;
     font-size: 14px;
@@ -58,8 +57,12 @@
     border-radius: 3px 3px 0px 0px !important;
     box-shadow: none !important;
     background-color: #f1f1f1 !important;
-    color: #fa7427 !important;
+    color: #F26925 !important;
     transition: 0s;
+ }
+
+ .padding-fixes {
+     padding-top: 20px;
  }
 
  app-alerts {
@@ -129,17 +132,19 @@ hr {
 .pull-right {
     margin-right:20px; 
     margin-top: 20px; 
-    z-index: 100; 
+    z-index: 10; 
     position: relative;
 }
 
+.shift-right {
+    text-align: right;
+}
+
 .btn-primary:hover {
-    background-color:#fa7427; 
+    background-color:#F26925; 
     color: white;
     transition: 1s;
 }
-
-
 
  /***********************************************
 	Two Modals: Add Trainee and Update Trainee
@@ -179,8 +184,3 @@ h3 {
     background-color: rgb(255, 255, 255) !important;
     padding-left: 10px;
 }
-
-
-
-
-

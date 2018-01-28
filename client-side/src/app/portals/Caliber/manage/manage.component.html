@@ -1,4 +1,4 @@
-<div id="manage" class="container">
+<div id="manage" class="container padding-fixes">
 
   <div class="row">
 
@@ -144,21 +144,28 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
       <!-- Modal Header II -->
       <br>
-      <div class="row" style="margin-left:13px; padding-top:10px; font-family: Futura-Std-Book">
-        <div class="pull-right">
-            <!-- <a role="button"><i class="fa fa-toggle-on fa-2x" aria-hidden="true"></i></a> -->
-            <span>Active</span>
+
+    
+        <div class="row" style="padding: 0px 20px">
+          <div class="col">
+            <h3 style="position: relative;top:10px;right:15px">Trainees in Batch</h3>
+          </div>
+          <div class="col shift-right">
+            <span style="position:relative;left:7px">Active</span>
+            <br>
             <a role="button" (click)="switchTraineeView()" *ngIf="!showDropped">
               <i class="fa fa-toggle-on fa-2x" style="color: #F26925" aria-hidden="true"></i>
             </a>
             <a role="button" (click)="switchTraineeView()" *ngIf="showDropped">
-                <i class="fa fa-toggle-off fa-2x" style="color: #F26925" aria-hidden="true"></i>
+              <i class="fa fa-toggle-off fa-2x" style="color: #F26925" aria-hidden="true"></i>
             </a>
+          </div>
         </div>
-        <h3>Trainees in Batch</h3>
-      </div>
+      
+
       <hr>
       <!-- Modal Header III -->
       <div class="pull-right">
@@ -218,7 +225,7 @@
                 </td>
               </tr>
             </tbody>
-            
+
             <tbody *ngIf="showDropped">
               <tr *ngFor="let trainee of droppedTrainees">
                 <td>{{trainee.name}}</td>

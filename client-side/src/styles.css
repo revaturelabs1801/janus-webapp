@@ -61,10 +61,27 @@
     border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
 }
 
+
 .btn-primary {
     background-color:#fa7427;
     color: white;
     border: none;
+}
+
+.btn-revature {
+    /* background-image: linear-gradient(to bottom,#ff6e25,#d35e23); */
+    background-color: #f26925;
+    border-color: #f76c28;
+    color: white;
+}
+
+.btn-revature:hover {
+    /* background-image: linear-gradient(to bottom,#f8854c,#f16c29); */
+    background-color: #f0824b;
+}
+
+.btn-revature:active {
+    color: #dddddd;
 }
 
 /*****************************************
@@ -139,6 +156,10 @@ footer a, footer a:hover {
     color: #B9B9BA;
 }
 
+.f-size {
+    font-size: 14px;
+}
+
 .fa-copyright {
     padding-right: .5em;
 }
@@ -155,6 +176,14 @@ footer a, footer a:hover {
     padding-bottom: 1em;
 }
 
+.pad-container {
+    padding-top: 20px !important;
+}
+
+.rightHeaderTab {
+    text-align: right;
+}
+
 .wrapper {
     min-height: 100%;
     margin-bottom: -128px;
@@ -165,29 +194,12 @@ footer a, footer a:hover {
 /*****************************************
     Mobile Behavior
 ******************************************/
-/* @media only screen and (max-width: 768px) {
+ @media only screen and (max-width: 768px) {
     /* For mobile phones: */
-    /*.container {
-        width: 100%;
-        padding: 0;
+    .home-mobile {
+        width: 85%;
+        padding: 0
     }
-
-    .panel-body {
-        border: none;
-    }
-
-    .row {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-} */
-
-.panel-heading {
-    background: rgb(242, 105, 37);
-    color: white;
-    padding: 1vmin 2vmin;
-    border-top-left-radius: 2vmin;
-    border-top-right-radius: 2vmin;
 }
 
 .panel-body {
@@ -198,6 +210,13 @@ footer a, footer a:hover {
     width: auto;
     height: 2em;
     margin-right: 2em;
+}
+
+@media only screen and (max-width: 765px) {
+    .table-mobile {
+       border: solid 1px #ddd;
+       border-radius: 3px;
+    }
 }
 
 /*Navbar*/
@@ -302,11 +321,6 @@ footer a, footer a:hover {
     background-color: #ffffff !important;
 }
 
-/* nav {
-    background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);
-    border-bottom: 1px solid #dedede;
-} */
-
 nav[_ngcontent-c2] {
     border-bottom: 1px solid #ffffff !important;
     height: 82px;
@@ -328,7 +342,6 @@ nav[_ngcontent-c2] {
 }
 
 .navbar-light .navbar-nav .nav-link {
-    /* color: rgba(0, 0, 0, 0.5); */
     color: #777;
     font-size: 14px !important;
     font-weight: 600;
@@ -342,8 +355,22 @@ nav[_ngcontent-c2] {
 /*****************************************
 	Nav Tabs
 ******************************************/
+.btn-custom:focus,.btn-custom:active, .btn-secondary:not([disabled]):not(.disabled).active, .btn-secondary:not([disabled]):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    border: solid 1px blue !important;
+    border-radius: 3px 3px 0px 0px !important;
+    box-shadow: none !important;
+    background-color: #f1f1f1 !important;
+    color: #F26925 !important;
+    transition: 0s;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+ }
+ 
 .nav-tabs .nav-link {
     color: #f26925;
+    border-bottom: white;
     transition: 1s;
 }
 
@@ -353,7 +380,6 @@ nav[_ngcontent-c2] {
     background-color: #f1f1f1 !important;
     border: 1px solid #f1f1f1;
     color: #2c1da1 !important;
-    /* text-decoration: none !important; */
     transition: 1s;
 }
 
