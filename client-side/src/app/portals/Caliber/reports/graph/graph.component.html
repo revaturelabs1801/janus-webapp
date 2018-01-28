@@ -1,4 +1,4 @@
-<div class="chart-container top5">
+<div style="margin-top: 15px">
   <!-- Square graphs -->
   <canvas *ngIf="chartType === 'radar' || chartType ==='doughnut'" baseChart #baseChart="base-chart" width="400" height="400"
     [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" [legend]="chartLegend" [chartType]="chartType"
