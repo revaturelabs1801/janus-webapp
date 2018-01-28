@@ -10,11 +10,17 @@ th {
 
 /* Classes */
 .container {
-    padding-top: 8px;
+    margin-bottom: 20px;
+    padding: 0px;
 }
 
-.flex-grid {
-    display: flex;
+.feedback-heading {
+    background: #72A4C2;
+    color: white;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .flex-col {
@@ -27,36 +33,34 @@ th {
     display: flex;
 }
 
-.panel-heading {
-    background: #F26925;
-    color: white;
-    padding: 10px 15px;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: .5vmin;
-    border-top-right-radius: .5vmin;
+.flex-grid {
+    display: flex;
 }
 
-.panel-body {
-    border: 1px solid rgb(221, 221, 221);
-    border-top: 0px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-bottom-left-radius: .5vmin;
-    border-bottom-right-radius: .5vmin;
-}
-
-.feedback-heading {
-    background: #72A4C2;
-    color: white;
-    padding: 10px 15px;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+.left {
+    text-align: left;
 }
 
 .overall-feedback-title {
     font-weight: 500;
     text-align: left;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
 }
 
 .panel-status-failed {
@@ -67,6 +71,13 @@ th {
     color: #81f575;
 }
 
-.left {
-    text-align: left;
+.row-border {
+    border-bottom: solid 1px #ddd;
+}
+
+@media only screen and (max-width: 765px) {
+    .table-mobile {
+       border: solid 1px #ddd;
+       border-radius: 3px;
+    }
 }
