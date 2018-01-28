@@ -5,19 +5,19 @@
 
       <div class="panel-heading"> Weekly Progress
 
-        <select class="pull-right" [(ngModel)]="selectedLineCity" *ngIf="selectedState" (ngModelChange) = "hasCity($event)">
+        <select class="c-pointer pull-right" [(ngModel)]="selectedLineCity" *ngIf="selectedState" (ngModelChange) = "hasCity($event)">
           <option value="">All Cities</option>
           <option *ngFor = "let city of cities" [ngValue] = "city">{{city}}</option>
         </select>
 
-        <select class="pull-right" [(ngModel)]="selectedLineState" (ngModelChange) ="findCities($event)">
+        <select class="c-pointer pull-right" [(ngModel)]="selectedLineState" (ngModelChange) ="findCities($event)">
           <option value = "" [selected] = "true">All States</option>
           <option  *ngFor = "let state of states" [ngValue] = "state">{{state}}</option>
         </select>
 
       </div>
       <div class="panel-body">
-        <div class="chart-container top5">
+        <div class="chart-container margin-top-chart">
           <canvas baseChart
            class="chart chart-line"
             *ngIf="hasData" [datasets]="lineChartData.data" [options]="lineChartData.options" [labels]="lineChartData.labels"
