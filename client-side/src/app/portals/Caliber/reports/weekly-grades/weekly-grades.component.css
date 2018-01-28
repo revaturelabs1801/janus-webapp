@@ -1,9 +1,6 @@
 /* Tags */
-
-
-.margin-fixes{
-    margin-left: 2vmin;
-    margin-top: 2vmin;
+.padding-fixes{
+    padding: 0px;
 }
 
 thead {
@@ -16,7 +13,6 @@ table {
 }
 
 /* Classes */
-
 .feedback-heading {
     background: rgb(242, 105, 37);
     color: white;
@@ -34,4 +30,28 @@ table {
 
 .feedback-sub {
     margin-bottom: 8px;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+@media only screen and (max-width: 765px) {
+    .table-mobile {
+       border: solid 1px #ddd;
+       border-radius: 3px;
+    }
 }
