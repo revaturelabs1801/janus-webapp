@@ -62,23 +62,23 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     this.setSkills([]);
   }
 
-  private setSkills(skills: string[]): void {
+  public setSkills(skills: string[]): void {
     this.skills = skills;
   }
 
-  private setLocations(locations: Address[]): void {
+  public setLocations(locations: Address[]): void {
     this.locations = locations;
   }
 
-  private setTrainers(trainers: Trainer[]): void {
+  public setTrainers(trainers: Trainer[]): void {
     this.trainers = trainers;
   }
 
-  private setTrainingTypes(types: string[]): void {
+  public setTrainingTypes(types: string[]): void {
     this.trainingTypes = types;
   }
 
-  private clone() {
+  public clone() {
     Object.assign(this.batch, this.initialBatch);
   }
 

@@ -66,6 +66,8 @@ export class ManageComponent implements OnInit, OnDestroy {
   createNewTrainee: Trainee = new Trainee;
   isNew: Boolean;
   currentTrainees : any;
+  showDropped: Boolean = false;
+  droppedTrainees: Trainee[] = [];
 
   /* Subscriptions */
   batchListSub: Subscription;
@@ -145,9 +147,6 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.deletedTraineeSub.unsubscribe();
   }
 
-  public helloWorld(): string{
-    return 'HelloWorld';
-  }
 
   /** Creates a new batch from batch service
   * createNewBatch is a batch that is dynamically populated from the modal
@@ -404,6 +403,7 @@ export class ManageComponent implements OnInit, OnDestroy {
    * @param batch
    */
   openViewBatchTraineesModal(traineesInBatch, batch) {
+    this.showDropped = false;
 
     this.batchModal = this.modalService.open(traineesInBatch, { size: 'lg', container: '.batch-trainee-modal-container' });
     this.currentTrainees = traineesInBatch;
@@ -533,6 +533,14 @@ export class ManageComponent implements OnInit, OnDestroy {
       return `with: ${reason}`;
     }
   }
-
-
+  
+  /**
+   * Switch trainee mode, set showDropped to !showDropped.
+   */
+  switchTraineeView(){
+    this.showDropped = !this.showDropped;
+    if(this.showDropped){
+      this.traineeService.fetchDroppedByBatch(this.currentBatch.batchId).subscribe(results => this.droppedTrainees = results);
+    }
+  }
 }

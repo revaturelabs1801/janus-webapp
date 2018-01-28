@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 // services
 import { AlertsService } from './alerts.service';
 import { ApiService } from '../util/api.service';
-import { environment } from '../../../../environments/environment';
 
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -70,7 +69,8 @@ export class PanelService implements CRUD<Panel> {
   * @param panel: Panel
   */
   public create(panel: Panel): Observable<Panel> {
-    console.log(JSON.stringify(panel));
+    console.log(panel);
+    panel.status = "Pass";
     return this.http.post<Panel>(urls.panel.save(), JSON.stringify(panel));
   }
 
