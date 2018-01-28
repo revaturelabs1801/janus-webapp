@@ -59,7 +59,7 @@
               </div>
 
               <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
-                <textarea class="form-control" [disabled]="noteIsUndefined(row.note)" [(ngModel)]="row.note.content" rows="2" (change)="saveNote(row.note)"></textarea>
+                <textarea class="form-control" [(ngModel)]="row.note.content" rows="2" (change)="saveNote(row.note)"></textarea>
               </div>
 
               <hr style="margin: 5px 0px 1px 1px; width: 100%">
