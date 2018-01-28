@@ -1,7 +1,8 @@
 <div>
-  <div class="container-extra">
-    <header class="feedback-heading">Overall Feedback</header>
-    <div class="table-responsive">
+  <div class="container">
+    <header class="panel-heading">Overall Feedback</header>
+    <div class="panel-body">
+    <div class="table-hover table-mobile table-responsive">
       <table class="table">
         <thead>
           <tr>
@@ -12,7 +13,7 @@
             <td>Trainer Feedback</td>
           </tr>
         </thead>
-        <tbody *ngFor="let topic of weekTopics; let week = index" class="row-border">
+        <tbody *ngFor="let topic of weekTopics; let week = index">
           <tr>
             <td>{{week+1}}</td>
             <td>{{topic | arrToString}}</td>
@@ -27,6 +28,7 @@
           </tr>
         </tbody>
       </table>
+    </div>
     </div>
   </div>
 </div>
