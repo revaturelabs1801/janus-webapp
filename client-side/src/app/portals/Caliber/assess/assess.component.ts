@@ -118,7 +118,6 @@ export class AssessComponent implements OnInit {
           let sDate = new Date(b.startDate);
           if (sDate.getFullYear() > this.currentYear){
             this.currentYear = sDate.getFullYear();
-            console.log(this.currentYear);
           }
         });
         
@@ -280,6 +279,28 @@ export class AssessComponent implements OnInit {
     return note;
   }
 
+  getWeekBatchNote(batch: Batch): Note {
+    const n = this.notes.filter( (note) => {
+      return (note.type === 'BATCH' && Number(note.week) === Number(this.selectedWeek));
+    })[0];
+    
+    if (n != null) {
+      if (n.content === undefined) {
+        n.content = 'u';
+      }
+      return n;
+    } else {
+      let nNote = new Note();
+      nNote.content = null;
+      nNote.batch = this.selectedBatch;
+      nNote.maxVisibility = '3';
+      nNote.qcFeedback = false;
+      nNote.week = this.selectedWeek;
+      nNote.type = 'BATCH';
+      return nNote;
+    }
+  }
+
   addWeekOfNotes(week: number) {
     this.selectedBatch.trainees.forEach(trainee => {
       const note = new Note();
@@ -292,6 +313,13 @@ export class AssessComponent implements OnInit {
       note.type = 'TRAINEE';
       this.noteService.create(note);
     });
+    let note = new Note();
+    note.batch = this.selectedBatch;
+    note.maxVisibility = '3';
+    note.qcFeedback = false;
+    note.week = week;
+    note.type = 'BATCH';
+    this.noteService.create(note);
   }
 
   updateNote(note: Note, input) {
@@ -312,6 +340,10 @@ export class AssessComponent implements OnInit {
     this.selectedBatch.weeks += 1;
     this.addWeekOfNotes(this.selectedBatch.weeks);
     this.batchService.update(this.selectedBatch);
+    this.selectedWeek = this.selectedBatch.weeks;
+    this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
+    this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
+    this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
   }
 
   changeYear(year: number) {

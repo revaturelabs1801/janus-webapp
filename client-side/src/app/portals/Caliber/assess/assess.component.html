@@ -125,7 +125,8 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-10">
-      <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea>
+      <!-- <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea> -->
+      <textarea #inputBatchNote *ngIf="this.batches" class='form-control' placeholder="Enter your overall feedback on the batch" [value]="getWeekBatchNote(this.selectedBatch).content" (change)="updateNote(getWeekBatchNote(this.selectedBatch), inputBatchNote)"></textarea>
     </div>
   </div>
   <div class="row justify-content-center">
