@@ -1,8 +1,9 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">Panel Feedback</div>
-    <div class="table-responsive">
-      <table class="table">
+    <div class="panel-body">
+    <div class="table-mobile table-responsive">
+      <table class="table table-hover">
         <thead>
           <tr>
             <td class="trainee-name">Trainee</td>
@@ -18,7 +19,6 @@
               <td class="trainee-name">{{trainee.trainee}}</td>
               <td *ngIf="trainee.status == 'Repanel'" class="panel-status-failed fa fa-times fa-2x panel-glyph"></td>
               <td *ngIf="trainee.status == 'Pass'" class="panel-status-pass fa fa-check fa-2x panel-glyph"></td>
-
               <td class="panel-date">{{trainee.date}}</td>
               <td class="panel-time">{{trainee.time}}</td>
               <td *ngIf="trainee.topics" class="panel-repeat-topics">{{trainee.topics}}</td>
@@ -27,6 +27,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </div>
