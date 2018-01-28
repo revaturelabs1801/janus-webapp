@@ -1,15 +1,15 @@
 <div>
   <div class="container">
-    <header class="feedback-heading">Feedback for the Week
+    <header class="panel-heading">Feedback for the Week
       <span class="pull-right">Week {{week}}</span>
     </header>
-    <div class="feedback-body">
+    <div class="panel-body">
       <div class="feedback-sub">
         <strong>Categories covered this week: </strong>
         <span *ngIf="weekTopics">{{weekTopics | arrToString}}</span>
       </div>
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-hover table-mobile">
           <thead>
             <tr>
               <td>Trainer Feedback</td>
