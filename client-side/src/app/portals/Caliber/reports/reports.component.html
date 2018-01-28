@@ -1,6 +1,6 @@
 <app-toolbar></app-toolbar>
 <div class="container" *ngIf="ready">
-    <div class="row reports-row">
+    <div class="row">
         <div class="col-md-12">
             <div class="charts">
                 <app-all-cumulative-scores *ngIf="allWeeks && allTrainees"></app-all-cumulative-scores>
@@ -11,7 +11,7 @@
             <app-assessment-breakdown *ngIf="!allTrainees"></app-assessment-breakdown>
         </div>
     </div>
-    <div class="row reports-row">
+    <div class="row">
         <div [ngClass]="{'col-md-5': allTrainees && allWeeks, 'col-md-4': !(allTrainees && allWeeks)}">
             <app-trainee-tech-skills *ngIf="!(!allWeeks && allTrainees)"></app-trainee-tech-skills>
             <app-qc-doughnut *ngIf="!allWeeks && allTrainees"></app-qc-doughnut>
