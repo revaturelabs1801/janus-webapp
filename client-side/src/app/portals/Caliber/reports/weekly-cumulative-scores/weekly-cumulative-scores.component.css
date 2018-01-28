@@ -1,15 +1,7 @@
-.data-box {
-    font-size: 80%;
+h2 {
     text-align: center;
-    width: 10%;
 }
-.panel-heading {
-    background: rgb(242, 105, 37);
-    color: white;
-    padding: 1vmin;
-    border-top-left-radius: .5vmin;
-    border-top-right-radius: .5vmin;
-}
+
 .chartContainer {
     padding: 0.5vmin;
     border: 1px solid lightgrey;
@@ -17,30 +9,57 @@
     background: white;
 }
 
-.data-head {
-    font-weight: bold; 
+.container {
+    margin-top: 20px;
+    padding: 0px;
 }
+
+.data-box {
+    font-size: 80%;
+    text-align: center;
+    width: 10%;
+}
+
 .data-container {
     margin-left: auto;
     margin-right: auto;
     padding: 3vmin;
 }
-h2 {
-    text-align: center;
+
+.data-head {
+    font-weight: bold; 
 }
-.container {
-    margin: 2vmin;
+
+.fa {
+    cursor: pointer;
 }
-.panel-body {
-    border: 1px rgb(221, 221, 221) solid;
-    padding: 2vmin;
-    border-bottom-left-radius: .5vmin;
-    border-bottom-right-radius: .5vmin;
-}
+
 .modal-body-row{
     border-bottom: 1px solid LightGrey;
     margin-bottom   : 5px;
 }
-.fa {
-    cursor: pointer;
+
+.panel {
+    margin-bottom: 20px;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.panel-default {
+    border-color: #ddd
 }
