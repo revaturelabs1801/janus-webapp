@@ -1,14 +1,9 @@
-/* .text-orange {
-    color: #F26925;
-} */
-
 a {
     color: #f26925;
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
-
 
 .btn-secondary {
     background-color: white;
@@ -24,8 +19,6 @@ a {
     color: #10009c !important;
     transition: 1s;
 }
-
-
 
 .container {
     font-size: 14px;
