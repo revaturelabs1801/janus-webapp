@@ -19,3 +19,11 @@ h3 {
     background-color: #F26925;
     padding-left: 10px;
  }
+
+ input {
+     height: 28px !important;
+ }
+
+ textarea {
+     height: 28px !important;
+ }

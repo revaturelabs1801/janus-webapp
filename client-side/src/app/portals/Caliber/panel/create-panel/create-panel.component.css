@@ -14,6 +14,7 @@ label.heading {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     padding: 10px 15px;
+    background-color: #F26925;
 }
 #heading{
     font-family: 'Futura-Std-Bold';
@@ -93,7 +94,7 @@ div.border.border-secondary {
  .fixedplus{
     float: right;
     margin-right: -2vmin;
-    margin-top: -8vmin;
+    margin-top: -64px;
  }
 
  .fixedmin{

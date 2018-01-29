@@ -4,7 +4,7 @@
 }
 
 .btn-add {
-    background-color: #ff8e4d;
+    background-color: #ff6925;
     color: white;
 }
 
@@ -184,3 +184,18 @@ h3 {
     background-color: rgb(255, 255, 255) !important;
     padding-left: 10px;
 }
+
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+ }
+ 
+ .close:hover {
+    opacity: .4;
+ }

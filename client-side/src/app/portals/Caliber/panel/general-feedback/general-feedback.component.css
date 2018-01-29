@@ -1,5 +1,6 @@
 textarea {
     overflow-x: hidden;
+    height: 28px !important;
 }
 #form{
     padding: 6px 30px 6px 0px;
@@ -49,3 +50,7 @@ label.heading.g{
     background-color: #F26925;
     padding-left: 10px;
  }
+
+ .panel-heading {
+    background-color: #F26925;
+}

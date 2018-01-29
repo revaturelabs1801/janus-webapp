@@ -49,3 +49,15 @@ hr {
     margin: 0px;
     max-width: 1800px;
 }
+
+select {
+    height: 28px !important;
+ }
+
+ .fixedplus {
+    margin-top: -64px !important;
+}
+
+textarea {
+    height: 28px !important;
+}
