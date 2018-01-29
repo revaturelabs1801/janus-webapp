@@ -140,7 +140,7 @@
       <!-- Modal Header I -->
       <div class="modal-header" style="background-color:rgba(243, 243, 243, 0.918)">
         <h4 class="modal-title" style="font-size:18px">View/Add Trainees</h4>
-        <button type="button" (click)="c('Close click')" class="close" data-dismiss="modal" aria-label="Close">
+        <button style="cursor: pointer !important" (click)="c('Close click')" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -148,23 +148,22 @@
       <!-- Modal Header II -->
       <br>
 
-    
-        <div class="row" style="padding: 0px 20px">
-          <div class="col">
-            <h3 style="position: relative;top:10px;right:15px">Trainees in Batch</h3>
-          </div>
-          <div class="col shift-right">
-            <span style="position:relative;left:7px">Active</span>
-            <br>
-            <a role="button" (click)="switchTraineeView()" *ngIf="!showDropped">
-              <i class="fa fa-toggle-on fa-2x" style="color: #F26925" aria-hidden="true"></i>
-            </a>
-            <a role="button" (click)="switchTraineeView()" *ngIf="showDropped">
-              <i class="fa fa-toggle-off fa-2x" style="color: #F26925" aria-hidden="true"></i>
-            </a>
-          </div>
+
+      <div class="row" style="padding: 0px 20px">
+        <div class="col">
+          <h3 style="position: relative;top:5px;right:15px">Trainees in Batch</h3>
         </div>
-      
+        <div class="col shift-right">
+          <span style="position:relative;bottom:3px">Active&nbsp;</span>
+          <a role="button" class="c-pointer" (click)="switchTraineeView()" *ngIf="!showDropped">
+            <i class="fa fa-toggle-on fa-2x" style="color: #F26925" aria-hidden="true"></i>
+          </a>
+          <a role="button" class="c-pointer" (click)="switchTraineeView()" *ngIf="showDropped">
+            <i class="fa fa-toggle-off fa-2x" style="color: #F26925" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
 
       <hr>
       <!-- Modal Header III -->
@@ -264,6 +263,9 @@
   <ng-template #createTrainee let-c="close" let-d="dismiss">
     <div class="modal-header" style="background-color: #f1f2f4">
       <h4 style="font-size: 20px" class="modal-title">Add Trainees</h4>
+      <button style="cursor: pointer !important" (click)="c('Close click')" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     <div class="modal-body" style="margin-top: 14px !important;">
       <h4 *ngIf="isNew" style="font-size: 26px" class="modal-title">Add Trainee</h4>
@@ -349,7 +351,7 @@
         <strong>Save</strong>
       </button>
       <button class="btn btn-primary c-pointer" *ngIf="!isNew" (click)="updateTraineeFunction()">
-        <strong>Save</strong>
+        <strong>Update</strong>
       </button>
       <button type="button" class="btn btn-default c-pointer" (click)="closeCreateTraineeModal()">Close</button>
     </div>
