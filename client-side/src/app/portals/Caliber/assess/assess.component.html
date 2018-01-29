@@ -126,14 +126,12 @@
   <!-- </div>
   </div> -->
   <div class="row justify-content-center">
-    <div class="col-lg-10">
-      <!-- <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea> -->
-      <textarea #inputBatchNote *ngIf="this.batches" class='form-control' placeholder="Enter your overall feedback on the batch"
-        [value]="getWeekBatchNote(this.selectedBatch).content" (change)="updateNote(getWeekBatchNote(this.selectedBatch), inputBatchNote)"></textarea>
-    </div>
+    <!-- <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea> -->
+    <textarea #inputBatchNote *ngIf="this.batches" class='form-control inputBatchNote' placeholder="Enter your overall feedback on the batch"
+      [value]="getWeekBatchNote(this.selectedBatch).content" (change)="updateNote(getWeekBatchNote(this.selectedBatch), inputBatchNote)"></textarea>
   </div>
   <div class="row justify-content-center">
-    <div class="col-lg-10">
+    <div class="col-lg-12">
       <a ng-click="c('Close click');" ng-show="showFloppy" class="save-button fade-in c-pointer">
         <span class="fa fa-floppy-o fa-2x" aria-hidden="true"></span> Save
       </a>
