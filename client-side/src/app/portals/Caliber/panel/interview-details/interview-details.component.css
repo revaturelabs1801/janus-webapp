@@ -30,3 +30,26 @@
     background-color: #F26925;
     padding-left: 10px;
  }
+
+ input {
+    height: 28px !important;
+    font-size: 12px !important;
+ }
+
+ button {
+    height: 28px !important;
+    padding-bottom: 4px !important;
+ }
+
+ select {
+    height: 28px !important;
+ }
+
+ .row {
+     height: 55px !important;
+ }
+
+ textarea{
+    height: 28px !important;
+    
+ }
