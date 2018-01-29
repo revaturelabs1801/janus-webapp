@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -26,6 +25,8 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 // loading routes from child modules this way will lazy load them
@@ -37,7 +38,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'Caliber', loadChildren: './portals/Caliber/caliber.module#CaliberModule' },
-      { path: 'AssignForce', loadChildren: './portals/Assign-Force/assign-force.module#AssignForceModule' },
+      { path: 'AssignForce', loadChildren: './portals/AssignForce/src/app/app.module#AppModule' },
       { path: 'TrackForce', loadChildren: './portals/Track-Force/track-force.module#TrackForceModule' },
       { path: '**', pathMatch: 'full', redirectTo: '/dashboard' }
     ]
@@ -48,6 +49,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     NgbModule.forRoot(),
     FormsModule,
