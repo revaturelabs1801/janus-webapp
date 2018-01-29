@@ -44,6 +44,11 @@ textarea {
     border-bottom: solid 1px white;
 }
 
+#dropdownBasic1, #dropdownBasic2{
+    font-size: 14px;
+    font-family: 'Futura-Std-Heavy';
+ }
+
 /* Classes */
 .assessment-area {
     width:80px;

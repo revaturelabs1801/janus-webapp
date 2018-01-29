@@ -331,15 +331,13 @@
       <div class="row">
         <div class="form-group col-md-12 col-sm-12">
           <label for="trainingStatus">Training Status</label>
-          <select *ngIf="isNew" [ngModel]="selectStatus" [(ngModel)]="createNewTrainee.trainingStatus" class="form-control" id="trainer"
-            placeholder="Select Status">
+          <select *ngIf="isNew" [ngModel]="selectStatus" [(ngModel)]="createNewTrainee.trainingStatus" class="form-control" id="trainer">
             <option [disabled]="true">
               {{selectStatus}}
             </option>
             <option *ngFor="let status of statuses">{{status}}</option>
           </select>
-          <select *ngIf="!isNew" [ngModel]="statuses[5]" [(ngModel)]="createNewTrainee.trainingStatus" class="form-control" id="trainer"
-            placeholder="Select Status">
+          <select *ngIf="!isNew" [(ngModel)]="createNewTrainee.trainingStatus" class="form-control" id="trainer">
             <option *ngFor="let status of statuses">{{status}}</option>
           </select>
         </div>
