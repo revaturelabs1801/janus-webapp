@@ -39,6 +39,7 @@ import {
 import {ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -67,6 +68,7 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     HttpClientModule,
+    NgbModule,
     FormsModule,
     CommonModule,
     AppRouting,
