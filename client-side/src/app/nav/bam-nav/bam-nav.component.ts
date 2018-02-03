@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BamUser } from '../../portals/Bam/models/bamuser.modal';
+import { BamUser } from '../../portals/Bam/models/bamuser.model';
 
 @Component({
   selector: 'app-bam-nav',
