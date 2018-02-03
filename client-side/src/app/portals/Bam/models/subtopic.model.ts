@@ -1,6 +1,6 @@
-import { SubtopicName } from './subtopicname.modal';
-import { SubtopicStatus } from './subtopicstatus.modal';
-import { Batch } from './batch.modal';
+import { SubtopicName } from './subtopicname.model';
+import { SubtopicStatus } from './subtopicstatus.model';
+import { Batch } from './batch.model';
 
 export class SubTopic {
     subtopicId: number;
