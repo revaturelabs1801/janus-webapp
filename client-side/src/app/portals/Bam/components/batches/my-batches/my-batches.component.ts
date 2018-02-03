@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BatchService } from '../../../services/batch.service';
-import { Batch } from '../../../models/batch.modal';
+import { Batch } from '../../../models/batch.model';
 
 @Component({
   selector: 'app-my-batches',

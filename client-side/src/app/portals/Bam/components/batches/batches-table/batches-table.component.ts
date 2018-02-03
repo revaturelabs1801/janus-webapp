@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core/';
-import { Batch } from '../../../models/batch.modal';
+import { Batch } from '../../../models/batch.model';
 
 @Component({
   selector: 'app-batches-table',
