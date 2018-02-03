@@ -20,6 +20,12 @@ export const janusGlobal = {
       homeUrl: '/TrackForce/home',
       baseUrl: '/TrackForce',
       imgUrl: '../../assets/track-force.png'
+    }, 
+    {
+      name: 'BAM', 
+      homeUrl: '/Bam/home', 
+      baseUrl: '/BAM', 
+      imgUrl: '../../assets/bam.png'
     }
   ]
 };
