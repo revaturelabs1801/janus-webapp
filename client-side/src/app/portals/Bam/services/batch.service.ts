@@ -23,24 +23,24 @@ export class BatchService {
     );
   }
 
-  getPastBatches(): Observable<Batch[]> {
-    return this.http.get<Batch[]>(environment.batch.getPastBatchesUrl()).map(
+  getPastBatches(email: string): Observable<Batch[]> {
+    return this.http.get<Batch[]>(environment.batch.getPastBatchesUrl(email)).map(
       data => {
         return data;
       }
     );
   }
 
-  getFutureBatches(): Observable<Batch[]> {
-    return this.http.get<Batch[]>(environment.batch.getFutureBatchesUrl()).map(
+  getFutureBatches(email: string): Observable<Batch[]> {
+    return this.http.get<Batch[]>(environment.batch.getFutureBatchesUrl(email)).map(
       data => {
         return data;
       }
     );
   }
 
-  getBatchInProgress(): Observable<Batch> {
-    return this.http.get<Batch>(environment.batch.getBatchInProgressUrl()).map(
+  getBatchInProgress(email: string): Observable<Batch> {
+    return this.http.get<Batch>(environment.batch.getBatchInProgressUrl(email)).map(
       data => {
         return data;
       }
