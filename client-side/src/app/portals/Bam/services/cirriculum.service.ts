@@ -17,7 +17,6 @@ export class CirriculumService {
 
   constructor(private http: HttpClient) { }
 
-  // getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
   // addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
   // makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
   // syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`}
