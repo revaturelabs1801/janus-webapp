@@ -15,12 +15,23 @@ batches: Batch[];
   constructor(private batchService: BatchService) { }
 
   ngOnInit() {
-    this.getMyBatches();
+    this.loadCurrent(this);
   }
 
-  getMyBatches() {
+
+  loadCurrent(event) {
     this.batchService.getBatchInProgress(this.email)
       .subscribe(batches => this.batches = [batches]);
+  }
+
+  loadPast(event) {
+    this.batchService.getPastBatches(this.email)
+      .subscribe(batches => this.batches = batches);
+  }
+
+  loadFuture(event) {
+    this.batchService.getFutureBatches(this.email)
+      .subscribe(batches => this.batches = batches);
   }
 
 }

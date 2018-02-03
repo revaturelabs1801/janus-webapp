@@ -1,2 +1,13 @@
-<app-batches-nav></app-batches-nav>
+<ul class="nav nav-tabs">
+    <li class="nav-link active" (click)="loadCurrent($event)">
+        <a>Current Batches</a>
+    </li>
+    <li class="nav-link" (click)="loadPast($event)">
+        <a>Past Batches</a>
+    </li>
+    <li class="nav-link" (click)="loadFuture($event)">
+        <a>Future Batches</a>
+    </li>
+</ul>
+
 <app-batches-table [batches]="batches"></app-batches-table>
