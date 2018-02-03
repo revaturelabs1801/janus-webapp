@@ -12,6 +12,16 @@ export const environment = {
     getBatchByIdURL: (bid: number) => `${context}/batches/byid/${bid}`,
     updateBatchUrl: () => `${context}/batches/updatebatch`,
     getAllBatchTypesUrl: () => `${context}/batches/batchtypes`,
+  },
+
+  calendar: {
+//   ResponseEntity<List<Subtopic>> getSubtopicsByBatchPagination
+//   ResponseEntity<List<Subtopic>> getSubtopicsByBatch
+//   ResponseEntity<Long> getNumberOfSubTopicsByBatch
+//   ResponseEntity<List<TopicWeek>> getTopicsByBatchPag
+//   changeTopicDate
+//   updateTopicStatus
+//   addTopics
   }
 
 };
