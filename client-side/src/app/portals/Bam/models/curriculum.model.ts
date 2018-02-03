@@ -1,4 +1,4 @@
-import { BamUser } from './bamuser.modal';
+import { BamUser } from './bamuser.model';
 
 export class Curriculum {
     id: number;

@@ -1,5 +1,5 @@
-import { SubtopicName } from './subtopicname.modal';
-import { Curriculum } from './curriculum.modal';
+import { Curriculum } from './curriculum.model';
+import { SubtopicName } from './subtopicname.model';
 
 export class CurriculumSubtopic {
     curriculumSubtopicId: number;

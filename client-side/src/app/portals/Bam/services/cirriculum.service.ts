@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
-import { Curriculum } from '../models/curriculum.modal';
-import { CurriculumSubtopic } from '../models/curriculumSubtopic.modal';
-import { SubtopicName } from '../models/subtopicname.modal';
-import { SubTopic } from '../models/subtopic.modal';
+import { Curriculum } from '../models/curriculum.model';
+import { CurriculumSubtopic } from '../models/curriculumSubtopic.model';
+import { SubtopicName } from '../models/subtopicname.model';
+import { SubTopic } from '../models/subtopic.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -17,7 +17,6 @@ export class CirriculumService {
 
   constructor(private http: HttpClient) { }
 
-  // getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
   // addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
   // makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
   // syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`}
