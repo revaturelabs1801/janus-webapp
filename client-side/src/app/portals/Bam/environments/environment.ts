@@ -12,6 +12,17 @@ export const environment = {
     getBatchByIdURL: (bid: number) => `${context}/batches/byid/${bid}`,
     updateBatchUrl: () => `${context}/batches/updatebatch`,
     getAllBatchTypesUrl: () => `${context}/batches/batchtypes`,
+  },
+
+  cirriculum: {
+    getCirriculumAllUrl: () => `${context}/curriculum/all`,
+    getCirriculumByIdUrl: (id: number) => `${context}/curriculum/getcurriculum/${id}`,
+    getSchedulesByCurriculumIdUrl: (id: number) => `${context}/curriculum/schedule/cirriculumId/${id}`,
+    getTopicPoolAllUrl: () => `${context}/curriculum/topicpool`,
+    getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
+    addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
+    makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
+    syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`
   }
 
 };
