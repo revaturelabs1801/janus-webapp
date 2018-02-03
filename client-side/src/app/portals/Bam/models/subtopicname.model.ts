@@ -1,4 +1,4 @@
-import { TopicName } from './topicname.modal';
+import { TopicName } from './topicname.model';
 
 export class SubtopicName {
     id: number;

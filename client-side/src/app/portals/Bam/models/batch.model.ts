@@ -1,6 +1,6 @@
 import { Timestamp } from 'rxjs/operators/timestamp';
-import { BamUser } from './bamuser.modal';
-import { BatchType } from './batchtype.modal';
+import { BamUser } from './bamuser.model';
+import { BatchType } from './batchtype.model';
 
 export class Batch {
     id: number;

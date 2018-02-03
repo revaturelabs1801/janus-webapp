@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Batch } from '../../Caliber/entities/Batch';
-import { BatchType } from '../models/batchtype.modal';
+import { BatchType } from '../models/batchtype.model';
 import { environment } from '../environments/environment';
+import { Batch } from '../models/batch.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
