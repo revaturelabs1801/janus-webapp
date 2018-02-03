@@ -1,4 +1,3 @@
-import { Timestamp } from 'rxjs/operators/timestamp';
 import { BamUser } from './bamuser.model';
 import { BatchType } from './batchtype.model';
 
