@@ -22,7 +22,16 @@ export const environment = {
     getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
     addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
     makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
-    syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`
-  }
+    syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`}
 
-};
+//     calendar: {
+// //   ResponseEntity<List<Subtopic>> getSubtopicsByBatchPagination
+// //   ResponseEntity<List<Subtopic>> getSubtopicsByBatch
+// //   ResponseEntity<Long> getNumberOfSubTopicsByBatch
+// //   ResponseEntity<List<TopicWeek>> getTopicsByBatchPag
+// //   changeTopicDate
+// //   updateTopicStatus
+// //   addTopics
+//   }
+
+  };
