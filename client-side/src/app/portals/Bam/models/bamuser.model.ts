@@ -1,4 +1,4 @@
-import { Batch } from './batch.modal';
+import { Batch } from './batch.model';
 
 export class BamUser {
     userId: number;
