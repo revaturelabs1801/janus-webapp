@@ -5,7 +5,8 @@ import { environment } from '../environments/environment';
 import { Curriculum } from '../models/curriculum.model';
 import { CurriculumSubtopic } from '../models/curriculumSubtopic.model';
 import { SubtopicName } from '../models/subtopicname.model';
-import { SubTopic } from '../models/subtopic.model';
+import { Subtopic } from '../models/subtopic.model';
+import { CurriculumSubtopicDTO } from '../models/curriculumSubtopicDTO.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -17,6 +18,7 @@ export class CirriculumService {
 
   constructor(private http: HttpClient) { }
 
+  // getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
   // addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
   // makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
   // syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`}
@@ -53,13 +55,35 @@ export class CirriculumService {
     );
   }
 
-  getSubtopicPool(): Observable<SubTopic[]> {
-    return this.http.get<SubTopic[]>(environment.cirriculum.getSubtopicPoolAllUrl()).map(
+  getSubtopicPool(): Observable<Subtopic[]> {
+    return this.http.get<Subtopic[]>(environment.cirriculum.getSubtopicPoolAllUrl()).map(
       data => {
         return data;
       }
     );
   }
 
+  addCurriculum(curriculum: CurriculumSubtopicDTO) {
+    return this.http.post(environment.cirriculum.addCurriculumUrl(), curriculum, httpOptions).map(
+      data => {
+        return data;
+      }
+    );
+  }
 
+  markCurriculumAsMaster(curriculumId: number) {
+    return this.http.get(environment.cirriculum.makeCurriculumMasterByIdUrl(curriculumId)).map(
+      data => {
+        return data;
+      }
+    );
+  }
+
+  syncBatch(batchId: number) {
+    return this.http.get(environment.cirriculum.syncBatchByIdUrl(batchId)).map(
+      data => {
+        return data;
+      }
+    );
+  }
 }
