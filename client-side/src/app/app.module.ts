@@ -39,6 +39,7 @@ const routes: Routes = [
       { path: 'Caliber', loadChildren: './portals/Caliber/caliber.module#CaliberModule' },
       { path: 'AssignForce', loadChildren: './portals/Assign-Force/assign-force.module#AssignForceModule' },
       { path: 'TrackForce', loadChildren: './portals/Track-Force/track-force.module#TrackForceModule' },
+      { path: 'Bam', loadChildren: './portals/Bam/bam.module#BamModule' },
       { path: '**', pathMatch: 'full', redirectTo: '/dashboard' }
     ]
   },
