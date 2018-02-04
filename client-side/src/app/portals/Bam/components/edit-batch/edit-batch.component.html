@@ -3,40 +3,39 @@
 
   <div class="row justify-content-center ">
     <div class="col-4 pt-3">
-      <!-- <h2> Edit Batch</h2> -->
 
-      <div class="card">
+      <div class="card mb-3">
         <div class="card-body">
           <form ng-submit="updateBatch()" class="ng-valid-required ng-dirty ng-valid ng-valid-date">
 
-            <div class="form-group input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Batch Name</label>
-              </div>
+            <div class="form-group">
+              <span class=" -addon input-tag">Name:</span>
+
               <input type="text" class="form-control ng-pristine ng-not-empty ng-valid ng-valid-required ng-touched" ng-model="batch.name"
-              placeholder="" required="" readonly="">
+                placeholder="" required="" readonly="" value="{{ batch.name }}">
             </div>
 
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Batch Type</label>
-              </div>
-              <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <div class="form-group">
+              <span class=" -addon input-tag">Type:</span>
+
+              <select class="custom-select form-control" id="inputGroupSelect01">
+                <option selected> {{ batch.type.name }}</option>
+                <ng-container *ngFor="let type of batchTypes">
+                  <option *ngIf="batch.type.name != type.name"> {{ type.name }} </option>
+                </ng-container>
               </select>
             </div>
 
             <div class="form-group">
               <span class=" -addon input-tag">Start Date:</span>
-              <input type="date" class="form-control ng-not-empty ng-valid ng-valid-required ng-touched ng-dirty ng-valid-date" width="30%"
-                required="">
+              <input type="date" id="startDate" class="form-control ng-not-empty ng-valid ng-valid-required ng-touched ng-dirty ng-valid-date"
+                width="30%" required="" value='{{batch.startDate | date:"yyyy-MM-dd"}}'>
+              <!-- 2018-02-14 -->
             </div>
             <div class="form-group">
               <span class="input-tag">End Date:</span>
-              <input type="date" class="form-control ng-dirty ng-not-empty ng-valid ng-valid-date ng-valid-required ng-touched" required="">
+              <input type="date" class="form-control ng-dirty ng-not-empty ng-valid ng-valid-date ng-valid-required ng-touched" required=""
+                value='{{batch.endDate | date:"yyyy-MM-dd"}}'>
             </div>
 
             <button class="btn btn-block btn-primary" id="login-btn" type="submit">SUBMIT</button>
