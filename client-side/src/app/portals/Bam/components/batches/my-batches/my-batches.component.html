@@ -1,13 +1,35 @@
-<ul class="nav nav-tabs">
-    <li class="nav-link active" (click)="loadCurrent($event)">
-        <a>Current Batches</a>
-    </li>
-    <li class="nav-link" (click)="loadPast($event)">
-        <a>Past Batches</a>
-    </li>
-    <li class="nav-link" (click)="loadFuture($event)">
-        <a>Future Batches</a>
-    </li>
-</ul>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div>
+                <ngb-tabset>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <div (click)="loadCurrent($event)">Current Batches</div>
+                        </ng-template>
+                        <ng-template ngbTabContent></ng-template>
+                    </ngb-tab>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <div (click)="loadPast($event)">Past Batches</div>
+                        </ng-template>
+                        <ng-template ngbTabContent></ng-template>
+                    </ngb-tab>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <div (click)="loadFuture()">Future Batches</div>
+                        </ng-template>
+                        <ng-template ngbTabContent></ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
 
-<app-batches-table [batches]="batches"></app-batches-table>
+            <div class="pull-right">
+                <app-batches-search></app-batches-search>
+            </div>
+        </div>
+    </div>
+
+
+    <app-batches-table [batches]="batches" [title]="'My Batches'"></app-batches-table>
+</div>

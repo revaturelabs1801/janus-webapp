@@ -1,39 +1,29 @@
-<!-- <ngb-tabset activeId="{{this.selectedWeek}}" (tabChange)="fetchNews($event)" style="margin-top: -2px; border-bottom: white">
-<ngb-tabset>
-	<ngb-tab>
-		<ng-template ngbTabTitle>
-			<div>Current Batches</div>
-		</ng-template>
-		<ng-template ngbTabContent></ng-template>
-	</ngb-tab>
-	<ngb-tab>
-		<ng-template ngbTabTitle>
-			<div>Past Batches</div>
-		</ng-template>
-		<ng-template ngbTabContent></ng-template>
-	</ngb-tab>
-	<ngb-tab>
-		<ng-template ngbTabTitle>
-			<div>Future Batches</div>
-		</ng-template>
-		<ng-template ngbTabContent></ng-template>
-	</ngb-tab>
-</ngb-tabset> -->
-
-
-<table class="table">
-	<tr>
-		<th>Name</th>
-		<th>Trainer</th>
-		<th>Type</th>
-		<th>Start Date</th>
-		<th>End Date</th>
-	</tr>
-	<tr *ngFor="let batch of batches">
-		<td>{{batch.name}}</td>
-		<td>{{batch.trainer.fName}} {{batch.trainer.lName}}</td>
-		<td>{{batch.type.name}}</td>
-		<td>{{batch.startDate | date: 'MM/dd/yyyy'}}</td>
-		<td>{{batch.endDate | date: 'MM/dd/yyyy'}}</td>
-	</tr>
-</table>
+<div class="row">
+	<div class="col">
+		<div class="table-border">
+			<h3 class="table-title">{{title}}</h3>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Trainer</th>
+							<th scope="col">Type</th>
+							<th scope="col">Start Date</th>
+							<th scope="col">End Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let batch of batches">
+							<td>{{batch.name}}</td>
+							<td>{{batch.trainer.fName}} {{batch.trainer.lName}}</td>
+							<td>{{batch.type.name}}</td>
+							<td>{{batch.startDate | date: 'MM/dd/yyyy'}}</td>
+							<td>{{batch.endDate | date: 'MM/dd/yyyy'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

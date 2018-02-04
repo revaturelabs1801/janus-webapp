@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div>
+                <ngb-tabset>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <div>All Batches</div>
+                        </ng-template>
+                        <ng-template ngbTabContent></ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+
+            <div class="pull-right">
+                <app-batches-search></app-batches-search>
+            </div>
+        </div>
+    </div>
+
+
+    <app-batches-table [batches]="batches" [title]="'All Batches'"></app-batches-table>
+</div>

@@ -10,6 +10,7 @@ import { Batch } from '../../../models/batch.model';
 export class BatchesTableComponent implements OnInit {
 
   @Input() batches: Batch[];
+  @Input() title: string;
 
   constructor() { }
 
