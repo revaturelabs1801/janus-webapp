@@ -1,0 +1,36 @@
+// Note: batch type should not be of type number?
+// Unsure if it returns another object.
+export class BamUser {
+    userId: number;
+    fName: string;
+    mName: string;
+    lName: string;
+    email: string;
+    pwd: string;
+    role: number;
+    batch: number;
+    phone: string;
+    phone2: string;
+    skype: string;
+    pwd2: string;
+    assignForceId: number;
+
+    constructor(userId: number, fName: string, mName: string,
+        lName: string, email: string, pwd: string, role: number,
+        batch: number, phone: string, phone2: string,
+        skype: string, pwd2: string, assignForceId: number) {
+        this.userId = userId;
+        this.fName = fName;
+        this.mName = mName;
+        this.lName = lName;
+        this.email = email;
+        this.pwd = pwd;
+        this.role = role;
+        this.batch = batch;
+        this.phone = phone;
+        this.phone2 = phone2;
+        this.skype = skype;
+        this.pwd2 = pwd2;
+        this.assignForceId = assignForceId;
+    }
+}
