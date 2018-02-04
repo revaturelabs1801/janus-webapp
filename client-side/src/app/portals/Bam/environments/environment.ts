@@ -38,6 +38,7 @@ export const environment = {
         getAllTrainersUrl: () => `${context}/users/alltrainers`,
         getAllAssociatesUrl: () => `${context}/users/allassociates`,
         getUsersInBatchUrl: (batchId: number) => `${context}/users/inbatch?batchId=${batchId}`,
+<<<<<<< HEAD
         dropUserFromBatchUrl: () => `${context}/users/drop?userId`,
         updateUserUrl: () => `${context}/users/update`,
         addUserUrl: () => `${context}/users/register`,
@@ -46,5 +47,24 @@ export const environment = {
         addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add?userId=${userId}&batchId=${batchId}`,
         getUsersNotInBatchUrl: () => `${context}/users/notinabatch`,
         recoverPasswordUrl: () => `${context}/users/recovery`
+=======
+        dropUserFromBatchUrl: () => `${context}/users/drop`,
+        // requestbody updateUser
+        // requestbody addUser
+        // requestbody resetPassword
+        removeUserUrl: (userId: number) => `${context}/users/remove?userId=${userId}`,
+        addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add?userId=${userId}&batchId=${batchId}`,
+        getUsersNotInBatchUrl: () => `${context}/users/notinabatch`,
+        // requestbody recoverPassword
+    },
+
+    topic: {
+        addTopicName: (name: string) => `${context}/topic/add?name=${name}`
+    },
+
+    subtopic: {
+        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${context}/subtopic/add?
+        subtopicName=${subtopicName}&topicId=${topicId}&typeId=${typeId}`
+>>>>>>> 977683cfe1b83e5d740a80fce669308680edb780
     }
 };
