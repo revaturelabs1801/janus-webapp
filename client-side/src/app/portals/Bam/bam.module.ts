@@ -12,7 +12,7 @@ import { EditBatchService } from './services/edit-batch/edit-batch.service';
     CommonModule,
     BamRoutingModule
   ],
-  declarations: [BamComponent, HomeComponent, EditBatchComponent], 
+  declarations: [BamComponent, HomeComponent, EditBatchComponent],
   providers: [
     EditBatchService
   ]

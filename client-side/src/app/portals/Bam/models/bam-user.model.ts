@@ -15,11 +15,11 @@ export class BamUser {
     pwd2: string;
     assignForceId: number;
 
-    constructor(userId: number, fName: string, mName: stirng,
+    constructor(userId: number, fName: string, mName: string,
         lName: string, email: string, pwd: string, role: number,
         batch: number, phone: string, phone2: string,
         skype: string, pwd2: string, assignForceId: number) {
-        this.userId = number;
+        this.userId = userId;
         this.fName = fName;
         this.mName = mName;
         this.lName = lName;
