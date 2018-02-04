@@ -10,17 +10,17 @@ import { BatchType } from '../../models/batch-type.model';
 })
 export class EditBatchComponent implements OnInit {
 
-  batch : Batch; 
-  batchTypes : BatchType[]; 
+  batch: Batch;
+  batchTypes: BatchType[];
 
   constructor(editBatchService: EditBatchService) {
-    this.batch = new Batch(null, null, null, null, null); 
+    this.batch = new Batch(null, null, null, null, null);
     editBatchService.getBatchById(4).subscribe(
       batches => { this.batch = batches; console.log(this.batch);  }
-    ); 
+    );
     editBatchService.getAllBatchTypes().subscribe(
       types => { this.batchTypes = types; console.log(this.batchTypes);  }
-    ); 
+    );
   }
 
   ngOnInit() {
