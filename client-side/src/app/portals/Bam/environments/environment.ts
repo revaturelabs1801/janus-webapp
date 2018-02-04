@@ -36,7 +36,7 @@ export const environment = {
         getAllTrainersUrl: () => `${context}/users/alltrainers`,
         getAllAssociatesUrl: () => `${context}/users/allassociates`,
         getUsersInBatchUrl: (batchId: number) => `${context}/users/inbatch?batchId=${batchId}`,
-        dropUserFromBatchUrl: (userId: number) => `${context}/users/drop?userId=${userId}`,
+        dropUserFromBatchUrl: () => `${context}/users/drop`,
         // requestbody updateUser
         // requestbody addUser
         // requestbody resetPassword
@@ -44,5 +44,14 @@ export const environment = {
         addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add?userId=${userId}&batchId=${batchId}`,
         getUsersNotInBatchUrl: () => `${context}/users/notinabatch`,
         // requestbody recoverPassword
+    },
+
+    topic: {
+        addTopicName: (name: string) => `${context}/topic/add?name=${name}`
+    },
+
+    subtopic: {
+        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${context}/subtopic/add?
+        subtopicName=${subtopicName}&topicId=${topicId}&typeId=${typeId}`
     }
 };
