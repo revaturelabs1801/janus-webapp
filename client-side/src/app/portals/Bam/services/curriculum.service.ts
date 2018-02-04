@@ -14,14 +14,9 @@ const httpOptions = {
 };
 
 @Injectable()
-export class CirriculumService {
+export class CurriculumService {
 
   constructor(private http: HttpClient) { }
-
-  // getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
-  // addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
-  // makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
-  // syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`}
 
   getAllCurriculums(): Observable<Curriculum[]> {
     return this.http.get<Curriculum[]>(environment.cirriculum.getCirriculumAllUrl()).map(
