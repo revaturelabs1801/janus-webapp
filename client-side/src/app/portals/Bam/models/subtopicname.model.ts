@@ -1,10 +1,11 @@
 import { TopicName } from './topicname.model';
+import { SubtopicType } from './subtopictype.model';
 
 export class SubtopicName {
     id: number;
     name: string;
     topic: TopicName;
-    type: SubtopicName;
+    type: SubtopicType;
     constructor(id: number, name: string, topic: TopicName, type: SubtopicName) {
         this.id = id;
         this.name = name;

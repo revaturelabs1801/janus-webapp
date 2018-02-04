@@ -5,12 +5,13 @@ import { BamRoutingModule } from './bam-routing.module';
 import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
+import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule
   ],
-  declarations: [BamComponent, HomeComponent, MainCurriculumViewComponent]
+  declarations: [BamComponent, HomeComponent, MainCurriculumViewComponent, TopicPoolComponent]
 })
 export class BamModule { }

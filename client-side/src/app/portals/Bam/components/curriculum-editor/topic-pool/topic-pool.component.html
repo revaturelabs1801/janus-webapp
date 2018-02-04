@@ -1,0 +1,11 @@
+<div class="offset-1 col-md-2 col-xs-3 topic-pool">
+  <p class="text-center title">Topic Pool</p>
+  <div *ngFor="let topic of uniqarr; let i = index">
+    <div class="offset-1 col-10 topic" >
+      {{topic}}
+    </div>
+    <div class="substuff" *ngFor="let sub of subArray[i]">
+      {{sub.name}}
+    </div>
+  </div>
+</div>
