@@ -29,6 +29,20 @@ export const environment = {
 
     assignForce: {
         refreshBatches: () => `${context}/refreshbatches`
-    }
+    },
 
+    users: {
+        getAllUsersUrl: () => `${context}/users/all`,
+        getAllTrainersUrl: () => `${context}/users/alltrainers`,
+        getAllAssociatesUrl: () => `${context}/users/allassociates`,
+        getUsersInBatchUrl: (batchId: number) => `${context}/users/inbatch?batchId=${batchId}`,
+        dropUserFromBatchUrl: (userId: number) => `${context}/users/drop?userId=${userId}`,
+        // requestbody updateUser
+        // requestbody addUser
+        // requestbody resetPassword
+        removeUserUrl: (userId: number) => `${context}/users/remove?userId=${userId}`,
+        addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add?userId=${userId}&batchId=${batchId}`,
+        getUsersNotInBatchUrl: () => `${context}/users/notinabatch`,
+        // requestbody recoverPassword
+    }
 };
