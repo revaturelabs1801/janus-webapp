@@ -45,4 +45,11 @@ export class UsersService {
     );
   }
 
+  dropUserFromBatch(batchId: number){
+    return this.http.post(environment.users.dropUserFromBatchUrl(), batchId, httpOptions).map(
+      data => {
+        return data;
+      }
+    );
+  }
 }
