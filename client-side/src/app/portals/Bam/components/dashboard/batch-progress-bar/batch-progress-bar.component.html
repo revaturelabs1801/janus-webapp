@@ -2,8 +2,7 @@
 	Batch Progress
 	<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 	<p *ngIf="!showSpinner">{{batch.name}}</p>
-
-</div>	
-			
-			
-		
+	<div class="progress">
+		<div class="progress-bar" [style.width]="percentCompleted + '%'" >{{percentCompleted}}% </div>
+	  </div>
+</div>
