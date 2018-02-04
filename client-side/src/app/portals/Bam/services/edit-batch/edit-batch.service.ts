@@ -28,8 +28,16 @@ export class EditBatchService {
     // }
   }
 
-  getUsersInBatch(id: number) {
-    //TODO return users
+  getUsersInBatch(batchId: number) {
+    //TODO return user
+    console.log("getBatchById is called"); 
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      params:  new HttpParams().set('batchId', batchId.toString())
+    }
+
+    return this.http.get<any>("http://localhost:9001/api/v1/users/inbatch?batchId=4"); 
+
     // get users in the batch by the batchId
     // url: "rest/api/v1/Users/InBatch"
     // params: {
