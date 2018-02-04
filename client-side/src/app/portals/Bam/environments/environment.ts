@@ -1,3 +1,5 @@
+import { BamUser } from "../models/bamuser.model";
+
 const context = 'http://localhost:9001/api/v1';
 export const environment = {
     production: false,
@@ -36,13 +38,13 @@ export const environment = {
         getAllTrainersUrl: () => `${context}/users/alltrainers`,
         getAllAssociatesUrl: () => `${context}/users/allassociates`,
         getUsersInBatchUrl: (batchId: number) => `${context}/users/inbatch?batchId=${batchId}`,
-        dropUserFromBatchUrl: (userId: number) => `${context}/users/drop?userId=${userId}`,
-        // requestbody updateUser
-        // requestbody addUser
-        // requestbody resetPassword
+        dropUserFromBatchUrl: () => `${context}/users/drop?userId`,
+        updateUserUrl: () => `${context}/users/update`,
+        addUserUrl: () => `${context}/users/register`,
+        resetPasswordUrl: () => `${context}/users/reset`,
         removeUserUrl: (userId: number) => `${context}/users/remove?userId=${userId}`,
         addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add?userId=${userId}&batchId=${batchId}`,
         getUsersNotInBatchUrl: () => `${context}/users/notinabatch`,
-        // requestbody recoverPassword
+        recoverPasswordUrl: () => `${context}/users/recovery`
     }
 };
