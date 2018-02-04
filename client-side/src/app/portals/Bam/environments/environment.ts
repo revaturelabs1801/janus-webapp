@@ -9,7 +9,7 @@ export const environment = {
         getFutureBatchesUrl: (email: string) => `${context}/batches/future?email=${email}`,
         getBatchInProgressUrl: (email: string) => `${context}/batches/inprogress?email=${email}`,
         getAllBatchesInProgressUrl: (email: string) => `${context}/batches/allinprogress?email=${email}`,
-        getBatchByIdURL: (bid: number) => `${context}/batches/byid?bid=${bid}`,
+        getBatchByIdURL: (bid: number) => `${context}/batches/byid?batchId=${bid}`,
         updateBatchUrl: () => `${context}/batches/updatebatch`,
         getAllBatchTypesUrl: () => `${context}/batches/batchtypes`,
     },
