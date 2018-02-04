@@ -1,0 +1,49 @@
+<div class="container">
+
+
+  <div class="row justify-content-center ">
+    <div class="col-4 pt-3">
+      <!-- <h2> Edit Batch</h2> -->
+
+      <div class="card">
+        <div class="card-body">
+          <form ng-submit="updateBatch()" class="ng-valid-required ng-dirty ng-valid ng-valid-date">
+
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Batch Name</label>
+              </div>
+              <input type="text" class="form-control ng-pristine ng-not-empty ng-valid ng-valid-required ng-touched" ng-model="batch.name"
+              placeholder="" required="" readonly="">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Batch Type</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <span class=" -addon input-tag">Start Date:</span>
+              <input type="date" class="form-control ng-not-empty ng-valid ng-valid-required ng-touched ng-dirty ng-valid-date" width="30%"
+                required="">
+            </div>
+            <div class="form-group">
+              <span class="input-tag">End Date:</span>
+              <input type="date" class="form-control ng-dirty ng-not-empty ng-valid ng-valid-date ng-valid-required ng-touched" required="">
+            </div>
+
+            <button class="btn btn-block btn-primary" id="login-btn" type="submit">SUBMIT</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
