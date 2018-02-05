@@ -3,6 +3,7 @@ import { NgModel } from '@angular/forms';
 import { BamUser } from '../../../models/bamuser.model';
 import { Batch } from '../../../models/batch.model';
 import { BatchService } from '../../../services/batch.service';
+import { ListService } from '../../../services/dashboard/list.service';
 
 /**
  * @author Mohamed Swelam -- batch: 1712-dec-Java-Steve
@@ -23,7 +24,7 @@ export class WelcomeComponent implements OnInit {
   private batches: Batch [];
   private selectedBatch: Batch;
 
-  constructor(private batchSer: BatchService) {
+  constructor(private batchSer: BatchService, private data: ListService) {
 
    }
 
@@ -41,11 +42,13 @@ export class WelcomeComponent implements OnInit {
       response => {
         this.batches = response;
         if (this.batches !== null) {
-          this.batchCount =  1; // this.batches.length;
+          this.batchCount =  this.batches.length;
         } else {
           this.batchCount =  0;
         }
         this.setAllneededVars();
+        console.log(this.selectedBatch.id);
+        this.data.currentBatchId.subscribe(batchId => this.selectedBatch.id = batchId);
       });
   }
 
@@ -65,5 +68,10 @@ export class WelcomeComponent implements OnInit {
       this.batchCount = 0;
       this.message = 'You have no current batches';
     }
+  }
+
+
+  onChange(b: number) {
+    this.data.changeBatchId(b);
   }
 }

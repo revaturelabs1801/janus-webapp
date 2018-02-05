@@ -26,6 +26,8 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
+import { CalendarService } from './portals/Bam/services/calendar.service';
+import { BatchService } from './portals/Caliber/services/batch.service';
 
 
 // loading routes from child modules this way will lazy load them
@@ -68,7 +70,9 @@ const routes: Routes = [
     ReportingService,
     PDFService,
     RoleGuard,
-    CookieService
+    CookieService,
+    CalendarService,
+    BatchService
   ],
   bootstrap: [AppComponent]
 })
