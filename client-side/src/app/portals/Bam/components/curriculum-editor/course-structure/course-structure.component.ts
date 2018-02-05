@@ -120,7 +120,9 @@ export class CourseStructureComponent implements OnInit {
         this.uniqCurrVersions[i][j].isMaster = 0;
       }
     }
+    
     currVersion.isMaster = 1;
+    this.curriculumService.markCurriculumAsMaster(i);
   }
 
 
