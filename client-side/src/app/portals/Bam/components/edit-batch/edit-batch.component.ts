@@ -42,8 +42,7 @@ export class EditBatchComponent implements OnInit {
   submit(typeId) {
 
     let selected_type: BatchType;
-    //Get the appropriate type by id 
-    for (var i = 0; i < this.batchTypes.length; i++) {
+    for (let i = 0; i < this.batchTypes.length; i++) {
       if (typeId == this.batchTypes[i].id) {
         selected_type = this.batchTypes[i];
         break;

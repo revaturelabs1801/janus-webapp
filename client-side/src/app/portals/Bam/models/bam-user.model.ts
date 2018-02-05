@@ -1,5 +1,3 @@
-// Note: batch type should not be of type number?
-// Unsure if it returns another object.
 export class BamUser {
     userId: number;
     fName: string;

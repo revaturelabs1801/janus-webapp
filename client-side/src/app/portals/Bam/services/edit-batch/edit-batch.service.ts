@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Batch } from '../../models/batch.model';
 import { BatchType } from '../../models/batch-type.model';
+import { BamUser } from '../../models/bam-user.model';
 
 const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -21,12 +22,12 @@ export class EditBatchService {
     return this.http.get<Batch>('http://localhost:9001/api/v1/batches/byid?batchId=' + batchId, httpOptions);
   }
 
-  getUsersInBatch(batchId: number): Observable<Batch[]> {
-    return this.http.get<Batch[]>('http://localhost:9001/api/v1/users/inbatch?batchId=' + batchId, httpOptions);
+  getUsersInBatch(batchId: number): Observable<BamUser[]> {
+    return this.http.get<BamUser[]>('http://localhost:9001/api/v1/users/inbatch?batchId=' + batchId, httpOptions);
   }
 
-  getUsersNotInBatch(batchId: number): Observable<Batch[]> {
-    return this.http.get<Batch[]>('http://localhost:9001/api/v1/users/notinabatch?batchId=' + batchId, httpOptions);
+  getUsersNotInBatch(batchId: number): Observable<BamUser[]> {
+    return this.http.get<BamUser[]>('http://localhost:9001/api/v1/users/notinabatch?batchId=' + batchId, httpOptions);
   }
 
   updateBatch(batch: Batch) {
