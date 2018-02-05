@@ -23,8 +23,8 @@ export class CourseStructureComponent implements OnInit {
   }
 
   /**
-   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    * get all curriculum names (including duplicates)
+   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    */
   getCurriculumNames() {
     for (let i = 0; i < this.allCurriculums.length; i++) {
@@ -33,20 +33,20 @@ export class CourseStructureComponent implements OnInit {
   }
 
   /**
-   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    * filters out all duplicate curriculum names
+   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    */
   getUniqueCurrNames() {
     this.uniqCurrNames = this.allCurriculumNames.filter(this.onlyUnique);
   }
 
   /**
-   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    * get all versions of a curriculum (including duplicates).
    * loops through all curriculums (including duplicates), and once the filter finds a match to
    *  the current unique curriculum name, we add it back into all curriculums while ignoring
    *  the rest. This array is then pushed into allCurrVersions. Once iteration is complete,
    *  the process repeats for the next curriculum type
+   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    */
   getCurriculumVersions() {
     for (let i = 0; i < this.uniqCurrNames.length; i++) {
@@ -55,7 +55,6 @@ export class CourseStructureComponent implements OnInit {
   }
 
   /**
-   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    * taking our array of nested curriculum arrays, we want to filter all duplicate versions
    * for each of those nested arrays
    * currs - temp array that will contain all unique versions of a specific curriculum type for
@@ -71,6 +70,7 @@ export class CourseStructureComponent implements OnInit {
    *  currs array is pushed into an array of unique curriculum versions.
    *  Then  we clear our temp array and start the next iteration of our outer loop to
    *  repeat the process for the next curriculum grouped type.
+   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    */
   getUniqCurrVersions() {
     let currs: Curriculum[] = [];
@@ -100,18 +100,18 @@ export class CourseStructureComponent implements OnInit {
   }
 
   /**
-   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    * automagical function used in conjunction with the filter method to return only unique values
+   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    */
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
   /**
-   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    * requests all curriculums by calling apporopiate API endpoint.
    * Then calls all methods associated with getting
    * the unique list of curriculum types & their versions
+   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    */
   getAllCurriculums() {
     this.curriculumService.getAllCurriculums().subscribe(
@@ -126,6 +126,8 @@ export class CourseStructureComponent implements OnInit {
   }
 
   /**
+   * makes the curriculum object, passed as a parameter, the
+   * master version of its curriculum type.
    * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    * @param currVersion - curriculum object selected from view.
    * @param typeIndex - index of curriculum type, allows for faster navigation
