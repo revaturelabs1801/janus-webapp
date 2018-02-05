@@ -23,13 +23,14 @@
                     </ngb-tab>
                 </ngb-tabset>
             </div>
+            <!-- <app-batches-search (change)="filterText=$event.target.value"></app-batches-search> -->
 
-            <div class="pull-right">
-                <app-batches-search></app-batches-search>
-            </div>
         </div>
     </div>
 
+    <app-batches-table *ngIf="batches"
+        [batches]="batches" 
+        [title]="'My Batches'">
+    </app-batches-table>
 
-    <app-batches-table [batches]="batches" [title]="'My Batches'"></app-batches-table>
 </div>
