@@ -10,6 +10,7 @@ import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/to
 import { CurriculumWeeksViewComponent } from './components/curriculum-weeks-view/curriculum-weeks-view.component';
 import { CourseStructureComponent } from './components/curriculum-editor/course-structure/course-structure.component';
 import { CurriculumService } from './services/curriculum.service';
+import { DragNDropDirective } from './drag-n-drop.directive';
 
 @NgModule({
   imports: [
@@ -17,8 +18,8 @@ import { CurriculumService } from './services/curriculum.service';
     BamRoutingModule
   ],
   declarations: [ BamComponent, HomeComponent, CurriculumWeekComponent,
-    MainCurriculumViewComponent, TopicPoolComponent, CurriculumWeeksViewComponent, CourseStructureComponent ],
-  providers: [ CurriculumService ]
+    MainCurriculumViewComponent, TopicPoolComponent, CurriculumWeeksViewComponent, CourseStructureComponent, DragNDropDirective ],
+  providers: [ CurriculumService, CurriculumWeekComponent ]
 
 })
 export class BamModule { }

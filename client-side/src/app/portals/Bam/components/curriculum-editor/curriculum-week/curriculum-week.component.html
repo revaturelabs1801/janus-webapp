@@ -1,12 +1,12 @@
 
-<div class="row week offset-1">week#</div>
+<div class="row week offset-1" >week#</div>
 <div class="weeksrow row offset-1">
 
-<div class="days">Monday <div *ngFor="let day of monday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
-<div class="days">Tuesday  <div *ngFor="let day of tuesday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
-<div class="days">Wednesday  <div *ngFor="let day of wednesday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
-<div class="days">Thursday  <div *ngFor="let day of thursday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
-<div class="days">Friday  <div *ngFor="let day of friday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
+<div class="days" pDroppable="subtopic"(onDrop)="dropIt($event)">Monday <div *ngFor="let day of monday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
+<div class="days" pDroppable="subtopic"(onDrop)="dropIt($event)">Tuesday  <div *ngFor="let day of tuesday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
+<div class="days" pDroppable="subtopic"(onDrop)="dropIt($event)">Wednesday  <div *ngFor="let day of wednesday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
+<div class="days" pDroppable="subtopic"(onDrop)="dropIt($event)">Thursday  <div *ngFor="let day of thursday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
+<div class="days" pDroppable="subtopic"(onDrop)="dropIt($event)">Friday  <div *ngFor="let day of friday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
 
 </div>
 

@@ -9,11 +9,10 @@
         {{topic}}
       </div>
 
-
       <div [attr.id]="i" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
 
         <div *ngFor="let sub of subArray[i]">
-          <div class="subtopic text-nowrap text-truncate offset-1 col-9 " data-toggle="tooltip" data-placement="right" [attr.title]="sub.name">
+          <div class="subtopic text-nowrap text-truncate offset-1 col-9" pDraggable="subtopic" (onDrag)="dragStart($event)" data-toggle="tooltip" data-placement="right" [attr.title]="sub.name">
             {{sub.name}}
           </div>
         </div>
@@ -25,6 +24,7 @@
   </div>
  
 </div>
+
 
 <!-- <div id="accordion">
     <div class="card">

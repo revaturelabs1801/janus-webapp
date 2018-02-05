@@ -2,18 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { TopicName } from '../../../models/topicname.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { CurriculumService } from '../../../services/curriculum.service';
+import { ViewChild } from '@angular/core/src/metadata/di';
+import { DragNDropDirective } from '../../../drag-n-drop.directive';
+import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 
 @Component({
   selector: 'app-topic-pool',
   templateUrl: './topic-pool.component.html',
   styleUrls: ['./topic-pool.component.css']
 })
+
 export class TopicPoolComponent implements OnInit {
   topics: string[] = [];
   uniqarr: string[];
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
   subTopicName: SubtopicName[];
-  constructor(private curriculumService: CurriculumService) { }
+  constructor(private curriculumService: CurriculumService,
+              public curriculumWeekComponent: CurriculumWeekComponent) { }
+
+
+
+
+
+  currentlyDragged;
 
   ngOnInit() {
     this.getTopics();
@@ -53,4 +64,15 @@ export class TopicPoolComponent implements OnInit {
     }
   }
 
+   dragStart(event) {
+    this.currentlyDragged = event;
+    this.curriculumWeekComponent.draggedFinder(this.currentlyDragged);
+  }
+    
+
+  /* dragOver() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory();
+    const viewContainerRef = ;
+    const componentRef = viewContainerRef.remove();
+  } */
 }

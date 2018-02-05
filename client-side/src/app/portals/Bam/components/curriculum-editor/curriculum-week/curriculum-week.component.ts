@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
+/**
+ * Authors: Daniel Robinson, Tyler Dresselhouse, Dylan Britton
+ * Creates array of days in a week for curriculum view
+ * 
+ */
 
 @Component({
   selector: 'app-curriculum-week',
   templateUrl: './curriculum-week.component.html',
   styleUrls: ['./curriculum-week.component.css']
 })
-
 
 export class CurriculumWeekComponent implements OnInit {
 
@@ -20,10 +24,14 @@ friday: CurriculumSubtopic[] = [];
 
   constructor() { }
 
+currentlyDragged;
+
   ngOnInit() {
  this.sortSubtopics();
   }
-
+/**
+ * 
+ */
 sortSubtopics() {
 this.weekDTO.forEach(elem => {
 switch (elem.curriculumSubtopicDay) {
@@ -44,7 +52,13 @@ switch (elem.curriculumSubtopicDay) {
     break;
 }
 });
-
 }
 
+dropIt(event) {
+event.target.append(this.currentlyDragged.target);
+}
+
+draggedFinder(currentlyDragged) {
+this.currentlyDragged = currentlyDragged;
+}
 }
