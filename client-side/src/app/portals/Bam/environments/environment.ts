@@ -41,14 +41,4 @@ export const environment = {
         refreshBatches: () => `${context}/refreshbatches`
     }
 
-//     calendar: {
-// //   ResponseEntity<List<Subtopic>> getSubtopicsByBatchPagination
-// //   ResponseEntity<List<Subtopic>> getSubtopicsByBatch
-// //   ResponseEntity<Long> getNumberOfSubTopicsByBatch
-// //   ResponseEntity<List<TopicWeek>> getTopicsByBatchPag
-// //   changeTopicDate
-// //   updateTopicStatus
-// //   addTopics
-//   }
-
   };
