@@ -14,6 +14,7 @@ export class TopicService {
 
   /**
    * Adds a topic to the database.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @param name string
    */
   addTopicName(name: string) {

@@ -15,6 +15,7 @@ export class SubtopicService {
 
   /**
    * Adds a subtopic to a topic.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @param subtopicName string
    * @param topicId number
    * @param typeId number

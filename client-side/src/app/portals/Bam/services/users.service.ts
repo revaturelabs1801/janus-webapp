@@ -15,6 +15,7 @@ export class UsersService {
 
   /**
    * Gets all users.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @returns BamUser[]
    */
   getAllUsers(): Observable<BamUser[]> {
@@ -27,6 +28,7 @@ export class UsersService {
 
   /**
    * Gets all trainers.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @returns BamUser[]
    */
   getAllTrainers(): Observable<BamUser[]> {
@@ -39,6 +41,7 @@ export class UsersService {
 
   /**
    * Gets all associates.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @returns BamUser[]
    */
   getAllAssociates(): Observable<BamUser[]> {
@@ -51,6 +54,7 @@ export class UsersService {
 
   /**
    * Gets all the user in the batch.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @returns BamUser[]
    * @param batchId number
    */
@@ -64,6 +68,7 @@ export class UsersService {
 
   /**
    * Drops batch from database.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @param batchId number
    */
   dropUserFromBatch(batchId: number) {
@@ -75,6 +80,7 @@ export class UsersService {
   }
   /**
    * Must pass in the updated Bamuser.
+   * @author Jeffery Camacho | Batch: 1712-dec10-java-steve
    * @returns BamUser
    * @param currentUser BamUser
    */
@@ -87,6 +93,7 @@ export class UsersService {
   }
   /**
    * Adds a user to the database.
+   * @author Jeffery Camacho | Batch: 1712-dec10-java-steve
    * @returns BamUser
    * @param newUser BamUser
    */
@@ -100,6 +107,7 @@ export class UsersService {
   /**
    * Resets the pass word of the user.
    * Must pass in the user with new password.
+   * @author Jeffery Camacho | Batch: 1712-dec10-java-steve
    * @returns BamUser
    * @param userNewPass BamUser
    */
@@ -112,6 +120,7 @@ export class UsersService {
   }
   /**
    * Recovers the password by sending the new password to an email.
+   * @author Jeffery Camacho | Batch: 1712-dec10-java-steve
    * @returns BamUser
    * @param recoverEmail string
    */
