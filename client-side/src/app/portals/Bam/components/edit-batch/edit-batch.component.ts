@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Batch } from '../../models/batch.model';
 import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
-import { BatchType } from '../../models/batch-type.model';
+import { BatchType } from '../../models/batchtype.model';
 import { Output } from '@angular/core/src/metadata/directives';
 
 @Component({
@@ -11,39 +11,27 @@ import { Output } from '@angular/core/src/metadata/directives';
 })
 export class EditBatchComponent implements OnInit {
 
-  @Input() batch: Batch;
+  @Input() batch: Batch = new Batch(null, null, null, null, null, null);
   batchTypes: BatchType[];
 
-  add = false;
+  showAddUserTable = false;
 
-  constructor(editBatchService: EditBatchService) {
-    this.batch = new Batch(null, null, null, null, null);
-    editBatchService.getBatchById(4).subscribe(
-      batches => {
-        this.batch = batches; console.log(this.batch);
-      }
-    );
-    editBatchService.getAllBatchTypes().subscribe(
-      types => { this.batchTypes = types; console.log(this.batchTypes); }
-    );
-  }
-
-  ngOnInit() {
+  constructor(public editBatchService: EditBatchService) {
   }
 
   toggleRemove() {
-    this.add = false;
+    this.showAddUserTable = false;
   }
 
   toggleAdd() {
-    this.add = true;
+    this.showAddUserTable = true;
   }
 
   submit(typeId) {
 
     let selected_type: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
-      if (typeId == this.batchTypes[i].id) {
+      if (typeId === this.batchTypes[i].id) {
         selected_type = this.batchTypes[i];
         break;
       }
@@ -60,8 +48,11 @@ export class EditBatchComponent implements OnInit {
 
   private startDateChanged(newDate) {
     this.batch.startDate = new Date(newDate);
-    console.log("start date " + newDate);
-    console.log(this.batch.startDate); // <-- for testing 
+    console.log(this.batch.startDate); // <-- for testing
   }
 
+  ngOnInit() {
+    this.editBatchService.getBatchById(4).subscribe( batch => this.batch = batch );
+    this.editBatchService.getAllBatchTypes().subscribe( types => this.batchTypes = types );
+  }
 }

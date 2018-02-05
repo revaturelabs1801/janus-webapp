@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Batch } from '../../models/batch.model';
-import { BatchType } from '../../models/batch-type.model';
-import { BamUser } from '../../models/bam-user.model';
+import { BatchType } from '../../models/batchtype.model';
+import { BamUser } from '../../models/bamuser.model';
 
 const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
