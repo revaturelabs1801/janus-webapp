@@ -10,7 +10,7 @@ import { Batch } from '../../../models/batch.model';
 })
 export class MyBatchesComponent implements OnInit {
 
-  email = 'rl@revature.com';
+  email = 'rl@revature.com'; // Temporary for testing
   batches: Batch[];
 
   constructor(private batchService: BatchService) { }
@@ -19,18 +19,21 @@ export class MyBatchesComponent implements OnInit {
     this.loadCurrent(this);
   }
 
+  // Loads the user's batches currently in progress
   loadCurrent(event) {
     this.batches = null;
     this.batchService.getAllBatchesInProgress(this.email)
       .subscribe(batches => this.batches = batches);
   }
 
+  // Loads the user's past batches
   loadPast(event) {
     this.batches = null;
     this.batchService.getPastBatches(this.email)
       .subscribe(batches => this.batches = batches);
   }
 
+  // Loads the user's future batches
   loadFuture(event) {
     this.batches = null;
     this.batchService.getFutureBatches(this.email)

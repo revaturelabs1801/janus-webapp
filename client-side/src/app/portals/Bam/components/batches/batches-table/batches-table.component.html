@@ -3,7 +3,7 @@
 		<div class="input-group" class="pull-right">
 			<div class="input-group">
 
-				<input *ngIf="automaticFiltering" [(ngModel)]="filterText" (keyup)="filterBatches($event)" id="typeahead-basic" placeholder="Filter" type="search" class="form-control" />
+				<input *ngIf="automaticFiltering" (keyup)="filterBatches($event)" id="typeahead-basic" placeholder="Filter" type="search" class="form-control" />
 				<input *ngIf="!automaticFiltering" (keyup.enter)="filterBatches($event)" id="typeahead-basic" placeholder="Filter" type="search" class="form-control" />
 
 				<span class="icon">
