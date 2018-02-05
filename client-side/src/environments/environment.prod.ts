@@ -4,7 +4,6 @@ export const environment = {
   production: true,
   context: context, // change for what the production environment would actually be
 
-
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
     save: () => `${context}trainer/assessment/create`,
