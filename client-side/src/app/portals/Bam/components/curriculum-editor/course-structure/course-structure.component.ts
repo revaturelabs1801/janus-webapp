@@ -19,7 +19,6 @@ export class CourseStructureComponent implements OnInit {
   constructor(private curriculumService: CurriculumService) { }
 
   ngOnInit() {
-    // calls the function that calls all other functions
     this.getAllCurriculums();
   }
 
@@ -99,7 +98,10 @@ export class CourseStructureComponent implements OnInit {
     return self.indexOf(value) === index;
   }
 
-  // calls everything
+  /**
+   * calls all methods associated with getting
+   * the unique list of curriculum types & their versions
+   */
   getAllCurriculums() {
     this.curriculumService.getAllCurriculums().subscribe(
       data => {
@@ -112,6 +114,12 @@ export class CourseStructureComponent implements OnInit {
     );
   }
 
+  /**
+   *
+   * @param currVersion - curriculum object selected from view.
+   * @param typeIndex - index of curriculum type, allows for faster navigation
+   *    through uniqCurrVersions 2D array.
+   */
   makeMaster(currVersion, typeIndex: number) {
     for (let j = 0; j < this.uniqCurrVersions[typeIndex].length; j++) {
       if (this.uniqCurrVersions[typeIndex][j].isMaster === 1) {
