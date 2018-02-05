@@ -1,0 +1,57 @@
+
+.pan{
+	width: auto;
+    /*background-color: rgba(243, 93, 10, .95);
+    padding: 50px; */
+    margin: 10px;
+    /*border-radius: 7px; */
+    font-weight: bold;
+    /*border-style: inset;
+    color: white;
+    border-color: #e85f12; */
+}
+
+#pan-container{
+    width: auto;
+    background-color: rgba(243, 93, 10, .95);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 7px;
+    border-style: inset;
+    color: white;
+    border-color: #e85f12;
+}
+
+#pan2{
+	width: auto;
+    /*background-color: rgba(243, 93, 10, .95);*/
+    margin-left: 25px;
+    /*padding: 15px; */
+    /*border-radius: 7px;*/
+    font-weight: bold;
+    /*border-style: outset;
+    color: white;
+    border-color: #e85f12;*/
+}
+
+#pan3{
+	width: auto;
+    /*background-color: rgba(243, 93, 10, .95);*/
+    float: right;
+    margin-right: 40px;
+    /*padding: 15px;*/
+    /*border-radius: 7px;*/
+    font-weight: bold;
+    /*border-style: outset;
+    color: white;
+    border-color: #e85f12;*/
+}
+
+@media all and (max-width: 600px) {
+    #pan3 { display: none; }
+}
+
+#bWeek {
+    position: absolute;
+    right: 0;
+}
