@@ -12,7 +12,7 @@ export class AddUserTableComponent implements OnInit {
   associates: BamUser[];
 
   constructor(public editBatchService: EditBatchService) {
-   }
+  }
 
   ngOnInit() {
     this.editBatchService.getUsersNotInBatch(4).subscribe(users => this.associates = users);
