@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
 import { BamUser } from '../../models/bamuser.model';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-remove-user-table',
@@ -11,7 +12,7 @@ export class RemoveUserTableComponent implements OnInit {
 
   associates: BamUser[];
 
-  constructor(public editBatchService: EditBatchService) {
+  constructor(public editBatchService: EditBatchService, public usersService : UsersService) {
   }
 
   ngOnInit() {
@@ -24,7 +25,8 @@ export class RemoveUserTableComponent implements OnInit {
     let i = 0;
     for (let associate of this.associates) {
       if (associate.userId === user.userId) {
-        this.associates.splice(i, 1);  
+        //this.associates.splice(i, 1);
+        this.usersService.removeUserFromBatch(associate.userId).subscribe(users => this.associates = users);
         break;
       }
       i++;

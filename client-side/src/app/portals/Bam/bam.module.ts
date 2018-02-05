@@ -9,6 +9,7 @@ import { EditBatchComponent } from './components/edit-batch/edit-batch.component
 import { AddUserTableComponent } from './components/add-user-table/add-user-table.component';
 import { RemoveUserTableComponent } from './components/remove-user-table/remove-user-table.component';
 import { EditBatchService } from './services/edit-batch/edit-batch.service';
+import { UsersService } from './services/users.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { EditBatchService } from './services/edit-batch/edit-batch.service';
     RemoveUserTableComponent
   ],
   providers: [
-    EditBatchService
+    EditBatchService,
+    UsersService
   ]
 })
 export class BamModule { }
