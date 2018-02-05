@@ -9,7 +9,7 @@ export class CurriculumWeeksViewComponent implements OnInit {
 
   constructor() { }
 
-weeks = ['a', 'b', 'c'];
+weeks = ['a', 'b', 'c', 'd', 'a'];
 
   ngOnInit() {
   }

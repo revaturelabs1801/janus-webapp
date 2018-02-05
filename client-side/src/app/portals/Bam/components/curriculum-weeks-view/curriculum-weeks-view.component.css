@@ -1,4 +1,9 @@
-.giveHeight{
+.giveHeight {
     height: 500px;
     position: absolute;   
+}
+
+.scrollbar {
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
