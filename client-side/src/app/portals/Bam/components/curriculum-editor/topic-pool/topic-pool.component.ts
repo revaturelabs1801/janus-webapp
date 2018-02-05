@@ -15,10 +15,12 @@ export class TopicPoolComponent implements OnInit {
   subTopicName: SubtopicName[];
   constructor(private curriculumService: CurriculumService) { }
 
+  // On initializing this component we are calling the getTopic() function
   ngOnInit() {
     this.getTopics();
   }
 
+  // This will subscribe to the curriculum service to obtain the topic pool information
   getTopics() {
     this.curriculumService.getAllTopicPool().subscribe(
       data => {
@@ -33,20 +35,24 @@ export class TopicPoolComponent implements OnInit {
     );
   }
 
+  // Runs throught subTopicNames array and will extract the topics within the array
   initTopics() {
     for (let i = 0; i < this.subTopicName.length; i++) {
       this.topics.push(this.subTopicName[i].topic.name);
     }
   }
 
+  // this method is used with conjunction of filter to obtain only unique elements of an array
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
+  // filter through topics array to filter out repeated topics within the array
   uniqueTopics() {
     this.uniqarr = this.topics.filter(this.onlyUnique);
   }
 
+  // uses the unique topics array to obtain the the subtopics that releate to each topic
   getSubTopics() {
     for (let i = 0; i < this.uniqarr.length; i++) {
       this.subArray.push(this.subTopicName.filter(e => this.uniqarr[i] === e.topic.name));
