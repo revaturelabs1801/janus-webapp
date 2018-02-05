@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
+import { BamUser } from '../../models/bam-user.model';
 
 @Component({
   selector: 'app-remove-user-table',
@@ -8,9 +9,11 @@ import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
 })
 export class RemoveUserTableComponent implements OnInit {
 
+  associates : BamUser[]; 
+
   constructor(editBatchService: EditBatchService) {
     editBatchService.getUsersInBatch(0).subscribe(
-      types => {console.log(types); }
+      users => {this.associates = users; console.log(this.associates); }
     );
    }
 

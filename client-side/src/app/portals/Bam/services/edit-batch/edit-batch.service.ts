@@ -45,10 +45,17 @@ export class EditBatchService {
     // }
   }
 
-  getUsersNotInBatch(id: number) {
+  getUsersNotInBatch(batchId: number) {
     // TODO: return users
     // get users who are not in a batch
     // url: "rest/api/v1/Users/NotInABatch",
+    console.log("getBatchById is called"); 
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      params:  new HttpParams().set('batchId', batchId.toString())
+    }
+
+    return this.http.get<any>("http://localhost:9001/api/v1/users/notinabatch?batchId=4"); 
     // 
   }
 
