@@ -22,84 +22,95 @@ export class CourseStructureComponent implements OnInit {
     this.getAllCurriculums();
   }
 
-  // get all curriculum names (including duplicates)
+  /**
+   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
+   * get all curriculum names (including duplicates)
+   */
   getCurriculumNames() {
     for (let i = 0; i < this.allCurriculums.length; i++) {
       this.allCurriculumNames.push(this.allCurriculums[i].curriculumName);
     }
   }
 
-  // filters out all duplicate curriculum names
+  /**
+   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
+   * filters out all duplicate curriculum names
+   */
   getUniqueCurrNames() {
     this.uniqCurrNames = this.allCurriculumNames.filter(this.onlyUnique);
   }
 
-  // get all versions of a curriculum (including duplicates)
+  /**
+   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
+   * get all versions of a curriculum (including duplicates).
+   * loops through all curriculums (including duplicates), and once the filter finds a match to
+   *  the current unique curriculum name, we add it back into all curriculums while ignoring
+   *  the rest. This array is then pushed into allCurrVersions. Once iteration is complete,
+   *  the process repeats for the next curriculum type
+   */
   getCurriculumVersions() {
-    // loop through each curriculum type
     for (let i = 0; i < this.uniqCurrNames.length; i++) {
-      // loops through all curriculums (including duplicates), and once the filter finds a match to
-      // the current unique curriculum name, we add it back into all curriculums while ignoring
-      // the rest. This array is then pushed into allCurrVersions.
       this.allCurrVersions.push(this.allCurriculums.filter(e => this.uniqCurrNames[i] === e.curriculumName));
-      // once iteration is complete, the process repeats for the next curriculum type
     }
-    // once for loop is complete, allCurrVersions is an array of curriculum arrays containing all versions,
-    // including duplicate versions
   }
 
-  // now that we have our array of nested curriculum arrays, we want to filter all duplicate versions
-  // for each of those nested arrays
+  /**
+   * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
+   * taking our array of nested curriculum arrays, we want to filter all duplicate versions
+   * for each of those nested arrays
+   * currs - temp array that will contain all unique versions of a specific curriculum type for
+   * each iteration
+   * loops through all curriculum grouped types
+   *  sets our version variable equal to the max version number of the
+   *  current curriculum grouped types
+   * loops through all elements within the current grouped type
+   *  grabs the first instance of a curriculum object if its version is equal to
+   *  the current value of our version variable and then pushes it
+   *  into our temp currs array
+   * once our version variable hits 0, inner loop is complete and our temp
+   *  currs array is pushed into an array of unique curriculum versions.
+   *  Then  we clear our temp array and start the next iteration of our outer loop to
+   *  repeat the process for the next curriculum grouped type.
+   */
   getUniqCurrVersions() {
-    // this is a temp array that will contain all unique versions of a specific curriculum type for
-    // each iteration
     let currs: Curriculum[] = [];
-
-    // loops through all curriculum grouped types
     for (let i = 0; i < this.allCurrVersions.length; i++) {
       let version = 1;
-      // sets our version variable equal to the max version number of the
-      // current curriculum grouped types
       this.allCurrVersions[i].forEach(e => {
         if (e.curriculumVersion > version) {
           version = e.curriculumVersion;
         }
       });
-      // loops through all elements within the current grouped type
       for (let j = 0; j < this.allCurrVersions[i].length; j++) {
-        // grabs the first instance of a curriculum object if its version is equal to
-        // the current value of our version variable and then pushes it
-        // into our temp currs array
         if (this.allCurrVersions[i][j].curriculumVersion === version) {
           currs.push(this.allCurrVersions[i][j]);
           version--;
           if (version !== 0) {
-            // restart loop if version is not yet at 0
             j = -1;
           }
         } else if (j === this.allCurrVersions[i].length - 1 && version !== 0) {
           version--;
-          // restart loop if version is not yet at 0
           j = -1;
         }
       }
-      // once our version variable hits 0, inner loop is complete and our temp
-      // currs array is pushed into an array of unique curriculum versions.
-      // Then  we clear our temp array and start the next iteration of our outer loop to
-      // repeat the process for the next curriculum grouped type.
       this.uniqCurrVersions.push(currs);
       currs = [];
     }
 
   }
 
-  // automagical function used in conjunction with the filter function to return only unique values
+  /**
+   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
+   * automagical function used in conjunction with the filter method to return only unique values
+   */
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
   /**
-   * calls all methods associated with getting
+   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
+   * requests all curriculums by calling apporopiate API endpoint.
+   * Then calls all methods associated with getting
    * the unique list of curriculum types & their versions
    */
   getAllCurriculums() {
@@ -115,7 +126,7 @@ export class CourseStructureComponent implements OnInit {
   }
 
   /**
-   *
+   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    * @param currVersion - curriculum object selected from view.
    * @param typeIndex - index of curriculum type, allows for faster navigation
    *    through uniqCurrVersions 2D array.
