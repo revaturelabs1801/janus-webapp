@@ -112,7 +112,7 @@ export class CourseStructureComponent implements OnInit {
     );
   }
 
-  crownMe(currVersion: Curriculum, i) {
+  crownMe(currVersion: Curriculum, i: number) {
     console.log('crown me! ' + i);
     for (let j = 0; j < this.uniqCurrVersions[i].length; j++) {
       console.log('j= ' + j);
@@ -121,6 +121,13 @@ export class CourseStructureComponent implements OnInit {
       }
     }
     currVersion.isMaster = 1;
+  }
+
+  makeMaster(currVersion: Curriculum) {
+    this.curriculumService.markCurriculumAsMaster(currVersion.id).subscribe(
+    data => {
+      console.log(data);
+    });
   }
 
 
