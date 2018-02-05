@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BatchService } from '../../../services/batch.service';
 import { Batch } from '../../../models/batch.model';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-my-batches',
@@ -10,31 +11,41 @@ import { Batch } from '../../../models/batch.model';
 })
 export class MyBatchesComponent implements OnInit {
 
-  email = 'rl@revature.com'; // Temporary for testing
+  email: string;
   batches: Batch[];
 
-  constructor(private batchService: BatchService) { }
+  constructor(private batchService: BatchService, private sessionService: SessionService) { }
 
   ngOnInit() {
-    this.loadCurrent(this);
+    this.email = this.sessionService.getUser().email;
+    this.loadCurrent();
   }
 
-  // Loads the user's batches currently in progress
-  loadCurrent(event) {
+  /**
+   * Gets the current user's batches in progress
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
+  loadCurrent() {
     this.batches = null;
     this.batchService.getAllBatchesInProgress(this.email)
       .subscribe(batches => this.batches = batches);
   }
 
-  // Loads the user's past batches
-  loadPast(event) {
+  /**
+   * Gets the current user's past batches
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
+  loadPast() {
     this.batches = null;
     this.batchService.getPastBatches(this.email)
       .subscribe(batches => this.batches = batches);
   }
 
-  // Loads the user's future batches
-  loadFuture(event) {
+  /**
+   * Gets the current user's future batches
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
+  loadFuture() {
     this.batches = null;
     this.batchService.getFutureBatches(this.email)
       .subscribe(batches => this.batches = batches);

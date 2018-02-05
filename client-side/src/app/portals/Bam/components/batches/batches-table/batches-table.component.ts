@@ -26,7 +26,11 @@ export class BatchesTableComponent implements OnInit {
     this.automaticFiltering = (this.batches.length < this.automaticFilteringThreshold);
   }
 
-  // Filter the displayed batches by text in search input field
+  /**
+   * Filters the displayed batches by the text in the search box
+   * @param event event.target.value holds the text the batches are filtered by
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
   filterBatches(event) {
     this.filtered = this.filterBatchPipe.transform(this.batches, event.target.value);
   }

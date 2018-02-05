@@ -5,13 +5,13 @@
                 <ngb-tabset>
                     <ngb-tab>
                         <ng-template ngbTabTitle>
-                            <div (click)="loadCurrent($event)">Current Batches</div>
+                            <div (click)="loadCurrent()">Current Batches</div>
                         </ng-template>
                         <ng-template ngbTabContent></ng-template>
                     </ngb-tab>
                     <ngb-tab>
                         <ng-template ngbTabTitle>
-                            <div (click)="loadPast($event)">Past Batches</div>
+                            <div (click)="loadPast()">Past Batches</div>
                         </ng-template>
                         <ng-template ngbTabContent></ng-template>
                     </ngb-tab>
@@ -26,7 +26,9 @@
         </div>
     </div>
 
-    <app-batches-table *ngIf="batches" [batches]="batches" [title]="'My Batches'">
+    <app-batches-table *ngIf="batches"
+        [batches]="batches" 
+        [title]="'My Batches'">
     </app-batches-table>
 
 </div>

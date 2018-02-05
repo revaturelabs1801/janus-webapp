@@ -17,7 +17,10 @@ export class AllBatchesComponent implements OnInit {
     this.loadAll();
   }
 
-  // Loads all batches
+  /**
+   * Gets all batches
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
   loadAll() {
     this.batchService.getBatchAll()
     .subscribe(batches => this.batches = batches);
