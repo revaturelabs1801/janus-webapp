@@ -21,7 +21,6 @@ export const environment = {
     save: () => `${context}all/batch/create`,
     update: () => `${context}all/batch/update`,
     delete: (batchId) => `${context}all/batch/delete/${batchId}`,
-    
   },
 
   category: {

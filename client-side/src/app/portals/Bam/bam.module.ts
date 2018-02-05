@@ -7,13 +7,15 @@ import { BatchProgressBarComponent } from './components/dashboard/batch-progress
 import { HomeComponent } from './components/home/home.component';
 import { LoadingSpinnerComponent } from './components/dashboard/ui/loading-spinner/loading-spinner.component';
 import { BatchService } from './services/batch.service';
+import { TestDropEmitterComponent } from './components/dashboard/test-drop-emitter/test-drop-emitter.component';
+import { ListService } from './services/dashboard/list.service';
 
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule
   ],
-  declarations: [BamComponent, HomeComponent, BatchProgressBarComponent, LoadingSpinnerComponent],
-  providers: [BatchService]
+  declarations: [BamComponent, HomeComponent, BatchProgressBarComponent, LoadingSpinnerComponent, TestDropEmitterComponent],
+  providers: [BatchService, ListService]
 })
 export class BamModule { }
