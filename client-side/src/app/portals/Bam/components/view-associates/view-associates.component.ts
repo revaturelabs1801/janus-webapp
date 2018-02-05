@@ -8,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class ViewAssociatesComponent implements OnInit {
 
   constructor() { }
-
+  /*
+  *if current batch is null display nothing otherwise batch name
+  */
   ngOnInit() {
+
+  }
+
+  loadAssociatesInBatch() {
+
   }
 
 }
