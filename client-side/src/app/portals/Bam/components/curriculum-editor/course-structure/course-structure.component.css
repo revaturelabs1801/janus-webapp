@@ -1,14 +1,6 @@
-.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-}
+#accordion {
+    border: 1px solid black;
+   }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .accordion:hover {
@@ -21,4 +13,38 @@
     background-color: white;
     display: none;
     overflow: hidden;
+}
+
+.currType {
+    font-size: 1.2vw;
+    border: 1px solid #f47f43;
+    background-color: #474c55;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    margin: 6px;
+    padding: 5px 0px;
+    border-radius: 0px 30px 0px 30px;
+}
+
+.currTypeVer{
+    margin-left: 32px;
+    cursor: pointer;
+    font-size: 1vw;
+}
+
+.currTypeVer:hover {
+    font-size: 1.2vw
+}
+
+.currTypeVer:active {
+   color: #f47f43;
+}
+
+.fa-chess-king {
+    color: #f47f43;
+}
+
+.crownless {
+    color: rgba(128, 128, 128, 0.473);
 }
