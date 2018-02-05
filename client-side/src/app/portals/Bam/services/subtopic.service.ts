@@ -13,6 +13,12 @@ const httpOptions = {
 export class SubtopicService {
   constructor(private http: HttpClient) { }
 
+  /**
+   * Adds a subtopic to a topic.
+   * @param subtopicName string
+   * @param topicId number
+   * @param typeId number
+   */
   addSubTopicName(subtopicName: string, topicId: number, typeId: number) {
     return this.http.post(environment.subtopic.addSubTopicName(subtopicName, topicId, typeId), httpOptions).map(
       data => {

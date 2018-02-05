@@ -12,6 +12,10 @@ const httpOptions = {
 export class TopicService {
   constructor(private http: HttpClient) { }
 
+  /**
+   * Adds a topic to the database.
+   * @param name string
+   */
   addTopicName(name: string) {
     return this.http.post(environment.topic.addTopicName(name), httpOptions).map(
       data => {
