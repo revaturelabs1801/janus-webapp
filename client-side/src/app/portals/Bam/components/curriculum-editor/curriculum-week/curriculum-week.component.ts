@@ -11,7 +11,7 @@ import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 
 export class CurriculumWeekComponent implements OnInit {
 
-weekDTO: CurriculumSubtopic[];
+weekDTO: CurriculumSubtopic[] = [];
 monday: CurriculumSubtopic[] = [];
 tuesday: CurriculumSubtopic[] = [];
 wednesday: CurriculumSubtopic[] = [];
