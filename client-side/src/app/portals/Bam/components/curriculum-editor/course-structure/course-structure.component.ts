@@ -112,22 +112,22 @@ export class CourseStructureComponent implements OnInit {
     );
   }
 
-  crownMe(currVersion: Curriculum, i) {
-    console.log('crown me! ' + i);
-    for (let j = 0; j < this.uniqCurrVersions[i].length; j++) {
-      console.log('j= ' + j);
-      if (this.uniqCurrVersions[i][j].isMaster === 1) {
-        this.uniqCurrVersions[i][j].isMaster = 0;
+  makeMaster(currVersion, typeIndex: number) {
+    for (let j = 0; j < this.uniqCurrVersions[typeIndex].length; j++) {
+      if (this.uniqCurrVersions[typeIndex][j].isMaster === 1) {
+        this.uniqCurrVersions[typeIndex][j].isMaster = 0;
       }
     }
     
     currVersion.isMaster = 1;
-    this.curriculumService.markCurriculumAsMaster(i);
+    console.log(currVersion);
+    this.curriculumService.markCurriculumAsMaster(currVersion.curriculumId).subscribe(
+    data => {
+      console.log(data);
+    },
+    error => {
+      console.log(error);
+    });
   }
 
-
-  // logic for CSS. Currently selected curriculum version
-  shiftSelectedCurriculum() {
-
-  }
 }
