@@ -25,6 +25,7 @@
     margin: 6px;
     padding: 5px 0px;
     border-radius: 0px 30px 0px 30px;
+    cursor: pointer;
 }
 
 .currTypeVer{
@@ -34,7 +35,7 @@
 }
 
 .currTypeVer:hover {
-    font-size: 1.2vw
+    font-size: 1.2vw;
 }
 
 .currTypeVer:active {
@@ -47,4 +48,9 @@
 
 .crownless {
     color: rgba(128, 128, 128, 0.473);
+}
+
+.crownless:hover {
+    color: #f47f43;
+    font-size: 1.3vw;
 }

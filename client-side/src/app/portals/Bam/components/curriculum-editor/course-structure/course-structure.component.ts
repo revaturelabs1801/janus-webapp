@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Curriculum } from '../../../models/curriculum.model';
 import { CurriculumService } from '../../../services/curriculum.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-course-structure',
@@ -110,6 +111,18 @@ export class CourseStructureComponent implements OnInit {
       }
     );
   }
+
+  crownMe(currVersion: Curriculum, i) {
+    console.log('crown me! ' + i);
+    for (let j = 0; j < this.uniqCurrVersions[i].length; j++) {
+      console.log('j= ' + j);
+      if (this.uniqCurrVersions[i][j].isMaster === 1) {
+        this.uniqCurrVersions[i][j].isMaster = 0;
+      }
+    }
+    currVersion.isMaster = 1;
+  }
+
 
   // logic for CSS. Currently selected curriculum version
   shiftSelectedCurriculum() {
