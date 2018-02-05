@@ -1,4 +1,3 @@
-import { BamUser } from '../models/bamuser.model';
 
 const context = 'http://localhost:9001/api/v1';
 export const environment = {

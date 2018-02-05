@@ -13,6 +13,11 @@ export class UsersService {
   httpClient: any;
   constructor(private http: HttpClient) { }
 
+  /**
+   * Gets all users.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
+   * @returns BamUser[]
+   */
   getAllUsers(): Observable<BamUser[]> {
     return this.http.get<BamUser[]>(environment.users.getAllUsersUrl()).map(
       data => {
@@ -21,7 +26,11 @@ export class UsersService {
     );
   }
 
-
+  /**
+   * Gets all trainers.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
+   * @returns BamUser[]
+   */
   getAllTrainers(): Observable<BamUser[]> {
     return this.http.get<BamUser[]>(environment.users.getAllTrainersUrl()).map(
       data => {
@@ -30,6 +39,11 @@ export class UsersService {
     );
   }
 
+  /**
+   * Gets all associates.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
+   * @returns BamUser[]
+   */
   getAllAssociates(): Observable<BamUser[]> {
     return this.http.get<BamUser[]>(environment.users.getAllAssociatesUrl()).map(
       data => {
@@ -38,6 +52,12 @@ export class UsersService {
     );
   }
 
+  /**
+   * Gets all the user in the batch.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
+   * @returns BamUser[]
+   * @param batchId number
+   */
   getUsersInBatch(batchId: number): Observable<BamUser[]> {
     return this.http.get<BamUser[]>(environment.users.getUsersInBatchUrl(batchId)).map(
       data  => {
@@ -46,6 +66,11 @@ export class UsersService {
     );
   }
 
+  /**
+   * Drops batch from database.
+   * @author Cristian Hermida | Batch: 1712-dec10-java-steve
+   * @param batchId number
+   */
   dropUserFromBatch(batchId: number) {
     return this.http.post(environment.users.dropUserFromBatchUrl(), batchId, httpOptions).map(
       data => {
@@ -53,6 +78,12 @@ export class UsersService {
       }
     );
   }
+  /**
+   * Must pass in the updated Bamuser.
+   * @author Jeffery Camacho | Batch: 1712-dec10-java-steve
+   * @returns BamUser
+   * @param currentUser BamUser
+   */
   updateUser(currentUser: BamUser): Observable<BamUser> {
     return this.http.post<BamUser>(environment.users.updateUserUrl(), currentUser).map(
       data => {
@@ -60,6 +91,12 @@ export class UsersService {
       }
     );
   }
+  /**
+   * Adds a user to the database.
+   * @author Jeffery Camacho | Batch: 1712-dec10-java-steve
+   * @returns BamUser
+   * @param newUser BamUser
+   */
   addUser(newUser: BamUser): Observable<BamUser> {
     return this.http.post<BamUser>(environment.users.addUserUrl(), newUser).map(
       data => {
@@ -67,6 +104,13 @@ export class UsersService {
       }
     );
   }
+  /**
+   * Resets the pass word of the user.
+   * Must pass in the user with new password.
+   * @author Jeffery Camacho | Batch: 1712-dec10-java-steve
+   * @returns BamUser
+   * @param userNewPass BamUser
+   */
   resetPassword(userNewPass: BamUser): Observable<BamUser> {
     return this.http.post<BamUser>(environment.users.resetPasswordUrl(), userNewPass).map(
       data => {
@@ -74,6 +118,12 @@ export class UsersService {
       }
     );
   }
+  /**
+   * Recovers the password by sending the new password to an email.
+   * @author Jeffery Camacho | Batch: 1712-dec10-java-steve
+   * @returns BamUser
+   * @param recoverEmail string
+   */
   recoverPassword(recoverEmail: string): Observable<BamUser> {
     return this.http.post<BamUser>(environment.users.resetPasswordUrl(), recoverEmail).map(
       data => {
