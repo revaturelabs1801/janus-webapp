@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
+import { BamUser } from '../../models/bam-user.model';
 
 @Component({
   selector: 'app-add-user-table',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddUserTableComponent implements OnInit {
 
-  constructor() { }
+  associates : BamUser[]; 
+
+  constructor(editBatchService: EditBatchService) {
+    editBatchService.getUsersNotInBatch(0).subscribe(
+      users => {this.associates = users; console.log(this.associates); }
+    );
+   }
 
   ngOnInit() {
   }
