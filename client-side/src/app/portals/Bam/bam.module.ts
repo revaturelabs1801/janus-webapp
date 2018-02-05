@@ -8,6 +8,7 @@ import { CurriculumWeekComponent } from './components/curriculum-editor/curricul
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumWeeksViewComponent } from './components/curriculum-weeks-view/curriculum-weeks-view.component';
+import { CourseStructureComponent } from './components/curriculum-editor/course-structure/course-structure.component';
 import { CurriculumService } from './services/curriculum.service';
 
 @NgModule({
@@ -16,7 +17,7 @@ import { CurriculumService } from './services/curriculum.service';
     BamRoutingModule
   ],
   declarations: [ BamComponent, HomeComponent, CurriculumWeekComponent,
-    MainCurriculumViewComponent, TopicPoolComponent, CurriculumWeeksViewComponent ],
+    MainCurriculumViewComponent, TopicPoolComponent, CurriculumWeeksViewComponent, CourseStructureComponent ],
   providers: [ CurriculumService ]
 
 })
