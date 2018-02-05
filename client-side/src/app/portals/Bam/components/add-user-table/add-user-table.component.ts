@@ -18,4 +18,16 @@ export class AddUserTableComponent implements OnInit {
     this.editBatchService.getUsersNotInBatch(4).subscribe(users => this.associates = users);
   }
 
+  //TODO: add user to api
+  addUser(user: BamUser) {
+    let i = 0;
+    for (let associate of this.associates) {
+      if (associate.userId === user.userId) {
+        //TODO: add user to api
+        break;
+      }
+      i++;
+    }
+  }
+
 }

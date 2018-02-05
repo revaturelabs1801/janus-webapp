@@ -18,13 +18,16 @@ export class RemoveUserTableComponent implements OnInit {
     this.editBatchService.getUsersInBatch(4).subscribe(users => this.associates = users);
   }
 
-  removeUser(userId: number) {
-    var i = 0;
-    for (var associate of this.associates) {
-      if (associate.userId == userId) {
-        this.associates.splice(i, 1);
+
+  //TODO: call API 
+  removeUser(user: BamUser) {
+    let i = 0;
+    for (let associate of this.associates) {
+      if (associate.userId === user.userId) {
+        this.associates.splice(i, 1);  
         break;
       }
+      i++;
     }
   }
 
