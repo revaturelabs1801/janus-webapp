@@ -12,10 +12,20 @@ export class RemoveUserTableComponent implements OnInit {
   associates: BamUser[];
 
   constructor(public editBatchService: EditBatchService) {
-   }
+  }
 
   ngOnInit() {
-    this.editBatchService.getUsersInBatch(4).subscribe( users => this.associates = users );
+    this.editBatchService.getUsersInBatch(4).subscribe(users => this.associates = users);
+  }
+
+  removeUser(userId: number) {
+    var i = 0;
+    for (var associate of this.associates) {
+      if (associate.userId == userId) {
+        this.associates.splice(i, 1);
+        break;
+      }
+    }
   }
 
 }
