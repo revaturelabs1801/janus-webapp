@@ -43,16 +43,14 @@ export class EditBatchComponent implements OnInit {
 
   private endDateChanged(newDate) {
     this.batch.endDate = new Date(newDate);
-    console.log(this.batch.endDate); // <-- for testing
   }
 
   private startDateChanged(newDate) {
     this.batch.startDate = new Date(newDate);
-    console.log(this.batch.startDate); // <-- for testing
   }
 
   ngOnInit() {
-    this.editBatchService.getBatchById(4).subscribe( batch => this.batch = batch );
-    this.editBatchService.getAllBatchTypes().subscribe( types => this.batchTypes = types );
+    this.editBatchService.getBatchById(4).subscribe( batch => this.batch = batch);
+    this.editBatchService.getAllBatchTypes().subscribe( types => this.batchTypes = types);
   }
 }

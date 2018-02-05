@@ -45,10 +45,10 @@
 
   <div class="nav nav-tabs justify-content-between">
       <div class="nav-item" (click)="toggleRemove()">
-        <a class="nav-link" [ngClass]="{active : add==false}"> Remove </a>
+        <a class="nav-link" [ngClass]="{active : showAddUserTable==false}"> Remove </a>
       </div>
       <div class="nav-item" (click)="toggleAdd()">
-        <a class="nav-link" [ngClass]="{active : add==true}"> Add </a>
+        <a class="nav-link" [ngClass]="{active : showAddUserTable==true}"> Add </a>
       </div>
       <form class="form-inline weight-right">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -61,7 +61,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </nav> -->
-  <div *ngIf="add; then addUser; else removeUser"></div>
+  <div *ngIf="showAddUserTable; then addUser; else removeUser"></div>
   <ng-template #removeUser>
     <app-remove-user-table></app-remove-user-table>
   </ng-template>

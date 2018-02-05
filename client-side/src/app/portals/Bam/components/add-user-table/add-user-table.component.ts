@@ -15,9 +15,7 @@ export class AddUserTableComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.editBatchService.getUsersNotInBatch(0).subscribe(
-      users => { this.associates = users; console.log(this.associates); }
-    );
+    this.editBatchService.getUsersNotInBatch(4).subscribe(users => this.associates = users);
   }
 
 }

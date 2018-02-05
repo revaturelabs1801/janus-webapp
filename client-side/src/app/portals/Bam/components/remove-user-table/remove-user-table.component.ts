@@ -15,9 +15,7 @@ export class RemoveUserTableComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.editBatchService.getUsersInBatch(0).subscribe(
-      users => { this.associates = users; console.log(this.associates); }
-    );
+    this.editBatchService.getUsersInBatch(4).subscribe( users => this.associates = users );
   }
 
 }
