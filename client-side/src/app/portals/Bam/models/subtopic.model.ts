@@ -2,7 +2,7 @@ import { SubtopicName } from './subtopicname.model';
 import { SubtopicStatus } from './subtopicstatus.model';
 import { Batch } from './batch.model';
 
-export class SubTopic {
+export class Subtopic {
     subtopicId: number;
     subtopicName: SubtopicName;
     batch: Batch;
