@@ -14,7 +14,7 @@
 #pan-container{
     width: auto;
     background-color: rgba(243, 93, 10, .95);
-    padding: 20px;
+    padding: 10px;
     margin: 10px;
     border-radius: 7px;
     border-style: inset;
@@ -25,7 +25,7 @@
 #pan2{
 	width: auto;
     /*background-color: rgba(243, 93, 10, .95);*/
-    margin-left: 25px;
+    margin-left: 1px;
     /*padding: 15px; */
     /*border-radius: 7px;*/
     font-weight: bold;

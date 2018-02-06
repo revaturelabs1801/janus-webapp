@@ -1,0 +1,31 @@
+<div>
+      <div class="pan">
+        <h1 class="display-3">Welcome, {{this.currentUser.fName}}</h1>
+        <p class="lead"> Pick up where you left off</p>
+        
+            <div *ngIf="this.batchCount > 1">
+              Select Batch:
+              <div class="row justify-content-between">
+                    <select class="styled-select blue semi-square"  [(ngModel)]="this.selectedBatch" (change)="setSelected()">
+                            <option *ngFor="let batch of this.batches" [ngValue]="batch" >{{batch.name}}</option>
+                    </select>
+
+                    <a href="#/calendar" class="btn btnbam rounded myAttribute2 col-2">View Calendar <i class="fa fa-calendar"></i></a>
+              </div> 
+              <br><a class="myAttribute" title="View Calendar">{{this.message}}</a><br>
+            </div>
+
+            <div *ngIf="this.batchCount === 1">
+                <div class="row justify-content-between">
+                  Current Batch: {{this.selectedBatch.name}} 
+                  <a href="#/calendar" class="btn btnbam rounded myAttribute2 col-2">View Calendar <i class="fa fa-calendar"></i></a>
+              </div> 
+            </div>
+
+            <div *ngIf="this.batchCount === 0">
+                <div class="row justify-content-between">
+                    <br><a class="myAttribute">{{this.message}}</a><br>
+              </div> 
+            </div>	
+      </div>
+</div>
