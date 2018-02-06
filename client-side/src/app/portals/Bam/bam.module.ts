@@ -23,6 +23,7 @@ import { CurriculumService } from './services/curriculum.service';
     BamRoutingModule,
     NgbModule.forRoot(),
   ],
+<<<<<<< HEAD
   declarations: [
     BamComponent,
     HomeComponent,

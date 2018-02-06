@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UsersService } from './users.service';
 import { BamUser } from '../models/bamuser.model';
 import { Batch } from '../models/batch.model';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SessionService {
@@ -31,8 +32,8 @@ export class SessionService {
    * @returns
    * @param
    */
-  putUserInSession() {
-    this.userService.updateUser(this.bamUser).map(data => {
+  putUserInSession(): Observable<BamUser> {
+    return this.userService.updateUser(this.bamUser).map(data => {
       localStorage.setItem('bamUser', JSON.stringify(this.bamUser));
       return data;
     });
