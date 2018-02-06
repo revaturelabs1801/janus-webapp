@@ -6,6 +6,7 @@ import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
 import { ViewAssociatesComponent } from './components/view-associates/view-associates.component';
 import { SortPipe } from './services/pipe.sort';
+import { UsersService } from './services/users.service';
 
 
 @NgModule({
@@ -17,6 +18,9 @@ import { SortPipe } from './services/pipe.sort';
                 HomeComponent,
                 FilterPipe,
                 SortPipe,
-                ViewAssociatesComponent]
+                ViewAssociatesComponent],
+  providers: [
+    UsersService
+  ]
 })
 export class BamModule { }

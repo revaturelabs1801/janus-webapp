@@ -16,11 +16,12 @@ export class ViewAssociatesComponent implements OnInit {
   *if current batch is null display nothing otherwise batch name
   */
   ngOnInit() {
-    // this.loadAssociatesInBatch();
+    this.loadAssociatesInBatch();
   }
 
   loadAssociatesInBatch() {
     // this.usersService.getAllAssociates().subscribe(data => {this.associateList = data; });
+
   }
 
 }
