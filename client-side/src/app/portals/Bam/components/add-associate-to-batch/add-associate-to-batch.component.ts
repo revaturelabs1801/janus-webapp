@@ -1,7 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { BamUser } from '../../models/bamuser.model';
 import { UsersService } from '../../services/users.service';
-import { BatchService } from '../../../Track-Force/services/batch-service/batch.service';
 
 @Component({
   selector: 'app-add-associate-to-batch',
