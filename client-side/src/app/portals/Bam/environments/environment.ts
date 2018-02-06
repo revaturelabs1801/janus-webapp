@@ -1,3 +1,4 @@
+
 const context = 'http://localhost:9001/api/v1';
 export const environment = {
     production: false,
@@ -39,16 +40,29 @@ export const environment = {
 
     assignForce: {
         refreshBatches: () => `${context}/refreshbatches`
+    },
+
+    users: {
+        getAllUsersUrl: () => `${context}/users/all`,
+        getAllTrainersUrl: () => `${context}/users/alltrainers`,
+        getAllAssociatesUrl: () => `${context}/users/allassociates`,
+        getUsersInBatchUrl: (batchId: number) => `${context}/users/inbatch?batchId=${batchId}`,
+        dropUserFromBatchUrl: () => `${context}/users/drop?userId`,
+        updateUserUrl: () => `${context}/users/update`,
+        addUserUrl: () => `${context}/users/register`,
+        resetPasswordUrl: () => `${context}/users/reset`,
+        removeUserUrl: (userId: number) => `${context}/users/remove?userId=${userId}`,
+        addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add?userId=${userId}&batchId=${batchId}`,
+        getUsersNotInBatchUrl: () => `${context}/users/notinabatch`,
+        recoverPasswordUrl: () => `${context}/users/recovery`
+    },
+
+    topic: {
+        addTopicName: (name: string) => `${context}/topic/add?name=${name}`,
+    },
+
+    subtopic: {
+        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${context}/subtopic/add?
+        subtopicName=${subtopicName}&topicId=${topicId}&typeId=${typeId}`
     }
-
-//     calendar: {
-// //   ResponseEntity<List<Subtopic>> getSubtopicsByBatchPagination
-// //   ResponseEntity<List<Subtopic>> getSubtopicsByBatch
-// //   ResponseEntity<Long> getNumberOfSubTopicsByBatch
-// //   ResponseEntity<List<TopicWeek>> getTopicsByBatchPag
-// //   changeTopicDate
-// //   updateTopicStatus
-// //   addTopics
-//   }
-
-  };
+};
