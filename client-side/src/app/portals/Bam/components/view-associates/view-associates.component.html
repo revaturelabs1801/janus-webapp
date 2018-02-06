@@ -24,10 +24,11 @@
         <td (click)="order = 'phone2'" class="head">Secondary Phone</td>
         <td (click)="order = 'skype'" class="head">Skype</td>
         </tr>
-        <tr class="associates-row" *ngFor="let associate of associateList | filter:searchText | orderBy:order">
+        <tr class="associates-row" *ngFor="let associate of associateList">
         <td class="value lname">{{associate.lName}}, {{associate.fName}}</td>
         <td class="value email">{{associate.email}}</td>
-        <td class="value batchId">{{associate.batch.id}}</td>
+        <td></td>
+        <!--<td class="value batchId">{{associate.batch.id}}</td>-->
         <td class="value mPhone">{{associate.phone}}</td>
         <td class="value sPhone">{{associate.phone2}}</td>
         <td class="value skype">{{associate.skype}}</td>

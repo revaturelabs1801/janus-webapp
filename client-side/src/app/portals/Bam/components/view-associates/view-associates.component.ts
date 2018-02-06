@@ -20,7 +20,8 @@ export class ViewAssociatesComponent implements OnInit {
   }
 
   loadAssociatesInBatch() {
-    // this.usersService.getAllAssociates().subscribe(data => {this.associateList = data; });
+     this.usersService.getAllAssociates().subscribe(data => { console.log(data); this.associateList = data; });
+     // console.log(this.associateList);
 
   }
 
