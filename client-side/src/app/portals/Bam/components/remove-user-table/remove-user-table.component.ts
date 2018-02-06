@@ -8,11 +8,17 @@ import { UsersService } from '../../services/users.service';
   templateUrl: './remove-user-table.component.html',
   styleUrls: ['./remove-user-table.component.css']
 })
+
+/**
+ * Class for remove user table component
+ *
+ * @class      RemoveUserTableComponent (name)
+ */
 export class RemoveUserTableComponent implements OnInit {
 
   associates: BamUser[];
 
-  constructor(public editBatchService: EditBatchService, public usersService : UsersService) {
+  constructor(public editBatchService: EditBatchService, public usersService: UsersService) {
   }
 
   ngOnInit() {
@@ -20,12 +26,15 @@ export class RemoveUserTableComponent implements OnInit {
   }
 
 
-  //TODO: call API 
+  /**
+   * Removes an associate from the current batch.
+   *
+   * @param      {BamUser}  user    The associate to remove.
+   */
   removeUser(user: BamUser) {
     let i = 0;
     for (let associate of this.associates) {
       if (associate.userId === user.userId) {
-        //this.associates.splice(i, 1);
         this.usersService.removeUserFromBatch(associate.userId).subscribe(users => this.associates = users);
         break;
       }

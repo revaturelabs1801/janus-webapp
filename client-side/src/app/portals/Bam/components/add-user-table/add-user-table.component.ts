@@ -10,7 +10,7 @@ import { UsersService } from '../../services/users.service';
 })
 
 /**
- * Class for adding an associate to the a batch.
+ * Class for adding an associate to the batch.
  * @author Patrick Kennedy
  * @author Shane Avery Sistoza
  * @batch 1712-Steve
@@ -27,6 +27,11 @@ export class AddUserTableComponent implements OnInit {
     this.editBatchService.getUsersNotInBatch(4).subscribe(users => this.associates = users);
   }
 
+  /**
+   * Adds user to the batch.
+   *
+   * @param      {BamUser}  user    The user being added to the batch.
+   */
   addUser(user: BamUser) {
     let i = 0;
     for (let associate of this.associates) {

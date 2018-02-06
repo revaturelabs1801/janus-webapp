@@ -9,6 +9,12 @@ import { Output } from '@angular/core/src/metadata/directives';
   templateUrl: './edit-batch.component.html',
   styleUrls: ['./edit-batch.component.css']
 })
+
+/**
+ * Class for edit the current batch.
+ * @author Patrick Kennedy
+ * @author Shane Avery Sistoza
+ */
 export class EditBatchComponent implements OnInit {
 
   @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
@@ -19,32 +25,53 @@ export class EditBatchComponent implements OnInit {
   constructor(public editBatchService: EditBatchService) {
   }
 
+  /**
+   * Toggle to the table to remove an associate from the batch.
+   */
   toggleRemove() {
     this.showAddUserTable = false;
   }
 
+  /**
+   * Toggle to the table to add an associate to the batch.
+   */
   toggleAdd() {
     this.showAddUserTable = true;
   }
 
+  /** TODO
+   * Submit and persist updated changes to the batch.
+   *
+   * @param      {number}  typeId  The type id the batch wil change to.
+   */
   submit(typeId) {
 
-    let selected_type: BatchType;
+    let selectedType: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
       if (typeId === this.batchTypes[i].id) {
-        selected_type = this.batchTypes[i];
+        selectedType = this.batchTypes[i];
         break;
       }
     }
-    this.batch.type = selected_type;
+    this.batch.type = selectedType;
 
     console.log(JSON.stringify(this.batch));
   }
 
+  /**
+   * Change the end date of this batch.
+   *
+   * @param      {string}  newDate  The new date being modified to.
+   */
   private endDateChanged(newDate) {
     this.batch.endDate = new Date(newDate);
   }
 
+  /**
+   * Change the start date of this batch.
+   *
+   * @param      {string}  newDate  The new date being modified to.
+   */
   private startDateChanged(newDate) {
     this.batch.startDate = new Date(newDate);
   }
