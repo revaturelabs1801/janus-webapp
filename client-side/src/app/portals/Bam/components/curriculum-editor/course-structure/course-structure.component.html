@@ -1,12 +1,12 @@
 <div class="offset-1 col-md-2 col-sm-3">
   <p class="text-center title">Curriculum Types</p>
 </div>
-<div class="offset-1 col-md-2 col-sm-3 col-4" id="accordion" role="tablist">
+<div class="offset-1 col-md-2 col-sm-3 col-4" id="currAccordion" role="tablist">
   <div class="offset-1 col-md-10" *ngFor="let currName of uniqCurrNames; let i = index">
     <div class="currType" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
       {{currName}}
     </div>
-    <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+    <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#currAccordion">
       <div class="currTypeVer" *ngFor="let currVersion of uniqCurrVersions[i]">
         <span (click)="viewCurrSchedule(currVersion.curriculumId)">
           Version #{{currVersion.curriculumVersion}}
