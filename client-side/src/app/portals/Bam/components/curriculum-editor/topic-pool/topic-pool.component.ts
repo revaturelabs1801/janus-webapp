@@ -16,16 +16,18 @@ export class TopicPoolComponent implements OnInit {
   subTopicName: SubtopicName[];
   constructor(private curriculumService: CurriculumService) { }
 
-  /** Author: Mohamad Alhindi
-    *  Batch: 1712-Dec11-2017
-    * On initializing this component we are calling the getTopic() function */
+  /**  On initializing this component we are calling the getTopic() function
+   *   @author: Mohamad Alhindi
+    *  @batch: 1712-Dec11-2017
+    *  */
   ngOnInit() {
     this.getTopics();
   }
 
-  /** Author: Mohamad Alhindi
-    *  Batch: 1712-Dec11-2017
-    *  This will subscribe to the curriculum service to obtain the topic pool information */
+  /**  This will subscribe to the curriculum service to obtain the topic pool information
+   *   @author: Mohamad Alhindi
+    *  @batch: 1712-Dec11-2017
+    */
   getTopics() {
     this.curriculumService.getAllTopicPool().subscribe(
       data => {
@@ -40,32 +42,39 @@ export class TopicPoolComponent implements OnInit {
     );
   }
 
-    /** Author: Mohamad Alhindi
-      *  Batch: 1712-Dec11-2017
-      *  Runs throught subTopicNames array and will extract the topics within the array */
+    /** Runs throught subTopicNames array and will extract the topics within the array
+     *  @author: Mohamad Alhindi
+      * @batch: 1712-Dec11-2017
+      */
   initTopics() {
     for (let i = 0; i < this.subTopicName.length; i++) {
       this.topics.push(this.subTopicName[i].topic.name);
     }
   }
 
-  /** Author: Mohamad Alhindi
-    *  Batch: 1712-Dec11-2017
-    *  This method is used with conjunction of filter to obtain only unique elements of an array */
+  /** This method is used with conjunction of filter to obtain only unique elements of an array
+    * @author: Mohamad Alhindi
+      @param: value
+      @param: index
+      @param: self
+    * @batch: 1712-Dec11-2017
+    */
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
-  /** Author: Mohamad Alhindi
-    *  Batch: 1712-Dec11-2017
-    *  Filters through topics array to filter out repeated topics within the array */
+  /**  Filters through topics array to filter out repeated topics within the array
+   *   @author: Mohamad Alhindi
+    *  @batch: 1712-Dec11-2017
+    */
   uniqueTopics() {
     this.uniqarr = this.topics.filter(this.onlyUnique);
   }
 
-  /** Author: Mohamad Alhindi
-    * Batch: 1712-Dec11-2017
-    * Uses the unique topics array to obtain the the subtopics that releate to each topic */
+  /** Uses the unique topics array to obtain the the subtopics that releate to each topic
+    * @author: Mohamad Alhindi
+    * @batch: 1712-Dec11-2017
+    */
   getSubTopics() {
     for (let i = 0; i < this.uniqarr.length; i++) {
       this.subArray.push(this.subTopicName.filter(e => this.uniqarr[i] === e.topic.name));

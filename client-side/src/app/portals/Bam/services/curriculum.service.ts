@@ -18,9 +18,11 @@ export class CurriculumService {
 
   constructor(private http: HttpClient) { }
 
-  /** Author: Mohamad Alhindi
-    *  Batch: 1712-Dec11-2017
-    *  This gets all curriculums from the API */
+  /**  This gets all curriculums from the API
+   *   @author: Mohamad Alhindi
+    *  @batch: 1712-Dec11-2017
+    *  @return: Observable<Curriculum[]>
+    */
   getAllCurriculums(): Observable<Curriculum[]> {
     return this.http.get<Curriculum[]>(environment.cirriculum.getCirriculumAllUrl()).map(
       data => {
@@ -29,9 +31,12 @@ export class CurriculumService {
     );
   }
 
-  /** Author: Mohamad Alhindi
-    *  Batch: 1712-Dec11-2017
-    *   This will get a specific curriculum by the curriculum id */
+  /** This will get a specific curriculum by the curriculum id
+   *  @author: Mohamad Alhindi
+    * @batch: 1712-Dec11-2017
+    * @return: Observable<Curriculum>
+    * @param: Curriculum Id
+    */
   getCurriculumById(cid: number): Observable<Curriculum> {
     return this.http.get<Curriculum>(environment.cirriculum.getCirriculumByIdUrl(cid)).map(
       data => {
@@ -40,9 +45,12 @@ export class CurriculumService {
     );
   }
 
-  /** Author: Mohamad Alhindi
-    * Batch: 1712-Dec11-2017
-    * This will get a curriculums schedule based on the curriculum id */
+  /** This will get a curriculums schedule based on the curriculum id
+   *  @author: Mohamad Alhindi
+    * @batch: 1712-Dec11-2017
+    * @return: Observable<CurriculumSubtopic[]>
+    * @param: Curriculum Id
+    */
   getSchedualeByCurriculumId(cid: number): Observable<CurriculumSubtopic[]> {
     return this.http.get<CurriculumSubtopic[]>(environment.cirriculum.getSchedulesByCurriculumIdUrl(cid)).map(
       data => {
@@ -51,9 +59,11 @@ export class CurriculumService {
     );
   }
 
-  /** Author: Mohamad Alhindi
-    * Batch: 1712-Dec11-2017
-    * Gets the entire topic pool being taught at revature */
+  /** Gets the entire topic pool being taught at revature
+   *  @author: Mohamad Alhindi
+    * @batch:  1712-Dec11-2017
+    * @return: Observable<SubtopicName[]>
+    */
   getAllTopicPool(): Observable<SubtopicName[]> {
     return this.http.get<SubtopicName[]>(environment.cirriculum.getTopicPoolAllUrl()).map(
       data => {
@@ -62,9 +72,11 @@ export class CurriculumService {
     );
   }
 
-  /** Author: Mohamad Alhindi
-    * Batch: 1712-Dec11-2017
-    * Gets entire subtopic pool as well as a relationship to which topic they belong to */
+  /** Gets entire subtopic pool as well as a relationship to which topic they belong to
+    * @author: Mohamad Alhindi
+    * @batch:  1712-Dec11-2017
+    * @return: Observable<Subtopic[]>
+    */
   getSubtopicPool(): Observable<Subtopic[]> {
     return this.http.get<Subtopic[]>(environment.cirriculum.getSubtopicPoolAllUrl()).map(
       data => {
@@ -73,9 +85,11 @@ export class CurriculumService {
     );
   }
 
-  /** Author: Carter Taylor
-    * Batch: 1712-Dec11-2017
-    * Allows you to add a curriculum to the backend */
+  /** Allows you to add a curriculum to the backend
+    * @author: Carter Taylor
+    * @batch: 1712-Dec11-2017
+    * @param: CurriculumSubtopicDTO
+    */
   addCurriculum(curriculum: CurriculumSubtopicDTO) {
     return this.http.post(environment.cirriculum.addCurriculumUrl(), curriculum, httpOptions).map(
       data => {
@@ -84,9 +98,11 @@ export class CurriculumService {
     );
   }
 
-  /** Author: Carter Taylor
-    * Batch: 1712-Dec11-2017
-    * This method allows to set a version of a specific curriculum to master */
+  /** This method allows to set a version of a specific curriculum to master
+   *  @author: Carter Taylor
+    * @batch: 1712-Dec11-2017
+    * @param: Curriculum Id
+    */
   markCurriculumAsMaster(curriculumId: number) {
     return this.http.get(environment.cirriculum.makeCurriculumMasterByIdUrl(curriculumId)).map(
       data => {
@@ -95,9 +111,11 @@ export class CurriculumService {
     );
   }
 
-  /** Author: Carter Taylor
-    * Batch: 1712-Dec11-2017
-    * Sync batch by batchId getting list of curriculum subtopics related to that batch type */
+  /** Sync batch by batchId getting list of curriculum subtopics related to that batch type
+   *  @author: Carter Taylor
+    * @batch:  1712-Dec11-2017
+    * @param:  Batch Id
+    */
   syncBatch(batchId: number) {
     return this.http.get(environment.cirriculum.syncBatchByIdUrl(batchId)).map(
       data => {
