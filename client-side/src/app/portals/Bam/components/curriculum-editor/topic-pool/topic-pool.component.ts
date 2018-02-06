@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TopicName } from '../../../models/topicname.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { CurriculumService } from '../../../services/curriculum.service';
-
+// import { DragDropModule } from 'primeng/dragdrop';
 
 @Component({
   selector: 'app-topic-pool',
