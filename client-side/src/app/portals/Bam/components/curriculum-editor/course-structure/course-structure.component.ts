@@ -125,6 +125,12 @@ export class CourseStructureComponent implements OnInit {
     );
   }
 
+  /**
+   * view the schedule of a specific curriculum identified
+   * by its curriculum Id
+   * @author Carter Taylor (1712-Steve)
+   * @param curId - id of curriculum selected from view
+   */
   viewSchedule(curId: number) {
     this.curriculumService.getSchedualeByCurriculumId(curId).subscribe(
       data => {
