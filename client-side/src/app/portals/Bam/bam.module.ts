@@ -10,6 +10,7 @@ import { AddAssociateToBatchComponent } from './components/add-associate-to-batc
 import { RemoveAssociateFromBatchComponent } from './components/remove-associate-from-batch/remove-associate-from-batch.component';
 import { EditBatchService } from './services/edit-batch/edit-batch.service';
 import { UsersService } from './services/users.service';
+import { BatchService } from './services/batch.service';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { UsersService } from './services/users.service';
   ],
   providers: [
     EditBatchService,
-    UsersService
+    UsersService, 
+    BatchService
   ]
 })
 export class BamModule { }

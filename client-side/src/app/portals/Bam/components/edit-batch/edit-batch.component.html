@@ -43,24 +43,18 @@
     </div>
   </div>
 
-  <div class="nav nav-tabs justify-content-between">
+  <div class="nav nav-tabs">
       <div class="nav-item" (click)="toggleRemove()">
         <a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
       </div>
       <div class="nav-item" (click)="toggleAdd()">
         <a class="nav-link" [ngClass]="{active : showAddUserTable == true}"> Add </a>
       </div>
-      <form class="form-inline weight-right">
-        <input class="form-control mr-sm-2" type="search" name="SearchTerm" [(ngModel)]="searchTerm" placeholder="Search" aria-label="Search">
+      <form class="ml-auto">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       </form>
   </div>
-  <!-- <nav class="navbar navbar-light bg-light justify-content-between">
-      <a class="navbar-brand">Navbar</a>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </nav> -->
+  
   <div *ngIf="showAddUserTable; then addUser; else removeUser"></div>
   <ng-template #removeUser>
     <app-remove-associate-from-batch></app-remove-associate-from-batch>

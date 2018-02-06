@@ -3,6 +3,7 @@ import { Batch } from '../../models/batch.model';
 import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
 import { BatchType } from '../../models/batchtype.model';
 import { Output } from '@angular/core/src/metadata/directives';
+import { BatchService } from '../../services/batch.service';
 
 @Component({
   selector: 'app-edit-batch',
@@ -25,7 +26,7 @@ export class EditBatchComponent implements OnInit {
 
   showAddUserTable = false;
 
-  constructor(public editBatchService: EditBatchService) {
+  constructor(public editBatchService: EditBatchService, public batchService : BatchService) {
   }
 
   /**
@@ -51,14 +52,18 @@ export class EditBatchComponent implements OnInit {
 
     let selectedType: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
-      if (typeId === this.batchTypes[i].id) {
+      if (typeId == this.batchTypes[i].id) {
         selectedType = this.batchTypes[i];
         break;
       }
     }
+    console.log("batch type: " + JSON.stringify(this.batch.type)); 
     this.batch.type = selectedType;
-
-    console.log(JSON.stringify(this.batch));
+    console.log("batch: "  + JSON.stringify(this.batch)); 
+    console.log("batch type: " + JSON.stringify(this.batch.type)); 
+    this.batchService.updateBatch(this.batch).subscribe(
+      status => console.log(status) 
+    )
   }
 
   /**
