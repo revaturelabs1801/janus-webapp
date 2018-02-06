@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUserTableComponent } from './add-user-table.component';
+import { AddAssociateToBatchComponent } from './add-associate-to-batch.component';
 
-describe('AddUserTableComponent', () => {
-  let component: AddUserTableComponent;
-  let fixture: ComponentFixture<AddUserTableComponent>;
+describe('AddAssociateToBatchComponent', () => {
+  let component: AddAssociateToBatchComponent;
+  let fixture: ComponentFixture<AddAssociateToBatchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddUserTableComponent ]
+      declarations: [ AddAssociateToBatchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUserTableComponent);
+    fixture = TestBed.createComponent(AddAssociateToBatchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +22,5 @@ describe('AddUserTableComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+});import { from } from 'rxjs/observable/from';
+

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RemoveUserTableComponent } from './remove-user-table.component';
+import { RemoveAssociateFromBatchComponent } from './remove-associate-from-batch.component';
 
-describe('RemoveUserTableComponent', () => {
-  let component: RemoveUserTableComponent;
-  let fixture: ComponentFixture<RemoveUserTableComponent>;
+describe('RemoveAssociateFromBatchComponent', () => {
+  let component: RemoveAssociateFromBatchComponent;
+  let fixture: ComponentFixture<RemoveAssociateFromBatchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RemoveUserTableComponent ]
+      declarations: [ RemoveAssociateFromBatchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RemoveUserTableComponent);
+    fixture = TestBed.createComponent(RemoveAssociateFromBatchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
