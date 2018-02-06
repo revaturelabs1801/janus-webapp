@@ -10,7 +10,7 @@ const httpOptions = {
 };
 @Injectable()
 export class UsersService {
-  httpClient: any;
+
   constructor(private http: HttpClient) { }
 
   /**
@@ -131,4 +131,51 @@ export class UsersService {
       }
     );
   }
+
+    /**
+   * Get users not in batch 
+   * @author Shane Sistoza, Patrick Kennedy | Batch: 1712-dec10-java-steve
+   * @returns BamUser
+   * @param  userId  the user id of user added 
+   * @param  batchId the batch id of batch to add user to
+   */
+  getUsersNotInBatch(): Observable<BamUser[]> {
+    return this.http.get<BamUser[]>(environment.users.getUsersNotInBatchUrl()).map(
+      data => {
+        return data;
+      }
+    );
+  }
+
+    /**
+   * Adds a user to a batch
+   * @author Shane Sistoza, Patrick Kennedy | Batch: 1712-dec10-java-steve
+   * @returns BamUser
+   * @param  userId  the user id of user added 
+   * @param  batchId the batch id of batch to add user to
+   */
+  addUserToBatch(batchId: number, userId: number): Observable<BamUser[]> {
+    return this.http.post<BamUser[]>(environment.users.addUserToBatchUrl(batchId, userId), httpOptions).map(
+      data => {
+        return data; 
+      }
+    );
+  }
+
+  /**
+   * Removes a user from a batch
+   * @author Shane Sistoza, Patrick Kennedy | Batch: 1712-dec10-java-steve
+   * @returns BamUser
+   * @param  userId  the user id of user removed  
+   */
+  removeUserFromBatch(userId: number): Observable<BamUser[]> {
+    console.log("Remove User To Batch is called"); 
+    
+    return this.http.post<BamUser[]>(environment.users.removeUserUrl(userId), httpOptions).map(
+      data => {
+        return data; 
+      }
+    );
+  }
+
 }

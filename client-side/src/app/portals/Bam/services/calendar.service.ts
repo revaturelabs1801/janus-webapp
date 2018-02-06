@@ -23,8 +23,8 @@ export class CalendarService {
    * @param pageNumber: number
    * @param pageSize: number
    */
-  getSubtopicsByBatchPagination(batchId: number, pageNumber: number, pageSize: number): Observable<SubTopic[]> {
-    return this.http.get<SubTopic[]>(environment.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize)).map(
+  getSubtopicsByBatchPagination(batchId: number, pageNumber: number, pageSize: number): Observable<Subtopic[]> {
+    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize)).map(
       data => {
         return data;
       }
@@ -37,8 +37,8 @@ export class CalendarService {
    * @returns SubTopic[]
    * @param batchId number
    */
-  getSubtopicsByBatch(batchId: number): Observable<SubTopic[]> {
-    return this.http.get<SubTopic[]>(environment.calendar.getTopicsByBatchPagUrl(batchId)).map(
+  getSubtopicsByBatch(batchId: number): Observable<Subtopic[]> {
+    return this.http.get<Subtopic[]>(environment.calendar.getTopicsByBatchPagUrl(batchId)).map(
       data => {
         return data;
       }
