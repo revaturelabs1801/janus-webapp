@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
+
 /**
  * Authors: Daniel Robinson, Tyler Dresselhouse, Dylan Britton
  * Creates array of days in a week for curriculum view
- * 
  */
 
 @Component({
@@ -15,50 +15,60 @@ import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 
 export class CurriculumWeekComponent implements OnInit {
 
-weekDTO: CurriculumSubtopic[] = [];
-monday: CurriculumSubtopic[] = [];
-tuesday: CurriculumSubtopic[] = [];
-wednesday: CurriculumSubtopic[] = [];
-thursday: CurriculumSubtopic[] = [];
-friday: CurriculumSubtopic[] = [];
+  weekDTO: CurriculumSubtopic[] = [];
+  monday: CurriculumSubtopic[] = [];
+  tuesday: CurriculumSubtopic[] = [];
+  wednesday: CurriculumSubtopic[] = [];
+  thursday: CurriculumSubtopic[] = [];
+  friday: CurriculumSubtopic[] = [];
 
   constructor() { }
 
-currentlyDragged;
+  currentlyDragged;
 
   ngOnInit() {
- this.sortSubtopics();
+    this.sortSubtopics();
   }
-/**
- * 
- */
-sortSubtopics() {
-this.weekDTO.forEach(elem => {
-switch (elem.curriculumSubtopicDay) {
-  case 1:
-    this.monday.push(elem);
-    break;
-  case 2:
-    this.tuesday.push(elem);
-    break;
-  case 3:
-    this.wednesday.push(elem);
-    break;
-  case 4:
-    this.thursday.push(elem);
-    break;
-  case 5:
-    this.friday.push(elem);
-    break;
-}
-});
-}
 
-dropIt(event) {
-event.target.append(this.currentlyDragged.target);
-}
+  /**
+   * Sorts through curriculum to assign week-day value to from numeric signifier
+   */
 
-draggedFinder(currentlyDragged) {
-this.currentlyDragged = currentlyDragged;
-}
+  sortSubtopics() {
+    this.weekDTO.forEach(elem => {
+      switch (elem.curriculumSubtopicDay) {
+        case 1:
+          this.monday.push(elem);
+          break;
+        case 2:
+          this.tuesday.push(elem);
+          break;
+        case 3:
+          this.wednesday.push(elem);
+          break;
+        case 4:
+          this.thursday.push(elem);
+          break;
+        case 5:
+          this.friday.push(elem);
+          break;
+      }
+    });
+  }
+
+  /**
+   * Drop function for drag/drop feature  
+   */
+
+  dropIt(event) {
+    event.target.append(this.currentlyDragged.target);
+  }
+
+  /**
+   * Drag function for drag/drop functionality
+   */
+
+  draggedFinder(currentlyDragged) {
+    this.currentlyDragged = currentlyDragged;
+  }
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Author:Daniel Robinson
+ * Creates full view of a curriculum's weeks 
+ */
 @Component({
   selector: 'app-main-curriculum-view',
   templateUrl: './main-curriculum-view.component.html',
