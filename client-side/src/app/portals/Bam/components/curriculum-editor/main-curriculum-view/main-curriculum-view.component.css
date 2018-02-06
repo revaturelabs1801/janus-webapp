@@ -12,12 +12,18 @@
     color:rgb(244, 136, 81);
     position: relative;
 }
+
+.buttons:hover{
+    color: green;
+    cursor: pointer;
+}
+
 .pushtotop{
     position: absolute;
+    float:right;
     top:0px;
     right:0px;
     font-size: 2.5em;
-    color:rgb(244, 136, 81);
 }
 
 /*
