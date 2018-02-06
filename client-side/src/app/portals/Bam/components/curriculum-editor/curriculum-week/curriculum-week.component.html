@@ -1,5 +1,6 @@
 
-<div class="row week offset-1" >week#</div>
+<div class ="col">
+<div class="row week offset-1" >week {{i}}</div>
 <div class="weeksrow row offset-1">
 
 <div class="days" pDroppable="subtopic"(onDrop)="dropIt($event)">Monday <div *ngFor="let day of monday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
@@ -8,5 +9,6 @@
 <div class="days" pDroppable="subtopic"(onDrop)="dropIt($event)">Thursday  <div *ngFor="let day of thursday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
 <div class="days" pDroppable="subtopic"(onDrop)="dropIt($event)">Friday  <div *ngFor="let day of friday"> {{day.curriculumSubtopicNameId.name}}</div> </div>
 
+</div>
 </div>
 
