@@ -10,7 +10,7 @@ import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/to
 import { CurriculumService } from './services/curriculum.service';
 import { SessionService } from './services/session.service';
 import { UsersService } from './services/users.service';
-import { DashboardinfoComponent } from './components/dashboardinfo/dashboardinfo.component';
+import { DashboardinfoComponent } from './components/dashboard/dashboardinfo/dashboardinfo.component';
 import { WelcomeComponent } from './components/dashboard/welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
 import { BatchService } from './services/batch.service';
