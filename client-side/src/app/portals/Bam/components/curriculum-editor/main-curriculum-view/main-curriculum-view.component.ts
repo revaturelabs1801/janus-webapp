@@ -123,7 +123,9 @@ export class MainCurriculumViewComponent implements OnInit {
 
   this.getWeeks();
   }
-
+/**
+ * Discovers the amount of weeks in a given curriculum
+ */
   getMaxWeeks() {
     let maxWeek = 0;
     this.schedule.forEach(e => {
@@ -135,6 +137,9 @@ export class MainCurriculumViewComponent implements OnInit {
     return maxWeek;
   }
 
+  /**
+   * Populates week with subtopics from curriculum
+   */
   getWeeks() {
     let week: CurriculumSubtopic[] = [];
     const maxWeek = this.getMaxWeeks();
