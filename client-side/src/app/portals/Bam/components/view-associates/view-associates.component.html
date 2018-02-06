@@ -1,0 +1,33 @@
+
+
+<h3 style="text-align: center;">{{batch.name}} Associates</h3>
+
+<div>
+    <div class="searchText-container">
+      <div class="input-group">
+        <span class="input-group-addon">Search</span> <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search" required="">
+      </div>
+    </div>
+  
+    <table class="table">
+      <tbody>
+        <tr class="associates-header">
+        <td ng-click="order = 'fName'" class="head">Name</td>
+        <td ng-click="order = 'email'" class="head">Email</td>
+        <td ng-click="order = 'batch'" class="head">Batch Id</td>
+        <td ng-click="order = 'phone'" class="head">Main Phone</td>
+        <td ng-click="order = 'phone2'" class="head">Secondary Phone</td>
+        <td ng-click="order = 'skype'" class="head">Skype</td>
+        </tr>
+        <tr class="associates-row" *ngFor="let associate of associateList | filter:searchText | orderBy:order">
+        <td class="value lname">{{associate.lName}}, {{associate.fName}}</td>
+        <td class="value email">{{associate.email}}</td>
+        <td class="value batchId">{{associate.batch.id}}</td>
+        <td class="value mPhone">{{associate.phone}}</td>
+        <td class="value sPhone">{{associate.phone2}}</td>
+        <td class="value skype">{{associate.skype}}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>
