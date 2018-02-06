@@ -7,8 +7,8 @@ import { SessionService } from '../../../services/session.service';
 import { Observable } from 'rxjs/Observable';
 
 /**
- * @author Mohamed Swelam -- batch: 1712-dec-Java-Steve
- * Welcom component to handel the welcome part
+ * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
+ * Welcom component to handel the welcome view
  *
  */
 
@@ -32,11 +32,18 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     // this.sessionService.putUserInSession();
     // this.currentUser = this.sessionService.getUser();
-    this.getInProgressBatches();
-
+    if (this.sessionService.getSelectedBatch()) {
+      this.selectedBatch = this.sessionService.getSelectedBatch();
+      console.log('at welcome  ' , this.selectedBatch);
+      this.sessionService.putSelectedBatchIntoSession(this.selectedBatch);
+      this.getInProgressBatches();
+    } else {
+      this.getInProgressBatches();
+    }
   }
 
   /**
+   * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
    * Function to get in-progress batches using the batches service.
    * and setting the response data to batches array.
    */
@@ -54,12 +61,21 @@ export class WelcomeComponent implements OnInit {
   }
 
   /**
-   * When a batch got selected it will set the selected batch var.
+   * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
+   * When a batch got selected it will set the selected batch into session.
    */
   setSelected() {
     this.sessionService.putSelectedBatchIntoSession(this.selectedBatch);
   }
 
+
+  /**
+   * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
+   *
+   * To set all needed varables for the welcome componet
+   *
+   *
+   */
   setAllneededVars() {
     if (this.batchCount > 1) {
       this.message = 'You have more than one current batch';
@@ -71,5 +87,15 @@ export class WelcomeComponent implements OnInit {
       this.message = 'You have no current batches';
     }
   }
+  /**
+   * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
+   *
+   * To compare batches for selected batch.
+   * @returns true if batches match , false otherwise.
+   *
+   */
+  compareBatch(b1: Batch, b2: Batch): boolean {
+    return b1 && b2 ? b1.id === b2.id : b1 === b2;
+ }
 
 }

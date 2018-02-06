@@ -49,6 +49,7 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
 
    }
   ngOnInit() {
+    console.log(this.session.getSelectedBatch());
     this.session.selectedBatchSubject.subscribe(data =>  {
       this.batchId = data.id;
       this.batchObs = this._batchService.getBatchById(this.batchId);

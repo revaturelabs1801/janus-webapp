@@ -6,11 +6,13 @@
             <div *ngIf="this.batchCount > 1">
               Select Batch:
               <div class="row justify-content-between">
-                    <select class="styled-select blue semi-square"  [(ngModel)]="this.selectedBatch" (change)="setSelected()">
+                    <select class="styled-select blue semi-square" [compareWith]="compareBatch" [(ngModel)]="this.selectedBatch" (change)="setSelected()">
                             <option *ngFor="let batch of this.batches" [ngValue]="batch" >{{batch.name}}</option>
                     </select>
-
-                    <a href="#/calendar" class="btn btnbam rounded myAttribute2 col-2">View Calendar <i class="fa fa-calendar"></i></a>
+                    <div *ngIf="this.selectedBatch != null">
+                        <a routerLink="/calendar" class="btn btn-primary btnbam myAttribute2 ">View Calendar <i class="fa fa-calendar"></i></a>
+                    </div>
+                    
               </div> 
               <br><a class="myAttribute" title="View Calendar">{{this.message}}</a><br>
             </div>
@@ -18,7 +20,7 @@
             <div *ngIf="this.batchCount === 1">
                 <div class="row justify-content-between">
                   Current Batch: {{this.selectedBatch.name}} 
-                  <a href="#/calendar" class="btn btnbam rounded myAttribute2 col-2">View Calendar <i class="fa fa-calendar"></i></a>
+                  <a routerLink="/calendar" class="btn btn-primary btnbam myAttribute2 ">View Calendar <i class="fa fa-calendar"></i></a>
               </div> 
             </div>
 
