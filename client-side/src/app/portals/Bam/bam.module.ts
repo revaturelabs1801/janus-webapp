@@ -12,6 +12,7 @@ import { BatchService } from './services/batch.service';
 import { LoadingSpinnerComponent } from './components/dashboard/ui/loading-spinner/loading-spinner.component';
 import { UsersService } from './services/users.service';
 import { SessionService } from './services/session.service';
+import { CalendarService } from './services/calendar.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { SessionService } from './services/session.service';
     FormsModule
   ],
   declarations: [BamComponent, HomeComponent, BatchProgressBarComponent, LoadingSpinnerComponent, WelcomeComponent, DashboardinfoComponent],
-  providers: [BatchService, UsersService, SessionService]
+  providers: [BatchService, UsersService, SessionService, CalendarService]
 })
 export class BamModule { }
