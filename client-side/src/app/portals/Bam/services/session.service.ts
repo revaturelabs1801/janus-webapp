@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { UsersService } from './users.service';
 import { BamUser } from '../models/bamuser.model';
 import { Batch } from '../models/batch.model';
+import { Subject } from 'rxjs/Subject';
+
 
 @Injectable()
 export class SessionService {
   bamUser: BamUser;
+
+  public selectedBatchSubject = new Subject<Batch>();
 
   constructor(private userService: UsersService) {
     this.bamUser = {
@@ -56,6 +60,7 @@ export class SessionService {
    */
   putSelectedBatchIntoSession(selectedBatch: Batch) {
     sessionStorage.setItem('batch', JSON.stringify(selectedBatch));
+    this.selectedBatchSubject.next(selectedBatch);
   }
 
   /**

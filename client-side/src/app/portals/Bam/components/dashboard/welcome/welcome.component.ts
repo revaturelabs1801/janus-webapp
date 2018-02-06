@@ -4,6 +4,8 @@ import { BamUser } from '../../../models/bamuser.model';
 import { Batch } from '../../../models/batch.model';
 import { BatchService } from '../../../services/batch.service';
 import { ListService } from '../../../services/dashboard/list.service';
+import { SessionService } from '../../../services/session.service';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * @author Mohamed Swelam -- batch: 1712-dec-Java-Steve
@@ -18,17 +20,19 @@ import { ListService } from '../../../services/dashboard/list.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  private currentUser: BamUser = new BamUser(3, 'Ray', '', '', 'rl@revature.com', ' ', '4', null, '', '', '', '', 3);
+  private currentUser: BamUser = new BamUser(3, 'Ray', '', '', 'rl@revature.com', ' ', 4, null, '', '', '', '', 3);
   private message: String;
   private batchCount: number;
   private batches: Batch [];
   private selectedBatch: Batch;
 
-  constructor(private batchSer: BatchService, private data: ListService) {
+  constructor(private batchSer: BatchService, private sessionService: SessionService) {
 
    }
 
   ngOnInit() {
+    // this.sessionService.putUserInSession();
+    // this.currentUser = this.sessionService.getUser();
     this.getInProgressBatches();
 
   }
@@ -42,13 +46,11 @@ export class WelcomeComponent implements OnInit {
       response => {
         this.batches = response;
         if (this.batches !== null) {
-          this.batchCount =  this.batches.length;
+          this.batchCount = this.batches.length;
         } else {
           this.batchCount =  0;
         }
         this.setAllneededVars();
-        console.log(this.selectedBatch.id);
-        this.data.currentBatchId.subscribe(batchId => this.selectedBatch.id = batchId);
       });
   }
 
@@ -56,7 +58,7 @@ export class WelcomeComponent implements OnInit {
    * When a batch got selected it will set the selected batch var.
    */
   setSelected() {
-    console.log(this.selectedBatch.name);
+    this.sessionService.putSelectedBatchIntoSession(this.selectedBatch);
   }
 
   setAllneededVars() {
@@ -64,14 +66,11 @@ export class WelcomeComponent implements OnInit {
       this.message = 'You have more than one current batch';
     } else if (this.batchCount === 1) {
       this.selectedBatch = this.batches.pop();
+      this.sessionService.putSelectedBatchIntoSession(this.selectedBatch);
     } else {
       this.batchCount = 0;
       this.message = 'You have no current batches';
     }
   }
 
-
-  onChange(b: number) {
-    this.data.changeBatchId(b);
-  }
 }

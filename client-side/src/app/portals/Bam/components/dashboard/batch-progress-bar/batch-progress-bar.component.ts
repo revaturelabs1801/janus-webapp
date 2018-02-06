@@ -9,6 +9,7 @@ import { ListModel } from '../listModel/listModel';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { ListService } from '../../../services/dashboard/list.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { SessionService } from '../../../services/session.service';
 
 
 @Component({
@@ -40,13 +41,15 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
   subTopicMissed: number;
   topicArray: ListModel[];
   batchIdObs: Observable<number>;
-  constructor(private _batchService: BatchService, private _calendarService: CalendarService, private data: ListService) {
+  constructor(private _batchService: BatchService, private _calendarService: CalendarService, private data: ListService,
+     private session: SessionService) {
 
    }
    ngOnChanges() {
 
    }
   ngOnInit() {
+    this.session.selectedBatchSubject.subscribe(selectedBatch =>  console.log(selectedBatch.id));
     this.batchIdObs = this.data.currentBatchId;
     this.batchIdObs.subscribe(data => {
       this.batchId = data;

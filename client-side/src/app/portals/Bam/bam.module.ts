@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { BatchService } from './services/batch.service';
 import { LoadingSpinnerComponent } from './components/dashboard/ui/loading-spinner/loading-spinner.component';
 import { ListService } from './services/dashboard/list.service';
+import { UsersService } from './services/users.service';
+import { SessionService } from './services/session.service';
 
 @NgModule({
   imports: [
@@ -18,6 +20,6 @@ import { ListService } from './services/dashboard/list.service';
     FormsModule
   ],
   declarations: [BamComponent, HomeComponent, BatchProgressBarComponent, LoadingSpinnerComponent, WelcomeComponent],
-  providers: [BatchService, ListService]
+  providers: [BatchService, UsersService, SessionService, ListService]
 })
 export class BamModule { }
