@@ -8,7 +8,9 @@
     </div>
     <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="currTypeVer" *ngFor="let currVersion of uniqCurrVersions[i]">
-        Version #{{currVersion.curriculumVersion}}
+        <span (click)="viewSchedule(currVersion.curriculumId)">
+          Version #{{currVersion.curriculumVersion}}
+        </span>
         <span (click)="makeMaster(currVersion, i)">
           <span *ngIf="currVersion.isMaster">
             <i class="fas fa-chess-king fa-1x" aria-hidden="true"> </i>
