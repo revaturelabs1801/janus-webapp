@@ -49,7 +49,6 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
 
    }
   ngOnInit() {
-    console.log(this.session.getSelectedBatch());
     this.session.selectedBatchSubject.subscribe(data =>  {
       this.batchId = data.id;
       this.batchObs = this._batchService.getBatchById(this.batchId);
@@ -123,5 +122,9 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
       // find subtomics completed
       this.subTopicCompleted = 0;
     });
+
+    if ( this.session.getSelectedBatch() != null) {
+      this.session.putSelectedBatchIntoSession(this.session.getSelectedBatch());
+    }
   }
 }
