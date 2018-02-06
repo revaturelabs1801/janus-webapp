@@ -1,4 +1,9 @@
-
+  <ul class="nav nav-tabs">
+    <li class="nav-link"><a href="#/calendar">Calendar</a></li>
+    <li class="nav-link active"><a href="#/associates">View Associates</a></li>
+    <li class="nav-link"><a href="#/editBatch">Edit Batch</a></li>
+    <li class="nav-link"><a href="#/addSubtopic">Add Subtopics</a></li>
+  </ul>
 
 <h3 style="text-align: center;">{{batch.name}} Associates</h3>
 
@@ -12,12 +17,12 @@
     <table class="table">
       <tbody>
         <tr class="associates-header">
-        <td ng-click="order = 'fName'" class="head">Name</td>
-        <td ng-click="order = 'email'" class="head">Email</td>
-        <td ng-click="order = 'batch'" class="head">Batch Id</td>
-        <td ng-click="order = 'phone'" class="head">Main Phone</td>
-        <td ng-click="order = 'phone2'" class="head">Secondary Phone</td>
-        <td ng-click="order = 'skype'" class="head">Skype</td>
+        <td (click)="order = 'fName'" class="head">Name</td>
+        <td (click)="order = 'email'" class="head">Email</td>
+        <td (click)="order = 'batch'" class="head">Batch Id</td>
+        <td (click)="order = 'phone'" class="head">Main Phone</td>
+        <td (click)="order = 'phone2'" class="head">Secondary Phone</td>
+        <td (click)="order = 'skype'" class="head">Skype</td>
         </tr>
         <tr class="associates-row" *ngFor="let associate of associateList | filter:searchText | orderBy:order">
         <td class="value lname">{{associate.lName}}, {{associate.fName}}</td>
