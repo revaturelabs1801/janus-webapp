@@ -1,4 +1,4 @@
-<div id=pan4 class="col-md-12">
+<div id=pan4 class="col-md-12" *ngIf="batchId != null">
 	Batch Progress By Day:
 	<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 
@@ -35,5 +35,4 @@
 			</ul>
 		</div>
 	</div>
-	{{batchId}}
 </div>

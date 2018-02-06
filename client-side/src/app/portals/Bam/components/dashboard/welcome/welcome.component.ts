@@ -3,7 +3,6 @@ import { NgModel } from '@angular/forms';
 import { BamUser } from '../../../models/bamuser.model';
 import { Batch } from '../../../models/batch.model';
 import { BatchService } from '../../../services/batch.service';
-import { ListService } from '../../../services/dashboard/list.service';
 import { SessionService } from '../../../services/session.service';
 import { Observable } from 'rxjs/Observable';
 
