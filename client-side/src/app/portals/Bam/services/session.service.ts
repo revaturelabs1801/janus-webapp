@@ -27,6 +27,7 @@ export class SessionService {
       'pwd2': null,
       'assignForceID': 9
   };
+  localStorage.setItem('bamUser', JSON.stringify(this.bamUser));
    }
 
    /**
