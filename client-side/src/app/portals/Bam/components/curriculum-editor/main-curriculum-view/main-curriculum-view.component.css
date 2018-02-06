@@ -12,6 +12,13 @@
     color:rgb(244, 136, 81);
     position: relative;
 }
+.pushtotop{
+    position: absolute;
+    top:0px;
+    right:0px;
+    font-size: 2.5em;
+    color:rgb(244, 136, 81);
+}
 
 /*
  *  STYLE 7
