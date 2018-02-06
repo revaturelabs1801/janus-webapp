@@ -13,6 +13,7 @@ export class MyBatchesComponent implements OnInit {
 
   email: string;
   batches: Batch[];
+  error = false;
 
   constructor(private batchService: BatchService, private sessionService: SessionService) { }
 
@@ -28,7 +29,7 @@ export class MyBatchesComponent implements OnInit {
   loadCurrent() {
     this.batches = null;
     this.batchService.getAllBatchesInProgress(this.email)
-      .subscribe(batches => this.batches = batches);
+      .subscribe(batches => this.setbatches(batches),  err => this.batches = []);
   }
 
   /**
@@ -38,7 +39,7 @@ export class MyBatchesComponent implements OnInit {
   loadPast() {
     this.batches = null;
     this.batchService.getPastBatches(this.email)
-      .subscribe(batches => this.batches = batches);
+      .subscribe(batches => this.setbatches(batches), err => this.batches = []);
   }
 
   /**
@@ -48,7 +49,19 @@ export class MyBatchesComponent implements OnInit {
   loadFuture() {
     this.batches = null;
     this.batchService.getFutureBatches(this.email)
-      .subscribe(batches => this.batches = batches);
+      .subscribe(batches => this.setbatches(batches), err => this.batches = []);
+  }
+
+  /**
+   * Sets this.batches equal to batches, or initializes this.batches as an empty list if batches is undefined
+   * @param batches
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
+  setbatches(batches) {
+    this.batches = batches;
+    if (!batches) {
+      this.batches = [];
+    }
   }
 
 }

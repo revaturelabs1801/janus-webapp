@@ -1,23 +1,4 @@
 <div class="row">
-	<div class="col col-sm-12">
-		<div class="input-group" class="pull-right">
-			<div class="input-group">
-
-				<input *ngIf="automaticFiltering" (keyup)="filterBatches($event)" id="typeahead-basic" placeholder="Filter" type="search" class="form-control" />
-				<input *ngIf="!automaticFiltering" (keyup.enter)="filterBatches($event)" id="typeahead-basic" placeholder="Filter" type="search" class="form-control" />
-
-				<span class="icon">
-					<button type="submit" class="SearchButton">
-						<i class="fa fa-search" style="color: #868e96"></i>
-					</button>
-				</span>
-
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row">
 	<div class="col">
 		<div class="table-border">
 			<h3 class="table-title">{{title}}</h3>
@@ -33,7 +14,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr *ngFor="let batch of filtered">
+						<tr *ngFor="let batch of filtered" (click)="viewBatch()" class="clickable">
 							<td>{{batch.name}}</td>
 							<td>{{batch.trainer.fName}} {{batch.trainer.lName}}</td>
 							<td>{{batch.type.name}}</td>

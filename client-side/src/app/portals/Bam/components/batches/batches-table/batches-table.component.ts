@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core/';
 import { Batch } from '../../../models/batch.model';
 import { FilterBatchPipe } from '../../../Pipes/filter-batch.pipe';
+import { BatchSearchService } from '../../../services/batch-search.service';
 
 @Component({
   selector: 'app-batches-table',
@@ -14,25 +15,30 @@ export class BatchesTableComponent implements OnInit {
   @Input() title: string;
 
   filtered: Batch[];
-  // If fewer than [automaticFilteringThreshold] batches, filtering will occur after every key press in search bar,
-  // otherwise filtering only occurs when hitting enter or clicking search button
-  automaticFiltering: boolean;
-  automaticFilteringThreshold = 50; // Max num. batches before automatic filtering is disabled
+  filterText: string;
 
-  constructor(private filterBatchPipe: FilterBatchPipe) { }
+  constructor(private filterBatchPipe: FilterBatchPipe, private searchService: BatchSearchService) { }
 
   ngOnInit() {
     this.filtered = this.batches;
-    this.automaticFiltering = (this.batches.length < this.automaticFilteringThreshold);
+    this.searchService.getMessage().subscribe(msg => this.filterBatches(msg.text));
   }
 
   /**
-   * Filters the displayed batches by the text in the search box
-   * @param event event.target.value holds the text the batches are filtered by
+   * Filters the displayed batches by [filterText]
+   * @param filterText
    * @author Charlie Harris | 1712-dec10-java-steve
    */
-  filterBatches(event) {
-    this.filtered = this.filterBatchPipe.transform(this.batches, event.target.value);
+  filterBatches(filterText) {
+    this.filtered = this.filterBatchPipe.transform(this.batches, filterText);
+  }
+
+  /**
+   * UNIMPLEMENTED
+   * on-click function for batch
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
+  viewBatch() {
   }
 
 
