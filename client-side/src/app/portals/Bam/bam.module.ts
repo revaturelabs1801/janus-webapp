@@ -16,6 +16,8 @@ import { UsersService } from './services/users.service';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumService } from './services/curriculum.service';
+import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
+import { BatchSearchService } from './services/batch-search.service';
 
 @NgModule({
   imports: [
@@ -31,12 +33,14 @@ import { CurriculumService } from './services/curriculum.service';
     MyBatchesComponent,
     AllBatchesComponent,
     BatchesTableComponent,
+    BatchesSearchComponent,
   ],
   providers: [
     SessionService,
     UsersService,
     CurriculumService,
     BatchService,
+    BatchSearchService,
     FilterBatchPipe,
     DatePipe
   ]
