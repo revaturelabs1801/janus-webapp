@@ -4,19 +4,18 @@ import { BamUser } from '../../models/bamuser.model';
 import { UsersService } from '../../services/users.service';
 
 @Component({
-  selector: 'app-add-user-table',
-  templateUrl: './add-user-table.component.html',
-  styleUrls: ['./add-user-table.component.css']
+  selector: 'app-remove-associate-from-batch',
+  templateUrl: './remove-associate-from-batch.component.html',
+  styleUrls: ['./remove-associate-from-batch.component.css']
 })
 
 /**
- * Class for adding an associate to the batch.
+ * Class for remove user table component
  * @author Patrick Kennedy
  * @author Shane Avery Sistoza
  * @batch 1712-Steve
- *
  */
-export class AddUserTableComponent implements OnInit {
+export class RemoveAssociateFromBatchComponent implements OnInit {
 
   associates: BamUser[];
 
@@ -24,19 +23,20 @@ export class AddUserTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editBatchService.getUsersNotInBatch(4).subscribe(users => this.associates = users);
+    this.editBatchService.getUsersInBatch(4).subscribe(users => this.associates = users);
   }
 
+
   /**
-   * Adds user to the batch.
+   * Removes an associate from the current batch.
    *
-   * @param      {BamUser}  user    The user being added to the batch.
+   * @param      {BamUser}  user    The associate to remove.
    */
-  addUser(user: BamUser) {
+  removeUser(user: BamUser) {
     let i = 0;
     for (let associate of this.associates) {
       if (associate.userId === user.userId) {
-        this.usersService.addUserToBatch(4, associate.userId).subscribe(users => this.associates = users);
+        this.usersService.removeUserFromBatch(associate.userId).subscribe(users => this.associates = users);
         break;
       }
       i++;

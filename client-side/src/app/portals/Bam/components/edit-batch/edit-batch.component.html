@@ -63,10 +63,10 @@
     </nav> -->
   <div *ngIf="showAddUserTable; then addUser; else removeUser"></div>
   <ng-template #removeUser>
-    <app-remove-user-table></app-remove-user-table>
+    <app-remove-associate-from-batch></app-remove-associate-from-batch>
   </ng-template>
   <ng-template #addUser>
-    <app-add-user-table></app-add-user-table>
+    <app-add-associate-to-batch></app-add-associate-to-batch>
   </ng-template>
 
 </div>

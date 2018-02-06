@@ -6,8 +6,8 @@ import { BamRoutingModule } from './bam-routing.module';
 import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
-import { AddUserTableComponent } from './components/add-user-table/add-user-table.component';
-import { RemoveUserTableComponent } from './components/remove-user-table/remove-user-table.component';
+import { AddAssociateToBatchComponent } from './components/add-associate-to-batch/add-associate-to-batch.component';
+import { RemoveAssociateFromBatchComponent } from './components/remove-associate-from-batch/remove-associate-from-batch.component';
 import { EditBatchService } from './services/edit-batch/edit-batch.service';
 import { UsersService } from './services/users.service';
 
@@ -21,8 +21,8 @@ import { UsersService } from './services/users.service';
     BamComponent,
     HomeComponent,
     EditBatchComponent,
-    AddUserTableComponent,
-    RemoveUserTableComponent
+    AddAssociateToBatchComponent,
+    RemoveAssociateFromBatchComponent
   ],
   providers: [
     EditBatchService,
