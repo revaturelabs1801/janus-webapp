@@ -31,7 +31,7 @@ export class CurriculumWeekComponent implements OnInit {
   }
 
   /**
-   * Sorts through curriculum to assign week-day value to from numeric signifier
+   * Sorts through curriculum to assign week-day value from numeric signifier
    */
 
   sortSubtopics() {

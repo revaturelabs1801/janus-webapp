@@ -11,12 +11,11 @@
     border: 1px solid #f47f43;
     background-color: lightgray;
     padding: 20px;
-    width: 93.5%;
 }
 
 .giveHeight{
     height: 750px;
-    position: absolute;   
+      
 }
 
 .weeksrow {

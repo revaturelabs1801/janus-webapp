@@ -59,7 +59,9 @@ export class MainCurriculumViewComponent implements OnInit {
         }
     }
   }
-
+/**
+ * Discovers the amount of weeks in a given curriculum
+ */
   getMaxWeeks() {
     let maxWeek = 0;
     this.schedule.forEach(e => {
