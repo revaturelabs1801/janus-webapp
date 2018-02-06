@@ -18,9 +18,11 @@ import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/to
 import { CurriculumService } from './services/curriculum.service';
 import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
 import { BatchSearchService } from './services/batch-search.service';
+import { DragDropModule } from 'primeng/dragdrop';
 
 @NgModule({
   imports: [
+    DragDropModule,
     CommonModule,
     BamRoutingModule,
     NgbModule.forRoot(),
