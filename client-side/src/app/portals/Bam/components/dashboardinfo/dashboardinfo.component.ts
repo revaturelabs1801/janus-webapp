@@ -30,32 +30,56 @@ export class DashboardinfoComponent implements OnInit {
   constructor(private _batchService: BatchService,
     private session: SessionService) { }
 
-/**
- * @author David Graves -- batch: 1712-dec-Java-Steve
- * On init: uses bamUser stored in localStorage to populate trainer-specific information.
- * Subscribes to obtain current batch info to deterime start and end date, as well as current week.
- */
 
-  ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('bamUser'));
+  /**
+   * @author David Graves -- batch: 1712-dec-Java-Steve
+   * Subscribes to obtain current batch info to deterime start and end date, as well as current week.
+   */
+
+  batchSubscribe() {
     this.session.selectedBatchSubject.subscribe(data =>  {
       this.batchId = data.id;
       this.batchObs = this._batchService.getBatchById(this.batchId);
       this.batchObs.subscribe(
         data1 => {
-          this.batch = data1;
-          this.currentBatchStart1 = this.batch.startDate;
-          this.currentBatchEnd1 = this.batch.endDate;
-          let timePassed = 0;
-          if (new Date() < this.currentBatchEnd1) {
-            timePassed = (new Date().getTime()
-             - new Date(this.currentBatchStart1).getTime());
-          } else {
-            timePassed = (new Date(this.currentBatchEnd1).getTime() -
-            new Date(this.currentBatchStart1).getTime());
+          if (data1 != null) {
+
+            this.batch = data1;
+            this.setProperties(this.batch);
           }
-          this.weekNum = Math.floor((((timePassed / (1000 * 60 * 60 * 24)) + 1) / 7) + 1);
         });
     });
+  }
+
+  /**
+   * @author David Graves -- batch: 1712-dec-Java-Steve
+   * Sets properties based on the Batch object sent to it.
+   */
+  setProperties(batch1: Batch) {
+    this.currentBatchStart1 = batch1.startDate;
+    this.currentBatchEnd1 = batch1.endDate;
+    let timePassed = 0;
+    if (new Date() < this.currentBatchEnd1) {
+      timePassed = (new Date().getTime()
+      - new Date(this.currentBatchStart1).getTime());
+    } else {
+      timePassed = (new Date(this.currentBatchEnd1).getTime() -
+      new Date(this.currentBatchStart1).getTime());
+    }
+    this.weekNum = Math.floor((((timePassed / (1000 * 60 * 60 * 24)) + 1) / 7) + 1);
+  }
+
+  /**
+   * @author David Graves -- batch: 1712-dec-Java-Steve
+   * On init: uses bamUser stored in localStorage to populate trainer-specific information.
+   * Subscribes to obtain current batch info to deterime start and end date, as well as current week.
+   */
+  ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('bamUser'));
+    if (sessionStorage.getItem('batch') != null) {
+      this.batch = JSON.parse(sessionStorage.getItem('batch'));
+      this.setProperties(this.batch);
+    }
+    this.batchSubscribe();
   }
 }
