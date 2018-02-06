@@ -5,6 +5,7 @@ import { BamRoutingModule } from './bam-routing.module';
 import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
 import { ViewAssociatesComponent } from './components/view-associates/view-associates.component';
+import { SortPipe } from './services/pipe.sort';
 
 
 @NgModule({
@@ -12,6 +13,10 @@ import { ViewAssociatesComponent } from './components/view-associates/view-assoc
     CommonModule,
     BamRoutingModule
   ],
-  declarations: [BamComponent, HomeComponent, ViewAssociatesComponent, FilterPipe]
+  declarations: [BamComponent,
+                HomeComponent,
+                FilterPipe,
+                SortPipe,
+                ViewAssociatesComponent]
 })
 export class BamModule { }
