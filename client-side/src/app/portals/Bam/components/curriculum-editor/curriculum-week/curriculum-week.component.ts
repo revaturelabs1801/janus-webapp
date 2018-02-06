@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 
@@ -15,7 +15,7 @@ import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 
 export class CurriculumWeekComponent implements OnInit {
 
-  weekDTO: CurriculumSubtopic[] = [];
+  @Input() weekDTO: CurriculumSubtopic[] = [];
   monday: CurriculumSubtopic[] = [];
   tuesday: CurriculumSubtopic[] = [];
   wednesday: CurriculumSubtopic[] = [];
@@ -57,7 +57,7 @@ export class CurriculumWeekComponent implements OnInit {
   }
 
   /**
-   * Drop function for drag/drop feature  
+   * Drop function for drag/drop feature
    */
 
   dropIt(event) {
