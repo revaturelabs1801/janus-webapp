@@ -44,20 +44,20 @@
   </div>
 
   <div class="nav nav-tabs">
-      <div class="nav-item" (click)="toggleRemove()">
-        <a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
-      </div>
-      <div class="nav-item" (click)="toggleAdd()">
-        <a class="nav-link" [ngClass]="{active : showAddUserTable == true}"> Add </a>
-      </div>
-      <form class="ml-auto">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      </form>
+    <div class="nav-item" (click)="toggleRemove()">
+      <a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
+    </div>
+    <div class="nav-item" (click)="toggleAdd()">
+      <a class="nav-link" [ngClass]="{active : showAddUserTable == true}"> Add </a>
+    </div>
+    <form class="ml-auto">
+      <input name="searchTerm" [(ngModel)]="searchTerm" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    </form>
   </div>
-  
+
   <div *ngIf="showAddUserTable; then addUser; else removeUser"></div>
   <ng-template #removeUser>
-    <app-remove-associate-from-batch></app-remove-associate-from-batch>
+    <app-remove-associate-from-batch [searchTerm]="searchTerm"></app-remove-associate-from-batch>
   </ng-template>
   <ng-template #addUser>
     <app-add-associate-to-batch [searchTerm]="searchTerm"></app-add-associate-to-batch>

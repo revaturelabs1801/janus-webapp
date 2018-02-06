@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Batch } from '../../models/batch.model';
-import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
 import { BatchType } from '../../models/batchtype.model';
 import { Output } from '@angular/core/src/metadata/directives';
 import { BatchService } from '../../services/batch.service';
@@ -26,7 +25,7 @@ export class EditBatchComponent implements OnInit {
 
   showAddUserTable = false;
 
-  constructor(public editBatchService: EditBatchService, public batchService : BatchService) {
+  constructor(public batchService : BatchService) {
   }
 
   /**
@@ -85,7 +84,7 @@ export class EditBatchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editBatchService.getBatchById(4).subscribe( batch => this.batch = batch);
-    this.editBatchService.getAllBatchTypes().subscribe( types => this.batchTypes = types);
+    this.batchService.getBatchById(4).subscribe( batch => this.batch = batch);
+    this.batchService.getAllBatchTypes().subscribe( types => this.batchTypes = types);
   }
 }

@@ -8,9 +8,9 @@ import { HomeComponent } from './components/home/home.component';
 import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
 import { AddAssociateToBatchComponent } from './components/add-associate-to-batch/add-associate-to-batch.component';
 import { RemoveAssociateFromBatchComponent } from './components/remove-associate-from-batch/remove-associate-from-batch.component';
-import { EditBatchService } from './services/edit-batch/edit-batch.service';
 import { UsersService } from './services/users.service';
 import { BatchService } from './services/batch.service';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   imports: [
@@ -23,12 +23,15 @@ import { BatchService } from './services/batch.service';
     HomeComponent,
     EditBatchComponent,
     AddAssociateToBatchComponent,
-    RemoveAssociateFromBatchComponent
+    RemoveAssociateFromBatchComponent,
+    SearchPipe
   ],
   providers: [
-    EditBatchService,
     UsersService, 
     BatchService
+  ], 
+  exports: [
+    SearchPipe
   ]
 })
 export class BamModule { }

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { BamUser } from '../../models/bamuser.model';
 import { UsersService } from '../../services/users.service';
 
@@ -18,12 +17,13 @@ import { UsersService } from '../../services/users.service';
 export class RemoveAssociateFromBatchComponent implements OnInit {
 
   associates: BamUser[];
+  @Input() searchTerm: string;
 
-  constructor(public editBatchService: EditBatchService, public usersService: UsersService) {
+  constructor(public usersService: UsersService) {
   }
 
   ngOnInit() {
-    this.editBatchService.getUsersInBatch(4).subscribe(users => this.associates = users);
+    this.usersService.getUsersInBatch(4).subscribe(users => this.associates = users);
   }
 
 

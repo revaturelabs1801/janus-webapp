@@ -9,7 +9,7 @@
     <th>Add to Batch</th>
   </thead>
   <tbody>
-    <tr *ngFor="let user of associates">
+    <tr *ngFor="let user of associates | search : 'fName' : searchTerm">
       <td>{{ user.fName }}</td>
       <td>{{ user.lName }}</td>
       <td>{{ user.email }}</td>

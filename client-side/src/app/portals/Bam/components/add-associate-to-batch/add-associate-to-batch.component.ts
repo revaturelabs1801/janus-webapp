@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { EditBatchService } from '../../services/edit-batch/edit-batch.service';
+import { Component, OnInit, Input} from '@angular/core';
 import { BamUser } from '../../models/bamuser.model';
 import { UsersService } from '../../services/users.service';
+import { BatchService } from '../../../Track-Force/services/batch-service/batch.service';
 
 @Component({
   selector: 'app-add-associate-to-batch',
@@ -19,14 +19,13 @@ import { UsersService } from '../../services/users.service';
 export class AddAssociateToBatchComponent implements OnInit {
 
   associates: BamUser[];
-  @Input() searchTerm: string;
+  @Input() searchTerm: string; 
 
-  constructor(public editBatchService: EditBatchService, public usersService: UsersService) {
+  constructor(public usersService: UsersService) {
   }
 
   ngOnInit() {
-    this.editBatchService.getUsersNotInBatch(4).subscribe(users => this.associates = users);
-    console.log(this.searchTerm);
+    this.usersService.getUsersNotInBatch().subscribe(users => this.associates = users);
   }
 
   /**
