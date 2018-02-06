@@ -18,6 +18,9 @@ import { Output } from '@angular/core/src/metadata/directives';
 export class EditBatchComponent implements OnInit {
 
   @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
+
+  @Input() searchTerm: string = "";
+
   batchTypes: BatchType[];
 
   showAddUserTable = false;

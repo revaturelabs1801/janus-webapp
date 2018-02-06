@@ -45,13 +45,13 @@
 
   <div class="nav nav-tabs justify-content-between">
       <div class="nav-item" (click)="toggleRemove()">
-        <a class="nav-link" [ngClass]="{active : showAddUserTable==false}"> Remove </a>
+        <a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
       </div>
       <div class="nav-item" (click)="toggleAdd()">
-        <a class="nav-link" [ngClass]="{active : showAddUserTable==true}"> Add </a>
+        <a class="nav-link" [ngClass]="{active : showAddUserTable == true}"> Add </a>
       </div>
       <form class="form-inline weight-right">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" type="search" name="SearchTerm" [(ngModel)]="searchTerm" placeholder="Search" aria-label="Search">
       </form>
   </div>
   <!-- <nav class="navbar navbar-light bg-light justify-content-between">
@@ -66,7 +66,7 @@
     <app-remove-associate-from-batch></app-remove-associate-from-batch>
   </ng-template>
   <ng-template #addUser>
-    <app-add-associate-to-batch></app-add-associate-to-batch>
+    <app-add-associate-to-batch [searchTerm]="searchTerm"></app-add-associate-to-batch>
   </ng-template>
 
 </div>
