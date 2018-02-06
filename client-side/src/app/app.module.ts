@@ -26,7 +26,10 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9ac7049c9a15413a6de7ce30f69ecfe90ed287c9
 
 
 // loading routes from child modules this way will lazy load them
