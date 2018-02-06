@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
 import { ViewAssociatesComponent } from './components/view-associates/view-associates.component';
+import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 
 const routes: Routes = [
-{
+  {
     path: '',
     component: BamComponent,
     children: [
@@ -19,6 +20,10 @@ const routes: Routes = [
         component: ViewAssociatesComponent
       },
       {
+        path: 'editBatch',
+        component: EditBatchComponent
+      },
+      {
         path: 'curriculum-view',
         component: MainCurriculumViewComponent
       },
@@ -28,7 +33,7 @@ const routes: Routes = [
         redirectTo: '/Bam/home'
       }
     ]
-}
+  }
 ];
 
 @NgModule({
