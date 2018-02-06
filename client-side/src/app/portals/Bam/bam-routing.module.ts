@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
+import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'editBatch',
         component: EditBatchComponent
+      },
+      {
+        path: 'curriculum-view',
+        component: MainCurriculumViewComponent
       },
       {
         path: '**',
