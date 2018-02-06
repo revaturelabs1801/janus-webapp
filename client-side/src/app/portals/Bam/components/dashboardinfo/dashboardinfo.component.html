@@ -1,0 +1,26 @@
+
+<div class="row justify-content-between" id="pan-container">
+  <div id="pan2" class="col-md-5 pan2">
+    <ul  ng-model="getData">
+      <li>First Name: {{user.fName}}</li>
+      <li>Last Name: {{user.lName}}</li>
+      <li>Current Batch Start Date: {{currentBatchStart1 | date: 'MM-dd-yyyy'}}</li>
+      <li>Current Batch End Date: {{currentBatchEnd1 | date: 'MM-dd-yyyy'}}</li>
+    </ul>
+  </div>
+  
+      
+
+<div id="pan3" class="col-md-6 pan3">
+    <!--<h2 ng-hide="!trainerHasBatch || !userHasBatch">Batch Week: {{weekNum + 1}}</h2> -->
+    <h2 ng-show="!trainerHasBatch || !userHasBatch" id="bWeek">Batch Week: {{weekNum}}</h2>
+      <!--<h3 ng-show="userHasBatch">Trainer in Batch:</h3>
+      <ul>
+       <li>{{trainerInBatch}}&nbsp{{trainerInBatchLast}}</li>
+      </ul>
+      <h3 ng-show="trainerHasBatch && numOfAssociates != 0">Associates in batch:</h3>
+      <ul class="makeColumns">
+       <li ng-repeat="list in listNames">{{list.firstName}}&nbsp{{list.lastName}}</li>
+      </ul> -->
+  </div>
+</div>

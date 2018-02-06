@@ -23,7 +23,7 @@ export class CalendarService {
   }
 
   getSubtopicsByBatch(batchId: number): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.calendar.getTopicsByBatchPagUrl(batchId)).map(
+    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchUrl(batchId)).map(
       data => {
         return data;
       }

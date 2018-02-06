@@ -3,10 +3,13 @@ import { UsersService } from './users.service';
 import { BamUser } from '../models/bamuser.model';
 import { Batch } from '../models/batch.model';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class SessionService {
   bamUser: BamUser;
+
+  public selectedBatchSubject = new Subject<Batch>();
 
   constructor(private userService: UsersService) {
     this.bamUser = {
@@ -24,6 +27,7 @@ export class SessionService {
       'pwd2': null,
       'assignForceID': 9
   };
+  localStorage.setItem('bamUser', JSON.stringify(this.bamUser));
    }
 
    /**
@@ -46,7 +50,8 @@ export class SessionService {
    * @param
    */
   getUser(): BamUser {
-    return JSON.parse(localStorage.getItem('bamUser'));
+    const current: BamUser = JSON.parse(localStorage.getItem('bamUser'));
+    return current;
   }
 
   /**
@@ -57,6 +62,7 @@ export class SessionService {
    */
   putSelectedBatchIntoSession(selectedBatch: Batch) {
     sessionStorage.setItem('batch', JSON.stringify(selectedBatch));
+    this.selectedBatchSubject.next(selectedBatch);
   }
 
   /**
