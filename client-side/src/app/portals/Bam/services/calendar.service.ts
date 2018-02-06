@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { SubTopic } from '../models/subtopic.model';
+import { Subtopic } from '../models/subtopic.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { TopicWeek } from '../models/topicweek.model';
@@ -14,16 +14,16 @@ const httpOptions = {
 export class CalendarService {
   constructor(private http: HttpClient) { }
 
-  getSubtopicsByBatchPagination(batchId: number, pageNumber: number, pageSize: number): Observable<SubTopic[]> {
-    return this.http.get<SubTopic[]>(environment.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize)).map(
+  getSubtopicsByBatchPagination(batchId: number, pageNumber: number, pageSize: number): Observable<Subtopic[]> {
+    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize)).map(
       data => {
         return data;
       }
     );
   }
 
-  getSubtopicsByBatch(batchId: number): Observable<SubTopic[]> {
-    return this.http.get<SubTopic[]>(environment.calendar.getTopicsByBatchPagUrl(batchId)).map(
+  getSubtopicsByBatch(batchId: number): Observable<Subtopic[]> {
+    return this.http.get<Subtopic[]>(environment.calendar.getTopicsByBatchPagUrl(batchId)).map(
       data => {
         return data;
       }
