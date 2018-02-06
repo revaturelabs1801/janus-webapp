@@ -1,0 +1,26 @@
+.days {    
+    border: 1px solid black;
+    margin-bottom: 20px;
+    padding-bottom: 50px;
+    padding-top: 1%;    
+    width: 18.7%;
+    text-align: center;     
+}
+
+.week {
+    border: 1px solid #f47f43;
+    background-color: lightgray;
+    padding: 20px;
+    width: 93.5%;
+}
+
+.giveHeight{
+    height: 750px;
+    position: absolute;   
+}
+
+.weeksrow {
+width: 100%;
+}
+
+
