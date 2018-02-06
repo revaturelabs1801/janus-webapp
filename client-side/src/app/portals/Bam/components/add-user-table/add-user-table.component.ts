@@ -7,6 +7,14 @@ import { BamUser } from '../../models/bamuser.model';
   templateUrl: './add-user-table.component.html',
   styleUrls: ['./add-user-table.component.css']
 })
+
+/**
+ * Class for adding an associate to the a batch.
+ * @author Patrick Kennedy
+ * @author Shane Avery Sistoza
+ * @batch 1712-Steve
+ *
+ */
 export class AddUserTableComponent implements OnInit {
 
   associates: BamUser[];
