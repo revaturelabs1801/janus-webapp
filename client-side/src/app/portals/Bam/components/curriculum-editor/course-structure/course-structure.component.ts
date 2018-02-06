@@ -125,6 +125,17 @@ export class CourseStructureComponent implements OnInit {
     );
   }
 
+  viewSchedule(curId: number) {
+    this.curriculumService.getSchedualeByCurriculumId(curId).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   /**
    * makes the curriculum object, passed as a parameter, the
    * master version of its curriculum type.

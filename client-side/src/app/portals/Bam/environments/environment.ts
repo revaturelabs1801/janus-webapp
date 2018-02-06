@@ -17,7 +17,7 @@ export const environment = {
   cirriculum: {
     getCirriculumAllUrl: () => `${context}/curriculum/all`,
     getCirriculumByIdUrl: (id: number) => `${context}/curriculum/getcurriculum/${id}`,
-    getSchedulesByCurriculumIdUrl: (id: number) => `${context}/curriculum/schedule/cirriculumId/${id}`,
+    getSchedulesByCurriculumIdUrl: (id: number) => `${context}/curriculum/schedule/${id}`,
     getTopicPoolAllUrl: () => `${context}/curriculum/topicpool`,
     getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
     addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
