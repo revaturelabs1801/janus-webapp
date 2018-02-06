@@ -27,6 +27,8 @@ export class SessionService {
       'pwd2': null,
       'assignForceID': 9
   };
+
+   localStorage.setItem('bamUser', JSON.stringify(this.bamUser));
    }
 
    /**
@@ -49,7 +51,8 @@ export class SessionService {
    * @param
    */
   getUser(): BamUser {
-    return JSON.parse(localStorage.getItem('bamUser'));
+    const current: BamUser = JSON.parse(localStorage.getItem('bamUser'));
+    return current;
   }
 
   /**

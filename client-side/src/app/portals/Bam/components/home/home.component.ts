@@ -11,7 +11,6 @@ export class HomeComponent implements OnInit {
   constructor(private sessionService: SessionService) { }
 
   ngOnInit() {
-    console.log(this.sessionService.getUser());
   }
 
 }
