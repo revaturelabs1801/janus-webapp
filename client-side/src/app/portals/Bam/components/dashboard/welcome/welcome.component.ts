@@ -19,7 +19,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class WelcomeComponent implements OnInit {
 
-  private currentUser: BamUser = new BamUser(3, 'Ray', '', '', 'rl@revature.com', ' ', 4, null, '', '', '', '', 3);
+  private currentUser: BamUser;
   private message: String;
   private batchCount: number;
   private batches: Batch [];
@@ -30,11 +30,9 @@ export class WelcomeComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.sessionService.putUserInSession();
-    // this.currentUser = this.sessionService.getUser();
+    this.currentUser = this.sessionService.getUser();
     if (this.sessionService.getSelectedBatch()) {
       this.selectedBatch = this.sessionService.getSelectedBatch();
-      console.log('at welcome  ' , this.selectedBatch);
       this.sessionService.putSelectedBatchIntoSession(this.selectedBatch);
       this.getInProgressBatches();
     } else {

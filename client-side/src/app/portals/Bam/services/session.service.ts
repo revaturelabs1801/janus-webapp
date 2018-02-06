@@ -50,7 +50,8 @@ export class SessionService {
    * @param
    */
   getUser(): BamUser {
-    return JSON.parse(localStorage.getItem('bamUser'));
+    const current: BamUser = JSON.parse(localStorage.getItem('bamUser'));
+    return current;
   }
 
   /**
