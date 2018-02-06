@@ -50,7 +50,7 @@ export class WelcomeComponent implements OnInit {
       response => {
         this.batches = response;
         if (this.batches !== null) {
-          this.batchCount = this.batches.length;
+          this.batchCount =  this.batches.length;
         } else {
           this.batchCount =  0;
         }
