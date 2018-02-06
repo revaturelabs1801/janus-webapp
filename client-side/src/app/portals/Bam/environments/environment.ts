@@ -6,10 +6,10 @@ export const environment = {
 
     batch: {
         getBatchAllUrl: () => `${context}/batches/all`,
-        getPastBatchesUrl: (email: string) => `${context}/batches/past?email=${email}`,
-        getFutureBatchesUrl: (email: string) => `${context}/batches/future?email=${email}`,
-        getBatchInProgressUrl: (email: string) => `${context}/batches/inprogress?email=${email}`,
-        getAllBatchesInProgressUrl: (email: string) => `${context}/batches/allinprogress?email=${email}`,
+        getPastBatchesUrl: (email: string) => `${context}/batches/past/${email}/`,
+        getFutureBatchesUrl: (email: string) => `${context}/batches/future/${email}/`,
+        getBatchInProgressUrl: (email: string) => `${context}/batches/inprogress/${email}/`,
+        getAllBatchesInProgressUrl: (email: string) => `${context}/batches/allinprogress/${email}/`,
         getBatchByIdURL: (bid: number) => `${context}/batches/byid?bid=${bid}`,
         updateBatchUrl: () => `${context}/batches/updatebatch`,
         getAllBatchTypesUrl: () => `${context}/batches/batchtypes`,
