@@ -22,6 +22,24 @@ export class CourseStructureComponent implements OnInit {
     this.getAllCurriculums();
   }
 
+   /**
+   * view the schedule of a specific curriculum identified
+   * by its curriculum Id. Sends the schedule (CurriculumSubtopic[])
+   * to BehaviorSubject in CurriculumService
+   * @author Carter Taylor (1712-Steve)
+   * @param curId - id of curriculum selected from view
+   */
+  viewCurrSchedule(curId: number) {
+    this.curriculumService.getSchedualeByCurriculumId(curId).subscribe(
+      data => {
+        this.curriculumService.changeData(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   /**
    * get all curriculum names (including duplicates)
    * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
@@ -121,23 +139,6 @@ export class CourseStructureComponent implements OnInit {
         this.getUniqueCurrNames();
         this.getCurriculumVersions();
         this.getUniqCurrVersions();
-      }
-    );
-  }
-
-  /**
-   * view the schedule of a specific curriculum identified
-   * by its curriculum Id
-   * @author Carter Taylor (1712-Steve)
-   * @param curId - id of curriculum selected from view
-   */
-  viewSchedule(curId: number) {
-    this.curriculumService.getSchedualeByCurriculumId(curId).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

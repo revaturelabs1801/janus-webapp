@@ -7,6 +7,7 @@ import { CurriculumSubtopic } from '../models/curriculumSubtopic.model';
 import { SubtopicName } from '../models/subtopicname.model';
 import { Subtopic } from '../models/subtopic.model';
 import { CurriculumSubtopicDTO } from '../models/curriculumSubtopicDTO.model';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -16,7 +17,14 @@ const httpOptions = {
 @Injectable()
 export class CurriculumService {
 
+  private dataSource = new BehaviorSubject<CurriculumSubtopic[]>([]);
+  currentData = this.dataSource.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  changeData(data: CurriculumSubtopic[]) {
+    this.dataSource.next(data);
+  }
 
   /**  This gets all curriculums from the API
    *   @author: Mohamad Alhindi
