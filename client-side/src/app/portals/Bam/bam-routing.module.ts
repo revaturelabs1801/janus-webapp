@@ -4,6 +4,7 @@ import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'curriculum-view',
         component: MainCurriculumViewComponent
+      },
+      {
+        path: 'calendar-view',
+        component: CalendarComponent
       },
       {
         path: '**',

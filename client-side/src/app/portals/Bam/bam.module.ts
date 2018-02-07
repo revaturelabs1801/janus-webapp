@@ -20,12 +20,15 @@ import { UsersService } from './services/users.service';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumService } from './services/curriculum.service';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
+import {ScheduleModule} from 'primeng/schedule';
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule,
-    FormsModule
+    FormsModule,
+    ScheduleModule
   ],
   declarations: [
     BamComponent,
@@ -39,7 +42,8 @@ import { CurriculumService } from './services/curriculum.service';
     LoadingSpinnerComponent,
     WelcomeComponent,
     DashboardInfoComponent,
-    SearchPipe
+    SearchPipe,
+    CalendarComponent
   ],
   providers: [
     UsersService,
