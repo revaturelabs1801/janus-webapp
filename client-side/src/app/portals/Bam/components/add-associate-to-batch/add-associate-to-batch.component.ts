@@ -18,7 +18,7 @@ import { UsersService } from '../../services/users.service';
 export class AddAssociateToBatchComponent implements OnInit {
 
   associates: BamUser[];
-  @Input() searchTerm: string; 
+  @Input() searchTerm: string;
 
   constructor(public usersService: UsersService) {
   }
