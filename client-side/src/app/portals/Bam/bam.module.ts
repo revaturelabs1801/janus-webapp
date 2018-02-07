@@ -22,7 +22,7 @@ import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/to
 import { CurriculumService } from './services/curriculum.service';
 import { CalendarComponent } from './components/calendar/calendar.component';
 
-import {ScheduleModule} from 'primeng/schedule';
+import {ScheduleModule} from 'primeng/primeng';
 @NgModule({
   imports: [
     CommonModule,

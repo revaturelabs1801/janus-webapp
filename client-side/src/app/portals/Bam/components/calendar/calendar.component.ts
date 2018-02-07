@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import { ScheduleModule, Schedule, } from 'primeng/schedule';
+import { ScheduleModule, Schedule, } from 'primeng/primeng';
 
 @Component({
   selector: 'app-calendar',
