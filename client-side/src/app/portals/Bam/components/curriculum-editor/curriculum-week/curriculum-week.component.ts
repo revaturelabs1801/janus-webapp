@@ -101,7 +101,7 @@ export class CurriculumWeekComponent implements OnInit {
   pickItUp(event, subtopic) {
     this.dndService.sendItem(event);
     this.dndService.sendSubtopic(subtopic);
-
+    
   }
 
   /**
