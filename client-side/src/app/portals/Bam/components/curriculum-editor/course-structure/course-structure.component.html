@@ -5,6 +5,9 @@
   <div class="offset-1 col-md-10" *ngFor="let currName of uniqCurrNames; let i = index">
     <div class="currType" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
       {{currName}}
+      <span (click)="newVersion(currName, i)">
+        <i class="fas fa-plus-circle"></i>
+      </span>
     </div>
     <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#currAccordion">
       <div class="currTypeVer" *ngFor="let currVersion of uniqCurrVersions[i]">
