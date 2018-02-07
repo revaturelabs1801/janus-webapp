@@ -7,6 +7,7 @@ import { CurriculumSubtopic } from '../models/curriculumSubtopic.model';
 import { SubtopicName } from '../models/subtopicname.model';
 import { Subtopic } from '../models/subtopic.model';
 import { CurriculumSubtopicDTO } from '../models/curriculumSubtopicDTO.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -16,7 +17,7 @@ const httpOptions = {
 @Injectable()
 export class CurriculumService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private modalService: NgbModal) { }
 
   /**  This gets all curriculums from the API
    *   @author: Mohamad Alhindi
@@ -123,4 +124,15 @@ export class CurriculumService {
       }
     );
   }
+
+
+
+retainString(curric: Curriculum){
+
+const  curric.curriculumName;
+curric.curriculumVersion;
+  
+}
+
+
 }
