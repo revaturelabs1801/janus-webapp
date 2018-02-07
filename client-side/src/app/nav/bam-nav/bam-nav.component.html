@@ -1,0 +1,32 @@
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/Bam/home">Home</a>
+  </li>
+  <li class="nav-item" (click)=$event.stopPropagation() routerLinkActive="activeLink">
+    <ul class="navbar-nav mr-auto">
+      <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>Batches</a>
+        <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/batchesAll" (click) = "myDrop.close()">All Batches</button>
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/myBatches" (click) = "myDrop.close()">My Batches</button>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/Bam/calendar">Calendar</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/Bam/curriculum-view">Curriculum Editor</a>
+  </li>
+  <li class="nav-item" (click)=$event.stopPropagation() routerLinkActive="activeLink">
+    <ul class="navbar-nav mr-auto">
+      <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>(fName lName) (role)</a> <!--{{ bamUser.fName }} {{ bamUser.lName) (bamUser.role)-->
+        <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/update" (click) = "myDrop.close()">Update Account</button>
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/reset" (click) = "myDrop.close()">Reset Password</button> 
+        </div>
+    </ul>
+  </li>
+</ul>
