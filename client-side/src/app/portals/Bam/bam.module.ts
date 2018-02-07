@@ -5,7 +5,12 @@ import { BamRoutingModule } from './bam-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BamComponent } from './bam.component';
+import { BatchProgressBarComponent } from './components/dashboard/batch-progress-bar/batch-progress-bar.component';
 import { HomeComponent } from './components/home/home.component';
+import { DashboardInfoComponent } from './components/dashboard/dashboardinfo/dashboardinfo.component';
+import { WelcomeComponent } from './components/dashboard/welcome/welcome.component';
+import { LoadingSpinnerComponent } from './components/dashboard/ui/loading-spinner/loading-spinner.component';
+import { CalendarService } from './services/calendar.service';
 import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
 import { AddAssociateToBatchComponent } from './components/add-associate-to-batch/add-associate-to-batch.component';
 import { RemoveAssociateFromBatchComponent } from './components/remove-associate-from-batch/remove-associate-from-batch.component';
@@ -35,16 +40,21 @@ import { AddSubtopicService } from './services/add-subtopic.service';
     RemoveAssociateFromBatchComponent,
     MainCurriculumViewComponent,
     TopicPoolComponent,
+    BatchProgressBarComponent,
+    LoadingSpinnerComponent,
+    WelcomeComponent,
+    DashboardInfoComponent,
     SearchPipe,
     AddSubtopicComponent
   ],
   providers: [
-    UsersService, 
-    BatchService, 
-    SessionService, 
+    UsersService,
+    BatchService,
+    SessionService,
     CurriculumService,
+    CalendarService,
     AddSubtopicService
-  ], 
+  ],
   exports: [
     SearchPipe
   ]
