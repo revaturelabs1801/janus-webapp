@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
+
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -26,7 +30,7 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
-
+//import { DragDropModule } from 'primeng/dragdrop';
 
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
@@ -56,6 +60,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
     HttpClientModule,
+    // BrowserAnimationsModule
+    // DragDropModule
+
   ],
   declarations: [
     AppComponent,

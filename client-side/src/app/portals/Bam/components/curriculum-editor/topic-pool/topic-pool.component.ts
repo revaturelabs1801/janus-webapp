@@ -96,7 +96,7 @@ export class TopicPoolComponent implements OnInit {
     this.currentlyDragged = event;
     this.curriculumWeekComponent.draggedFinder(this.currentlyDragged);
   }
-    
+
 
   /* dragOver() {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory();
