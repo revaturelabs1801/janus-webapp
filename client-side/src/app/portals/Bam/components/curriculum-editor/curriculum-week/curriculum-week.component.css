@@ -25,6 +25,14 @@
 
 .weeksrow {
 width: 100%;
+}
 
+.removeWeekBtn {
+    float: center;
+    color: red;
+}
+
+.removeWeekBtn:hover {
+    color: black;
 }
 
