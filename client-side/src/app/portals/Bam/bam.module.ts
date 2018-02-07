@@ -20,7 +20,7 @@ import { DragNDropDirective } from './drag-n-drop.directive';
   ],
   declarations: [ BamComponent, HomeComponent, CurriculumWeekComponent,
     MainCurriculumViewComponent, TopicPoolComponent, CourseStructureComponent, DragNDropDirective],
-  providers: [ CurriculumService, CurriculumWeekComponent, MainCurriculumViewComponent ]
+  providers: [ CurriculumService, CurriculumWeekComponent, MainCurriculumViewComponent, CourseStructureComponent ]
 
 })
 export class BamModule { }

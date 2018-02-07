@@ -3,20 +3,22 @@
         <app-topic-pool></app-topic-pool>
     </span>
 
-    <span class="col-8 align " id="style-7">
-<div class="bordered">
-        <span class="buttons">
-            <span class="pushtotop" (click)="addWeek()">
-                <i class="fa fa-plus-square" ></i>
-            </span>
-        </span>
-    </div>
+    <span class="col-8 align " id="style-7">                
+            <span *ngIf="allWeeks.length !== 0" class="buttons">
+                <span class="saveCurr">
+                        <button>Save Curriculum</button>
+                </span>
+                    
+                <span class="pushtotop" (click)="addWeek()">
+                    <i class="fa fa-plus-square"></i>
+                </span>
+            </span>        
         <br/>
         <br/>
 
-        <app-curriculum-week *ngFor="let week of allWeeks; let i = index" [weekDTO]="week" [weekNum]="i +1"></app-curriculum-week>
+        <app-curriculum-week (noWeeks)="false" *ngFor="let week of allWeeks; let i = index" [weekDTO]="week" [weekNum]="i + 1"></app-curriculum-week>
     </span>
     <span class="offset-1 col-md-2 col-sm-3 col-4">
-    <app-course-structure></app-course-structure>
-</span>
+        <app-course-structure></app-course-structure>
+    </span>
 </div>

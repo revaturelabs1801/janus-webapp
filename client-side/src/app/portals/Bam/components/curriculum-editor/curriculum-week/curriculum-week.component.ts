@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { MainCurriculumViewComponent } from '../main-curriculum-view/main-curriculum-view.component';
+import { CourseStructureComponent } from '../course-structure/course-structure.component';
+import { Curriculum } from '../../../models/curriculum.model';
 
 /**
  * Authors: Daniel Robinson, Tyler Dresselhouse, Dylan Britton
@@ -23,8 +25,10 @@ export class CurriculumWeekComponent implements OnInit {
   wednesday: CurriculumSubtopic[] = [];
   thursday: CurriculumSubtopic[] = [];
   friday: CurriculumSubtopic[] = [];
+  allCurriculums: Curriculum[] = [];
 
-  constructor(private mainCurriculumViewComponent: MainCurriculumViewComponent) { }
+  constructor(private mainCurriculumViewComponent: MainCurriculumViewComponent,
+              private courseStructureComponent: CourseStructureComponent) { }
 
   currentlyDragged;
 
