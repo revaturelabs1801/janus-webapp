@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
+import { MainCurriculumViewComponent } from '../main-curriculum-view/main-curriculum-view.component';
 
 /**
  * Authors: Daniel Robinson, Tyler Dresselhouse, Dylan Britton
@@ -23,7 +24,7 @@ export class CurriculumWeekComponent implements OnInit {
   thursday: CurriculumSubtopic[] = [];
   friday: CurriculumSubtopic[] = [];
 
-  constructor() { }
+  constructor(private mainCurriculumViewComponent: MainCurriculumViewComponent) { }
 
   currentlyDragged;
 
@@ -71,5 +72,10 @@ export class CurriculumWeekComponent implements OnInit {
 
   draggedFinder(currentlyDragged) {
     this.currentlyDragged = currentlyDragged;
+  }
+
+  removeWeekCall(weekNum: number) {
+console.log('I work?' + weekNum);
+ this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
   }
 }

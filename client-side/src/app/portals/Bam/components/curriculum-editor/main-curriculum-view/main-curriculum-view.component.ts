@@ -175,5 +175,19 @@ export class MainCurriculumViewComponent implements OnInit {
 
     return maxWeek;
   }
-}
 
+  addWeek() {
+    this.allWeeks.push(new Array<CurriculumSubtopic>());
+  }
+
+  getWeekById(weekNum: number): CurriculumSubtopic[] {
+      console.log('Me too! :(');
+const week: CurriculumSubtopic[] = this.allWeeks[weekNum];
+return week;
+  }
+
+  removeWeek(weekNum: number) {
+console.log('Im being hit, help!');
+this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
+  }
+}

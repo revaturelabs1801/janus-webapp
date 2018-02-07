@@ -31,7 +31,8 @@ width: 100%;
     float: center;
     color: red;
     position: relative;
-    left: 670px;
+    /* left: 670px; */
+    left: 88%;
     font-size: 2.1em;
 }
 
