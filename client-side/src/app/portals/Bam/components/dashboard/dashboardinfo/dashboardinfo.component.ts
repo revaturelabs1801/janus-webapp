@@ -26,17 +26,17 @@ export class DashboardInfoComponent implements OnInit {
   batchId: number;
   batchObs: Observable<Batch>;
 
-  constructor(private _batchService: BatchService,
-    private _sessionService: SessionService) { }
+  constructor(private batchService: BatchService,
+    private sessionService: SessionService) { }
 
   /**
    * @author David Graves -- batch: 1712-dec-Java-Steve
    * Subscribes to obtain current batch info to deterime start and end date, as well as current week.
    */
   batchSubscribe() {
-    this._sessionService.selectedBatchSubject.subscribe(data =>  {
+    this.sessionService.selectedBatchSubject.subscribe(data =>  {
       this.batchId = data.id;
-      this.batchObs = this._batchService.getBatchById(this.batchId);
+      this.batchObs = this.batchService.getBatchById(this.batchId);
       this.batchObs.subscribe(
         data1 => {
           if (data1 != null) {

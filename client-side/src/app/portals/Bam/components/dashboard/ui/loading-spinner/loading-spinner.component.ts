@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 /**
- * @author John Austin
+ * @author John Austin -  batch: 1712-dec11-Java-Steve
  */
 @Component({
   selector: 'app-loading-spinner',
