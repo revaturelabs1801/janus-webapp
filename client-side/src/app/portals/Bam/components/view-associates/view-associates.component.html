@@ -1,4 +1,3 @@
-
 <!-- {{batch.name}} -->
 <h3 style="text-align: center;"> *Batch Name* Associates</h3>
 
@@ -13,25 +12,25 @@
   <table class="table">
     <tbody>
       <tr class="associates-header">
-      <td (click)="order = 'fName'" class="head">Name</td>
-      <td (click)="order = 'email'" class="head">Email</td>
-      <td (click)="order = 'batch'" class="head">Batch Id</td>
-      <td (click)="order = 'phone'" class="head">Main Phone</td>
-      <td (click)="order = 'phone2'" class="head">Secondary Phone</td>
-      <td (click)="order = 'skype'" class="head">Skype</td>
+        <td (click)="order = 'fName'" class="head">Name</td>
+        <td (click)="order = 'email'" class="head">Email</td>
+        <td (click)="order = 'batch'" class="head">Batch Id</td>
+        <td (click)="order = 'phone'" class="head">Main Phone</td>
+        <td (click)="order = 'phone2'" class="head">Secondary Phone</td>
+        <td (click)="order = 'skype'" class="head">Skype</td>
       </tr>
-      <tr class="associates-row" *ngFor="let associate of associateList| search : 'all' : searchTerm | paginate: { itemsPerPage: 10, currentPage: p}">
-      <td class="value lname">{{associate.lName}}, {{associate.fName}}</td>
-      <td class="value email">{{associate.email}}</td>
-      <td></td>
-      <!--<td class="value batchId">{{associate.batch.id}}</td>-->
-      <td class="value mPhone">{{associate.phone}}</td>
-      <td class="value sPhone">{{associate.phone2}}</td>
-      <td class="value skype">{{associate.skype}}</td>
+      <tr class="associates-row" *ngFor="let associate of associateList| search : 'all' : searchTerm | paginate: { itemsPerPage: 7, currentPage: p}">
+        <td class="value lname">{{associate.lName}}, {{associate.fName}}</td>
+        <td class="value email">{{associate.email}}</td>
+        <td></td>
+        <!--<td class="value batchId">{{associate.batch.id}}</td>-->
+        <td class="value mPhone">{{associate.phone}}</td>
+        <td class="value sPhone">{{associate.phone2}}</td>
+        <td class="value skype">{{associate.skype}}</td>
       </tr>
     </tbody>
   </table>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
-
+  <div class="page-sel">
+    <pagination-controls class="my-pagination" (pageChange)="p = $event" autoHide="true"></pagination-controls>
+  </div>
 </div>
-
