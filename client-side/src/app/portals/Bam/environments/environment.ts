@@ -44,7 +44,8 @@ export const environment = {
         getBatchIdUrl: (batchId: number) => `${context}/batches/byid/${batchId}`,
         addSubtopicUrl: () => `${context}/subtopic/addsubtopic`,
         getSubtopicPoolUrl: () => `${context}/curriculum/topicpool`,
-        updateDateUrl: () => `${context}/calendar/dateupdate`
+        updateDateUrl: (subtopicId: number, batchId: number, date: number) =>
+                        `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`
     },
 
     assignForce: {

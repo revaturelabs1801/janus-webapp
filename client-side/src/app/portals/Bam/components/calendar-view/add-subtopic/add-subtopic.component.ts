@@ -18,29 +18,38 @@ import { AddSubtopicService } from '../../../services/add-subtopic.service';
   templateUrl: './add-subtopic.component.html',
   styleUrls: ['./add-subtopic.component.css']
 })
-
+/**
+ * This features allows a user to select a subtopic to
+ * add to their calendar. Subtopics cannot be repeated
+ * on a batch. If a user tries to add a subtopic that
+ * exists on the current batch, a pop up modal will appear
+ * to notify the user it exists on their calendar. This modal
+ * will give the user the opportunity to override the previous
+ * date with the one they have selected.
+ * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+ */
 export class AddSubtopicComponent implements OnInit {
 
   @ViewChild('content') modalRef: TemplateRef<any>;
-  public loading = true;
+  public loading: Boolean = true;
   public closeResult: string;
 
   private subtopics: SubtopicName[] = [];
 
   public uniqueTopics =  new Set();
   public topicMap = new Map();
-  public subtopicArray = [];
-  public selectedTopic = 'Select a Topic';
-  public selectedSubtopic = 'Select a Subtopic';
-  public selectedDate = '';
+  public subtopicArray: Object[] = [];
+  public selectedTopic: string;
+  public selectedSubtopic: string;
+  public selectedDate: any;
   public batchName: String;
 
-  public currentlyAddedSubtopic = [];
-  public prevDate;
-  public newDate;
+  public currentlyAddedSubtopic: Subtopic[] = [];
+  public prevDate: string;
+  public newDate: any;
 
-  private topicId;
-  private subtopicId;
+  private topicId: number;
+  private subtopicId: number;
 
   private currentBatch: Batch;
   private batchSubtopics: Subtopic[] = [];
@@ -50,10 +59,10 @@ export class AddSubtopicComponent implements OnInit {
   private subtopicName: SubtopicName;
   private status: SubtopicStatus;
   private subtopic: Subtopic;
-  private slectedDateMiliseconds;
+  private slectedDateMiliseconds: any;
 
-  private _alert = new Subject<string>();
-  private _alertSuccess = new Subject<string>();
+  private _alert: Subject<string> = new Subject<string>();
+  private _alertSuccess: Subject<string> = new Subject<string>();
 
   public alertMessage: string;
   public successMessage: string;
@@ -62,7 +71,8 @@ export class AddSubtopicComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-
+    this.selectedTopic = 'Select a Topic';
+    this.selectedSubtopic = 'Select a Subtopic';
     this._alert.subscribe((message) => this.alertMessage = message);
     debounceTime.call(this._alert, 5000).subscribe(() => this.alertMessage = null);
 
@@ -92,7 +102,6 @@ export class AddSubtopicComponent implements OnInit {
         this.batchSubtopics = service;
       });
   }
-
   /**
     * The endpoint used returns the subtopics with their topic.
     * The following iterations creates a set of unique Topics to filter
@@ -198,10 +207,8 @@ export class AddSubtopicComponent implements OnInit {
             this.batchSubtopics.push(service);
             this.currentlyAddedSubtopic.push(service);
             this.changeSuccessMessage(`Successfully added!`);
-          }, error => {
-                        this.changeAlertMessage(`Failed to add Subtopic, check all inputs`);
-                      }
-          );
+          }, error => this.changeAlertMessage(`Failed to add Subtopic, check all inputs`)
+        );
       } else {
         this.open(this.modalRef);
       }
@@ -235,7 +242,7 @@ export class AddSubtopicComponent implements OnInit {
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    * @param message holds the message that will be displayed
    */
-  public changeAlertMessage(message) {
+  changeAlertMessage(message) {
     this._alert.next(message);
   }
 
@@ -244,7 +251,7 @@ export class AddSubtopicComponent implements OnInit {
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    * @param message holds the message that will be displayed
    */
-  public changeSuccessMessage(message) {
+  changeSuccessMessage(message) {
     this._alertSuccess.next(message);
   }
 
@@ -294,8 +301,6 @@ export class AddSubtopicComponent implements OnInit {
           }
         );
       }
-    }, (reason) => {
-
-    });
+    }, (reason) => {});
   }
 }

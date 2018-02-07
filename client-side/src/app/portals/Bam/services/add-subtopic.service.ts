@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
 import { Subtopic } from '../models/subtopic.model';
 import { Batch } from '../models/batch.model';
-import 'rxjs/add/operator/map';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -18,17 +18,17 @@ const httpOptionsJson = {
 @Injectable()
 export class AddSubtopicService {
 
-  constructor(private httpPost: HttpClient, private httpGet: Http) { }
+  constructor(private http: HttpClient) { }
 
   /**
    * Retrieves current batch information
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   getBatchById(): Observable<Batch> {
-    return this.httpGet
-        .get(environment.addsubtopics.getBatchIdUrl(22506))
-        .map( (response: Response) => {
-          return <Batch> response.json();
+    return this.http
+        .get<Batch>(environment.addsubtopics.getBatchIdUrl(22506))
+        .map( data => {
+          return data;
         });
   }
 
@@ -37,10 +37,10 @@ export class AddSubtopicService {
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   getBatchSubtopics(): Observable<Subtopic[]> {
-    return this.httpGet
-        .get(environment.addsubtopics.getBatchSubtopicsUrl(22506, 34, 0))
-        .map( (response: Response) => {
-          return <Subtopic[]> response.json();
+    return this.http
+        .get<Subtopic[]>(environment.addsubtopics.getBatchSubtopicsUrl(22506, 34, 0))
+        .map( data => {
+          return data;
         });
   }
 
@@ -52,8 +52,7 @@ export class AddSubtopicService {
    * @param date date of the subtopic
    */
   updateDate(batchId, subtopicId, date): Observable<any> {
-    const pathVbs = `/${subtopicId}/${batchId}/${date}`;
-    return this.httpPost.post<any>(environment.addsubtopics.updateDateUrl() + pathVbs, '' , httpOptions);
+    return this.http.post<any>(environment.addsubtopics.updateDateUrl(batchId, subtopicId, date), '' , httpOptions);
   }
 
   /**
@@ -61,10 +60,10 @@ export class AddSubtopicService {
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   getSubtopicPool(): Observable<any> {
-    return this.httpGet
-        .get(environment.addsubtopics.getSubtopicPoolUrl())
-        .map( (response: Response) => {
-          return <any> response.json();
+    return this.http
+        .get<any>(environment.addsubtopics.getSubtopicPoolUrl())
+        .map( data => {
+          return data;
         });
   }
 
@@ -73,7 +72,7 @@ export class AddSubtopicService {
    * @param subtopic subtopic object
    */
   addSubtopic(subtopic): Observable<Subtopic> {
-    return this.httpPost.post<Subtopic>(environment.addsubtopics.addSubtopicUrl(), JSON.stringify(subtopic), httpOptionsJson);
+    return this.http.post<Subtopic>(environment.addsubtopics.addSubtopicUrl(), JSON.stringify(subtopic), httpOptionsJson);
   }
 
 }

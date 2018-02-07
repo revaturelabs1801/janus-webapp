@@ -24,7 +24,7 @@ const routes: Routes = [
         component: MainCurriculumViewComponent
       },
       {
-        path: 'addsubtopic',
+        path: 'add-subtopic',
         component: AddSubtopicComponent
       },
       {
