@@ -12,6 +12,8 @@ import { CurriculumService } from './services/curriculum.service';
 import { DragDropModule } from '../../../../node_modules/primeng/components/dragdrop/dragdrop';
 import { DragNDropDirective } from './drag-n-drop.directive';
 import { DragndropService } from './services/dragndrop.service';
+import { TopicSearchComponent } from './components/curriculum-editor/topic-search/topic-search.component';
+import { SearchTextService } from './services/search-text.service';
 
 @NgModule({
   imports: [
@@ -20,8 +22,8 @@ import { DragndropService } from './services/dragndrop.service';
     BamRoutingModule
   ],
   declarations: [ BamComponent, HomeComponent, CurriculumWeekComponent,
-    MainCurriculumViewComponent, TopicPoolComponent, CourseStructureComponent, DragNDropDirective],
-  providers: [ CurriculumService, CurriculumWeekComponent, DragndropService ]
+    MainCurriculumViewComponent, TopicPoolComponent, CourseStructureComponent, DragNDropDirective, TopicSearchComponent],
+  providers: [ CurriculumService, CurriculumWeekComponent, DragndropService, SearchTextService ]
 
 })
 export class BamModule { }
