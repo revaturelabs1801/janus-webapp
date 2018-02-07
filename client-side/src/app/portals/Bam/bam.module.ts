@@ -19,12 +19,14 @@ import { MainCurriculumViewComponent } from './components/curriculum-editor/main
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumService } from './services/curriculum.service';
 import { UserSearchPipe } from './pipes/user-search.pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   declarations: [
     BamComponent,
