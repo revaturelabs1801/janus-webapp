@@ -9,7 +9,7 @@
       <th>Remove from Batch</th>
     </thead>
     <tbody>
-      <tr *ngFor="let user of associates | search : 'fName' : searchTerm">
+      <tr *ngFor="let user of associates | search : 'all' : searchTerm">
         <td>{{ user.fName }}</td>
         <td>{{ user.lName }}</td>
         <td>{{ user.email }}</td>

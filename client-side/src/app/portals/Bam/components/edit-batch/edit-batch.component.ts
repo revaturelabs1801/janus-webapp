@@ -14,18 +14,19 @@ import { BatchService } from '../../services/batch.service';
  * Class for edit the current batch.
  * @author Patrick Kennedy
  * @author Shane Avery Sistoza
+ * @batch 1712-Steve
  */
 export class EditBatchComponent implements OnInit {
 
   @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
 
-  @Input() searchTerm: string = "";
+  @Input() searchTerm: string;
 
   batchTypes: BatchType[];
 
   showAddUserTable = false;
 
-  constructor(public batchService : BatchService) {
+  constructor(public batchService: BatchService) {
   }
 
   /**
@@ -42,27 +43,23 @@ export class EditBatchComponent implements OnInit {
     this.showAddUserTable = true;
   }
 
-  /** TODO
+  /**
    * Submit and persist updated changes to the batch.
    *
    * @param      {number}  typeId  The type id the batch wil change to.
    */
-  submit(typeId) {
+  submit(typeId: number) {
 
     let selectedType: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
-      if (typeId == this.batchTypes[i].id) {
+      if (typeId === this.batchTypes[i].id) {
         selectedType = this.batchTypes[i];
         break;
       }
     }
-    console.log("batch type: " + JSON.stringify(this.batch.type)); 
+
     this.batch.type = selectedType;
-    console.log("batch: "  + JSON.stringify(this.batch)); 
-    console.log("batch type: " + JSON.stringify(this.batch.type)); 
-    this.batchService.updateBatch(this.batch).subscribe(
-      status => console.log(status) 
-    )
+    this.batchService.updateBatch(this.batch).subscribe( status => console.log(status) );
   }
 
   /**
