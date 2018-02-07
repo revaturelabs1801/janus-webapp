@@ -9,7 +9,7 @@ import { MainCurriculumViewComponent } from './components/curriculum-editor/main
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CourseStructureComponent } from './components/curriculum-editor/course-structure/course-structure.component';
 import { CurriculumService } from './services/curriculum.service';
-import { DragDropModule } from 'primeng/dragdrop';
+import { DragDropModule } from '../../../../node_modules/primeng/components/dragdrop/dragdrop';
 import { DragNDropDirective } from './drag-n-drop.directive';
 import { DragndropService } from './services/dragndrop.service';
 
