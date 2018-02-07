@@ -1,0 +1,66 @@
+<div class="container">
+
+  <div class="row justify-content-center ">
+    <div class="col-sm-12 col-md-4 pt-3">
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <form ng-submit="updateBatch()" class="ng-valid-required ng-dirty ng-valid ng-valid-date">
+
+            <div class="form-group">
+              <span class="input-tag">Name:</span>
+
+              <input type="text" class="form-control ng-pristine ng-not-empty ng-valid ng-valid-required ng-touched" ng-model="batch.name"
+                placeholder="" required="" readonly="" value="{{ batch.name }}">
+            </div>
+
+            <div class="form-group">
+              <span class="input-tag">Type:</span>
+
+              <select #inputGroupSelectType class="custom-select form-control">
+                <option selected [value]="batch.type.id"> {{ batch.type.name }}</option>
+                <ng-container *ngFor="let type of batchTypes">
+                  <option *ngIf="batch.type.name != type.name" [value]="type.id"> {{ type.name}} </option>
+                </ng-container>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <span class=" -addon input-tag">Start Date:</span>
+              <input name="StartDate" [ngModel]="batch.startDate | date: 'yyyy-MM-dd'" type="date" id="startDate" class="form-control ng-not-empty ng-valid ng-valid-required ng-touched ng-dirty ng-valid-date"
+                width="30%" required="" (ngModelChange)="startDateChanged($event)">
+            </div>
+            <div class="form-group">
+              <span class="input-tag">End Date:</span>
+              <input name="EndDate" [ngModel]="batch.endDate | date: 'yyyy-MM-dd'" type="date" class="form-control ng-dirty ng-not-empty ng-valid ng-valid-date ng-valid-required ng-touched"
+                required="" (ngModelChange)="endDateChanged($event)">
+            </div>
+
+          </form>
+          <button class="btn btn-block btn-primary" id="login-btn" (click)="submit(inputGroupSelectType.value)">SUBMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav nav-tabs">
+    <div class="nav-item" (click)="toggleRemove()">
+      <a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
+    </div>
+    <div class="nav-item" (click)="toggleAdd()">
+      <a class="nav-link" [ngClass]="{active : showAddUserTable == true}"> Add </a>
+    </div>
+    <form class="ml-auto">
+      <input name="searchTerm" [(ngModel)]="searchTerm" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    </form>
+  </div>
+
+  <div *ngIf="showAddUserTable; then addUser; else removeUser"></div>
+  <ng-template #removeUser>
+    <app-remove-associate-from-batch [searchTerm]="searchTerm"></app-remove-associate-from-batch>
+  </ng-template>
+  <ng-template #addUser>
+    <app-add-associate-to-batch [searchTerm]="searchTerm"></app-add-associate-to-batch>
+  </ng-template>
+
+</div>
