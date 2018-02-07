@@ -5,12 +5,14 @@ import { Observable } from 'rxjs/Observable';
 import { Batch } from '../../../models/batch.model';
 import { CalendarService } from '../../../services/calendar.service';
 import { Subtopic } from '../../../models/subtopic.model';
-import { ListModel } from '../listModel/listModel';
+import { ListModel } from '../../../models/list.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { SessionService } from '../../../services/session.service';
 
-
+/**
+ * @author John Austin -  batch: 1712-dec11-Java-Steve
+ */
 @Component({
   selector: 'app-batch-progress-bar',
   templateUrl: './batch-progress-bar.component.html',
@@ -28,20 +30,20 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
   subTopicCompleted: number;
   subTopicTotal: number;
   subTopicTotalObs: Observable<number>;
-  percentCompleted;
-  subPercentCompleted;
-  currentDate;
-  completedDate;
+  percentCompleted: number;
+  subPercentCompleted: number;
+  currentDate: Date;
+  completedDate: number;
   missedTopics: number;
   totalTopics: number;
-  subTopicsCompleted;
+  subTopicsCompleted: number;
   subTopicObs: Observable<Subtopic[]>;
   subTopics: Subtopic[];
   subTopicMissed: number;
   topicArray: ListModel[];
   batchIdObs: Observable<number>;
-  constructor(private _batchService: BatchService, private _calendarService: CalendarService,
-     private session: SessionService) {
+  constructor(private batchService: BatchService, private calendarService: CalendarService,
+     private sessionService: SessionService) {
 
       this.batchId = null;
    }
@@ -49,11 +51,11 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
 
    }
   ngOnInit() {
-    this.session.selectedBatchSubject.subscribe(data =>  {
+    this.sessionService.selectedBatchSubject.subscribe(data =>  {
       this.batchId = data.id;
-      this.batchObs = this._batchService.getBatchById(this.batchId);
-      this.subTopicObs = this._calendarService.getSubtopicsByBatch(this.batchId);
-      this.subTopicTotalObs = this._calendarService.getNumberOfSubTopicsByBatch(this.batchId);
+      this.batchObs = this.batchService.getBatchById(this.batchId);
+      this.subTopicObs = this.calendarService.getSubtopicsByBatch(this.batchId);
+      this.subTopicTotalObs = this.calendarService.getNumberOfSubTopicsByBatch(this.batchId);
       this.batchObs.subscribe(
         data1 => {
           this.showSpinner = false;
@@ -123,8 +125,8 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
       this.subTopicCompleted = 0;
     });
 
-    if ( this.session.getSelectedBatch() != null) {
-      this.session.putSelectedBatchIntoSession(this.session.getSelectedBatch());
+    if ( this.sessionService.getSelectedBatch() != null) {
+      this.sessionService.putSelectedBatchIntoSession(this.sessionService.getSelectedBatch());
     }
   }
 }

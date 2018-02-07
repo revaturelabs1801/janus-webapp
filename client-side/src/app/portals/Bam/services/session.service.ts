@@ -34,7 +34,6 @@ export class SessionService {
    * Puts a hard coded user into the session
    * @author James Holzer | Batch: 1712-dec10-java-steve
    * @returns
-   * @param
    */
   putUserInSession(): Observable<BamUser> {
     return this.userService.updateUser(this.bamUser).map(data => {
@@ -47,7 +46,6 @@ export class SessionService {
    * Returns the Bam user that is in the current session
    * @author James Holzer | Batch: 1712-dec10-java-steve
    * @returns BamUser
-   * @param
    */
   getUser(): BamUser {
     const current: BamUser = JSON.parse(localStorage.getItem('bamUser'));
@@ -69,7 +67,6 @@ export class SessionService {
    * Gets a batch from sessionStorage 'batch'
    * @author James Holzer | Batch: 1712-dec10-java-steve
    * @returns Batch
-   * @param
    */
   getSelectedBatch(): Batch {
     return JSON.parse(sessionStorage.getItem('batch'));
