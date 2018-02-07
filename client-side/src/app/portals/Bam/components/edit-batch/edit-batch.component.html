@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row justify-content-center ">
-    <div class="col-sm-12 col-md-4 pt-3">
+    <div class="col-sm-12 col-md-6 col-lg-4 pt-3">
 
       <div class="card mb-3">
         <div class="card-body">
@@ -11,7 +11,7 @@
               <span class="input-tag">Name:</span>
 
               <input type="text" class="form-control ng-pristine ng-not-empty ng-valid ng-valid-required ng-touched" ng-model="batch.name"
-                placeholder="" required="" readonly="" value="{{ batch.name }}">
+              placeholder="" required="" readonly="" value="{{ batch.name }}">
             </div>
 
             <div class="form-group">
@@ -28,12 +28,12 @@
             <div class="form-group">
               <span class=" -addon input-tag">Start Date:</span>
               <input name="StartDate" [ngModel]="batch.startDate | date: 'yyyy-MM-dd'" type="date" id="startDate" class="form-control ng-not-empty ng-valid ng-valid-required ng-touched ng-dirty ng-valid-date"
-                width="30%" required="" (ngModelChange)="startDateChanged($event)">
+              width="30%" required="" (ngModelChange)="startDateChanged($event)">
             </div>
             <div class="form-group">
               <span class="input-tag">End Date:</span>
               <input name="EndDate" [ngModel]="batch.endDate | date: 'yyyy-MM-dd'" type="date" class="form-control ng-dirty ng-not-empty ng-valid ng-valid-date ng-valid-required ng-touched"
-                required="" (ngModelChange)="endDateChanged($event)">
+              required="" (ngModelChange)="endDateChanged($event)">
             </div>
 
           </form>
@@ -44,8 +44,7 @@
   </div>
 
   <div class="nav nav-tabs">
-    <div class="nav-item" (click)="toggleRemove()">
-      <a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
+    <div class="nav-item" (click)="toggleRemove()"><a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
     </div>
     <div class="nav-item" (click)="toggleAdd()">
       <a class="nav-link" [ngClass]="{active : showAddUserTable == true}"> Add </a>
@@ -62,5 +61,6 @@
   <ng-template #addUser>
     <app-add-associate-to-batch [searchTerm]="searchTerm"></app-add-associate-to-batch>
   </ng-template>
+
 
 </div>
