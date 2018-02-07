@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { LowerCasePipe } from '@angular/common';
 import { Batch } from '../models/batch.model';
 import { DatePipe } from '@angular/common';
 
