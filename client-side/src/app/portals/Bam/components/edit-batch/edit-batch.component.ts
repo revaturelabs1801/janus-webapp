@@ -48,11 +48,11 @@ export class EditBatchComponent implements OnInit {
    *
    * @param      {number}  typeId  The type id the batch wil change to.
    */
-  submit(typeId: number) {
+  submit(typeId) {
 
     let selectedType: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
-      if (typeId === this.batchTypes[i].id) {
+      if (typeId == this.batchTypes[i].id) {
         selectedType = this.batchTypes[i];
         break;
       }
