@@ -38,6 +38,15 @@ export const environment = {
         addTopicsUrl: () => `${context}/calendar/addtopics`,
     },
 
+    addsubtopics: {
+        getBatchSubtopicsUrl: (batchId: number, pageNumber: number, pageSize: number) =>
+                        `${context}/calendar/subtopicspagination/${batchId}/${pageSize}/${pageNumber}`,
+        getBatchIdUrl: (batchId: number) => `${context}/batches/byid/${batchId}`,
+        addSubtopicUrl: () => `${context}/subtopic/addsubtopic`,
+        getSubtopicPoolUrl: () => `${context}/curriculum/topicpool`,
+        updateDateUrl: () => `${context}/calendar/dateupdate`
+    },
+
     assignForce: {
         refreshBatches: () => `${context}/refreshbatches`
     },

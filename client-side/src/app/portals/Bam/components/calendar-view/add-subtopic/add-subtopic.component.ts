@@ -78,18 +78,18 @@ export class AddSubtopicComponent implements OnInit {
   }
   /**
     * Loads current batch information and all the subtopics of the batch
-		*	@author Francisco Palomino
+		*	@author Francisco Palomino | Batch: 1712-dec10-java-steve
 		*/
   getCurrentBatch() {
     this.subtopicsService.getBatchById().subscribe(
       (service) =>  {
-        this.batchName = JSON.parse(service._body).name;
-        this.currentBatch = JSON.parse(service._body);
+        this.batchName = service.name;
+        this.currentBatch = service;
       }
     );
     this.subtopicsService.getBatchSubtopics().subscribe(
       service => {
-        this.batchSubtopics = JSON.parse(service._body);
+        this.batchSubtopics = service;
       });
   }
 
@@ -99,7 +99,7 @@ export class AddSubtopicComponent implements OnInit {
     * out the topics from the Subtopics List and maps them to the 'topicMap' property.
     * The loading property is set to false here beacuse once this method is called
     * All the subtopics have benn loaded
-    *	@author Francisco Palomino
+    *	@author Francisco Palomino | Batch: 1712-dec10-java-steve
     * @param subtopics holds the subtopics result from the database call
 		*/
   getTopics(subtopics) {
@@ -122,10 +122,11 @@ export class AddSubtopicComponent implements OnInit {
   /**
    * Method called when a topic is changed. It generates the subtopic list
    * of the current Topic selected and sorts them alphabetically
-   * @author Francisco Palomino
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   onChangeLoadSubtopics() {
     this.subtopicArray = [];
+    this.selectedSubtopic = 'Select a Subtopic';
     if (this.selectedTopic !== '' && this.selectedTopic !== 'Select a Topic') {
       for (let subtopic of Array.from(this.topicMap.get(this.selectedTopic))) {
         this.subtopicArray.push(subtopic);
@@ -145,7 +146,7 @@ export class AddSubtopicComponent implements OnInit {
    * Method is called once the subtopic list is changed which
    * obtains all the necessary properties of the subtopic to be
    * able to persist it to the database
-   * @author Francisco Palomino
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   onChangeGetSubtopicInfo() {
     if (this.selectedSubtopic !== '' && this.selectedSubtopic !== 'Select a Subtopic') {
@@ -165,7 +166,7 @@ export class AddSubtopicComponent implements OnInit {
    * Method verifies selection inputs and the date and sends the appropriate
    * message to the user if something is missing or incorrect. Once all validation
    * is successfull it persists the new subtopic to the database
-   * @author Francisco Palomino
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   saveSubtopic () {
     this.slectedDateMiliseconds = new Date(this.selectedDate).setHours(0, 0, 0, 0);
@@ -211,7 +212,7 @@ export class AddSubtopicComponent implements OnInit {
    * exists on the batch's calendar. If the calendar does have the
    * the subtopic it saves its properties just in case the
    * user wants to override the date.
-   * @author Francisco Palomino
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    * @return I used the false value to idenetify that it can't be
    * added because it exists on the current batch.
    */
@@ -231,7 +232,7 @@ export class AddSubtopicComponent implements OnInit {
 
   /**
    * Calls the error alert message
-   * @author Francisco Palomino
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    * @param message holds the message that will be displayed
    */
   public changeAlertMessage(message) {
@@ -240,7 +241,7 @@ export class AddSubtopicComponent implements OnInit {
 
   /**
    * Calls the success alert message
-   * @author Francisco Palomino
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    * @param message holds the message that will be displayed
    */
   public changeSuccessMessage(message) {
@@ -250,7 +251,7 @@ export class AddSubtopicComponent implements OnInit {
   /**
    * Creates the subtopic object based on all the selected
    * values to be persisted to the database
-   * @author Francisco Palomino
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   setSubtopicObject() {
     this.topicName = {
@@ -275,7 +276,7 @@ export class AddSubtopicComponent implements OnInit {
    * Opens a modal to ask the user if they would like to reset
    * the date of a subtopic currently in their calendar. It allows the user
    * to cancel or save the new change.
-   * @author Francisco Palomino
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    * @param content HTML element reference of the modal
    */
   open(content) {
