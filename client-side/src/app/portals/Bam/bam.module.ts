@@ -15,10 +15,10 @@ import { BatchService } from './services/batch.service';
 import { SearchPipe } from './pipes/search.pipe';
 import { SessionService } from './services/session.service';
 import { UsersService } from './services/users.service';
-import { SessionService } from './services/session.service';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumService } from './services/curriculum.service';
+import { UserSearchPipe } from './pipes/user-search.pipe';
 
 @NgModule({
   imports: [
@@ -34,7 +34,9 @@ import { CurriculumService } from './services/curriculum.service';
     RemoveAssociateFromBatchComponent,
     MainCurriculumViewComponent,
     TopicPoolComponent,
-    SearchPipe
+    SearchPipe,
+    ViewAssociatesComponent,
+    UserSearchPipe
   ],
   providers: [
     UsersService,
@@ -43,7 +45,7 @@ import { CurriculumService } from './services/curriculum.service';
     CurriculumService
   ],
   exports: [
-    SearchPipe
+    SearchPipe, UserSearchPipe
   ]
 })
 export class BamModule { }
