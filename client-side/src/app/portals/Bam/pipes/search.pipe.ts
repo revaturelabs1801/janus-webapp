@@ -4,10 +4,12 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
     name: 'search'
 })
 /**
- * @author Shane Sistoza, Patrick Kennedy (1712-steve)
- * 
- * A filter to sort through a list. 
- * 
+ * @author Shane Sistoza
+ * @author Patrick Kennedy
+ * @batch 1712-Steve
+ *
+ * A filter to sort through a list.
+ *
  */
 @Injectable()
 export class SearchPipe implements PipeTransform {
