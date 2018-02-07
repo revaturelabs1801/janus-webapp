@@ -1,0 +1,39 @@
+
+.pan{
+	width: auto;
+    margin: 10px;
+    font-weight: bold;
+}
+
+#pan-container{
+    width: auto;
+    background-color: rgba(243, 93, 10, .95);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 7px;
+    border-style: inset;
+    color: white;
+    border-color: #e85f12;
+}
+
+#pan2{
+	width: auto;
+    margin-left: 1px;
+    font-weight: bold;
+}
+
+#pan3{
+	width: auto;
+    float: right;
+    margin-right: 40px;
+    font-weight: bold;
+}
+
+@media all and (max-width: 600px) {
+    #pan3 { display: none; }
+}
+
+#bWeek {
+    position: absolute;
+    right: 0;
+}

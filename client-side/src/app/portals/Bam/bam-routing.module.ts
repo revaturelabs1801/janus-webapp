@@ -5,9 +5,10 @@ import { HomeComponent } from './components/home/home.component';
 import { MyBatchesComponent } from './components/batches/my-batches/my-batches.component';
 import { AllBatchesComponent } from './components/batches/all-batches/all-batches.component';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
+import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
 
 const routes: Routes = [
-{
+  {
     path: '',
     component: BamComponent,
     children: [
@@ -24,6 +25,10 @@ const routes: Routes = [
         component: AllBatchesComponent
       },
       {
+        path: 'editBatch',
+        component: EditBatchComponent
+      },
+      {
         path: 'curriculum-view',
         component: MainCurriculumViewComponent
       },
@@ -33,7 +38,7 @@ const routes: Routes = [
         redirectTo: '/Bam/home'
       }
     ]
-}
+  }
 ];
 
 @NgModule({
