@@ -59,7 +59,7 @@ export class EditBatchComponent implements OnInit {
     }
 
     this.batch.type = selectedType;
-    this.batchService.updateBatch(this.batch).subscribe( status => console.log(status) );
+    this.batchService.updateBatch(this.batch).subscribe( status => console.log(status.statusText) );
   }
 
   /**

@@ -33,7 +33,7 @@ export class SearchPipe implements PipeTransform {
                 for (let i in objects) {
                     if (objects[i] != undefined) {
                         if ( objects[i].toString().toLowerCase().includes(value.toLowerCase()) ) {
-                            return objects;
+                            return true;
                         }
                     }
                 }
