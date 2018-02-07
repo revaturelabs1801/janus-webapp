@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
+import { DragndropService } from '../../../services/dragndrop.service';
 
 /**
  * Authors: Daniel Robinson, Tyler Dresselhouse, Dylan Britton
@@ -23,7 +24,7 @@ export class CurriculumWeekComponent implements OnInit {
   thursday: CurriculumSubtopic[] = [];
   friday: CurriculumSubtopic[] = [];
 
-  constructor() { }
+  constructor(private dndService: DragndropService) { }
 
   currentlyDragged;
 
@@ -62,7 +63,25 @@ export class CurriculumWeekComponent implements OnInit {
    */
 
   dropIt(event) {
+    console.log(event);
+    this.dndService.currentItem.subscribe(
+      data => {
+        this.currentlyDragged = data;
+      }
+    );
+    // this.dndService.currentSubtopic.subscribe(
+    //   data =>
+    // )
+    console.log(this.currentlyDragged.target);
+    // event.srcElement.append(this.currentlyDragged.target);
     event.target.append(this.currentlyDragged.target);
+
+  }
+
+  pickItUp(event, subtopic) {
+    this.dndService.sendItem(event);
+    this.dndService.sendSubtopic(subtopic);
+
   }
 
   /**

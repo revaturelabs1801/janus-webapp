@@ -11,6 +11,7 @@ import { CourseStructureComponent } from './components/curriculum-editor/course-
 import { CurriculumService } from './services/curriculum.service';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DragNDropDirective } from './drag-n-drop.directive';
+import { DragndropService } from './services/dragndrop.service';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { DragNDropDirective } from './drag-n-drop.directive';
   ],
   declarations: [ BamComponent, HomeComponent, CurriculumWeekComponent,
     MainCurriculumViewComponent, TopicPoolComponent, CourseStructureComponent, DragNDropDirective],
-  providers: [ CurriculumService, CurriculumWeekComponent ]
+  providers: [ CurriculumService, CurriculumWeekComponent, DragndropService ]
 
 })
 export class BamModule { }
