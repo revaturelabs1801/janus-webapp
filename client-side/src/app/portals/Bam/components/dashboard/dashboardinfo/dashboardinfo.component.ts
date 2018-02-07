@@ -11,13 +11,12 @@ import { Observable } from 'rxjs/observable';
  * @author David Graves -- batch: 1712-dec-Java-Steve
  * Dashboardinfo component to display trainer name and current batch progress by date
  */
-
 @Component({
   selector: 'app-dashboardinfo',
   templateUrl: './dashboardinfo.component.html',
   styleUrls: ['./dashboardinfo.component.css']
 })
-export class DashboardinfoComponent implements OnInit {
+export class DashboardInfoComponent implements OnInit {
 
   user: BamUser;
   batch: Batch;
@@ -28,16 +27,14 @@ export class DashboardinfoComponent implements OnInit {
   batchObs: Observable<Batch>;
 
   constructor(private _batchService: BatchService,
-    private session: SessionService) { }
-
+    private _sessionService: SessionService) { }
 
   /**
    * @author David Graves -- batch: 1712-dec-Java-Steve
    * Subscribes to obtain current batch info to deterime start and end date, as well as current week.
    */
-
   batchSubscribe() {
-    this.session.selectedBatchSubject.subscribe(data =>  {
+    this._sessionService.selectedBatchSubject.subscribe(data =>  {
       this.batchId = data.id;
       this.batchObs = this._batchService.getBatchById(this.batchId);
       this.batchObs.subscribe(

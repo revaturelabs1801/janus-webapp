@@ -8,8 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 /**
  * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
- * Welcom component to handel the welcome view
- *
+ * Welcome component to handle the welcome view
  */
 
 @Component({
@@ -25,7 +24,7 @@ export class WelcomeComponent implements OnInit {
   private batches: Batch [];
   private selectedBatch: Batch;
 
-  constructor(private batchSer: BatchService, private sessionService: SessionService) {
+  constructor(private batchService: BatchService, private sessionService: SessionService) {
 
    }
 
@@ -46,7 +45,7 @@ export class WelcomeComponent implements OnInit {
    * and setting the response data to batches array.
    */
   getInProgressBatches() {
-    this.batchSer.getAllBatchesInProgress(this.currentUser.email).subscribe(
+    this.batchService.getAllBatchesInProgress(this.currentUser.email).subscribe(
       response => {
         this.batches = response;
         if (this.batches !== null) {
@@ -69,10 +68,7 @@ export class WelcomeComponent implements OnInit {
 
   /**
    * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
-   *
    * To set all needed varables for the welcome componet
-   *
-   *
    */
   setAllneededVars() {
     if (this.batchCount > 1) {
@@ -90,7 +86,6 @@ export class WelcomeComponent implements OnInit {
    *
    * To compare batches for selected batch.
    * @returns true if batches match , false otherwise.
-   *
    */
   compareBatch(b1: Batch, b2: Batch): boolean {
     return b1 && b2 ? b1.id === b2.id : b1 === b2;

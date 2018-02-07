@@ -6,7 +6,7 @@ import { BamRoutingModule } from './bam-routing.module';
 import { BamComponent } from './bam.component';
 import { BatchProgressBarComponent } from './components/dashboard/batch-progress-bar/batch-progress-bar.component';
 import { HomeComponent } from './components/home/home.component';
-import { DashboardinfoComponent } from './components/dashboard/dashboardinfo/dashboardinfo.component';
+import { DashboardInfoComponent } from './components/dashboard/dashboardinfo/dashboardinfo.component';
 import { WelcomeComponent } from './components/dashboard/welcome/welcome.component';
 import { LoadingSpinnerComponent } from './components/dashboard/ui/loading-spinner/loading-spinner.component';
 import { CalendarService } from './services/calendar.service';
@@ -35,11 +35,11 @@ import { CurriculumService } from './services/curriculum.service';
     RemoveAssociateFromBatchComponent,
     MainCurriculumViewComponent,
     TopicPoolComponent,
-    SearchPipe,
     BatchProgressBarComponent,
     LoadingSpinnerComponent,
     WelcomeComponent,
-    DashboardinfoComponent
+    DashboardInfoComponent,
+    SearchPipe
   ],
   providers: [
     UsersService,
