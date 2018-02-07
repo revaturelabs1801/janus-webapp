@@ -12,8 +12,8 @@ import { SessionService } from '../../../services/session.service';
 export class MyBatchesComponent implements OnInit {
 
   email: string;
+  filterText: string;
   batches: Batch[];
-  error = false;
 
   constructor(private batchService: BatchService, private sessionService: SessionService) { }
 
@@ -62,6 +62,15 @@ export class MyBatchesComponent implements OnInit {
     if (!batches) {
       this.batches = [];
     }
+  }
+
+  /**
+   * Sets [this.filterText] to the text in the search box
+   * @param event event.target.value holds text in search box
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
+  setFilterText(event) {
+    this.filterText = event.target.value;
   }
 
 }

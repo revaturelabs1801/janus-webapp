@@ -27,7 +27,6 @@ import { MainCurriculumViewComponent } from './components/curriculum-editor/main
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumService } from './services/curriculum.service';
 import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
-import { BatchSearchService } from './services/batch-search.service';
 
 @NgModule({
   imports: [
@@ -45,14 +44,21 @@ import { BatchSearchService } from './services/batch-search.service';
     AllBatchesComponent,
     BatchesTableComponent,
     BatchesSearchComponent,
+    EditBatchComponent,
+    WelcomeComponent,
+    DashboardInfoComponent,
+    BatchProgressBarComponent,
+    LoadingSpinnerComponent,
+    AddAssociateToBatchComponent,
+    EditBatchComponent,
+    RemoveAssociateFromBatchComponent,
+    SearchPipe,
+    FilterBatchPipe
   ],
   providers: [
     SessionService,
     UsersService,
     CurriculumService,
-    BatchSearchService,
-    FilterBatchPipe,
-    DatePipe,
     EditBatchComponent,
     AddAssociateToBatchComponent,
     RemoveAssociateFromBatchComponent,
@@ -67,7 +73,8 @@ import { BatchSearchService } from './services/batch-search.service';
     SessionService,
     CurriculumService,
     CalendarService,
-    SearchPipe
+    SearchPipe,
+    DatePipe
   ],
   exports: [
     SearchPipe

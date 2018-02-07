@@ -21,11 +21,11 @@
                     <ng-template ngbTabContent></ng-template>
                 </ngb-tab>
             </ngb-tabset>
-            <app-batches-search *ngIf="batches" class="pull-right"></app-batches-search>
+            <app-batches-search *ngIf="batches" (change)="setFilterText($event)" class="pull-right"></app-batches-search>
         </div>
     </div>
 
-    <app-batches-table *ngIf="batches" [batches]="batches" [title]="'My Batches'"></app-batches-table>
+    <app-batches-table *ngIf="batches" [batches]="batches" [title]="'My Batches'" [filterText]="filterText"></app-batches-table>
 
     <div class="text-center" *ngIf="!batches">
         <h3 class="loading">Loading...</h3>

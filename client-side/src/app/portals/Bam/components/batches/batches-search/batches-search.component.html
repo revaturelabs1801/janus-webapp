@@ -3,11 +3,11 @@
 		<div class="input-group" class="pull-right">
 			<div class="input-group">
 
-				<input (keyup.enter)="sendFilterText($event)" id="typeahead-basic" placeholder="Filter" type="search" class="form-control"
-				/>
+				<input (keyup.enter)="sendFilterText()" [(ngModel)]="filterText" id="typeahead-basic" placeholder="Filter"
+				 type="search" class="form-control" />
 
-				<button type="submit" class="SearchButton">
-					<i class="fa fa-search" style="color: #868e96"></i>
+				<button (click)="sendFilterText()" type=" submit " class="SearchButton ">
+					<i class="fa fa-search " style="color: #868e96 "></i>
 				</button>
 			</div>
 		</div>

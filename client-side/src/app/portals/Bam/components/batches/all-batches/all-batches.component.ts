@@ -10,6 +10,7 @@ import { BatchService } from '../../../services/batch.service';
 export class AllBatchesComponent implements OnInit {
 
   batches: Batch[];
+  filterText: string;
 
   constructor(private batchService: BatchService) { }
 
@@ -24,6 +25,15 @@ export class AllBatchesComponent implements OnInit {
   loadAll() {
     this.batchService.getBatchAll()
     .subscribe(batches => this.batches = batches, err => this.batches = []);
+  }
+
+  /**
+   * Sets [this.filterText] to the text in the search box
+   * @param event event.target.value holds text in search box
+   * @author Charlie Harris | 1712-dec10-java-steve
+   */
+  setFilterText(event) {
+    this.filterText = event.target.value;
   }
 
 }

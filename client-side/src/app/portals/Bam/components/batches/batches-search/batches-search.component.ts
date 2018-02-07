@@ -1,6 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'events';
-import { BatchSearchService } from '../../../services/batch-search.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-batches-search',
@@ -9,18 +8,21 @@ import { BatchSearchService } from '../../../services/batch-search.service';
 })
 export class BatchesSearchComponent implements OnInit {
 
-  constructor(private searchService: BatchSearchService) { }
+  @Output() change: EventEmitter<string> = new EventEmitter<string>();
+
+  filterText: string;
+
+  constructor() { }
 
   ngOnInit() {
   }
 
   /**
    * Sends the contents of the search box to the BatchSearchService
-   * @param event event.target.value holds the search box text
    * @author Charlie Harris | 1712-dec10-java-steve
    */
-  sendFilterText(event) {
-    this.searchService.sendMessage(event.target.value);
+  sendFilterText() {
+    this.change.emit(this.filterText);
   }
 
 }
