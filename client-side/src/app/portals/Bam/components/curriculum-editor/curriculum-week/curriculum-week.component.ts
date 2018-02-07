@@ -79,6 +79,7 @@ export class CurriculumWeekComponent implements OnInit {
   }
 
   removeWeekCall(weekNum: number) {
+    event.stopPropagation();
 console.log('I work?' + weekNum);
  this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
   }
