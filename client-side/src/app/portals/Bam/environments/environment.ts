@@ -1,5 +1,6 @@
 
-const context = 'http://localhost:9001/api/v1';
+// const context = 'http://localhost:9001/api/v1';
+const context = 'http://18.219.98.213:9001/api/v1';
 export const environment = {
     production: false,
     context: context,
@@ -15,15 +16,16 @@ export const environment = {
         getAllBatchTypesUrl: () => `${context}/batches/batchtypes`,
     },
 
-  cirriculum: {
-    getCirriculumAllUrl: () => `${context}/curriculum/all`,
-    getCirriculumByIdUrl: (id: number) => `${context}/curriculum/getcurriculum/${id}`,
-    getSchedulesByCurriculumIdUrl: (id: number) => `${context}/curriculum/schedule/cirriculumId/${id}`,
-    getTopicPoolAllUrl: () => `${context}/curriculum/topicpool`,
-    getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
-    addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
-    makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
-    syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`},
+    curriculum: {
+        getCurriculumAllUrl: () => `${context}/curriculum/all`,
+        getCurriculumByIdUrl: (id: number) => `${context}/curriculum/getcurriculum/${id}`,
+        getSchedulesByCurriculumIdUrl: (id: number) => `${context}/curriculum/schedule/${id}`,
+        getTopicPoolAllUrl: () => `${context}/curriculum/topicpool`,
+        getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
+        addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
+        makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
+        syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`
+    },
 
     calendar: {
         getSubtopicsByBatchPaginationUrl: (batchId: number, pageNumber: number, pageSize: number) =>
@@ -46,23 +48,22 @@ export const environment = {
         getAllUsersUrl: () => `${context}/users/all`,
         getAllTrainersUrl: () => `${context}/users/alltrainers`,
         getAllAssociatesUrl: () => `${context}/users/allassociates`,
-        getUsersInBatchUrl: (batchId: number) => `${context}/users/inbatch?batchId=${batchId}`,
-        dropUserFromBatchUrl: () => `${context}/users/drop?userId`,
+        getUsersInBatchUrl: (batchId: number) => `${context}/users/inbatch/${batchId}`,
+        dropUserFromBatchUrl: (userId: number) => `${context}/users/drop/${userId}`,
         updateUserUrl: () => `${context}/users/update`,
         addUserUrl: () => `${context}/users/register`,
         resetPasswordUrl: () => `${context}/users/reset`,
-        removeUserUrl: (userId: number) => `${context}/users/remove?userId=${userId}`,
-        addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add?userId=${userId}&batchId=${batchId}`,
+        removeUserUrl: (userId: number) => `${context}/users/remove/${userId}`,
+        addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add/${userId}/${batchId}`,
         getUsersNotInBatchUrl: () => `${context}/users/notinabatch`,
         recoverPasswordUrl: () => `${context}/users/recovery`
     },
 
     topic: {
-        addTopicName: (name: string) => `${context}/topic/add?name=${name}`,
+        addTopicName: (name: string) => `${context}/topic/add/${name}`,
     },
 
     subtopic: {
-        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${context}/subtopic/add?
-        subtopicName=${subtopicName}&topicId=${topicId}&typeId=${typeId}`
+       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${context}/subtopic/${typeId}/${topicId}/${subtopicName}`
     }
 };
