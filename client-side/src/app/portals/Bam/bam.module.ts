@@ -24,6 +24,7 @@ import { CurriculumService } from './services/curriculum.service';
 import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
 import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
 import { AddSubtopicService } from './services/add-subtopic.service';
+import { CalendarStatusService } from './services/calendar-status.service';
 
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
@@ -60,7 +61,8 @@ import { CalendarModule } from 'primeng/primeng';
     SessionService, 
     CurriculumService,
     CalendarService,
-    AddSubtopicService
+    AddSubtopicService,
+    CalendarStatusService
   ], 
  
   exports: [
