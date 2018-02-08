@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subtopic } from '../models/subtopic.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../environments/environment';
 import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
+import { environment } from '../../../../environments/environment';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   observe: 'response' as 'response'
@@ -38,7 +38,7 @@ export class CalendarService {
    * @param batchId number
    */
   getSubtopicsByBatch(batchId: number): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.calendar.getTopicsByBatchPagUrl(batchId)).map(
+    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchUrl(batchId)).map(
       data => {
         return data;
       }

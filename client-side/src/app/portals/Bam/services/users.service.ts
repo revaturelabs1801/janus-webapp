@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BamUser } from '../models/bamuser.model';
-import { environment } from '../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
@@ -72,7 +72,7 @@ export class UsersService {
    * @param batchId number
    */
   dropUserFromBatch(batchId: number) {
-    return this.http.post(environment.users.dropUserFromBatchUrl(), batchId, httpOptions).map(
+    return this.http.post(environment.users.dropUserFromBatchUrl(batchId), batchId, httpOptions).map(
       data => {
         return data;
       }
