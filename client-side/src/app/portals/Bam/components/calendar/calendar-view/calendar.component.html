@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-9 m-2">
-      <p-schedule [droppable]="true" #fc [events]="events" (onEventDragStop)="handleDragStop($event)" [editable]="true" (onEventClick)="handleEventClick($event)"
+      <p-schedule [droppable]="true" #fc [events]="events" [editable]="true" (onEventClick)="handleEventClick($event)"
         (onEventDrop)="handleEventDrop($event)" (onDayClick)="handleDayClick($event)" (onDrop)="handleDrop($event)" (onEventReceive)="handleEventReceive($event)">
       </p-schedule>
 

@@ -2,11 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BamComponent } from './bam.component';
 import { BatchProgressBarComponent } from './components/dashboard/batch-progress-bar/batch-progress-bar.component';
 import { HomeComponent } from './components/home/home.component';
+
+import { ViewAssociatesComponent } from './components/view-associates/view-associates.component';
+import { AllBatchesComponent } from './components/batches/all-batches/all-batches.component';
+import { BatchesTableComponent } from './components/batches/batches-table/batches-table.component';
+import { MyBatchesComponent } from './components/batches/my-batches/my-batches.component';
+import { FilterBatchPipe } from './Pipes/filter-batch.pipe';
 import { DashboardInfoComponent } from './components/dashboard/dashboardinfo/dashboardinfo.component';
 import { WelcomeComponent } from './components/dashboard/welcome/welcome.component';
 import { LoadingSpinnerComponent } from './components/dashboard/ui/loading-spinner/loading-spinner.component';
@@ -23,6 +30,8 @@ import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/to
 import { CurriculumService } from './services/curriculum.service';
 import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
 import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
 import { AddSubtopicService } from './services/add-subtopic.service';
 import { CalendarStatusService } from './services/calendar-status.service';
 
@@ -34,6 +43,7 @@ import { CalendarModule } from 'primeng/primeng';
     CommonModule,
     BamRoutingModule,
     FormsModule,
+    NgxPaginationModule,
     ScheduleModule,
     CalendarModule,
     NgbModule.forRoot(),
@@ -41,24 +51,42 @@ import { CalendarModule } from 'primeng/primeng';
   declarations: [
     BamComponent,
     HomeComponent,
+    MainCurriculumViewComponent,
+    TopicPoolComponent,
+    MyBatchesComponent,
+    AllBatchesComponent,
+    BatchesTableComponent,
+    BatchesSearchComponent,
+    EditBatchComponent,
+    WelcomeComponent,
+    DashboardInfoComponent,
+    BatchProgressBarComponent,
+    LoadingSpinnerComponent,
+    AddAssociateToBatchComponent,
+    EditBatchComponent,
+    RemoveAssociateFromBatchComponent,
+    BatchProgressBarComponent,
+    LoadingSpinnerComponent,
+    DashboardInfoComponent,
+    SearchPipe,
+    FilterBatchPipe,
+    ViewAssociatesComponent,
+    CalendarComponent,
+    AddSubtopicComponent
+  ],
+  providers: [
+    SessionService,
+    UsersService,
+    CurriculumService,
     EditBatchComponent,
     AddAssociateToBatchComponent,
     RemoveAssociateFromBatchComponent,
     MainCurriculumViewComponent,
     TopicPoolComponent,
-    BatchProgressBarComponent,
-    LoadingSpinnerComponent,
-    DashboardInfoComponent,
-    CalendarComponent,
-    WelcomeComponent,
-    AddSubtopicComponent,
-    SearchPipe
-
-  ],
-  providers: [
-    UsersService, 
-    BatchService, 
-    SessionService, 
+    SearchPipe,
+    ViewAssociatesComponent,
+    BatchService,
+    SessionService,
     CurriculumService,
     CalendarService,
     AddSubtopicService,

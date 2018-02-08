@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subtopic } from '../models/subtopic.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../environments/environment';
 import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
 import { CalendarEvent } from '../models/calendar-event.model';
+import { environment } from '../../../../environments/environment';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
