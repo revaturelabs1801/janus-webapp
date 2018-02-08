@@ -67,7 +67,7 @@ export class EditBatchComponent implements OnInit {
    *
    * @param      {string}  newDate  The new date being modified to.
    */
-  private endDateChanged(newDate) {
+  endDateChanged(newDate) {
     this.batch.endDate = new Date(newDate);
   }
 
@@ -76,7 +76,7 @@ export class EditBatchComponent implements OnInit {
    *
    * @param      {string}  newDate  The new date being modified to.
    */
-  private startDateChanged(newDate) {
+  startDateChanged(newDate) {
     this.batch.startDate = new Date(newDate);
   }
 
