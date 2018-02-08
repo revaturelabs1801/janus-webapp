@@ -37,8 +37,8 @@ export class TopicPoolComponent implements OnInit {
   }
 
   /**  This will subscribe to the curriculum service to obtain the topic pool information
-   *   @author: Mohamad Alhindi
-    *  @batch: 1712-Dec11-2017
+   *   @author Mohamad Alhindi
+    *  @batch 1712-Dec11-2017
     */
   getTopics() {
     this.curriculumService.getAllTopicPool().subscribe(
@@ -55,9 +55,9 @@ export class TopicPoolComponent implements OnInit {
   }
 
     /** Runs throught subTopicNames array and will extract the topics within the array
-     *  @author: Mohamad Alhindi
-      * @batch: 1712-Dec11-2017
-      */
+     *  @author Mohamad Alhindi
+     * @batch 1712-Dec11-2017
+     */
   initTopics() {
     for (let i = 0; i < this.subTopicName.length; i++) {
       this.topics.push(this.subTopicName[i].topic.name);
@@ -65,27 +65,27 @@ export class TopicPoolComponent implements OnInit {
   }
 
   /** This method is used with conjunction of filter to obtain only unique elements of an array
-    * @author: Mohamad Alhindi
-      @param: value
-      @param: index
-      @param: self
-    * @batch: 1712-Dec11-2017
+    *  @author Mohamad Alhindi
+    *  @param value
+    *  @param index
+    *  @param self
+    *  @batch 1712-Dec11-2017
     */
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
   /**  Filters through topics array to filter out repeated topics within the array
-   *   @author: Mohamad Alhindi
-    *  @batch: 1712-Dec11-2017
+   *   @author Mohamad Alhindi
+    *  @batch 1712-Dec11-2017
     */
   uniqueTopics() {
     this.uniqarr = this.topics.filter(this.onlyUnique);
   }
 
   /** Uses the unique topics array to obtain the the subtopics that releate to each topic
-    * @author: Mohamad Alhindi
-    * @batch: 1712-Dec11-2017
+    * @author Mohamad Alhindi
+    * @batch 1712-Dec11-2017
     */
   getSubTopics() {
     for (let i = 0; i < this.uniqarr.length; i++) {
@@ -93,21 +93,14 @@ export class TopicPoolComponent implements OnInit {
     }
   }
 
-   dragStart(event) {
-    this.currentlyDragged = event;
-    this.curriculumWeekComponent.draggedFinder(this.currentlyDragged);
-  }
 
-  sendCurrentlyDragged(event, sub) {
-    // event.srcElement.append(event.target);
-    console.log(sub);
-    this.dndService.sendItem(event);
+  /**
+   * This method is used to send the currently dragged object 
+   * @author Mohamad Alhindi
+   * @param event
+   * @param sub
+   */
+  sendCurrentlyDragged(sub) {
     this.dndService.sendSubtopic(sub);
   }
-
-  /* dragOver() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory();
-    const viewContainerRef = ;
-    const componentRef = viewContainerRef.remove();
-  } */
 }

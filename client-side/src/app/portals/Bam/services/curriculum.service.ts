@@ -24,7 +24,7 @@ export class CurriculumService {
   constructor(private http: HttpClient, private modalService: NgbModal) { }
 
 
-  changeData(data: CurriculumSubtopic[]){
+  changeData(data: CurriculumSubtopic[]) {
     this.dataSource.next(data);
   }
   /**  This gets all curriculums from the API
@@ -137,11 +137,11 @@ export class CurriculumService {
 
 
 
-retainString(curric: Curriculum){
+retainString(curric: Curriculum) {
 
 // const  curric.curriculumName;
 // curric.curriculumVersion;
-  
+
 }
 
 

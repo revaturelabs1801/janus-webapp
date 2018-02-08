@@ -11,7 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
 })
 export class CourseStructureComponent implements OnInit {
 
- 
+
   allCurriculums: Curriculum[];
   allCurriculumNames: string[] = [];
   uniqCurrNames: string[];
@@ -159,7 +159,7 @@ export class CourseStructureComponent implements OnInit {
         this.uniqCurrVersions[typeIndex][j].isMaster = 0;
       }
     }
-    
+
     currVersion.isMaster = 1;
     console.log(currVersion);
     this.curriculumService.markCurriculumAsMaster(currVersion.curriculumId).subscribe(
@@ -172,8 +172,8 @@ export class CourseStructureComponent implements OnInit {
   }
 
 
-    
-  createCurr(curTitle: string){
+
+  createCurr(curTitle: string) {
     const curric = new Curriculum(0, null , 0, null, null, null, null, 0);
     curric.curriculumName = curTitle;
     curric.curriculumVersion = 1;
@@ -181,7 +181,7 @@ export class CourseStructureComponent implements OnInit {
 
   }
 
-  
+
   openNew() {
     const modalRef = this.modalService.open(CourseStructureComponent);
   }
