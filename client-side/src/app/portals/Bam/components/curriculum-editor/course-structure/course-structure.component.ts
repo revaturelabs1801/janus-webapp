@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Curriculum } from '../../../models/curriculum.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
 
 @Component({
   selector: 'app-course-structure',
@@ -10,13 +11,14 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class CourseStructureComponent implements OnInit {
 
+ 
   allCurriculums: Curriculum[];
   allCurriculumNames: string[] = [];
   uniqCurrNames: string[];
   allCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
   uniqCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
 
-  constructor(private curriculumService: CurriculumService) { }
+  constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.getAllCurriculums();
@@ -157,6 +159,7 @@ export class CourseStructureComponent implements OnInit {
         this.uniqCurrVersions[typeIndex][j].isMaster = 0;
       }
     }
+    
     currVersion.isMaster = 1;
     console.log(currVersion);
     this.curriculumService.markCurriculumAsMaster(currVersion.curriculumId).subscribe(
@@ -166,6 +169,35 @@ export class CourseStructureComponent implements OnInit {
     error => {
       console.log(error);
     });
+  }
+
+
+    
+  createCurr(curTitle: string){
+    const curric = new Curriculum(0, null , 0, null, null, null, null, 0);
+    curric.curriculumName = curTitle;
+    curric.curriculumVersion = 1;
+    this.curriculumService.retainString(curric);
+
+  }
+
+  
+  openNew() {
+    const modalRef = this.modalService.open(CourseStructureComponent);
+  }
+
+
+  newVersion(currName: string, index: number) {
+    event.stopPropagation();
+    let newVersionNum = 0;
+    this.uniqCurrVersions[index].forEach(elem => {
+      if (elem.curriculumVersion > newVersionNum) {
+        newVersionNum = elem.curriculumVersion;
+      }
+    });
+    newVersionNum++;
+
+    console.log('New ' + currName + ' curriculum version#' + newVersionNum);
   }
 
 }
