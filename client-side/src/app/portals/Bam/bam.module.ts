@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BamComponent } from './bam.component';
 import { BatchProgressBarComponent } from './components/dashboard/batch-progress-bar/batch-progress-bar.component';
@@ -20,12 +21,16 @@ import { UsersService } from './services/users.service';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumService } from './services/curriculum.service';
+import { AddSubtopicComponent } from './components/calendar-view/add-subtopic/add-subtopic.component';
+import { AddSubtopicService } from './services/add-subtopic.service';
+
 
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule.forRoot(),
   ],
   declarations: [
     BamComponent,
@@ -37,17 +42,21 @@ import { CurriculumService } from './services/curriculum.service';
     TopicPoolComponent,
     BatchProgressBarComponent,
     LoadingSpinnerComponent,
-    WelcomeComponent,
     DashboardInfoComponent,
+    WelcomeComponent,
+    AddSubtopicComponent,
     SearchPipe
+
   ],
   providers: [
-    UsersService,
-    BatchService,
-    SessionService,
+    UsersService, 
+    BatchService, 
+    SessionService, 
     CurriculumService,
-    CalendarService
-  ],
+    CalendarService,
+    AddSubtopicService
+  ], 
+ 
   exports: [
     SearchPipe
   ]
