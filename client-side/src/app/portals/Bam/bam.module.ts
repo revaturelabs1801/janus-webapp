@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BamComponent } from './bam.component';
 import { BatchProgressBarComponent } from './components/dashboard/batch-progress-bar/batch-progress-bar.component';
@@ -27,13 +28,19 @@ import { MainCurriculumViewComponent } from './components/curriculum-editor/main
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumService } from './services/curriculum.service';
 import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { AddSubtopicComponent } from './components/calendar-view/add-subtopic/add-subtopic.component';
+import { AddSubtopicService } from './services/add-subtopic.service';
 
+
+import {ScheduleModule} from 'primeng/primeng';
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule,
-    NgbModule.forRoot(),
-    FormsModule
+    FormsModule,
+    ScheduleModule,
+    NgbModule.forRoot()
   ],
   declarations: [
     BamComponent,
@@ -66,13 +73,10 @@ import { BatchesSearchComponent } from './components/batches/batches-search/batc
     TopicPoolComponent,
     BatchProgressBarComponent,
     LoadingSpinnerComponent,
-    WelcomeComponent,
     DashboardInfoComponent,
-    UsersService,
     BatchService,
-    SessionService,
-    CurriculumService,
-    CalendarService
+    CalendarService,
+    AddSubtopicService
   ],
   exports: [
     SearchPipe
