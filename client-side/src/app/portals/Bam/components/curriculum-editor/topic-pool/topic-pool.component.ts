@@ -3,7 +3,6 @@ import { TopicName } from '../../../models/topicname.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { ViewChild } from '@angular/core/src/metadata/di';
-import { DragNDropDirective } from '../../../drag-n-drop.directive';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { DragndropService } from '../../../services/dragndrop.service';
 
