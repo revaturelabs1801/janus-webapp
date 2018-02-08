@@ -28,7 +28,7 @@ export class CurriculumWeekComponent implements OnInit {
   allCurriculums: Curriculum[] = [];
 
   constructor(private mainCurriculumViewComponent: MainCurriculumViewComponent,
-              private courseStructureComponent: CourseStructureComponent) { }
+    private courseStructureComponent: CourseStructureComponent) { }
 
   currentlyDragged;
 
@@ -63,7 +63,7 @@ export class CurriculumWeekComponent implements OnInit {
   }
 
   /**
-   * Drop function for drag/drop feature
+   * Drop function for drag/drop feature. Appends "dropped" item onto target.
    */
 
   dropIt(event) {
@@ -71,16 +71,20 @@ export class CurriculumWeekComponent implements OnInit {
   }
 
   /**
-   * Drag function for drag/drop functionality
+   * Drag function for drag/drop functionality.
    */
 
   draggedFinder(currentlyDragged) {
     this.currentlyDragged = currentlyDragged;
   }
-
+/**
+ *
+ * @param weekNum
+ * Sends specific weekNum of a CurriculumSuptopic[] to removeWeek, for removal.
+ * Also, uses stopPropagation because button is on top of clickable div.
+ */
   removeWeekCall(weekNum: number) {
     event.stopPropagation();
-console.log('I work?' + weekNum);
- this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
+    this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
   }
 }
