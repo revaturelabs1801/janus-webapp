@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col">
+		<div class="table-border">
+			<h3 class="table-title">{{title}}</h3>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Trainer</th>
+							<th scope="col">Type</th>
+							<th scope="col">Start Date</th>
+							<th scope="col">End Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let batch of batches  | filterBatch: filterText" (click)="viewBatch()" class="clickable">
+							<td>{{batch.name}}</td>
+							<td>{{batch.trainer.fName}} {{batch.trainer.lName}}</td>
+							<td>{{batch.type.name}}</td>
+							<td>{{batch.startDate | date: 'MM/dd/yyyy'}}</td>
+							<td>{{batch.endDate | date: 'MM/dd/yyyy'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

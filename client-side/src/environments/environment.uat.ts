@@ -2,7 +2,8 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/';
+// const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/';
+const context = 'http://18.219.98.213:9001/api/v1';
 export const environment = {
   production: false,
   context: context, // change for what the production environment would actually be
@@ -185,6 +186,79 @@ export const environment = {
   apiFetchAllQCTraineeNotes: (batchId: Number, weekId: Number) =>
   environment.context + `qc/note/trainee/${batchId}/${weekId}`,
 
-apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
+  apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
   environment.context + `qc/note/batch/${batchId}/${weekId}`,
+
+  /** BAM Specific Endpoints */
+  bambatch: {
+        getBatchAllUrl: () => `${context}/batches/all`,
+        getPastBatchesUrl: (email: string) => `${context}/batches/past/${email}/`,
+        getFutureBatchesUrl: (email: string) => `${context}/batches/future/${email}/`,
+        getBatchInProgressUrl: (email: string) => `${context}/batches/inprogress/${email}/`,
+        getAllBatchesInProgressUrl: (email: string) => `${context}/batches/allinprogress/${email}/`,
+        getBatchByIdURL: (batchId: number) => `${context}/batches/byid/${batchId}/`,
+        updateBatchUrl: () => `${context}/batches/updatebatch`,
+        getAllBatchTypesUrl: () => `${context}/batches/batchtypes`,
+    },
+
+    curriculum: {
+        getCurriculumAllUrl: () => `${context}/curriculum/all`,
+        getCurriculumByIdUrl: (id: number) => `${context}/curriculum/getcurriculum/${id}`,
+        getSchedulesByCurriculumIdUrl: (id: number) => `${context}/curriculum/schedule/${id}`,
+        getTopicPoolAllUrl: () => `${context}/curriculum/topicpool`,
+        getSubtopicPoolAllUrl: () => `${context}/curriculum/subtopicpool`,
+        addCurriculumUrl: () => `${context}/curriculum/addcurriculum`,
+        makeCurriculumMasterByIdUrl: (id: number) => `${context}/curriculum/makemaster/${id}`,
+        syncBatchByIdUrl: (id: number) => `${context}/curriculum/syncbatch/${id}`
+    },
+
+    calendar: {
+        getSubtopicsByBatchPaginationUrl: (batchId: number, pageNumber: number, pageSize: number) =>
+            `${context}/calendar/subtopicspagination/${batchId}/${pageNumber}/${pageSize}/`,
+        getSubtopicsByBatchUrl: (batchId: number) => `${context}/calendar/subtopics/${batchId}`,
+        getNumberOfSubTopicsByBatchUrl: (batchId: number) => `${context}/calendar/getnumberofsubtopics/${batchId}`,
+        getTopicsByBatchPagUrl: (batchId: number) => `${context}/calendar/topics/${batchId}`,
+        changeTopicDateUrl: (subtopicId: number, batchId: number, status: number) =>
+            `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${status}`,
+        updateTopicStatusUrl: (subtopicId: number, batchId: number, status: number) =>
+            `${context}/calendar/${subtopicId}/${batchId}/${status}`,
+        addTopicsUrl: () => `${context}/calendar/addtopics`,
+    },
+
+    assignForce: {
+        refreshBatches: () => `${context}/refreshbatches`
+    },
+
+    users: {
+        getAllUsersUrl: () => `${context}/users/all`,
+        getAllTrainersUrl: () => `${context}/users/alltrainers`,
+        getAllAssociatesUrl: () => `${context}/users/allassociates`,
+        getUsersInBatchUrl: (batchId: number) => `${context}/users/inbatch/${batchId}`,
+        dropUserFromBatchUrl: (userId: number) => `${context}/users/drop/${userId}`,
+        updateUserUrl: () => `${context}/users/update`,
+        addUserUrl: () => `${context}/users/register`,
+        resetPasswordUrl: () => `${context}/users/reset`,
+        removeUserUrl: (userId: number) => `${context}/users/remove/${userId}`,
+        addUserToBatchUrl: (batchId: number, userId: number) => `${context}/users/add/${userId}/${batchId}`,
+        getUsersNotInBatchUrl: () => `${context}/users/notinabatch`,
+        recoverPasswordUrl: () => `${context}/users/recovery`
+    },
+
+    topic: {
+        addTopicName: (name: string) => `${context}/topic/add/${name}`,
+    },
+
+    subtopic: {
+       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${context}/subtopic/${typeId}/${topicId}/${subtopicName}`
+    },
+
+    addsubtopics: {
+      getBatchSubtopicsUrl: (batchId: number, pageNumber: number, pageSize: number) =>
+                      `${context}/calendar/subtopicspagination/${batchId}/${pageSize}/${pageNumber}`,
+      getBatchIdUrl: (batchId: number) => `${context}/batches/byid/${batchId}`,
+      addSubtopicUrl: () => `${context}/subtopic/addsubtopic`,
+      getSubtopicPoolUrl: () => `${context}/curriculum/topicpool`,
+      updateDateUrl: (subtopicId: number, batchId: number, date: number) =>
+                      `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`
+  }
 };

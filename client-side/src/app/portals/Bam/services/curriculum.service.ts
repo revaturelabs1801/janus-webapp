@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Curriculum } from '../models/curriculum.model';
 import { CurriculumSubtopic } from '../models/curriculumSubtopic.model';
 import { SubtopicName } from '../models/subtopicname.model';
@@ -33,7 +33,7 @@ export class CurriculumService {
     *  @return: Observable<Curriculum[]>
     */
   getAllCurriculums(): Observable<Curriculum[]> {
-    return this.http.get<Curriculum[]>(environment.cirriculum.getCirriculumAllUrl()).map(
+    return this.http.get<Curriculum[]>(environment.curriculum.getCurriculumAllUrl()).map(
       data => {
         return data;
       }
@@ -47,7 +47,7 @@ export class CurriculumService {
     * @param: Curriculum Id
     */
   getCurriculumById(cid: number): Observable<Curriculum> {
-    return this.http.get<Curriculum>(environment.cirriculum.getCirriculumByIdUrl(cid)).map(
+    return this.http.get<Curriculum>(environment.curriculum.getCurriculumByIdUrl(cid)).map(
       data => {
         return data;
       }
@@ -61,7 +61,7 @@ export class CurriculumService {
     * @param: Curriculum Id
     */
   getSchedualeByCurriculumId(cid: number): Observable<CurriculumSubtopic[]> {
-    return this.http.get<CurriculumSubtopic[]>(environment.cirriculum.getSchedulesByCurriculumIdUrl(cid)).map(
+    return this.http.get<CurriculumSubtopic[]>(environment.curriculum.getSchedulesByCurriculumIdUrl(cid)).map(
       data => {
         return data;
       }
@@ -74,7 +74,7 @@ export class CurriculumService {
     * @return: Observable<SubtopicName[]>
     */
   getAllTopicPool(): Observable<SubtopicName[]> {
-    return this.http.get<SubtopicName[]>(environment.cirriculum.getTopicPoolAllUrl()).map(
+    return this.http.get<SubtopicName[]>(environment.curriculum.getTopicPoolAllUrl()).map(
       data => {
         return data;
       }
@@ -87,7 +87,7 @@ export class CurriculumService {
     * @return: Observable<Subtopic[]>
     */
   getSubtopicPool(): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.cirriculum.getSubtopicPoolAllUrl()).map(
+    return this.http.get<Subtopic[]>(environment.curriculum.getSubtopicPoolAllUrl()).map(
       data => {
         return data;
       }
@@ -100,7 +100,7 @@ export class CurriculumService {
     * @param: CurriculumSubtopicDTO
     */
   addCurriculum(curriculum: CurriculumSubtopicDTO) {
-    return this.http.post(environment.cirriculum.addCurriculumUrl(), curriculum, httpOptions).map(
+    return this.http.post(environment.curriculum.addCurriculumUrl(), curriculum, httpOptions).map(
       data => {
         return data;
       }
@@ -113,7 +113,7 @@ export class CurriculumService {
     * @param: Curriculum Id
     */
   markCurriculumAsMaster(curriculumId: number) {
-    return this.http.get(environment.cirriculum.makeCurriculumMasterByIdUrl(curriculumId)).map(
+    return this.http.get(environment.curriculum.makeCurriculumMasterByIdUrl(curriculumId)).map(
       data => {
         return data;
       }
@@ -126,7 +126,7 @@ export class CurriculumService {
     * @param:  Batch Id
     */
   syncBatch(batchId: number) {
-    return this.http.get(environment.cirriculum.syncBatchByIdUrl(batchId)).map(
+    return this.http.get(environment.curriculum.syncBatchByIdUrl(batchId)).map(
       data => {
         return data;
       }
