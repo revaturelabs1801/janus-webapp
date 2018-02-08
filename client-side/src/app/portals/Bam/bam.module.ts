@@ -43,6 +43,7 @@ import { AddSubtopicService } from './services/add-subtopic.service';
     BatchProgressBarComponent,
     LoadingSpinnerComponent,
     DashboardInfoComponent,
+    WelcomeComponent,
     AddSubtopicComponent,
     SearchPipe
 
