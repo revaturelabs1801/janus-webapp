@@ -72,7 +72,7 @@ export class UsersService {
    * @param batchId number
    */
   dropUserFromBatch(batchId: number) {
-    return this.http.post(environment.users.dropUserFromBatchUrl(), batchId, httpOptions).map(
+    return this.http.post(environment.users.dropUserFromBatchUrl(batchId), batchId, httpOptions).map(
       data => {
         return data;
       }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BamComponent } from './bam.component';
 import { BatchProgressBarComponent } from './components/dashboard/batch-progress-bar/batch-progress-bar.component';
@@ -20,7 +21,13 @@ import { UsersService } from './services/users.service';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CurriculumService } from './services/curriculum.service';
+<<<<<<< HEAD
 import { CalendarComponent } from './components/calendar/calendar.component';
+=======
+import { AddSubtopicComponent } from './components/calendar-view/add-subtopic/add-subtopic.component';
+import { AddSubtopicService } from './services/add-subtopic.service';
+
+>>>>>>> dcd7dc381fb9ff0931242b943a994cb64a10a339
 
 import {ScheduleModule} from 'primeng/primeng';
 @NgModule({
@@ -28,7 +35,11 @@ import {ScheduleModule} from 'primeng/primeng';
     CommonModule,
     BamRoutingModule,
     FormsModule,
+<<<<<<< HEAD
     ScheduleModule
+=======
+    NgbModule.forRoot(),
+>>>>>>> dcd7dc381fb9ff0931242b943a994cb64a10a339
   ],
   declarations: [
     BamComponent,
@@ -40,18 +51,26 @@ import {ScheduleModule} from 'primeng/primeng';
     TopicPoolComponent,
     BatchProgressBarComponent,
     LoadingSpinnerComponent,
-    WelcomeComponent,
     DashboardInfoComponent,
+<<<<<<< HEAD
     SearchPipe,
     CalendarComponent
+=======
+    WelcomeComponent,
+    AddSubtopicComponent,
+    SearchPipe
+
+>>>>>>> dcd7dc381fb9ff0931242b943a994cb64a10a339
   ],
   providers: [
-    UsersService,
-    BatchService,
-    SessionService,
+    UsersService, 
+    BatchService, 
+    SessionService, 
     CurriculumService,
-    CalendarService
-  ],
+    CalendarService,
+    AddSubtopicService
+  ], 
+ 
   exports: [
     SearchPipe
   ]
