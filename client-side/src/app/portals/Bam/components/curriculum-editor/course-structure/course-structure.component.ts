@@ -11,7 +11,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
 })
 export class CourseStructureComponent implements OnInit {
 
-
   allCurriculums: Curriculum[];
   allCurriculumNames: string[] = [];
   uniqCurrNames: string[];
@@ -32,9 +31,11 @@ export class CourseStructureComponent implements OnInit {
    * @param curId - id of curriculum selected from view
    */
   viewCurrSchedule(curId: number) {
+
     this.curriculumService.getSchedualeByCurriculumId(curId).subscribe(
       data => {
         this.curriculumService.changeData(data);
+
       },
       error => {
         console.log(error);
@@ -171,8 +172,6 @@ export class CourseStructureComponent implements OnInit {
     });
   }
 
-
-
   createCurr(curTitle: string) {
     const curric = new Curriculum(0, null , 0, null, null, null, null, 0);
     curric.curriculumName = curTitle;
@@ -181,16 +180,18 @@ export class CourseStructureComponent implements OnInit {
 
   }
 
-
-  openNew() {
-    const modalRef = this.modalService.open(CourseStructureComponent);
-  }
-
-
-  newVersion(currName: string, index: number) {
+  /**
+   * creates a new curriculum version and sends data to
+   * curriculum service to be sent to curriculum-week component
+   * @author Carter Taylor (1712-Steve)
+   * @param currName - curriculum name
+   * @param index - index of curriculum type, allows for faster navigation
+   *    through uniqCurrVersions 2D array.
+   */
+  newVersion(currName: string, typeIndex: number) {
     event.stopPropagation();
     let newVersionNum = 0;
-    this.uniqCurrVersions[index].forEach(elem => {
+    this.uniqCurrVersions[typeIndex].forEach(elem => {
       if (elem.curriculumVersion > newVersionNum) {
         newVersionNum = elem.curriculumVersion;
       }

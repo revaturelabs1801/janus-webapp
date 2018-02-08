@@ -1,6 +1,11 @@
-<div class="row week offset-1" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
-    aria-controls="collapseOne">
-    Week #{{weekNum}}
+<div class="col">
+    <div class="row week offset-1" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
+        aria-controls="collapseOne">
+        Week #{{weekNum}}
+        <div class="removeWeekBtn" (click)="removeWeekCall(weekNum);">              
+                <i class="fas fa-minus-square"></i>
+            </div>
+    </div>    
 
 </div>
 

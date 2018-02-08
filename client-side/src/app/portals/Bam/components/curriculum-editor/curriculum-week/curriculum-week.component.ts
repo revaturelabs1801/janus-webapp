@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
+import { MainCurriculumViewComponent } from '../main-curriculum-view/main-curriculum-view.component';
+import { CourseStructureComponent } from '../course-structure/course-structure.component';
+import { Curriculum } from '../../../models/curriculum.model';
 import { DragndropService } from '../../../services/dragndrop.service';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { DaysDTO } from '../../../models/daysDTO.model';
@@ -27,7 +30,9 @@ export class CurriculumWeekComponent implements OnInit {
   friday: DaysDTO = new DaysDTO([]);
   weekDTO: WeeksDTO = new WeeksDTO([]);
 
-  constructor(private dndService: DragndropService) { }
+  constructor(private dndService: DragndropService,
+    private mainCurriculumViewComponent: MainCurriculumViewComponent,
+    private courseStructureComponent: CourseStructureComponent) { }
 
   currentlyDragged;
 
@@ -98,5 +103,23 @@ export class CurriculumWeekComponent implements OnInit {
   putItDown(subtopic, dayNum: number) {
     this.weekDTO.daysDTO[dayNum].subtopicNames =
       this.weekDTO.daysDTO[dayNum].subtopicNames.filter(elem => elem !== subtopic);
+  }
+
+  /**
+   * Drag function for drag/drop functionality.
+   */
+
+  draggedFinder(currentlyDragged) {
+    this.currentlyDragged = currentlyDragged;
+  }
+/**
+ *
+ * @param weekNum
+ * Sends specific weekNum of a CurriculumSuptopic[] to removeWeek, for removal.
+ * Also, uses stopPropagation because button is on top of clickable div.
+ */
+  removeWeekCall(weekNum: number) {
+    event.stopPropagation();
+    this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
   }
 }

@@ -23,7 +23,7 @@ import { DragndropService } from './services/dragndrop.service';
   ],
   declarations: [ BamComponent, HomeComponent, CurriculumWeekComponent,
     MainCurriculumViewComponent, TopicPoolComponent, CourseStructureComponent, DragNDropDirective],
-  providers: [ CurriculumService, CurriculumWeekComponent, DragndropService ]
+  providers: [ CurriculumService, CurriculumWeekComponent, DragndropService, MainCurriculumViewComponent, CourseStructureComponent ]
 
 })
 export class BamModule { }

@@ -11,6 +11,8 @@
     float:right;
     color:rgb(244, 136, 81);
     position: relative;
+    bottom: 10px;
+    right: 10px;
 }
 
 .buttons:hover{
@@ -24,6 +26,13 @@
     top:0px;
     right:0px;
     font-size: 2.5em;
+}
+
+.saveCurr{
+    background-color: blue;
+    position: relative;
+    right: 655px;
+    top: 10px;
 }
 
 :host ::ng-deep ul.nav.nav-tabs.justify-content-start.nav {
