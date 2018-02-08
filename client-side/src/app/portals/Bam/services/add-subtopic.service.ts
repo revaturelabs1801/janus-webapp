@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment';
 import { Subtopic } from '../models/subtopic.model';
 import { Batch } from '../models/batch.model';
 

@@ -4,7 +4,7 @@ import { Subtopic } from '../models/subtopic.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   observe: 'response' as 'response'

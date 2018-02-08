@@ -250,5 +250,15 @@ export const environment = {
 
     subtopic: {
        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${context}/subtopic/${typeId}/${topicId}/${subtopicName}`
-    }
+    },
+
+    addsubtopics: {
+      getBatchSubtopicsUrl: (batchId: number, pageNumber: number, pageSize: number) =>
+                      `${context}/calendar/subtopicspagination/${batchId}/${pageSize}/${pageNumber}`,
+      getBatchIdUrl: (batchId: number) => `${context}/batches/byid/${batchId}`,
+      addSubtopicUrl: () => `${context}/subtopic/addsubtopic`,
+      getSubtopicPoolUrl: () => `${context}/curriculum/topicpool`,
+      updateDateUrl: (subtopicId: number, batchId: number, date: number) =>
+                      `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`
+  }
 };
