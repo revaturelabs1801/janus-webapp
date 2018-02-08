@@ -13,7 +13,6 @@ import { ViewAssociatesComponent } from './components/view-associates/view-assoc
 import { AllBatchesComponent } from './components/batches/all-batches/all-batches.component';
 import { BatchesTableComponent } from './components/batches/batches-table/batches-table.component';
 import { MyBatchesComponent } from './components/batches/my-batches/my-batches.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterBatchPipe } from './Pipes/filter-batch.pipe';
 import { DashboardInfoComponent } from './components/dashboard/dashboardinfo/dashboardinfo.component';
 import { WelcomeComponent } from './components/dashboard/welcome/welcome.component';
@@ -44,7 +43,7 @@ import {ScheduleModule} from 'primeng/primeng';
     CommonModule,
     BamRoutingModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
     ScheduleModule,
     NgbModule.forRoot()
   ],
@@ -81,10 +80,7 @@ import {ScheduleModule} from 'primeng/primeng';
     MainCurriculumViewComponent,
     TopicPoolComponent,
     SearchPipe,
-    ViewAssociatesComponent
-  ],
-  providers: [
-    UsersService,
+    ViewAssociatesComponent,
     BatchService,
     SessionService,
     CurriculumService,
