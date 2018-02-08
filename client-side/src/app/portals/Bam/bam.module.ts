@@ -51,6 +51,7 @@ import {ScheduleModule} from 'primeng/primeng';
     FormsModule,
     NgxPaginationModule,
     ScheduleModule,
+    DragDropModule
   ],
   declarations: [
     BamComponent,
@@ -59,7 +60,6 @@ import {ScheduleModule} from 'primeng/primeng';
     MainCurriculumViewComponent,
     TopicPoolComponent,
     CourseStructureComponent,
-    DragNDropDirective,
     MyBatchesComponent,
     AllBatchesComponent,
     BatchesTableComponent,
