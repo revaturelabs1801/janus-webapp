@@ -15,11 +15,16 @@ import { CurriculumService } from '../../../services/curriculum.service';
 export class MainCurriculumViewComponent implements OnInit {
   schedule: CurriculumSubtopic[];
   allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
+  toggleTab = 1;
 
   constructor(private curriculumService: CurriculumService) { }
 
   ngOnInit() {
     this.displayWeekView();
+  }
+
+  toggle(view) {
+    this.toggleTab = view;
   }
 
   /**

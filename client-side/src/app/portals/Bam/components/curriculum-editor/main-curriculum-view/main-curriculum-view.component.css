@@ -26,6 +26,10 @@
     font-size: 2.5em;
 }
 
+:host ::ng-deep ul.nav.nav-tabs.justify-content-start.nav {
+    flex-wrap: nowrap;
+}
+
 /*
  *  STYLE 7
  */
