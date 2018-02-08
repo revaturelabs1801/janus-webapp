@@ -4,8 +4,8 @@ import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { AddSubtopicComponent } from './components/calendar-view/add-subtopic/add-subtopic.component';
+import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
+import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
 
 const routes: Routes = [
   {

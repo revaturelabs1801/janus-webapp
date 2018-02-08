@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-9 m-2">
+      <p-schedule [droppable]="true" #fc [events]="events" (onEventDragStop)="handleDragStop($event)" [editable]="true" (onEventClick)="handleEventClick($event)"
+        (onEventDrop)="handleEventDrop($event)" (onDayClick)="handleDayClick($event)" (onDrop)="handleDrop($event)" (onEventReceive)="handleEventReceive($event)">
+      </p-schedule>
+
+    </div>
+    <div class="col-md-2 m-2">
+      <p-calendar #datePicker [(ngModel)]="gotoDateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030"
+        [showIcon]="true" (onSelect)="jumpToDate(gotoDateValue)"></p-calendar>
+      <!-- <app-draggable></app-draggable> -->
+    </div>
+  </div>y
+</div>
