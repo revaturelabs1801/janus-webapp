@@ -219,10 +219,10 @@ export const environment = {
         getSubtopicsByBatchUrl: (batchId: number) => `${context}/calendar/subtopics/${batchId}`,
         getNumberOfSubTopicsByBatchUrl: (batchId: number) => `${context}/calendar/getnumberofsubtopics/${batchId}`,
         getTopicsByBatchPagUrl: (batchId: number) => `${context}/calendar/topics/${batchId}`,
-        changeTopicDateUrl: (subtopicId: number, batchId: number, status: number) =>
-            `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${status}`,
-        updateTopicStatusUrl: (subtopicId: number, batchId: number, status: number) =>
-            `${context}/calendar/${subtopicId}/${batchId}/${status}`,
+        changeTopicDateUrl: (subtopicId: number, batchId: number, date: number) =>
+            `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`,
+        updateTopicStatusUrl: (subtopicId: number, batchId: number, status: string) =>
+            `${context}/calendar/statusupdate/${subtopicId}/${batchId}/${status}`,
         addTopicsUrl: () => `${context}/calendar/addtopics`,
     },
 

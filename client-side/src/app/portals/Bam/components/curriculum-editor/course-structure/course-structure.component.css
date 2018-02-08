@@ -1,0 +1,80 @@
+#currAccordion {
+    border: 1px solid black;
+   }
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+
+.currBtn {
+    font-size: 1.2vw;
+    border: 1px solid #f47f43;
+    background-color: #474c55;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    margin: 6px;
+    padding: 5px 0px;
+    border-radius: 0px 30px 0px 30px;
+    cursor: pointer;
+}
+
+.currType {
+    font-size: 1.2vw;
+    border: 1px solid #f47f43;
+    background-color: #474c55;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    margin: 6px;
+    padding: 5px 0px;
+    border-radius: 0px 30px 0px 30px;
+    cursor: pointer;
+}
+
+.currTypeVer{
+    margin-left: 32px;
+    cursor: pointer;
+    font-size: 1vw;
+}
+
+.currTypeVer:hover {
+    font-size: 1.2vw;
+}
+
+.currTypeVer:active {
+   color: #f47f43;
+}
+
+.fa-chess-king {
+    color: #f47f43;
+}
+
+.crownless {
+    color: rgba(128, 128, 128, 0.473);
+}
+
+.crownless:hover {
+    color: #f47f43;
+    font-size: 1.3vw;
+}
+
+.fa-plus-circle {
+    float: right;
+    margin-right: 10%;
+    margin-top: 2%;
+    transition: .2s ease-in;
+}
+
+.fa-plus-circle:hover {
+    color: #f47f43;
+}

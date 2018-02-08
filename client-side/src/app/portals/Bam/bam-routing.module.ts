@@ -7,8 +7,8 @@ import { EditBatchComponent } from './components/edit-batch/edit-batch.component
 import { MyBatchesComponent } from './components/batches/my-batches/my-batches.component';
 import { AllBatchesComponent } from './components/batches/all-batches/all-batches.component';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { AddSubtopicComponent } from './components/calendar-view/add-subtopic/add-subtopic.component';
+import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
+import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
 
 const routes: Routes = [
   {

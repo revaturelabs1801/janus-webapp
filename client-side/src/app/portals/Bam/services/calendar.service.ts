@@ -4,7 +4,10 @@ import { Subtopic } from '../models/subtopic.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
+import { CalendarEvent } from '../models/calendar-event.model';
 import { environment } from '../../../../environments/environment';
+
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   observe: 'response' as 'response'
@@ -81,8 +84,8 @@ export class CalendarService {
    * @param batchId: number
    * @param status: number
    */
-  changeTopicDate(subtopicId: number, batchId: number, status: number) {
-    return this.http.get(environment.calendar.changeTopicDateUrl(subtopicId, batchId, status)).map(
+  changeTopicDate(subtopicId: number, batchId: number, date: number) {
+    return this.http.post(environment.calendar.changeTopicDateUrl(subtopicId, batchId, date), null, httpOptions).map(
       data => {
         return data;
       }
@@ -97,9 +100,9 @@ export class CalendarService {
    * @param batchId: number
    * @param status: number
    */
-  updateTopicStatus(subtopicId: number, batchId: number, status: number) {
-    return this.http.get(environment.calendar.updateTopicStatusUrl(subtopicId, batchId, status)).map(
-      data => {
+  updateTopicStatus(calendarEvent: CalendarEvent, batchId: number): Observable<any> {
+    return this.http.get(environment.calendar.updateTopicStatusUrl(calendarEvent.subtopicId, batchId, calendarEvent.status))
+      .map(data => {
         return data;
       }
     );
