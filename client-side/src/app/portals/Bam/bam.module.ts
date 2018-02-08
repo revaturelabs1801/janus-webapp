@@ -5,8 +5,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { BamComponent } from './bam.component';
 import { BatchProgressBarComponent } from './components/dashboard/batch-progress-bar/batch-progress-bar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -75,8 +73,11 @@ import {ScheduleModule} from 'primeng/primeng';
     EditBatchComponent,
     RemoveAssociateFromBatchComponent,
     BatchProgressBarComponent,
+    AddSubtopicComponent,
     LoadingSpinnerComponent,
     DashboardInfoComponent,
+    ViewAssociatesComponent,
+    CalendarComponent,
     SearchPipe,
     FilterBatchPipe
   ],
