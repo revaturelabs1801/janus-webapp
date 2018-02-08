@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { BamUser } from '../../models/bamuser.model';
 import { SearchPipe } from '../../pipes/search.pipe';
-import { UserSearchPipe } from '../../pipes/user-search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
