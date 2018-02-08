@@ -1,0 +1,44 @@
+
+    <div class="row week offset-1" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
+        aria-controls="collapseOne">
+        Week #{{weekNum}}
+        <div class="removeWeekBtn" (click)="removeWeekCall(weekNum);">              
+                <i class="fas fa-minus-square"></i>
+            </div>
+    </div>    
+
+
+
+<div class="collapse hide weeksrow row offset-1" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(0)">Monday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" class="putBorder"
+            *ngFor="let day of monday.subtopicNames">
+            {{day.name}}</div>
+    </div>
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(1)">Tuesday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 1)" (onDragEnd)="putItDown(day, 1)" class="putBorder"
+            *ngFor="let day of tuesday.subtopicNames">
+            {{day.name}}</div>
+    </div>
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(2)">Wednesday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 2)" (onDragEnd)="putItDown(day, 2)" class="putBorder"
+            *ngFor="let day of wednesday.subtopicNames">
+            {{day.name}}</div>
+    </div>
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(3)">Thursday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 3)" (onDragEnd)="putItDown(day, 3)" class="putBorder"
+            *ngFor="let day of thursday.subtopicNames">
+            {{day.name}}</div>
+    </div>
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(4)">Friday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 4)" (onDragEnd)="putItDown(day, 4)" class="putBorder"
+            *ngFor="let day of friday.subtopicNames">
+            {{day.name}}</div>
+    </div>
+
+</div>
