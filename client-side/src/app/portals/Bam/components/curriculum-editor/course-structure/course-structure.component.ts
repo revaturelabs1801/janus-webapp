@@ -171,6 +171,7 @@ export class CourseStructureComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
 
     
   createCurr(curTitle: string){
@@ -187,6 +188,8 @@ export class CourseStructureComponent implements OnInit {
   }
 
 
+=======
+>>>>>>> 83bf498a94d963a11a0e7f4196b91a2fecadd1d8
   newVersion(currName: string, index: number) {
     event.stopPropagation();
     let newVersionNum = 0;
