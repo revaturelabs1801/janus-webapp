@@ -32,7 +32,6 @@ import { CourseStructureComponent } from './components/curriculum-editor/course-
 import { CurriculumService } from './services/curriculum.service';
 import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
 import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
-import { DragNDropDirective } from './drag-n-drop.directive';
 import { DragndropService } from './services/dragndrop.service';
 
 import { NgxPaginationModule } from 'ngx-pagination';
