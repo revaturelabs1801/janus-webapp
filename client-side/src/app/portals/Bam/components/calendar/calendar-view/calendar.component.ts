@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { ScheduleModule, Schedule, } from 'primeng/primeng';
+import { CalendarModule, Calendar } from 'primeng/primeng';
 
 		/**
         *	This component will serve as the main calendar view. 
