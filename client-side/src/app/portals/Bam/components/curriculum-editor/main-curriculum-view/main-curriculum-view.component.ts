@@ -13,15 +13,21 @@ import { CurriculumService } from '../../../services/curriculum.service';
     styleUrls: ['./main-curriculum-view.component.css']
 })
 export class MainCurriculumViewComponent implements OnInit {
-    schedule: CurriculumSubtopic[];
-    allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
+  schedule: CurriculumSubtopic[];
+  allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
+  toggleTab = 1;
 
     constructor(private curriculumService: CurriculumService) { }
 
-    ngOnInit() {
-        this.displayWeekView();
-        this.getWeeks();
-    }
+
+  ngOnInit() {
+    this.displayWeekView();
+    this.getWeeks();
+  }
+
+  toggle(view) {
+    this.toggleTab = view;
+  }
 
     /**
      * Subscribes to the BehaviorSubject in Curriculum Service

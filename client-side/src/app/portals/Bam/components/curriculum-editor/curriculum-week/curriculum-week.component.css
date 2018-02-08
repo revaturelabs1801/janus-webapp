@@ -40,5 +40,7 @@ width: 100%;
     color: black;
 }
 
-
+.putBorder{
+    border: 1px solid black;
+}
 

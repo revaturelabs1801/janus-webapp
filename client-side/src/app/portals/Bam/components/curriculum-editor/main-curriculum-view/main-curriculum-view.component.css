@@ -35,6 +35,10 @@
     top: 10px;
 }
 
+:host ::ng-deep ul.nav.nav-tabs.justify-content-start.nav {
+    flex-wrap: nowrap;
+}
+
 /*
  *  STYLE 7
  */

@@ -4,6 +4,9 @@ import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { MainCurriculumViewComponent } from '../main-curriculum-view/main-curriculum-view.component';
 import { CourseStructureComponent } from '../course-structure/course-structure.component';
 import { Curriculum } from '../../../models/curriculum.model';
+import { DragndropService } from '../../../services/dragndrop.service';
+import { SubtopicName } from '../../../models/subtopicname.model';
+import { DaysDTO } from '../../../models/daysDTO.model';
 
 /**
  * Authors: Daniel Robinson, Tyler Dresselhouse, Dylan Britton
@@ -18,16 +21,17 @@ import { Curriculum } from '../../../models/curriculum.model';
 
 export class CurriculumWeekComponent implements OnInit {
 
-  @Input() weekDTO: CurriculumSubtopic[] = [];
+  @Input() weekCurrSubtopics: CurriculumSubtopic[] = [];
   @Input() weekNum: number;
-  monday: CurriculumSubtopic[] = [];
-  tuesday: CurriculumSubtopic[] = [];
-  wednesday: CurriculumSubtopic[] = [];
-  thursday: CurriculumSubtopic[] = [];
-  friday: CurriculumSubtopic[] = [];
-  allCurriculums: Curriculum[] = [];
+  monday: DaysDTO = new DaysDTO([]);
+  tuesday: DaysDTO = new DaysDTO([]);
+  wednesday: DaysDTO = new DaysDTO([]);
+  thursday: DaysDTO = new DaysDTO([]);
+  friday: DaysDTO = new DaysDTO([]);
+  weekDTO: WeeksDTO = new WeeksDTO([]);
 
-  constructor(private mainCurriculumViewComponent: MainCurriculumViewComponent,
+  constructor(private dndService: DragndropService,
+    private mainCurriculumViewComponent: MainCurriculumViewComponent,
     private courseStructureComponent: CourseStructureComponent) { }
 
   currentlyDragged;
@@ -41,33 +45,52 @@ export class CurriculumWeekComponent implements OnInit {
    */
 
   sortSubtopics() {
-    this.weekDTO.forEach(elem => {
+    this.weekCurrSubtopics.forEach(elem => {
       switch (elem.curriculumSubtopicDay) {
         case 1:
-          this.monday.push(elem);
+          this.monday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
         case 2:
-          this.tuesday.push(elem);
+          this.tuesday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
         case 3:
-          this.wednesday.push(elem);
+          this.wednesday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
         case 4:
-          this.thursday.push(elem);
+          this.thursday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
         case 5:
-          this.friday.push(elem);
+          this.friday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
       }
     });
+    this.weekDTO.daysDTO.push(this.monday, this.tuesday, this.wednesday, this.thursday, this.friday);
+    // this.weekDTO.daysDTO.push(this.tuesday);
+    // this.weekDTO.daysDTO.push(this.wednesday);
+    // this.weekDTO.daysDTO.push(this.thursday);
+    // this.weekDTO.daysDTO.push(this.friday);
   }
 
   /**
    * Drop function for drag/drop feature. Appends "dropped" item onto target.
    */
 
-  dropIt(event) {
-    event.target.append(this.currentlyDragged.target);
+  dropIt(event, dayNum: number) {
+    this.dndService.currentSubtopic.subscribe(
+      data => {
+        console.log(data);
+        this.weekDTO.daysDTO[dayNum].subtopicNames.push(data);
+      }
+    ).unsubscribe();
+  }
+
+  pickItUp(event, subtopic, dayNum: number) {
+    this.dndService.sendSubtopic(subtopic);
+  }
+
+  putItDown(subtopic, dayNum: number) {
+    this.weekDTO.daysDTO[dayNum].subtopicNames =
+      this.weekDTO.daysDTO[dayNum].subtopicNames.filter(elem => elem !== subtopic);
   }
 
   /**

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TopicName } from '../../../models/topicname.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { ViewChild } from '@angular/core/src/metadata/di';
 import { DragNDropDirective } from '../../../drag-n-drop.directive';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
-
+import { DragndropService } from '../../../services/dragndrop.service';
 
 @Component({
   selector: 'app-topic-pool',
@@ -17,15 +17,16 @@ export class TopicPoolComponent implements OnInit {
   topics: string[] = [];
   uniqarr: string[];
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
-  subTopicName: SubtopicName[];
+  subTopicName: SubtopicName[] = [];
   constructor(private curriculumService: CurriculumService,
-              public curriculumWeekComponent: CurriculumWeekComponent) { }
+              public curriculumWeekComponent: CurriculumWeekComponent,
+              private dndService: DragndropService) { }
 
 
 
 
 
-  currentlyDragged;
+  @Output() currentlyDragged = new EventEmitter();
 
   /**  On initializing this component we are calling the getTopic() function
    *   @author: Mohamad Alhindi
@@ -97,6 +98,12 @@ export class TopicPoolComponent implements OnInit {
     this.curriculumWeekComponent.draggedFinder(this.currentlyDragged);
   }
 
+  sendCurrentlyDragged(event, sub) {
+    // event.srcElement.append(event.target);
+    console.log(sub);
+    this.dndService.sendItem(event);
+    this.dndService.sendSubtopic(sub);
+  }
 
   /* dragOver() {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory();
