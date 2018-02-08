@@ -222,7 +222,7 @@ export const environment = {
         changeTopicDateUrl: (subtopicId: number, batchId: number, date: number) =>
             `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`,
         updateTopicStatusUrl: (subtopicId: number, batchId: number, status: string) =>
-            `${context}/calendar/${subtopicId}/${batchId}/${status}`,
+            `${context}/calendar/statusupdate/${subtopicId}/${batchId}/${status}`,
         addTopicsUrl: () => `${context}/calendar/addtopics`,
     },
 

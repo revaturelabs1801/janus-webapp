@@ -37,6 +37,8 @@ import { CalendarStatusService } from './services/calendar-status.service';
 
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
+import { DragDropModule } from 'primeng/primeng';
+
 
 @NgModule({
   imports: [
@@ -45,6 +47,7 @@ import { CalendarModule } from 'primeng/primeng';
     FormsModule,
     NgxPaginationModule,
     ScheduleModule,
+    DragDropModule,
     CalendarModule,
     NgbModule.forRoot(),
   ],

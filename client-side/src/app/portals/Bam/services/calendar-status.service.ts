@@ -79,9 +79,7 @@ export class CalendarStatusService {
     var later = today < eventDay;
 
     if(event.status == Status.PLANNED || event.status == Status.MISSED) {
-      console.log(event.status);
       event.status = later ? Status.PLANNED : Status.MISSED;
-      console.log(event.status);
     }
 
     return event.status;

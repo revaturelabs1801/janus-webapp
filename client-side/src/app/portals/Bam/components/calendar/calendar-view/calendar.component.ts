@@ -21,8 +21,10 @@ import { CalendarStatusService } from '../../../services/calendar-status.service
 })
 export class CalendarComponent implements OnInit {
   @ViewChild('fc') fc: Schedule;
+  @ViewChild('datePicker') datePicker: Calendar; 
 
   events: CalendarEvent[] = [];
+  gotoDateValue: Date;
   overridenDate: Date;
 
   constructor(private calendarService: CalendarService, private statusService: CalendarStatusService) { }
@@ -44,7 +46,48 @@ export class CalendarComponent implements OnInit {
         this.overridenDate = this.events[0].start;
       }
     );
+
+    if(window.innerWidth < 1000) {
+        this.fc.defaultView = "listMonth";
+        this.fc.header = {
+            left: 'agendaDay,basicWeek,listMonth',
+            center: 'title',
+            right: 'today prev,next'
+        }
+    } else {
+        this.fc.defaultView = "month";
+        this.fc.header = {
+            left: 'agendaDay,agendaWeek,month listMonth',
+            center: 'title',
+            right: 'today prev,next'
+        }
+    }
+
+    this.fc.options = {
+      defaultDate: Date.now(),
+      nowIndicator: true,
+      navLinks: true,
+      weekNumbers: true,
+      weekends: true,
+      droppable: true,
+      eventLimit: 3,
+      longPressDelay: 100,
+      scrollTime: '09:00:00',
+      businessHours: {
+        // days of week. an array of zero-based day of week integers (0=Sunday)
+        dow: [ 1, 2, 3, 4, 5 ], // Monday - Friday
+    
+        start: '9:00', // a start time (9am)
+        end: '17:00', // an end time (5pm)
+      }
+    }
   }
+
+   /*Date Picker Event*/
+   jumpToDate(date) {
+       this.fc.gotoDate(date);
+       this.fc.changeView("agendaDay");
+   }
 
   handleEventClick(event) {
     var clickedTopic = event.calEvent;
@@ -64,13 +107,18 @@ export class CalendarComponent implements OnInit {
     var milliDate = calendarEvent.start.getTime();
 
     droppedTopic.status = this.statusService.updateMovedStatus(calendarEvent);
+    console.log(calendarEvent);
     droppedTopic.color = this.statusService.getStatusColor(droppedTopic.status);
 
     //update date and status synchronously
     this.calendarService.changeTopicDate(droppedTopic.subtopicId, 22506, milliDate)
       .subscribe(response => {
         this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
-      });
+      },
+      error => {
+        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+      }
+    );
     this.fc.updateEvent(droppedTopic);
     this.updateEvents(calendarEvent);
   }
