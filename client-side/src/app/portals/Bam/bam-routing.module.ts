@@ -17,11 +17,11 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'myBatches',
+        path: 'mybatches',
         component: MyBatchesComponent
       },
       {
-        path: 'batchesAll',
+        path: 'allbatches',
         component: AllBatchesComponent
       },
       {

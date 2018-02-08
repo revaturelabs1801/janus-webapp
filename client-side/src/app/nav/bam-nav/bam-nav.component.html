@@ -7,8 +7,8 @@
       <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
         <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>Batches</a>
         <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/batchesAll" (click) = "myDrop.close()">All Batches</button>
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/myBatches" (click) = "myDrop.close()">My Batches</button>
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/allbatches" (click) = "myDrop.close()">All Batches</button>
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/mybatches" (click) = "myDrop.close()">My Batches</button>
         </div>
       </li>
     </ul>
