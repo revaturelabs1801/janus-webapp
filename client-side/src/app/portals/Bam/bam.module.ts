@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BamRoutingModule } from './bam-routing.module';
 import { BamComponent } from './bam.component';
@@ -17,7 +18,8 @@ import { DragndropService } from './services/dragndrop.service';
   imports: [
     DragDropModule,
     CommonModule,
-    BamRoutingModule
+    BamRoutingModule,
+    NgbModule.forRoot()
   ],
   declarations: [ BamComponent, HomeComponent, CurriculumWeekComponent,
     MainCurriculumViewComponent, TopicPoolComponent, CourseStructureComponent, DragNDropDirective],
