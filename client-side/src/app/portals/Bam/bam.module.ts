@@ -72,8 +72,7 @@ import { BatchesSearchComponent } from './components/batches/batches-search/batc
     BatchService,
     SessionService,
     CurriculumService,
-    CalendarService,
-    DatePipe
+    CalendarService
   ],
   exports: [
     SearchPipe
