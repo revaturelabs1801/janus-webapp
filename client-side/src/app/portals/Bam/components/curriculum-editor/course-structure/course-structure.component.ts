@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Curriculum } from '../../../models/curriculum.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
 
 @Component({
   selector: 'app-course-structure',
@@ -16,7 +17,7 @@ export class CourseStructureComponent implements OnInit {
   allCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
   uniqCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
 
-  constructor(private curriculumService: CurriculumService) { }
+  constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.getAllCurriculums();
@@ -30,9 +31,11 @@ export class CourseStructureComponent implements OnInit {
    * @param curId - id of curriculum selected from view
    */
   viewCurrSchedule(curId: number) {
+
     this.curriculumService.getSchedualeByCurriculumId(curId).subscribe(
       data => {
         this.curriculumService.changeData(data);
+
       },
       error => {
         console.log(error);
@@ -157,6 +160,7 @@ export class CourseStructureComponent implements OnInit {
         this.uniqCurrVersions[typeIndex][j].isMaster = 0;
       }
     }
+
     currVersion.isMaster = 1;
     console.log(currVersion);
     this.curriculumService.markCurriculumAsMaster(currVersion.curriculumId).subscribe(
@@ -166,6 +170,35 @@ export class CourseStructureComponent implements OnInit {
     error => {
       console.log(error);
     });
+  }
+
+  createCurr(curTitle: string) {
+    const curric = new Curriculum(0, null , 0, null, null, null, null, 0);
+    curric.curriculumName = curTitle;
+    curric.curriculumVersion = 1;
+    this.curriculumService.retainString(curric);
+
+  }
+
+  /**
+   * creates a new curriculum version and sends data to
+   * curriculum service to be sent to curriculum-week component
+   * @author Carter Taylor (1712-Steve)
+   * @param currName - curriculum name
+   * @param index - index of curriculum type, allows for faster navigation
+   *    through uniqCurrVersions 2D array.
+   */
+  newVersion(currName: string, typeIndex: number) {
+    event.stopPropagation();
+    let newVersionNum = 0;
+    this.uniqCurrVersions[typeIndex].forEach(elem => {
+      if (elem.curriculumVersion > newVersionNum) {
+        newVersionNum = elem.curriculumVersion;
+      }
+    });
+    newVersionNum++;
+
+    console.log('New ' + currName + ' curriculum version#' + newVersionNum);
   }
 
 }

@@ -1,8 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
+import { MainCurriculumViewComponent } from '../main-curriculum-view/main-curriculum-view.component';
+import { CourseStructureComponent } from '../course-structure/course-structure.component';
+import { Curriculum } from '../../../models/curriculum.model';
 import { DragndropService } from '../../../services/dragndrop.service';
 import { SubtopicName } from '../../../models/subtopicname.model';
+import { DaysDTO } from '../../../models/daysDTO.model';
 
 /**
  * Authors: Daniel Robinson, Tyler Dresselhouse, Dylan Britton
@@ -17,15 +21,18 @@ import { SubtopicName } from '../../../models/subtopicname.model';
 
 export class CurriculumWeekComponent implements OnInit {
 
-  @Input() weekDTO: CurriculumSubtopic[] = [];
+  @Input() weekCurrSubtopics: CurriculumSubtopic[] = [];
   @Input() weekNum: number;
-  monday: SubtopicName[] = [];
-  tuesday: SubtopicName[] = [];
-  wednesday: SubtopicName[] = [];
-  thursday: SubtopicName[] = [];
-  friday: SubtopicName[] = [];
+  monday: DaysDTO = new DaysDTO([]);
+  tuesday: DaysDTO = new DaysDTO([]);
+  wednesday: DaysDTO = new DaysDTO([]);
+  thursday: DaysDTO = new DaysDTO([]);
+  friday: DaysDTO = new DaysDTO([]);
+  weekDTO: WeeksDTO = new WeeksDTO([]);
 
-  constructor(private dndService: DragndropService) { }
+  constructor(private dndService: DragndropService,
+    private mainCurriculumViewComponent: MainCurriculumViewComponent,
+    private courseStructureComponent: CourseStructureComponent) { }
 
   currentlyDragged;
 
@@ -38,77 +45,69 @@ export class CurriculumWeekComponent implements OnInit {
    */
 
   sortSubtopics() {
-    this.weekDTO.forEach(elem => {
+    this.weekCurrSubtopics.forEach(elem => {
       switch (elem.curriculumSubtopicDay) {
         case 1:
-          this.monday.push(elem.curriculumSubtopicNameId);
+          this.monday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
         case 2:
-          this.tuesday.push(elem.curriculumSubtopicNameId);
+          this.tuesday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
         case 3:
-          this.wednesday.push(elem.curriculumSubtopicNameId);
+          this.wednesday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
         case 4:
-          this.thursday.push(elem.curriculumSubtopicNameId);
+          this.thursday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
         case 5:
-          this.friday.push(elem.curriculumSubtopicNameId);
+          this.friday.subtopicNames.push(elem.curriculumSubtopicNameId);
           break;
       }
     });
+    this.weekDTO.daysDTO.push(this.monday, this.tuesday, this.wednesday, this.thursday, this.friday);
+    // this.weekDTO.daysDTO.push(this.tuesday);
+    // this.weekDTO.daysDTO.push(this.wednesday);
+    // this.weekDTO.daysDTO.push(this.thursday);
+    // this.weekDTO.daysDTO.push(this.friday);
   }
 
   /**
-   * Drop function for drag/drop feature
+   * Drop function for drag/drop feature. Appends "dropped" item onto target.
    */
 
   dropIt(event, dayNum: number) {
-
-    console.log(event);
-    this.dndService.currentItem.subscribe(
-      data => {
-        this.currentlyDragged = data;
-      }
-    );
     this.dndService.currentSubtopic.subscribe(
       data => {
-        switch (dayNum) {
-          case 1:
-            this.monday.push(data);
-            break;
-          case 2:
-            this.tuesday.push(data);
-            break;
-          case 3:
-            this.wednesday.push(data);
-            break;
-          case 4:
-            this.thursday.push(data);
-            break;
-          case 5:
-            this.friday.push(data);
-            break;
-        }
+        console.log(data);
+        this.weekDTO.daysDTO[dayNum].subtopicNames.push(data);
       }
-    )
-    console.log(this.currentlyDragged.target);
-    // event.srcElement.append(this.currentlyDragged.target);
-    event.target.append(this.currentlyDragged.target);
-
+    ).unsubscribe();
   }
 
-  pickItUp(event, subtopic) {
-    this.dndService.sendItem(event);
+  pickItUp(event, subtopic, dayNum: number) {
     this.dndService.sendSubtopic(subtopic);
-    
+  }
+
+  putItDown(subtopic, dayNum: number) {
+    this.weekDTO.daysDTO[dayNum].subtopicNames =
+      this.weekDTO.daysDTO[dayNum].subtopicNames.filter(elem => elem !== subtopic);
   }
 
   /**
-   * Drag function for drag/drop functionality
+   * Drag function for drag/drop functionality.
    */
 
   draggedFinder(currentlyDragged) {
     this.currentlyDragged = currentlyDragged;
+  }
+/**
+ *
+ * @param weekNum
+ * Sends specific weekNum of a CurriculumSuptopic[] to removeWeek, for removal.
+ * Also, uses stopPropagation because button is on top of clickable div.
+ */
+  removeWeekCall(weekNum: number) {
+    event.stopPropagation();
+    this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
   }
 }

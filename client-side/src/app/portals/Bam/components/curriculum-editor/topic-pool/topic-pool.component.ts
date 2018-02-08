@@ -17,7 +17,7 @@ export class TopicPoolComponent implements OnInit {
   topics: string[] = [];
   uniqarr: string[];
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
-  subTopicName: SubtopicName[];
+  subTopicName: SubtopicName[] = [];
   constructor(private curriculumService: CurriculumService,
               public curriculumWeekComponent: CurriculumWeekComponent,
               private dndService: DragndropService) { }
