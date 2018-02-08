@@ -17,17 +17,12 @@ export class ViewAssociatesComponent implements OnInit {
   p: number = 1;
   associateList: BamUser[];
   constructor(private usersService: UsersService) { }
-  /*
-  *if current batch is null display nothing otherwise batch name
-  */
   ngOnInit() {
     this.loadAssociatesInBatch();
   }
 
   loadAssociatesInBatch() {
      this.usersService.getAllAssociates().subscribe(data => { console.log(data); this.associateList = data; });
-     // console.log(this.associateList);
-
   }
 
 }
