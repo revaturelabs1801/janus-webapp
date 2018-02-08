@@ -27,12 +27,15 @@ import { AddSubtopicService } from './services/add-subtopic.service';
 
 
 import {ScheduleModule} from 'primeng/primeng';
+import {DragDropModule} from 'primeng/primeng';
+
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule,
     FormsModule,
     ScheduleModule,
+    DragDropModule,
     NgbModule.forRoot(),
   ],
   declarations: [
