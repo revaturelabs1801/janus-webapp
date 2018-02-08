@@ -34,17 +34,16 @@ export class AddSubtopicComponent implements OnInit {
   public loading: Boolean = true;
   public closeResult: string;
 
-  private subtopics: SubtopicName[] = [];
+  public subtopics: SubtopicName[] = [];
+  public currentlyAddedSubtopic: Subtopic[] = [];
 
   public uniqueTopics =  new Set();
   public topicMap = new Map();
-  public subtopicArray: Object[] = [];
+  public subtopicList: Object[] = [];
   public selectedTopic: string;
   public selectedSubtopic: string;
   public selectedDate: any;
-  public batchName: String;
 
-  public currentlyAddedSubtopic: Subtopic[] = [];
   public prevDate: string;
   public newDate: any;
 
@@ -82,7 +81,7 @@ export class AddSubtopicComponent implements OnInit {
     this.subtopicsService.getSubtopicPool().subscribe(
       (subtopicsService) => {
         this.getCurrentBatch();
-        this.getTopics(subtopicsService);
+        this.subtopics = this.getSubtopics(subtopicsService);
       }
     );
   }
@@ -93,7 +92,6 @@ export class AddSubtopicComponent implements OnInit {
   getCurrentBatch() {
     this.subtopicsService.getBatchById().subscribe(
       (service) =>  {
-        this.batchName = service.name;
         this.currentBatch = service;
       }
     );
@@ -107,11 +105,11 @@ export class AddSubtopicComponent implements OnInit {
     * The following iterations creates a set of unique Topics to filter
     * out the topics from the Subtopics List and maps them to the 'topicMap' property.
     * The loading property is set to false here beacuse once this method is called
-    * All the subtopics have benn loaded
+    * All the subtopics have been loaded
     *	@author Francisco Palomino | Batch: 1712-dec10-java-steve
     * @param subtopics holds the subtopics result from the database call
 		*/
-  getTopics(subtopics) {
+  getSubtopics(subtopics) {
     for (let i in subtopics) {
       if (!this.uniqueTopics.has(subtopics[i].topic.name)) {
         this.uniqueTopics.add(subtopics[i].topic.name);
@@ -125,8 +123,8 @@ export class AddSubtopicComponent implements OnInit {
           this.topicMap.set(subtopics[i].topic.name, array);
         }
     }
-    this.subtopics = subtopics;
     this.loading = false;
+    return subtopics;
   }
   /**
    * Method called when a topic is changed. It generates the subtopic list
@@ -134,14 +132,14 @@ export class AddSubtopicComponent implements OnInit {
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   onChangeLoadSubtopics() {
-    this.subtopicArray = [];
+    this.subtopicList = [];
     this.selectedSubtopic = 'Select a Subtopic';
     if (this.selectedTopic !== '' && this.selectedTopic !== 'Select a Topic') {
       for (let subtopic of Array.from(this.topicMap.get(this.selectedTopic))) {
-        this.subtopicArray.push(subtopic);
+        this.subtopicList.push(subtopic);
       }
     }
-    this.subtopicArray.sort((n1, n2) => {
+    this.subtopicList.sort((n1, n2) => {
         if (n1 > n2) {
             return 1;
         }
@@ -291,7 +289,14 @@ export class AddSubtopicComponent implements OnInit {
       (result) => {
       if (result === 'ok') {
         this.subtopicsService.updateDate(22506, this.subtopicId, this.slectedDateMiliseconds).subscribe(
-          () => {this.changeSuccessMessage(`Successfully updated!`); },
+          () => {
+            this.changeSuccessMessage(`Successfully updated!`);
+            for (let i = 0; i < this.batchSubtopics.length; i++) {
+              if (this.batchSubtopics[i].subtopicId === this.subtopicId) {
+                this.batchSubtopics[i].subtopicDate = this.slectedDateMiliseconds;
+              }
+            }
+          },
           response => {
             if (response.status = 200) {
               this.changeSuccessMessage(`Successfully updated!`);
