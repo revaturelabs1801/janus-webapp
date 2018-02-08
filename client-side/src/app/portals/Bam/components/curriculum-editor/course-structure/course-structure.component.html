@@ -1,17 +1,21 @@
-<div class="offset-1 col-md-2 col-sm-3">
 
-</div>
-<div class="offset-1 col-md-2 col-sm-3 col-4" id="accordion" role="tablist">
+<div id="accordion" role="tablist">
   <h2>Curriculum Structure</h2>
     <button  class="currBtn" data-toggle="modal" data-target="#addCurricModel">
       Add New Curriculum<i class="fas fa-plus"></i></button>
+
+
+<div class="" id="currAccordion" role="tablist">
   <div class="offset-1 col-md-10" *ngFor="let currName of uniqCurrNames; let i = index">
     <div class="currType" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
       {{currName}}
+      <span (click)="newVersion(currName, i)">
+        <i class="fas fa-plus-circle"></i>
+      </span>
     </div>
     <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#currAccordion">
       <div class="currTypeVer" *ngFor="let currVersion of uniqCurrVersions[i]">
-        <span (click)="viewCurrSchedule(currVersion.curriculumId)">
+        <span (click)="viewCurrSchedule(currVersion.id)">
           Version #{{currVersion.curriculumVersion}}
         </span>
         <span (click)="makeMaster(currVersion, i)">

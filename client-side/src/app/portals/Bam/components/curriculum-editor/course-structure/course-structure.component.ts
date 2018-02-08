@@ -187,4 +187,17 @@ export class CourseStructureComponent implements OnInit {
   }
 
 
+  newVersion(currName: string, index: number) {
+    event.stopPropagation();
+    let newVersionNum = 0;
+    this.uniqCurrVersions[index].forEach(elem => {
+      if (elem.curriculumVersion > newVersionNum) {
+        newVersionNum = elem.curriculumVersion;
+      }
+    });
+    newVersionNum++;
+
+    console.log('New ' + currName + ' curriculum version#' + newVersionNum);
+  }
+
 }

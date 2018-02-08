@@ -67,3 +67,14 @@
     color: #f47f43;
     font-size: 1.3vw;
 }
+
+.fa-plus-circle {
+    float: right;
+    margin-right: 10%;
+    margin-top: 2%;
+    transition: .2s ease-in;
+}
+
+.fa-plus-circle:hover {
+    color: #f47f43;
+}

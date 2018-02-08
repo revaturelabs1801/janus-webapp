@@ -1,30 +1,39 @@
-<div class="col">
-    <div class="row week offset-1" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
-        aria-controls="collapseOne">
-        Week #{{weekNum}}
+<div class="row week offset-1" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
+    aria-controls="collapseOne">
+    Week #{{weekNum}}
+
+</div>
+
+<div class="collapse hide weeksrow row offset-1" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt($event, 0)">Monday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp($event, day, 0)" (onDragEnd)="putItDown(day, 0)" class="putBorder"
+            *ngFor="let day of monday.subtopicNames">
+            {{day.name}}</div>
     </div>
 
-    <div class="collapse hide weeksrow row offset-1" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
-
-        <div class="days" pDroppable="subtopicDrag" (onDrop)="dropIt($event, 0)">Monday
-            <div pDraggable="subtopicDrag" (onDragStart)="pickItUp($event, day)" class="putBorder" *ngFor="let day of monday"> {{day.name}}</div>
-        </div>
-
-        <div class="days" pDroppable="subtopicDrag" (onDrop)="dropIt($event, 1)">Tuesday
-            <div pDraggable="subtopicDrag" (onDragStart)="pickItUp($event, day)" class="putBorder" *ngFor="let day of tuesday"> {{day.name}}</div>
-        </div>
-
-        <div class="days" pDroppable="subtopicDrag" (onDrop)="dropIt($event, 2)">Wednesday
-            <div pDraggable="subtopicDrag" (onDragStart)="pickItUp($event, day)" class="putBorder" *ngFor="let day of wednesday"> {{day.name}}</div>
-        </div>
-
-        <div class="days" pDroppable="subtopicDrag" (onDrop)="dropIt($event, 3)">Thursday
-            <div pDraggable="subtopicDrag" (onDragStart)="pickItUp($event, day)" class="putBorder" *ngFor="let day of thursday"> {{day.name}}</div>
-        </div>
-
-        <div class="days" pDroppable="subtopicDrag" (onDrop)="dropIt($event, 4)">Friday
-            <div pDraggable="subtopicDrag" (onDragStart)="pickItUp($event, day)" class="putBorder" *ngFor="let day of friday"> {{day.name}}</div>
-        </div>
-
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt($event, 1)">Tuesday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp($event, day, 1)" (onDragEnd)="putItDown(day, 1)" class="putBorder"
+            *ngFor="let day of tuesday.subtopicNames">
+            {{day.name}}</div>
     </div>
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt($event, 2)">Wednesday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp($event, day, 2)" (onDragEnd)="putItDown(day, 2)" class="putBorder"
+            *ngFor="let day of wednesday.subtopicNames">
+            {{day.name}}</div>
+    </div>
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt($event, 3)">Thursday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp($event, day, 3)" (onDragEnd)="putItDown(day, 3)" class="putBorder"
+            *ngFor="let day of thursday.subtopicNames">
+            {{day.name}}</div>
+    </div>
+
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt($event, 4)">Friday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp($event, day, 4)" (onDragEnd)="putItDown(day, 4)" class="putBorder"
+            *ngFor="let day of friday.subtopicNames">
+            {{day.name}}</div>
+    </div>
+
 </div>

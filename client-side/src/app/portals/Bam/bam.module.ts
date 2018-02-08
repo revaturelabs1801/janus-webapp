@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BamRoutingModule } from './bam-routing.module';
 import { BamComponent } from './bam.component';
@@ -9,7 +10,7 @@ import { MainCurriculumViewComponent } from './components/curriculum-editor/main
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
 import { CourseStructureComponent } from './components/curriculum-editor/course-structure/course-structure.component';
 import { CurriculumService } from './services/curriculum.service';
-import { DragDropModule } from 'primeng/dragdrop';
+import { DragDropModule } from '../../../../node_modules/primeng/components/dragdrop/dragdrop';
 import { DragNDropDirective } from './drag-n-drop.directive';
 import { DragndropService } from './services/dragndrop.service';
 
@@ -17,7 +18,8 @@ import { DragndropService } from './services/dragndrop.service';
   imports: [
     DragDropModule,
     CommonModule,
-    BamRoutingModule
+    BamRoutingModule,
+    NgbModule.forRoot()
   ],
   declarations: [ BamComponent, HomeComponent, CurriculumWeekComponent,
     MainCurriculumViewComponent, TopicPoolComponent, CourseStructureComponent, DragNDropDirective],

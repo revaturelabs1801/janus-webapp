@@ -1,6 +1,28 @@
+
 <div class="row">
-    <span class="offset-1 col-3">
-        <app-topic-pool></app-topic-pool>
+    <div class="offset-1 col-3 noWrapDog">
+        <ngb-tabset>
+            <ngb-tab>
+                <ng-template ngbTabTitle>
+                    <div (click)="toggle(1)">Course Structures</div>
+                </ng-template>
+                <ng-template ngbTabContent></ng-template>
+            </ngb-tab>
+
+            <ngb-tab>
+                <ng-template ngbTabTitle>
+                    <div (click)="toggle(2)">Topic Pool</div>
+                </ng-template>
+                <ng-template ngbTabContent></ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>
+
+<div class="row">
+    <span class="offset-1 col-md-3 col-sm-3 col-4">
+        <app-course-structure *ngIf="toggleTab === 1"></app-course-structure>
+        <app-topic-pool *ngIf="toggleTab === 2"></app-topic-pool>
     </span>
 
     <span class="col-8 align " id="style-7">
@@ -12,10 +34,7 @@
         </span>
         <br/>
         <br/>
-
-        <app-curriculum-week *ngFor="let week of allWeeks; let i = index" [weekDTO]="week" [weekNum]="i +1"></app-curriculum-week>
+        <app-curriculum-week *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i +1"></app-curriculum-week>
     </span>
-    <span class="offset-1 col-md-2 col-sm-3 col-4">
-    <app-course-structure></app-course-structure>
-</span>
+
 </div>
