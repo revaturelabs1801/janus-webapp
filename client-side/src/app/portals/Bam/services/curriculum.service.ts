@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 import { Curriculum } from '../models/curriculum.model';
 import { CurriculumSubtopic } from '../models/curriculumSubtopic.model';
 import { SubtopicName } from '../models/subtopicname.model';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'}),
