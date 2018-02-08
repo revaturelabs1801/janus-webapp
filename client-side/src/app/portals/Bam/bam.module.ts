@@ -42,19 +42,20 @@ import { AddSubtopicService } from './services/add-subtopic.service';
     TopicPoolComponent,
     BatchProgressBarComponent,
     LoadingSpinnerComponent,
-    WelcomeComponent,
     DashboardInfoComponent,
-    SearchPipe,
-    AddSubtopicComponent
+    AddSubtopicComponent,
+    SearchPipe
+
   ],
   providers: [
-    UsersService,
-    BatchService,
-    SessionService,
+    UsersService, 
+    BatchService, 
+    SessionService, 
     CurriculumService,
     CalendarService,
     AddSubtopicService
-  ],
+  ], 
+ 
   exports: [
     SearchPipe
   ]
