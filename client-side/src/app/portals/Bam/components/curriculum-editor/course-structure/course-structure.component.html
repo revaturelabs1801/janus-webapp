@@ -1,7 +1,10 @@
 <div class="offset-1 col-md-2 col-sm-3">
-  <p class="text-center title">Curriculum Types</p>
+
 </div>
-<div class="" id="currAccordion" role="tablist">
+<div class="offset-1 col-md-2 col-sm-3 col-4" id="accordion" role="tablist">
+  <h2>Curriculum Structure</h2>
+    <button  class="currBtn" data-toggle="modal" data-target="#addCurricModel">
+      Add New Curriculum<i class="fas fa-plus"></i></button>
   <div class="offset-1 col-md-10" *ngFor="let currName of uniqCurrNames; let i = index">
     <div class="currType" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
       {{currName}}
@@ -19,6 +22,24 @@
             <i class="fas fa-chess-king fa-1x crownless" aria-hidden="true"> </i>
           </span>
         </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="addCurricModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Curriculum</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+    <input #addNewCurric class="addCur"/>
+    <button class="btn btn-default" (click)=" createCurr(addNewCurric.value) " >Create</button>
+      </div>
+      <div class="modal-footer">
+       
       </div>
     </div>
   </div>

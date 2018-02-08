@@ -7,6 +7,7 @@ import { CurriculumSubtopic } from '../models/curriculumSubtopic.model';
 import { SubtopicName } from '../models/subtopicname.model';
 import { Subtopic } from '../models/subtopic.model';
 import { CurriculumSubtopicDTO } from '../models/curriculumSubtopicDTO.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 const httpOptions = {
@@ -20,12 +21,12 @@ export class CurriculumService {
   private dataSource = new BehaviorSubject<CurriculumSubtopic[]>([]);
   currentData = this.dataSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private modalService: NgbModal) { }
 
-  changeData(data: CurriculumSubtopic[]) {
+
+  changeData(data: CurriculumSubtopic[]){
     this.dataSource.next(data);
   }
-
   /**  This gets all curriculums from the API
    *   @author: Mohamad Alhindi
     *  @batch: 1712-Dec11-2017
@@ -131,4 +132,17 @@ export class CurriculumService {
       }
     );
   }
+
+
+
+
+
+retainString(curric: Curriculum){
+
+// const  curric.curriculumName;
+// curric.curriculumVersion;
+  
+}
+
+
 }
