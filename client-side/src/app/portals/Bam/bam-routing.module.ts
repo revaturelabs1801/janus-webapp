@@ -24,7 +24,7 @@ const routes: Routes = [
         component: MainCurriculumViewComponent
       },
       {
-        path: 'calendar-view',
+        path: 'calendar',
         component: CalendarComponent
       },
       {

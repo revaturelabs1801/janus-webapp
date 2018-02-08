@@ -1,6 +1,14 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { ScheduleModule, Schedule, } from 'primeng/primeng';
 
+		/**
+        *	This component will serve as the main calendar view. 
+        *   This component leverages the PrimeNG schedule UI component to render a drag and drop calendar for viewing and updating a batch's subtopics
+		*	@author Jordan DeLong (1712-dec10-java-Steve)
+		*	
+		*	
+		*/
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -15,32 +23,9 @@ export class CalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-      this.events = [
-        {
-            "title": "All Day Event",
-            "start": "2016-01-01"
-        },
-        {
-            "title": "Long Event",
-            "start": "2016-01-07",
-            "end": "2016-01-10"
-        },
-        {
-            "title": "Repeating Event",
-            "start": "2016-01-09T16:00:00"
-        },
-        {
-            "title": "Repeating Event",
-            "start": "2016-01-16T16:00:00"
-        },
-        {
-            "title": "Conference",
-            "start": "2016-01-11",
-            "end": "2016-01-13"
-        }
-    ];
+      
+    this.events = [];
 
-    this.fc.events = this.events;
   }
 
 }
