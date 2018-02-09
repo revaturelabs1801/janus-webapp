@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BamComponent } from './bam.component';
 import { BatchProgressBarComponent } from './components/dashboard/batch-progress-bar/batch-progress-bar.component';
 import { HomeComponent } from './components/home/home.component';
+import { CurriculumWeekComponent } from './components/curriculum-editor/curriculum-week/curriculum-week.component';
 
 import { ViewAssociatesComponent } from './components/view-associates/view-associates.component';
 import { AllBatchesComponent } from './components/batches/all-batches/all-batches.component';
@@ -27,9 +28,12 @@ import { SessionService } from './services/session.service';
 import { UsersService } from './services/users.service';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 import { TopicPoolComponent } from './components/curriculum-editor/topic-pool/topic-pool.component';
+import { CourseStructureComponent } from './components/curriculum-editor/course-structure/course-structure.component';
 import { CurriculumService } from './services/curriculum.service';
 import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
 import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
+import { DragndropService } from './services/dragndrop.service';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
 import { AddSubtopicService } from './services/add-subtopic.service';
@@ -44,6 +48,7 @@ import { DragDropModule } from 'primeng/primeng';
   imports: [
     CommonModule,
     BamRoutingModule,
+    NgbModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
     ScheduleModule,
@@ -54,8 +59,10 @@ import { DragDropModule } from 'primeng/primeng';
   declarations: [
     BamComponent,
     HomeComponent,
+    CurriculumWeekComponent,
     MainCurriculumViewComponent,
     TopicPoolComponent,
+    CourseStructureComponent,
     MyBatchesComponent,
     AllBatchesComponent,
     BatchesTableComponent,
@@ -69,8 +76,11 @@ import { DragDropModule } from 'primeng/primeng';
     EditBatchComponent,
     RemoveAssociateFromBatchComponent,
     BatchProgressBarComponent,
+    AddSubtopicComponent,
     LoadingSpinnerComponent,
     DashboardInfoComponent,
+    ViewAssociatesComponent,
+    CalendarComponent,
     SearchPipe,
     FilterBatchPipe,
     ViewAssociatesComponent,
@@ -78,9 +88,11 @@ import { DragDropModule } from 'primeng/primeng';
     AddSubtopicComponent
   ],
   providers: [
+    CurriculumWeekComponent,
+    DragndropService,
+    CourseStructureComponent,
     SessionService,
     UsersService,
-    CurriculumService,
     EditBatchComponent,
     AddAssociateToBatchComponent,
     RemoveAssociateFromBatchComponent,
@@ -89,13 +101,11 @@ import { DragDropModule } from 'primeng/primeng';
     SearchPipe,
     ViewAssociatesComponent,
     BatchService,
-    SessionService,
     CurriculumService,
     CalendarService,
     AddSubtopicService,
     CalendarStatusService
-  ], 
- 
+  ],
   exports: [
     SearchPipe
   ]

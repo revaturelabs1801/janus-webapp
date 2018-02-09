@@ -1,23 +1,30 @@
-<div class ="col offset-1 col-md-3 col-sm-3 col-5"><p class="text-center title">Topic Pool</p></div>
-<div class=" col offset-1 col-md-3 col-sm-3 col-5 topic-pool scrollbar" id="style-7">
-
+<div class=" col topic-pool scrollbar" id="style-7">
   <div class="force-overflow" id="accordion">
 
+    <img src="../../../../../../assets/revatureLoad.gif" class="load" *ngIf="subTopicName.length === 0">
     <div class="keepHeight" *ngFor="let topic of uniqarr; let i = index">
 
       <div class="btn offset-1 col-10 topic" data-toggle="collapse" [attr.data-target]="'#'+i" aria-expanded="true" aria-controls="collapseOne">
-        <p [ngClass]="{'regularFont':topic.length <= 16, 'mediumFont':topic.length>=16 && topic.length<20 ,'smallFont':topic.length > 20}" >
-        {{topic}}
+        <p [ngClass]="{'regularFont':topic.length <= 16, 'mediumFont':topic.length>=16 && topic.length<20 ,'smallFont':topic.length > 20}">
+          {{topic}}
         </p>
       </div>
-      
 
-      <div [attr.id]="i" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
 
-        <div class="fit-content" *ngFor="let sub of subArray[i]">
-          <div pDraggable="dd" class="subtopic offset-1 col-9 " data-toggle="tooltip" data-placement="right" [attr.title]="sub.name">
-           <p class="subtopic-text text-nowrap text-truncate text-center" [ngClass]="{'regularsubFont':sub.name.length <= 16, 'mediumsubFont':sub.name.length>=16 && topic.length<20 ,'smallsubFont':sub.name.length > 20}">
-            {{sub.name}}
+      <div [attr.id]="i" class="collapse hide fit-content" aria-labelledby="headingOne" data-parent="#accordion">
+
+        <div *ngFor="let sub of subArray[i]">
+          <div pDraggable="subtopicdrag" (onDragStart)="sendCurrentlyDragged(sub)" class="subtopic offset-1 col-9 " data-toggle="tooltip"
+            data-placement="right" [attr.title]="sub.name">
+            <span>
+               
+              <i class="fas fa-circle fa-3x outerCircle">
+                  <i class="fas fa-circle fa-1x innerCircle"></i>
+              </i>
+            </span>
+
+            <p class="subtopic-text text-nowrap text-truncate text-center" [ngClass]="{'regularsubFont':sub.name.length <= 16, 'mediumsubFont':sub.name.length>=16 && topic.length<20 ,'smallsubFont':sub.name.length > 20}">
+              {{sub.name}}
             </p>
           </div>
         </div>
@@ -29,4 +36,3 @@
   </div>
 
 </div>
- 

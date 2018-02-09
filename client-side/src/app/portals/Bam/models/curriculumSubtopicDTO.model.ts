@@ -3,11 +3,11 @@ import { WeeksDTO } from './weeksDTO.model';
 
 export class CurriculumSubtopicDTO {
     meta: MetaDTO;
-    weeks: WeeksDTO;
+    weeks: WeeksDTO[];
 
     constructor(
         meta: MetaDTO,
-        weeks: WeeksDTO) {
+        weeks: WeeksDTO[]) {
 
         this.meta = meta;
         this.weeks = weeks;

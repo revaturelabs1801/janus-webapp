@@ -126,8 +126,8 @@ export class CalendarComponent implements OnInit {
         }
       );
     this.fc.updateEvent(droppedTopic);
-    this.removeEvent(calendarEvent);
-    this.addEvent(calendarEvent);
+    console.log(this.events);
+    this.updateEvent(calendarEvent);
   }
 
   mapSubtopicFromEvent(event): CalendarEvent {
@@ -139,27 +139,27 @@ export class CalendarComponent implements OnInit {
     return calendarEvent;
   }
 
-  /* Updates the subtopic in the events array after an event handler is fired */
-  removeEvent(changedSubtopic: CalendarEvent, index?: number) {
+  updateEvent(changedSubtopic: CalendarEvent) {
+    //reset the first index date that gets overriden on drops
     this.events[0].start = this.overridenDate;
-
-    if (index == undefined) {
-      for (let i = 0; i < this.events.length; i++) {
-        if (this.events[i].title == changedSubtopic.title) {
-          index = i;
-        }
-      }
+    let index = this.eventExists(changedSubtopic);
+    //update overridenDate to new date if first index
+    if(index == 0) {
+      this.overridenDate = this.events[index].start;
     }
 
-    this.events.splice(index, 1);
+    this.events[index].start = changedSubtopic.start;
+    this.events[index].status = changedSubtopic.status;
+    this.events[index].color = changedSubtopic.color;
   }
 
   addEvent(calendarEvent: CalendarEvent) {
     let index = this.eventExists(calendarEvent);
     if (index > -1) {
-      this.removeEvent(calendarEvent, index);
+      this.events.splice(index, 1);
     } 
     this.events.push(calendarEvent);
+    this.overridenDate = this.events[0].start;
   }
 
   eventExists(calendarEvent: CalendarEvent): number {
