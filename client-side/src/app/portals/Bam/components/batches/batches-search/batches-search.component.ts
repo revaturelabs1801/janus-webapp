@@ -17,7 +17,7 @@ export class BatchesSearchComponent implements OnInit {
   }
 
   /**
-   * Sends the contents of the search box to the BatchSearchService
+   * Emits filter text to any components listening to [this.change]
    * @author Charlie Harris | 1712-dec10-java-steve
    */
   sendFilterText(event) {
