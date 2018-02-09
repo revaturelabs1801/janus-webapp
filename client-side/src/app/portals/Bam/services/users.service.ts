@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BamUser } from '../models/bamuser.model';
-import { environment } from '../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
@@ -133,10 +133,10 @@ export class UsersService {
   }
 
     /**
-   * Get users not in batch 
+   * Get users not in batch
    * @author Shane Sistoza, Patrick Kennedy | Batch: 1712-dec10-java-steve
    * @returns BamUser
-   * @param  userId  the user id of user added 
+   * @param  userId  the user id of user added
    * @param  batchId the batch id of batch to add user to
    */
   getUsersNotInBatch(): Observable<BamUser[]> {
@@ -151,13 +151,13 @@ export class UsersService {
    * Adds a user to a batch
    * @author Shane Sistoza, Patrick Kennedy | Batch: 1712-dec10-java-steve
    * @returns BamUser
-   * @param  userId  the user id of user added 
+   * @param  userId  the user id of user added
    * @param  batchId the batch id of batch to add user to
    */
   addUserToBatch(batchId: number, userId: number): Observable<BamUser[]> {
     return this.http.post<BamUser[]>(environment.users.addUserToBatchUrl(batchId, userId), httpOptions).map(
       data => {
-        return data; 
+        return data;
       }
     );
   }
@@ -166,14 +166,12 @@ export class UsersService {
    * Removes a user from a batch
    * @author Shane Sistoza, Patrick Kennedy | Batch: 1712-dec10-java-steve
    * @returns BamUser
-   * @param  userId  the user id of user removed  
+   * @param  userId  the user id of user removed
    */
   removeUserFromBatch(userId: number): Observable<BamUser[]> {
-    console.log("Remove User To Batch is called"); 
-    
     return this.http.post<BamUser[]>(environment.users.removeUserUrl(userId), httpOptions).map(
       data => {
-        return data; 
+        return data;
       }
     );
   }

@@ -33,11 +33,21 @@ export const environment = {
         getSubtopicsByBatchUrl: (batchId: number) => `${context}/calendar/subtopics/${batchId}`,
         getNumberOfSubTopicsByBatchUrl: (batchId: number) => `${context}/calendar/getnumberofsubtopics/${batchId}`,
         getTopicsByBatchPagUrl: (batchId: number) => `${context}/calendar/topics/${batchId}`,
-        changeTopicDateUrl: (subtopicId: number, batchId: number, status: number) =>
-            `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${status}`,
-        updateTopicStatusUrl: (subtopicId: number, batchId: number, status: number) =>
-            `${context}/calendar/${subtopicId}/${batchId}/${status}`,
+        changeTopicDateUrl: (subtopicId: number, batchId: number, date: number) =>
+            `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`,
+        updateTopicStatusUrl: (subtopicId: number, batchId: number, status: string) =>
+            `${context}/calendar/statusupdate/${subtopicId}/${batchId}/${status}`,
         addTopicsUrl: () => `${context}/calendar/addtopics`,
+    },
+
+    addsubtopics: {
+        getBatchSubtopicsUrl: (batchId: number, pageNumber: number, pageSize: number) =>
+                        `${context}/calendar/subtopicspagination/${batchId}/${pageSize}/${pageNumber}`,
+        getBatchIdUrl: (batchId: number) => `${context}/batches/byid/${batchId}`,
+        addSubtopicUrl: () => `${context}/subtopic/addsubtopic`,
+        getSubtopicPoolUrl: () => `${context}/curriculum/topicpool`,
+        updateDateUrl: (subtopicId: number, batchId: number, date: number) =>
+                        `${context}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`
     },
 
     assignForce: {

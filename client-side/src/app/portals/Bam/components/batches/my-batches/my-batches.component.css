@@ -1,0 +1,12 @@
+.loading {
+    padding-top: 5%;
+}
+
+.batches-nav {
+    margin-bottom: 2%;
+}
+
+.batches-nav * {
+    display: inline-block;
+
+}
