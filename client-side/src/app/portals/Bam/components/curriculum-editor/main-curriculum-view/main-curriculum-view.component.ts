@@ -1,8 +1,13 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewChildren, QueryList} from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { CourseStructureComponent } from '../course-structure/course-structure.component';
+import { Curriculum } from '../../../models/curriculum.model';
+import { CurriculumSubtopicDTO } from '../../../models/curriculumSubtopicDTO.model';
+import { MetaDTO } from '../../../models/metaDTO.model';
+import { SessionService } from '../../../services/session.service';
+import { WeeksDTO } from '../../../models/weeksDTO.model';
 
 /**
  * Author:Daniel Robinson
@@ -14,30 +19,43 @@ import { CourseStructureComponent } from '../course-structure/course-structure.c
     styleUrls: ['./main-curriculum-view.component.css']
 })
 export class MainCurriculumViewComponent implements OnInit {
-  schedule: CurriculumSubtopic[];
-  allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
-  toggleTab = 1;
-  currInfo: string;
-  @ViewChildren(CurriculumWeekComponent) weekz: QueryList<CurriculumWeekComponent>;
+    schedule: CurriculumSubtopic[];
+    allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
+    toggleTab = 1;
+    selectedCurr: Curriculum;
+    isNewCurr = false;
+    @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
-    constructor(private curriculumService: CurriculumService) { }
+    constructor(private curriculumService: CurriculumService,
+        private sessionService: SessionService) { }
 
 
-  ngOnInit() {
-    this.displayWeekView();
-  }
+    ngOnInit() {
+        this.displayWeekView();
+    }
 
-  toggle(view) {
-    this.toggleTab = view;
-  }
+    toggle(view) {
+        this.toggleTab = view;
+    }
 
-  receiveMessage($event) {
-    this.currInfo = $event;
-  }
+    receiveMessage($event) {
+        this.selectedCurr = $event;
+    }
 
-  saveCurr() {
-      this.weekz.forEach(elem => console.log(elem.weekDTO));
-  }
+    saveCurr() {
+        this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
+        this.selectedCurr.curriculumCreator = this.sessionService.getUser();
+        this.selectedCurr.curriculumdateCreated = this.getCurrentDate();
+        const meta = new MetaDTO(this.selectedCurr);
+
+        const weeksDTO: WeeksDTO[] = [];
+        this.weeks.forEach(elem => weeksDTO.push(elem.weekDTO));
+
+        const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
+        this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
+            data => console.log(data)
+        );
+    }
 
     /**
      * Subscribes to the BehaviorSubject in Curriculum Service
@@ -115,5 +133,23 @@ export class MainCurriculumViewComponent implements OnInit {
      */
     removeWeek(weekNum: number) {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
+    }
+
+    getCurrentDate(): string {
+        let today: any = new Date();
+        let dd: any = today.getDate();
+        let mm: any = today.getMonth() + 1;
+        const yyyy: any = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        today = mm + '/' + dd + '/' + yyyy;
+        return today;
     }
 }

@@ -17,9 +17,7 @@ export class CourseStructureComponent implements OnInit {
   uniqCurrNames: string[];
   allCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
   uniqCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
-  currName: string;
-  currVersion: number;
-  @Output() messageEvent = new EventEmitter<string>();
+  @Output() messageEvent = new EventEmitter<Curriculum>();
 
   constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
 
@@ -200,12 +198,13 @@ export class CourseStructureComponent implements OnInit {
         newVersionNum = elem.curriculumVersion;
       }
     });
-    this.currName = currName;
-    this.currVersion = newVersionNum++;
+    newVersionNum++;
+
+    const newCurrVer: Curriculum = new Curriculum(null, currName, newVersionNum,
+      null, null, null, null, 0);
+    this.messageEvent.emit(newCurrVer);
 
     const master = this.uniqCurrVersions[typeIndex].filter(e => e.isMaster === 1);
-
-    this.messageEvent.emit(currName + ' curriculum version#' + newVersionNum);
     this.viewCurrSchedule(master[0].id);
   }
 
