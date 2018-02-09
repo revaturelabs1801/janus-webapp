@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BamUser } from '../../models/bamuser.model';
-import { UsersService } from '../../services/users.service';
+import { BamUser } from '../../../models/bamuser.model';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-remove-associate-from-batch',
@@ -10,8 +10,8 @@ import { UsersService } from '../../services/users.service';
 
 /**
  * Class for remove user table component
- * @author Patrick Kennedy
- * @author Shane Avery Sistoza
+ * @author Patrick Kennedy | Batch: 1712-Steve
+ * @author Shane Avery Sistoza | Batch: 1712-Steve
  * @batch 1712-Steve
  */
 export class RemoveAssociateFromBatchComponent implements OnInit {
@@ -25,7 +25,6 @@ export class RemoveAssociateFromBatchComponent implements OnInit {
   ngOnInit() {
     this.usersService.getUsersInBatch(4).subscribe(users => this.associates = users);
   }
-
 
   /**
    * Removes an associate from the current batch.
