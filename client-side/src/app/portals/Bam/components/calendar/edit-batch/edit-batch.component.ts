@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Batch } from '../../models/batch.model';
-import { BatchType } from '../../models/batchtype.model';
+import { Batch } from '../../../models/batch.model';
+import { BatchType } from '../../../models/batchtype.model';
 import { Output } from '@angular/core/src/metadata/directives';
-import { BatchService } from '../../services/batch.service';
+import { BatchService } from '../../../services/batch.service';
 
 @Component({
   selector: 'app-edit-batch',
@@ -10,23 +10,19 @@ import { BatchService } from '../../services/batch.service';
   styleUrls: ['./edit-batch.component.css']
 })
 
-/**
+/** TODO: Get User from session.
  * Class for edit the current batch.
- * @author Patrick Kennedy
- * @author Shane Avery Sistoza
- * @batch 1712-Steve
+ * @author Patrick Kennedy | Batch: 1712-Steve
+ * @author Shane Avery Sistoza | Batch: 1712-Steve
  */
 export class EditBatchComponent implements OnInit {
 
   @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
-
   @Input() searchTerm: string;
-
   batchTypes: BatchType[];
+  showAddUserTable: boolean = false;
 
-  showAddUserTable = false;
-
-  constructor(public batchService: BatchService) {
+  constructor(private batchService: BatchService) {
   }
 
   /**
@@ -67,7 +63,7 @@ export class EditBatchComponent implements OnInit {
    *
    * @param      {string}  newDate  The new date being modified to.
    */
-  private endDateChanged(newDate) {
+  endDateChanged(newDate) {
     this.batch.endDate = new Date(newDate);
   }
 
@@ -76,7 +72,7 @@ export class EditBatchComponent implements OnInit {
    *
    * @param      {string}  newDate  The new date being modified to.
    */
-  private startDateChanged(newDate) {
+  startDateChanged(newDate) {
     this.batch.startDate = new Date(newDate);
   }
 

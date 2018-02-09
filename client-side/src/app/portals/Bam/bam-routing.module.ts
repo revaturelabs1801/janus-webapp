@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BamComponent } from './bam.component';
 import { HomeComponent } from './components/home/home.component';
-import { ViewAssociatesComponent } from './components/view-associates/view-associates.component';
-import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
+import { ViewAssociatesComponent } from './components/calendar/view-associates/view-associates.component';
+import { EditBatchComponent } from './components/calendar/edit-batch/edit-batch.component';
 import { MyBatchesComponent } from './components/batches/my-batches/my-batches.component';
 import { AllBatchesComponent } from './components/batches/all-batches/all-batches.component';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { AddSubtopicComponent } from './components/calendar-view/add-subtopic/add-subtopic.component';
+import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
+import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
 
 const routes: Routes = [
   {
@@ -20,8 +20,7 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-
-        path: 'view-associates',
+        path: 'viewassociates',
         component: ViewAssociatesComponent
       },
       {
@@ -33,7 +32,7 @@ const routes: Routes = [
         component: AllBatchesComponent
       },
       {
-        path: 'editBatch',
+        path: 'editbatch',
         component: EditBatchComponent
       },
       {
