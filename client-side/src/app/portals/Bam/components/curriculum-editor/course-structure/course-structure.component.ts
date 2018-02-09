@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Curriculum } from '../../../models/curriculum.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
+
 
 @Component({
   selector: 'app-course-structure',
@@ -16,6 +17,9 @@ export class CourseStructureComponent implements OnInit {
   uniqCurrNames: string[];
   allCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
   uniqCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
+  currName: string;
+  currVersion: number;
+  @Output() messageEvent = new EventEmitter<string>();
 
   constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
 
@@ -163,7 +167,7 @@ export class CourseStructureComponent implements OnInit {
 
     currVersion.isMaster = 1;
     console.log(currVersion);
-    this.curriculumService.markCurriculumAsMaster(currVersion.curriculumId).subscribe(
+    this.curriculumService.markCurriculumAsMaster(currVersion.id).subscribe(
     data => {
       console.log(data);
     },
@@ -196,9 +200,13 @@ export class CourseStructureComponent implements OnInit {
         newVersionNum = elem.curriculumVersion;
       }
     });
-    newVersionNum++;
+    this.currName = currName;
+    this.currVersion = newVersionNum++;
 
-    console.log('New ' + currName + ' curriculum version#' + newVersionNum);
+    const master = this.uniqCurrVersions[typeIndex].filter(e => e.isMaster === 1);
+
+    this.messageEvent.emit(currName + ' curriculum version#' + newVersionNum);
+    this.viewCurrSchedule(master[0].id);
   }
 
 }

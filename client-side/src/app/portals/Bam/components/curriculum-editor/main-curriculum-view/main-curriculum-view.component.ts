@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewChildren, QueryList} from '@angular/core';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { CurriculumService } from '../../../services/curriculum.service';
+import { CourseStructureComponent } from '../course-structure/course-structure.component';
 
 /**
  * Author:Daniel Robinson
@@ -16,17 +17,26 @@ export class MainCurriculumViewComponent implements OnInit {
   schedule: CurriculumSubtopic[];
   allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
   toggleTab = 1;
+  currInfo: string;
+  @ViewChildren(CurriculumWeekComponent) weekz: QueryList<CurriculumWeekComponent>;
 
     constructor(private curriculumService: CurriculumService) { }
 
 
   ngOnInit() {
     this.displayWeekView();
-    this.getWeeks();
   }
 
   toggle(view) {
     this.toggleTab = view;
+  }
+
+  receiveMessage($event) {
+    this.currInfo = $event;
+  }
+
+  saveCurr() {
+      this.weekz.forEach(elem => console.log(elem.weekDTO));
   }
 
     /**

@@ -31,7 +31,6 @@ export class CurriculumWeekComponent implements OnInit {
   weekDTO: WeeksDTO = new WeeksDTO([]);
 
   constructor(private dndService: DragndropService,
-    private mainCurriculumViewComponent: MainCurriculumViewComponent,
     private courseStructureComponent: CourseStructureComponent) { }
 
   currentlyDragged;
@@ -76,7 +75,6 @@ export class CurriculumWeekComponent implements OnInit {
   dropIt(dayNum: number) {
     this.dndService.currentSubtopic.subscribe(
       data => {
-        console.log(data);
         this.weekDTO.daysDTO[dayNum].subtopicNames.push(data);
       }
     ).unsubscribe();
@@ -120,6 +118,6 @@ export class CurriculumWeekComponent implements OnInit {
  */
   removeWeekCall(weekNum: number) {
     event.stopPropagation();
-    this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
+    //this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
   }
 }

@@ -1,4 +1,4 @@
-
+<div class=offset-7>{{currInfo}}</div>
 <div class="row">
     <div class="offset-1 col-3 noWrapDog">
         <ngb-tabset>
@@ -21,14 +21,14 @@
 
 <div class="row">
     <span class="offset-1 col-md-3 col-sm-3 col-4">
-        <app-course-structure *ngIf="toggleTab === 1"></app-course-structure>
+        <app-course-structure *ngIf="toggleTab === 1" (messageEvent)="receiveMessage($event)"></app-course-structure>
         <app-topic-pool *ngIf="toggleTab === 2"></app-topic-pool>
     </span>
 
     <span class="col-8 align " id="style-7">                
             <span *ngIf="allWeeks.length !== 0" class="buttons">
                 <span class="saveCurr">
-                        <button>Save Curriculum</button>
+                        <button (click)="saveCurr()">Save Curriculum</button>
                 </span>
                     
                 <span class="pushtotop" (click)="addWeek()">
