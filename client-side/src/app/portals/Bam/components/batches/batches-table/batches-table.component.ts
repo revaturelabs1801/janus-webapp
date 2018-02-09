@@ -14,6 +14,7 @@ export class BatchesTableComponent implements OnInit {
   @Input() filterText: string;
 
   filtered: Batch[];
+  pageNum = 1;
 
   constructor() { }
 

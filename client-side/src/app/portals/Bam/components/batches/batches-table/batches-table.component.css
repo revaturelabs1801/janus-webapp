@@ -28,3 +28,11 @@
 .clickable {
     cursor: pointer;
 }
+
+.my-pagination /deep/ .ngx-pagination .current {
+    background: #fa7427;
+  }
+
+.page-sel{
+    text-align: center;
+}
