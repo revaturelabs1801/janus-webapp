@@ -51,8 +51,8 @@ export class AddSubtopicService {
    * @param subtopicId subtopic id
    * @param date date of the subtopic
    */
-  updateDate(batchId, subtopicId, date): Observable<any> {
-    return this.http.post<any>(environment.addsubtopics.updateDateUrl(batchId, subtopicId, date), '' , httpOptions);
+  updateDate(subtopicId, batchId, date): Observable<any> {
+    return this.http.post<any>(environment.addsubtopics.updateDateUrl(subtopicId, batchId, date), '' , httpOptions);
   }
 
   /**

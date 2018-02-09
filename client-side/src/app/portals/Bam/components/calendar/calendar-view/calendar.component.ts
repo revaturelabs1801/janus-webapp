@@ -21,7 +21,7 @@ import { CalendarStatusService } from '../../../services/calendar-status.service
 })
 export class CalendarComponent implements OnInit {
   @ViewChild('fc') fc: Schedule;
-  @ViewChild('datePicker') datePicker: Calendar; 
+  @ViewChild('datePicker') datePicker: Calendar;
 
   events: CalendarEvent[] = [];
   gotoDateValue: Date;
@@ -47,20 +47,26 @@ export class CalendarComponent implements OnInit {
       }
     );
 
-    if(window.innerWidth < 1000) {
-        this.fc.defaultView = "listMonth";
-        this.fc.header = {
-            left: 'agendaDay,basicWeek,listMonth',
-            center: 'title',
-            right: 'today prev,next'
-        }
+    //event handler for newly added topics
+    this.calendarService.addCalendarEvent
+      .subscribe(calendarEvent => {
+        this.addEvent(calendarEvent);
+      });
+
+    if (window.innerWidth < 1000) {
+      this.fc.defaultView = "listMonth";
+      this.fc.header = {
+        left: 'agendaDay,basicWeek,listMonth',
+        center: 'title',
+        right: 'today prev,next'
+      }
     } else {
-        this.fc.defaultView = "month";
-        this.fc.header = {
-            left: 'agendaDay,agendaWeek,month listMonth',
-            center: 'title',
-            right: 'today prev,next'
-        }
+      this.fc.defaultView = "month";
+      this.fc.header = {
+        left: 'agendaDay,agendaWeek,month listMonth',
+        center: 'title',
+        right: 'today prev,next'
+      }
     }
 
     this.fc.options = {
@@ -75,19 +81,19 @@ export class CalendarComponent implements OnInit {
       scrollTime: '09:00:00',
       businessHours: {
         // days of week. an array of zero-based day of week integers (0=Sunday)
-        dow: [ 1, 2, 3, 4, 5 ], // Monday - Friday
-    
+        dow: [1, 2, 3, 4, 5], // Monday - Friday
+
         start: '9:00', // a start time (9am)
         end: '17:00', // an end time (5pm)
       }
     }
   }
 
-   /*Date Picker Event*/
-   jumpToDate(date) {
-       this.fc.gotoDate(date);
-       this.fc.changeView("agendaDay");
-   }
+  /*Date Picker Event*/
+  jumpToDate(date) {
+    this.fc.gotoDate(date);
+    this.fc.changeView("agendaDay");
+  }
 
   handleEventClick(event) {
     var clickedTopic = event.calEvent;
@@ -98,7 +104,7 @@ export class CalendarComponent implements OnInit {
 
     this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
     this.fc.updateEvent(clickedTopic);
-    this.updateEvents(calendarEvent);
+    this.addEvent(calendarEvent);
   }
 
   handleEventDrop(calendar) {
@@ -107,20 +113,21 @@ export class CalendarComponent implements OnInit {
     var milliDate = calendarEvent.start.getTime();
 
     droppedTopic.status = this.statusService.updateMovedStatus(calendarEvent);
-    console.log(calendarEvent);
     droppedTopic.color = this.statusService.getStatusColor(droppedTopic.status);
 
     //update date and status synchronously
     this.calendarService.changeTopicDate(droppedTopic.subtopicId, 22506, milliDate)
-      .subscribe(response => {
-        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
-      },
-      error => {
-        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
-      }
-    );
+      .subscribe(
+        response => {
+          this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+        },
+        error => {
+          this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+        }
+      );
     this.fc.updateEvent(droppedTopic);
-    this.updateEvents(calendarEvent);
+    this.removeEvent(calendarEvent);
+    this.addEvent(calendarEvent);
   }
 
   mapSubtopicFromEvent(event): CalendarEvent {
@@ -133,14 +140,34 @@ export class CalendarComponent implements OnInit {
   }
 
   /* Updates the subtopic in the events array after an event handler is fired */
-  updateEvents(changedSubtopic: CalendarEvent) {
+  removeEvent(changedSubtopic: CalendarEvent, index?: number) {
     this.events[0].start = this.overridenDate;
-    for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i].title == changedSubtopic.title) {
-        this.events[i].status = changedSubtopic.status;
-        this.events[i].start = changedSubtopic.start;
-        this.events[i].color = changedSubtopic.color;
+
+    if (index == undefined) {
+      for (let i = 0; i < this.events.length; i++) {
+        if (this.events[i].title == changedSubtopic.title) {
+          index = i;
+        }
       }
     }
+
+    this.events.splice(index, 1);
+  }
+
+  addEvent(calendarEvent: CalendarEvent) {
+    let index = this.eventExists(calendarEvent);
+    if (index > -1) {
+      this.removeEvent(calendarEvent, index);
+    } 
+    this.events.push(calendarEvent);
+  }
+
+  eventExists(calendarEvent: CalendarEvent): number {
+    for (let i = 0; i < this.events.length; i++) {
+      if (this.events[i].title == calendarEvent.title) {
+        return i;
+      }
+    }
+    return -1;
   }
 }

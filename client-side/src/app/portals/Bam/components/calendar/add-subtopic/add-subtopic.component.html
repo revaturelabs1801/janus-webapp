@@ -1,44 +1,38 @@
-<div class="container">
-  <div class="row justify-content-md-center">
-    <div class="col-12 text-center"><img *ngIf="loading" src='/assets/img/revloading.gif'></div>
-    <div *ngIf="!loading && currentBatch != null" class="col-md-8 col-sm-12">
+<div class="sidebar-element">
+  <div class="row">
+    <div>
+      <img *ngIf="loading" src='/assets/img/revloading.gif'>
+    </div>
+    <div *ngIf="!loading && currentBatch != null">
       <div class="form-group row">
-        <div class="col-12"><h1>Add Subtopics</h1></div>
+        <div>Add subtopic to calendar</div>
       </div>
       <div class="form-group row">
-        <label for="batch" class="col-4 col-form-label">Batch Name:</label>
-        <div class="col-8">
-          <input class="form-control" type="text" readonly id="batch" value="{{currentBatch.name}}">
+        <label for="batch" class="form-label">Batch:</label>
+        <input class="form-control" type="text" readonly id="batch" value="{{currentBatch.name}}">
+      </div>
+      <div class="form-group row">
+        <label for="topics" class="form-label">Topic:</label>
+        <select [(ngModel)]="selectedTopic" class="form-control" id="topics" (change)="onChangeLoadSubtopics()">
+          <option selected>Select a Topic</option>
+          <option *ngFor="let topic of uniqueTopics" value="{{topic}}">{{topic}}</option>
+        </select>
+      </div>
+      <div class="form-group row">
+        <label for="subtopics" class="form-label">Subtopic:</label>
+        <select [(ngModel)]="selectedSubtopic" *ngIf="subtopicList.length > 0" class="form-control" id="subtopics" (change)="onChangeGetSubtopicInfo()">
+          <option selected>Select a Subtopic</option>
+          <option *ngFor="let subtopic of subtopicList" value="{{subtopic}}">{{subtopic}}</option>
+        </select>
+      </div>
+      <div class="form-group row">
+        <label for="date" class="form-label">Start:</label>
+        <div>
+          <input [(ngModel)]="selectedDate" class="form-control" type="date" id="date">
         </div>
       </div>
       <div class="form-group row">
-        <label for="topics" class="col-4 col-form-label">Topic Name:</label>
-        <div class="col-8">
-          <select [(ngModel)]="selectedTopic" class="form-control" id="topics" (change)="onChangeLoadSubtopics()">
-              <option selected>Select a Topic</option>
-              <option *ngFor="let topic of uniqueTopics" value="{{topic}}">{{topic}}</option>
-            </select>
-          </div>
-      </div>
-      <div class="form-group row">
-        <label for="subtopics" class="col-4 col-form-label">SubTopic Name:</label>
-        <div class="col-8">
-          <select [(ngModel)]="selectedSubtopic" *ngIf="subtopicList.length > 0" class="form-control" id="subtopics" (change)="onChangeGetSubtopicInfo()">
-              <option selected>Select a Subtopic</option>
-              <option *ngFor="let subtopic of subtopicList" value="{{subtopic}}">{{subtopic}}</option>
-            </select>
-          </div>
-      </div>
-      <div class="form-group row">
-          <label for="date" class="col-4 col-form-label">Start Date:</label>
-          <div class="col-8">
-            <input [(ngModel)]="selectedDate" class="form-control" type="date" id="date">
-          </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-12 text-right">
-          <button type="button" class="btn btn-primary" (click)="saveSubtopic()">Submit</button>
-        </div>
+        <button type="button" class="btn btn-primary" (click)="saveSubtopic()">Submit</button>
       </div>
       <ngb-alert *ngIf="alertMessage" type="danger" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
       <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
@@ -53,19 +47,19 @@
   </div>
 </div>
 <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title">Subtopic already exists</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <h5>Would you like to override the date?</h5>
-      <p>Previous date: {{prevDate}}</p>
-      <p>Date selected: {{newDate}}</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('ok')">OK</button>
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
-    </div>
-  </ng-template>
+  <div class="modal-header">
+    <h4 class="modal-title">Subtopic already exists</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>Would you like to override the date?</h5>
+    <p>Previous date: {{prevDate}}</p>
+    <p>Date selected: {{newDate}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('ok')">OK</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
+  </div>
+</ng-template>
