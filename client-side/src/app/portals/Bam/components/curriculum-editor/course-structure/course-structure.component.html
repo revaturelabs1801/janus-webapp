@@ -1,34 +1,43 @@
-
 <div id="accordion" role="tablist">
-  <h2>Curriculum Structure</h2>
-    <button  class="currBtn" data-toggle="modal" data-target="#addCurricModel">
-      Add New Curriculum<i class="fas fa-plus"></i></button>
+  <button class="currBtn" data-toggle="modal" data-target="#addCurricModel">
+    Add New Curriculum
+    <i class="fas fa-plus"></i>
+  </button>
 
 
-<div class="" id="currAccordion" role="tablist">
-  <div class="offset-1 col-md-10" *ngFor="let currName of uniqCurrNames; let i = index">
-    <div class="currType" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
-      {{currName}}
-      <span (click)="newVersion(currName, i)">
-        <i class="fas fa-plus-circle"></i>
-      </span>
-    </div>
-    <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#currAccordion">
-      <div class="currTypeVer" *ngFor="let currVersion of uniqCurrVersions[i]">
-        <span (click)="viewCurrSchedule(currVersion.id)">
-          Version #{{currVersion.curriculumVersion}}
-        </span>
-        <span (click)="makeMaster(currVersion, i)">
-          <span *ngIf="currVersion.isMaster">
-            <i class="fas fa-chess-king fa-1x" aria-hidden="true"> </i>
-          </span>
-          <span *ngIf="!currVersion.isMaster">
-            <i class="fas fa-chess-king fa-1x crownless" aria-hidden="true"> </i>
-          </span>
+  <div class="" id="currAccordion" role="tablist">
+    <div class="offset-1 col-md-10" *ngFor="let currName of uniqCurrNames; let i = index">
+      
+      <div class="currType" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
+        {{currName}}
+        <span (click)="newVersion(currName, i)">
+          <i class="fas fa-plus-circle"></i>
         </span>
       </div>
+
+      <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#currAccordion">
+        
+        <div class="currTypeVer" *ngFor="let currVersion of uniqCurrVersions[i]">
+          <span (click)="viewCurrSchedule(currVersion.id)">
+            Version #{{currVersion.curriculumVersion}}
+          </span>
+
+          <span (click)="makeMaster(currVersion, i)">
+            <span *ngIf="currVersion.isMaster">
+              <i class="fas fa-chess-king fa-1x" aria-hidden="true"> </i>
+            </span>
+            <span *ngIf="!currVersion.isMaster">
+              <i class="fas fa-chess-king fa-1x crownless" aria-hidden="true"> </i>
+            </span>
+          </span>
+        </div>
+
+      </div>
+
     </div>
+
   </div>
+
 </div>
 
 <div id="addCurricModel" class="modal fade" role="dialog">
@@ -39,11 +48,11 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-    <input #addNewCurric class="addCur"/>
-    <button class="btn btn-default" (click)=" createCurr(addNewCurric.value) " >Create</button>
+        <input #addNewCurric class="addCur" />
+        <button class="btn btn-default" (click)=" createCurr(addNewCurric.value) ">Create</button>
       </div>
       <div class="modal-footer">
-       
+
       </div>
     </div>
   </div>

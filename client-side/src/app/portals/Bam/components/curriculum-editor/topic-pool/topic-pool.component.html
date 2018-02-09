@@ -15,7 +15,7 @@
       <div [attr.id]="i" class="collapse hide fit-content" aria-labelledby="headingOne" data-parent="#accordion">
 
         <div *ngFor="let sub of subArray[i]">
-          <div pDraggable="subtopicdrag" (onDragStart)="sendCurrentlyDragged($event, sub)" class="subtopic offset-1 col-9 " data-toggle="tooltip"
+          <div pDraggable="subtopicdrag" (onDragStart)="sendCurrentlyDragged(sub)" class="subtopic offset-1 col-9 " data-toggle="tooltip"
             data-placement="right" [attr.title]="sub.name">
             <span>
                

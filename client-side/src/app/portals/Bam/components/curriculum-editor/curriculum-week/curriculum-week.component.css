@@ -15,6 +15,7 @@
     cursor: pointer;
 }
 
+
 .week:hover {
     font-size: 1.2vw;
 }
@@ -25,10 +26,21 @@
 
 .weeksrow {
 width: 100%;
+}
 
+.removeWeekBtn {
+    float: center;
+    color: red;
+    position: relative;
+    /* left: 670px; */
+    left: 88%;
+    font-size: 2.1em;
+}
+
+.removeWeekBtn:hover {
+    color: black;
 }
 
 .putBorder{
     border: 1px solid black;
 }
-

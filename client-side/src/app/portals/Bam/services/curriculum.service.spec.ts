@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { CurriculumService } from './curriculum.service';
 
-describe('CirriculumService', () => {
+describe('CurriculumService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [CurriculumService]
