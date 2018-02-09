@@ -18,7 +18,7 @@
       <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#currAccordion">
         
         <div class="currTypeVer" *ngFor="let currVersion of uniqCurrVersions[i]">
-          <span (click)="viewCurrSchedule(currVersion.id)">
+          <span (click)="viewCurrSchedule(currVersion)">
             Version #{{currVersion.curriculumVersion}}
           </span>
 

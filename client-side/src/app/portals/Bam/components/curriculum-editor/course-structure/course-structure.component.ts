@@ -26,15 +26,14 @@ export class CourseStructureComponent implements OnInit {
   }
 
    /**
-   * view the schedule of a specific curriculum identified
-   * by its curriculum Id. Sends the schedule (CurriculumSubtopic[])
+   * view the schedule of a specific curriculum.
+   * Sends the schedule (CurriculumSubtopic[])
    * to BehaviorSubject in CurriculumService
    * @author Carter Taylor (1712-Steve)
-   * @param curId - id of curriculum selected from view
+   * @param currVersion - curriculum object selected from view
    */
-  viewCurrSchedule(curId: number) {
-
-    this.curriculumService.getSchedualeByCurriculumId(curId).subscribe(
+  viewCurrSchedule(currVersion: Curriculum) {
+    this.curriculumService.getSchedualeByCurriculumId(currVersion.id).subscribe(
       data => {
         this.curriculumService.changeData(data);
 
@@ -43,6 +42,7 @@ export class CourseStructureComponent implements OnInit {
         console.log(error);
       }
     );
+    this.messageEvent.emit(currVersion);
   }
 
   /**
@@ -183,8 +183,8 @@ export class CourseStructureComponent implements OnInit {
   }
 
   /**
-   * creates a new curriculum version and sends data to
-   * curriculum service to be sent to curriculum-week component
+   * creates a new curriculum version and sends schedule (CurriculumSubtopic[])
+   * of the master version of this curriculum curriculum service to be sent to curriculum-week component
    * @author Carter Taylor (1712-Steve)
    * @param currName - curriculum name
    * @param index - index of curriculum type, allows for faster navigation
@@ -198,14 +198,13 @@ export class CourseStructureComponent implements OnInit {
         newVersionNum = elem.curriculumVersion;
       }
     });
-    newVersionNum++;
-
-    const newCurrVer: Curriculum = new Curriculum(null, currName, newVersionNum,
-      null, null, null, null, 0);
-    this.messageEvent.emit(newCurrVer);
 
     const master = this.uniqCurrVersions[typeIndex].filter(e => e.isMaster === 1);
-    this.viewCurrSchedule(master[0].id);
+    this.viewCurrSchedule(master[0]);
+
+    const newCurrVer: Curriculum = new Curriculum(null, currName, ++newVersionNum,
+      null, null, null, null, 0);
+    this.messageEvent.emit(newCurrVer);
   }
 
 }

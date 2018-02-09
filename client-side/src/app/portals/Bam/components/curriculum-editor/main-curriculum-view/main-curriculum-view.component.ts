@@ -23,7 +23,7 @@ export class MainCurriculumViewComponent implements OnInit {
     allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
     toggleTab = 1;
     selectedCurr: Curriculum;
-    isNewCurr = false;
+    isNewVer = false;
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
     constructor(private curriculumService: CurriculumService,
@@ -38,8 +38,14 @@ export class MainCurriculumViewComponent implements OnInit {
         this.toggleTab = view;
     }
 
-    receiveMessage($event) {
-        this.selectedCurr = $event;
+    receiveMessage(event) {
+        this.selectedCurr = event;
+        if (event.id == null) {
+            console.log('i am new!');
+            this.isNewVer = true;
+        } else {
+            this.isNewVer = false;
+        }
     }
 
     saveCurr() {
@@ -54,7 +60,8 @@ export class MainCurriculumViewComponent implements OnInit {
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
             data => console.log(data),
-            error => console.log(error)
+            error => console.log(error),
+            () => this.isNewVer = false
         );
     }
 
