@@ -53,7 +53,8 @@ export class MainCurriculumViewComponent implements OnInit {
 
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
-            data => console.log(data)
+            data => console.log(data),
+            error => console.log(error)
         );
     }
 
