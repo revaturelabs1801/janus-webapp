@@ -18,9 +18,9 @@ import { Observable } from 'rxjs/Observable';
 })
 export class WelcomeComponent implements OnInit {
 
-  private currentUser: BamUser;
+  public currentUser: BamUser;
   private message: String;
-  private batchCount: number;
+  public batchCount: number;
   private batches: Batch [];
   private selectedBatch: Batch;
 
