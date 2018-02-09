@@ -1,4 +1,5 @@
 <div *ngIf="selectedCurr" class="offset-7">{{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
+
 <div class="row">
     <div class="offset-1 col-3 noWrapDog">
         <ngb-tabset>
@@ -26,7 +27,7 @@
     </span>
 
     <span class="col-8 align " id="style-7">                
-            <span *ngIf="allWeeks.length !== 0" class="buttons">
+            <span class="buttons">
                 <span class="saveCurr">
                         <button (click)="saveCurr()">Save Curriculum</button>
                 </span>

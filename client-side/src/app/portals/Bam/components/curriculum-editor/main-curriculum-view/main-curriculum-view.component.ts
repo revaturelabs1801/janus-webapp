@@ -23,6 +23,8 @@ export class MainCurriculumViewComponent implements OnInit {
     allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
     toggleTab = 1;
     selectedCurr: Curriculum;
+  
+
     isNewCurr = false;
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
@@ -40,8 +42,17 @@ export class MainCurriculumViewComponent implements OnInit {
 
     receiveMessage($event) {
         this.selectedCurr = $event;
+        if(this.selectedCurr.id = null){
+            this.selectedCurr.isMaster
+            
+        } 
+        
     }
 
+ 
+
+  
+    
     saveCurr() {
         this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
         this.selectedCurr.curriculumCreator = this.sessionService.getUser();

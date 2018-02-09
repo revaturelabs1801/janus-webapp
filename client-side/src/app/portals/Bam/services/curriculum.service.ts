@@ -137,12 +137,12 @@ export class CurriculumService {
 
 
 
-retainString(curric: Curriculum) {
+// retainString(curric: Curriculum) {
 
-// const  curric.curriculumName;
-// curric.curriculumVersion;
+// // const  curric.curriculumName;
+// // curric.curriculumVersion;
 
-}
+// }
 
 
 }
