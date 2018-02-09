@@ -42,6 +42,12 @@
       </div>
     </div>
   </div>
+  <div class="row justify-content-center">
+    <ngb-alert class="col-sm-12 col-md-6 col-lg-4" *ngIf="editBatchAlertMessage" [type]="editBatchAlertType" (close)="editBatchAlertMessage = null">{{ editBatchAlertMessage }}</ngb-alert>
+  </div>
+  <div class="row justify-content-center">
+    <ngb-alert class="col-12" *ngIf="associateAlertMessage" [type]="associateAlertType" (close)="associateAlertMessage = null">{{ associateAlertMessage }}</ngb-alert>
+  </div>
 
   <div class="nav nav-tabs">
     <div class="nav-item" (click)="toggleRemove()"><a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>

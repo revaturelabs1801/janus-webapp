@@ -3,6 +3,7 @@ import { Batch } from '../../../models/batch.model';
 import { BatchType } from '../../../models/batchtype.model';
 import { Output } from '@angular/core/src/metadata/directives';
 import { BatchService } from '../../../services/batch.service';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-edit-batch',
@@ -22,7 +23,18 @@ export class EditBatchComponent implements OnInit {
   batchTypes: BatchType[];
   showAddUserTable: boolean = false;
 
-  constructor(private batchService: BatchService) {
+  editBatchAlertType: string;
+  editBatchAlertMessage: string;
+
+  associateAlertType: string;
+  associateAlertMessage: string;
+
+  constructor(private batchService: BatchService, private sessionService: SessionService) {
+    this.editBatchAlertType = "danger";
+    this.editBatchAlertMessage = "Warning!";
+
+    this.associateAlertType = "success";
+    this.associateAlertMessage = "Success!";
   }
 
   /**
@@ -55,7 +67,21 @@ export class EditBatchComponent implements OnInit {
     }
 
     this.batch.type = selectedType;
-    this.batchService.updateBatch(this.batch).subscribe( status => console.log(status.statusText) );
+    this.batchService.updateBatch(this.batch).subscribe( status => {
+      this.batchAlert("success", "Updated: " + this.batch.name + " successfully! ");
+    }, error => {
+      console.log(error);
+      this.batchAlert("danger", "Error: Update " + this.batch.name + " unsuccessful! ");
+    });
+  }
+
+  batchAlert(type, message) {
+    this.editBatchAlertMessage = message;
+    this.editBatchAlertType = type;
+  }
+
+  closeEditBatchAlert() {
+    this.editBatchAlertMessage = null;
   }
 
   /**
@@ -77,7 +103,8 @@ export class EditBatchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.batchService.getBatchById(4).subscribe( batch => this.batch = batch);
+    // this.batch = this.sessionService.getSelectedBatch();
+    this.batchService.getBatchById(4).subscribe( batch => this.batch = batch );
     this.batchService.getAllBatchTypes().subscribe( types => this.batchTypes = types);
   }
 }
