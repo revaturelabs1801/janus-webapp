@@ -205,7 +205,7 @@ export class AddSubtopicComponent implements OnInit {
             this.batchSubtopics.push(service);
             this.currentlyAddedSubtopic.push(service);
             this.changeSuccessMessage(`Successfully added!`);
-            this.calendarService.addSubtopicToCalendar(this.subtopic);
+            this.calendarService.addSubtopicToCalendar(service);
           }, error => this.changeAlertMessage(`Failed to add Subtopic, check all inputs`)
         );
       } else {
@@ -289,6 +289,7 @@ export class AddSubtopicComponent implements OnInit {
     this.modalService.open(content).result.then(
       (result) => {
         if (result === 'ok') {
+          this.subtopic.subtopicId = this.subtopicId;
           this.calendarService.addSubtopicToCalendar(this.subtopic);
           this.subtopicsService.updateDate(this.subtopicId, 22506, this.slectedDateMiliseconds).subscribe(
             () => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ScheduleModule, Schedule, } from 'primeng/primeng';
 import { CalendarModule, Calendar } from 'primeng/primeng';
 import { Subtopic } from '../../../models/subtopic.model';
@@ -9,7 +9,7 @@ import { CalendarStatusService } from '../../../services/calendar-status.service
 /**
     *	This component will serve as the main calendar view. 
     *   This component leverages the PrimeNG schedule UI component to render a drag and drop calendar for viewing and updating a batch's subtopics
-*	@author Jordan DeLong (1712-dec10-java-Steve)
+*	@author Jordan DeLong, Sean Sung (1712-dec10-java-Steve)
 *	
 *	
 */
@@ -22,10 +22,16 @@ import { CalendarStatusService } from '../../../services/calendar-status.service
 export class CalendarComponent implements OnInit {
   @ViewChild('fc') fc: Schedule;
   @ViewChild('datePicker') datePicker: Calendar;
+  @ViewChild('tooltip') tooltip: ElementRef;
+  @ViewChild('body') body: ElementRef;
+  @ViewChild('status') status: ElementRef;
 
   events: CalendarEvent[] = [];
   gotoDateValue: Date;
   overridenDate: Date;
+
+  subtopicTooltip: string;
+  statusTooltip: string;
 
   constructor(private calendarService: CalendarService, private statusService: CalendarStatusService) { }
 
@@ -50,6 +56,7 @@ export class CalendarComponent implements OnInit {
     //event handler for newly added topics
     this.calendarService.addCalendarEvent
       .subscribe(calendarEvent => {
+        console.log(calendarEvent);
         this.addEvent(calendarEvent);
       });
 
@@ -126,8 +133,28 @@ export class CalendarComponent implements OnInit {
         }
       );
     this.fc.updateEvent(droppedTopic);
-    console.log(this.events);
     this.updateEvent(calendarEvent);
+  }
+
+  /**
+   * Unhides the tooltip and positions it above the element
+   */
+  handleEventMouseover(event) {
+    let y = event.jsEvent.target.getBoundingClientRect().top;
+    let offsetY = this.body.nativeElement.getBoundingClientRect().top;
+    y = y - offsetY + 50;
+    let mouseoverTopic = event.calEvent;
+    this.subtopicTooltip = mouseoverTopic.title;
+    this.statusTooltip = mouseoverTopic.status;
+
+    this.status.nativeElement.style.background = this.statusService.getStatusColor(this.statusTooltip);
+    this.tooltip.nativeElement.style.display = 'inline';
+    this.tooltip.nativeElement.style.top = y + 'px';
+    this.tooltip.nativeElement.style.left = event.jsEvent.clientX + 'px';
+  }
+
+  handleEventMouseout(event) {
+    this.tooltip.nativeElement.style.display = 'none';
   }
 
   mapSubtopicFromEvent(event): CalendarEvent {
@@ -143,7 +170,7 @@ export class CalendarComponent implements OnInit {
     //reset the first index date that gets overriden on drops
     this.events[0].start = this.overridenDate;
     let index = this.eventExists(changedSubtopic);
-    //update overridenDate to new date if first index
+    //update overridenDate to new date if updating first index
     if(index == 0) {
       this.overridenDate = this.events[index].start;
     }
