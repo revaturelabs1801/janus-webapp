@@ -50,7 +50,7 @@ export class AddSubtopicComponent implements OnInit {
   private topicId: number;
   private subtopicId: number;
 
-  private currentBatch: Batch;
+  public currentBatch: Batch;
   private batchSubtopics: Subtopic[] = [];
 
   private topicName: TopicName;

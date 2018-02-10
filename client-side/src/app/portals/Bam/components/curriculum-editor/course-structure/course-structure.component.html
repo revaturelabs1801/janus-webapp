@@ -18,7 +18,7 @@
       <div [attr.id]="i + 'v'" class="collapse hide" aria-labelledby="headingOne" data-parent="#currAccordion">
         
         <div class="currTypeVer" *ngFor="let currVersion of uniqCurrVersions[i]">
-          <span (click)="viewCurrSchedule(currVersion.id)">
+          <span (click)="viewCurrSchedule(currVersion)">
             Version #{{currVersion.curriculumVersion}}
           </span>
 
@@ -49,7 +49,7 @@
       </div>
       <div class="modal-body">
         <input #addNewCurric class="addCur" />
-        <button class="btn btn-default" (click)=" createCurr(addNewCurric.value) ">Create</button>
+        <button class="btn btn-default" (click)="createCurr(addNewCurric.value)"   data-dismiss="modal">Create</button>
       </div>
       <div class="modal-footer">
 

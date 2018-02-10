@@ -132,17 +132,4 @@ export class CurriculumService {
       }
     );
   }
-
-
-
-
-
-retainString(curric: Curriculum) {
-
-// const  curric.curriculumName;
-// curric.curriculumVersion;
-
-}
-
-
 }

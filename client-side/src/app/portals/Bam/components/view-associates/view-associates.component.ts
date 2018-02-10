@@ -15,6 +15,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export class ViewAssociatesComponent implements OnInit {
   p: number = 1;
   associateList: BamUser[];
+  searchTerm: string;
+  order: string;
   constructor(private usersService: UsersService) { }
   ngOnInit() {
     this.loadAssociatesInBatch();
