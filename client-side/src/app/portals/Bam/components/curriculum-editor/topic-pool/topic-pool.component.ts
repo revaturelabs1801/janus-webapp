@@ -6,6 +6,8 @@ import { ViewChild } from '@angular/core/src/metadata/di';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { DragndropService } from '../../../services/dragndrop.service';
 import { SearchTextService } from '../../../services/search-text.service';
+import { TopicService } from '../../../services/topic.service';
+import { SubtopicService } from '../../../services/subtopic.service';
 
 @Component({
   selector: 'app-topic-pool',
@@ -23,7 +25,10 @@ export class TopicPoolComponent implements OnInit {
   constructor(private curriculumService: CurriculumService,
     public curriculumWeekComponent: CurriculumWeekComponent,
     private dndService: DragndropService,
-    private searchTextService: SearchTextService) { }
+    private searchTextService: SearchTextService,
+    private topicService: TopicService,
+    private subtopicService: SubtopicService
+  ) { }
 
 
 
@@ -46,6 +51,7 @@ export class TopicPoolComponent implements OnInit {
   getTopics() {
     this.curriculumService.getAllTopicPool().subscribe(
       data => {
+        console.log(data);
         this.subTopicName = data;
         this.initTopics();
         this.uniqueTopics();
@@ -127,7 +133,7 @@ export class TopicPoolComponent implements OnInit {
 
 
   /**
-   * This method is used to send the currently dragged object 
+   * This method is used to send the currently dragged object
    * @author Mohamad Alhindi
    * @param event
    * @param sub
@@ -136,12 +142,18 @@ export class TopicPoolComponent implements OnInit {
     this.dndService.sendSubtopic(sub);
   }
 
-  // createTopic(newTopic: String) {
-  //   console.log(newTopic);
-  //   const topic = new Topic(0, null , 0, null, null, null, null, 0);
-  //   curric.curriculumName = curTitle;
-  //   curric.curriculumVersion = 1;
-  //   this.curriculumService.retainString(curric);
-  // }
+  createTopic(newTopic: string, newSubTopic: string) {
+    this.topicService.addTopicName(newTopic).subscribe(
+      topic => {
+        console.log(topic);
+        this.subtopicService.addSubTopicName(newSubTopic, topic.id, 1).subscribe(
+          data => {
+            console.log(data);
+            // this.topics.push(topic.name);
+          }
+        );
+      }
+    );
+  }
 
 }

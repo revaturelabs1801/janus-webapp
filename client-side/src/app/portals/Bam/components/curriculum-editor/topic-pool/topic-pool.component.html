@@ -53,8 +53,9 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <input #addNewTopic class="addCur" />
-        <button class="btn btn-default" (click)=" createTopic(addNewTopic.value) ">Create</button>
+        Topic:<br> <input #addNewTopic class="addCur" /> <br><br>
+        Subtopic: <br> <input #defaultSubTopic class="addCur" /> <br><br>
+        <button class="btn btn-default" (click)=" createTopic(addNewTopic.value, defaultSubTopic.value); addNewTopic.value =''; defaultSubTopic.value ='';" data-dismiss="modal">Create</button>
       </div>
       <div class="modal-footer">
 

@@ -45,6 +45,8 @@ import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
+import { TopicService } from './services/topic.service';
+import { SubtopicService } from './services/subtopic.service';
 
 
 @NgModule({
@@ -110,7 +112,9 @@ import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic
     CalendarService,
     AddSubtopicService,
     CalendarStatusService,
-    SearchTextService
+    SearchTextService,
+    TopicService,
+    SubtopicService
   ],
   exports: [
     SearchPipe
