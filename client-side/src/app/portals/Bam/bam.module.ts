@@ -42,6 +42,7 @@ import { CalendarStatusService } from './services/calendar-status.service';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { DragDropModule } from 'primeng/primeng';
     NgbModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
+    Ng2OrderModule,
     ScheduleModule,
     DragDropModule,
     CalendarModule,
