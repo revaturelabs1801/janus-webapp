@@ -1,6 +1,6 @@
-import { Component, OnInit, Input} from '@angular/core';
-import { BamUser } from '../../models/bamuser.model';
-import { UsersService } from '../../services/users.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { BamUser } from '../../../models/bamuser.model';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-add-associate-to-batch',
@@ -10,9 +10,8 @@ import { UsersService } from '../../services/users.service';
 
 /**
  * Class for adding an associate to the batch.
- * @author Patrick Kennedy
- * @author Shane Avery Sistoza
- * @batch 1712-Steve
+ * @author Patrick Kennedy | Batch: 1712-Steve
+ * @author Shane Avery Sistoza | Batch: 1712-Steve
  *
  */
 export class AddAssociateToBatchComponent implements OnInit {
@@ -20,7 +19,7 @@ export class AddAssociateToBatchComponent implements OnInit {
   associates: BamUser[];
   @Input() searchTerm: string;
 
-  constructor(public usersService: UsersService) {
+  constructor(private usersService: UsersService) {
   }
 
   ngOnInit() {

@@ -10,7 +10,7 @@ import { BatchProgressBarComponent } from './components/dashboard/batch-progress
 import { HomeComponent } from './components/home/home.component';
 import { CurriculumWeekComponent } from './components/curriculum-editor/curriculum-week/curriculum-week.component';
 
-import { ViewAssociatesComponent } from './components/view-associates/view-associates.component';
+import { ViewAssociatesComponent } from './components/calendar/view-associates/view-associates.component';
 import { AllBatchesComponent } from './components/batches/all-batches/all-batches.component';
 import { BatchesTableComponent } from './components/batches/batches-table/batches-table.component';
 import { MyBatchesComponent } from './components/batches/my-batches/my-batches.component';
@@ -19,9 +19,9 @@ import { DashboardInfoComponent } from './components/dashboard/dashboardinfo/das
 import { WelcomeComponent } from './components/dashboard/welcome/welcome.component';
 import { LoadingSpinnerComponent } from './components/dashboard/ui/loading-spinner/loading-spinner.component';
 import { CalendarService } from './services/calendar.service';
-import { EditBatchComponent } from './components/edit-batch/edit-batch.component';
-import { AddAssociateToBatchComponent } from './components/add-associate-to-batch/add-associate-to-batch.component';
-import { RemoveAssociateFromBatchComponent } from './components/remove-associate-from-batch/remove-associate-from-batch.component';
+import { EditBatchComponent } from './components/calendar/edit-batch/edit-batch.component';
+import { AddAssociateToBatchComponent } from './components/calendar/add-associate-to-batch/add-associate-to-batch.component';
+import { RemoveAssociateFromBatchComponent } from './components/calendar/remove-associate-from-batch/remove-associate-from-batch.component';
 import { BatchService } from './services/batch.service';
 import { SearchPipe } from './pipes/search.pipe';
 import { SessionService } from './services/session.service';
