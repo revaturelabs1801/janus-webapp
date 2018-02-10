@@ -109,6 +109,8 @@ export class MainCurriculumViewComponent implements OnInit {
 
     /**
      * When the synch button is clicked, calls the synchBatch method in the curriculum service
+     * @author: Jordan DeLong
+     * @batch:  1712-Dec11-2017
      */
     populateCalendar()
     {
