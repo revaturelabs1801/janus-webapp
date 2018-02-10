@@ -20,7 +20,7 @@ export class CalendarService {
   /**
    * Gets subtopics by batch and uses pagination to limit the results
    * apposed to getting them all at one time
-   * @author James Holzer | Batch: 1712-dec10-java-steve
+   * @author James Holzer Jordan DeLong| Batch: 1712-dec10-java-steve
    * @returns SubTopic[]
    * @param batchId number
    * @param pageNumber: number

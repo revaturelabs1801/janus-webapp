@@ -106,4 +106,9 @@ export class MainCurriculumViewComponent implements OnInit {
     removeWeek(weekNum: number) {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
     }
+
+    populateCalendar()
+    {
+        this.curriculumService.syncBatch(22506).subscribe();
+    }
 }
