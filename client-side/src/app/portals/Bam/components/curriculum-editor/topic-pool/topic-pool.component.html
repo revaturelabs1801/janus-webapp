@@ -3,7 +3,7 @@
     <app-topic-search></app-topic-search>
 
     <img src="../../../../../../assets/revatureLoad.gif" class="load" *ngIf="subTopicName.length === 0">
-    <div class="keepHeight" *ngFor="let topic of uniqarrFiltered; let i = index">
+    <div class="keepHeight" *ngFor="let topic of uniqarrFiltered; let i = index" (click)="clearSubtopicSearch()">
 
       <div class="btn offset-1 col-10 topic" data-toggle="collapse" [attr.data-target]="'#'+i" aria-expanded="true" aria-controls="collapseOne">
         <p [ngClass]="{'regularFont':topic.length <= 16, 'mediumFont':topic.length>=16 && topic.length<20 ,'smallFont':topic.length > 20}">

@@ -8,13 +8,22 @@ import { SearchTextService } from '../../../services/search-text.service';
 })
 export class SubtopicSearchComponent implements OnInit {
 
+  searchText: string;
+
   constructor(private textService: SearchTextService) { }
 
   ngOnInit() {
+    this.textService.getMessage().subscribe(data => {
+      if (data.type === 'clear') {
+        this.searchText = '';
+      }
+    });
   }
 
-  sendSearchText(event) {
-    this.textService.sendMessage(event, 'subtopic');
+  sendSearchText() {
+    this.textService.sendMessage(this.searchText, 'subtopic');
   }
+
+
 
 }

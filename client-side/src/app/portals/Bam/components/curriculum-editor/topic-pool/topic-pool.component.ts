@@ -110,6 +110,11 @@ export class TopicPoolComponent implements OnInit {
     });
   }
 
+  clearSubtopicSearch() {
+    this.searchText = '';
+    this.searchTextService.sendMessage('', 'clear');
+  }
+
   /** Uses the unique topics array to obtain the the subtopics that releate to each topic
     * @author Mohamad Alhindi
     * @batch 1712-Dec11-2017
