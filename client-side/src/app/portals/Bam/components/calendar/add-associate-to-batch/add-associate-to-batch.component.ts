@@ -38,7 +38,9 @@ export class AddAssociateToBatchComponent implements OnInit {
       if (associate.userId === user.userId) {
         this.usersService.addUserToBatch(4, associate.userId).subscribe(users => {
           this.associates = users;
-          this.associateAlert("success", `Added ${user.fName} ${user.lName} to current batch.`);
+          this.associateAlert("success", `Successfully added ${user.fName} ${user.lName} to current batch.`);
+        }, error => {
+          this.associateAlert("danger", `Error: couldn't add ${user.fName} ${user.lName} to current batch.`);
         });
         break;
       }
