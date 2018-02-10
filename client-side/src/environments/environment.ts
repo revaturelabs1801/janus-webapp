@@ -201,6 +201,7 @@ export const environment = {
         getBatchByIdURL: (batchId: number) => `${bam}/batches/byid/${batchId}/`,
         updateBatchUrl: () => `${bam}/batches/updatebatch`,
         getAllBatchTypesUrl: () => `${bam}/batches/batchtypes`,
+        removeSubtopicFromBatchUrl: (subtopicId: number) => `${bam}/batches/${subtopicId}`
     },
 
     curriculum: {
@@ -251,7 +252,7 @@ export const environment = {
     },
 
     subtopic: {
-       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${bam}/subtopic/${typeId}/${topicId}/${subtopicName}`
+       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${bam}/subtopic/${typeId}/${topicId}/${subtopicName}`,
     },
 
     addsubtopics: {
