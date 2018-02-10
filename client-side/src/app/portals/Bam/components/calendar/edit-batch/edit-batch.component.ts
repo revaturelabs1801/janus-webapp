@@ -3,6 +3,9 @@ import { Batch } from '../../../models/batch.model';
 import { BatchType } from '../../../models/batchtype.model';
 import { Output } from '@angular/core/src/metadata/directives';
 import { BatchService } from '../../../services/batch.service';
+import { SessionService } from '../../../services/session.service';
+import {debounceTime} from 'rxjs/operator/debounceTime'; 
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-edit-batch',
@@ -16,35 +19,44 @@ import { BatchService } from '../../../services/batch.service';
  * @author Shane Avery Sistoza | Batch: 1712-Steve
  */
 export class EditBatchComponent implements OnInit {
-
+  
+  // Specific to batch
   @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
-  @Input() searchTerm: string;
   batchTypes: BatchType[];
+  batchAlertType: string;
+  batchAlertMessage: string;
+
+  // Specific to associates that are apart of the batch.
+  @Input() searchTerm: string;
   showAddUserTable: boolean = false;
+  associateAlertType: string;
+  associateAlertMessage: string;
 
-  constructor(private batchService: BatchService) {
+  //For the timeout 
+  private batchTimeout = new Subject<string>();
+  private associateTimeout = new Subject<string>(); 
+  private timeoutTime = 2500;
+
+  constructor(private batchService: BatchService, private sessionService: SessionService) {
   }
 
   /**
-   * Toggle to the table to remove an associate from the batch.
-   */
-  toggleRemove() {
-    this.showAddUserTable = false;
-  }
-
-  /**
-   * Toggle to the table to add an associate to the batch.
-   */
-  toggleAdd() {
-    this.showAddUserTable = true;
-  }
-
-  /**
+   * Get the object of batch type.
    * Submit and persist updated changes to the batch.
+   * Persist updated changes to the session storage.
    *
    * @param      {number}  typeId  The type id the batch wil change to.
    */
   submit(typeId) {
+
+    //Check dates
+    //if dates are not correct 
+    //alert and return 
+    if(this.batch.startDate > this.batch.endDate){
+      //alert
+      this.batchAlert("danger", `Error: End date can't be earlier than start date.`);
+      return; 
+    }
 
     let selectedType: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
@@ -55,7 +67,35 @@ export class EditBatchComponent implements OnInit {
     }
 
     this.batch.type = selectedType;
-    this.batchService.updateBatch(this.batch).subscribe( status => console.log(status.statusText) );
+    this.batchService.updateBatch(this.batch).subscribe( status => {
+      this.batchAlert("success", `Updated:  ${this.batch.name} successfully! `);
+      this.sessionService.putSelectedBatchIntoSession(this.batch);
+    }, error => {
+      this.batchAlert("danger", `Error: Update ${this.batch.name} unsuccessful! `);
+    });
+  }
+
+  /**
+   * Adds a timed notification whether or not the updating batch was successful.
+   *
+   * @param      {string}  type     The type of notification {danger or success}.
+   * @param      {string}  message  The message for notification.
+   */
+  batchAlert(type, message) {
+    this.batchTimeout.next();
+    this.batchAlertMessage = message;
+    this.batchAlertType = type;
+  }
+
+  /**
+   * Adds a timed notification whether or not adding or removing an associate was successful.
+   *
+   * @param      {[string, string]}  assoc   Contains 2 string values type and messsage.
+   */
+  associateAlert(assoc) {
+    this.associateTimeout.next();
+    this.associateAlertType = assoc.type;
+    this.associateAlertMessage = assoc.message;
   }
 
   /**
@@ -77,7 +117,13 @@ export class EditBatchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.batchService.getBatchById(4).subscribe( batch => this.batch = batch);
+    this.batchTimeout.subscribe();
+    debounceTime.call(this.batchTimeout, this.timeoutTime).subscribe(() => this.batchAlertMessage = null);
+
+    this.associateTimeout.subscribe(); 
+    debounceTime.call(this.associateTimeout, this.timeoutTime).subscribe(() => this.associateAlertMessage = null);
+
+    this.batch = this.sessionService.getSelectedBatch();
     this.batchService.getAllBatchTypes().subscribe( types => this.batchTypes = types);
   }
 }
