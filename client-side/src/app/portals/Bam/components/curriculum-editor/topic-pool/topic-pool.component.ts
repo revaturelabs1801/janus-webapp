@@ -135,4 +135,13 @@ export class TopicPoolComponent implements OnInit {
   sendCurrentlyDragged(sub) {
     this.dndService.sendSubtopic(sub);
   }
+
+  // createTopic(newTopic: String) {
+  //   console.log(newTopic);
+  //   const topic = new Topic(0, null , 0, null, null, null, null, 0);
+  //   curric.curriculumName = curTitle;
+  //   curric.curriculumVersion = 1;
+  //   this.curriculumService.retainString(curric);
+  // }
+
 }
