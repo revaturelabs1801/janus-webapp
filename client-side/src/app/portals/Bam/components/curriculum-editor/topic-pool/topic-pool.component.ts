@@ -99,10 +99,14 @@ export class TopicPoolComponent implements OnInit {
    */
   initFilterTopicListener() {
     this.searchTextService.getMessage().subscribe(data => {
-      this.searchText = data.text.toString().toLowerCase();
-      this.uniqarrFiltered = this.uniqarr.filter(i => {
-        return i.toLowerCase().includes(this.searchText.toString());
-      });
+      if (data.type === 'topic') {
+        const topicSearch = data.text.toString().toLowerCase();
+        this.uniqarrFiltered = this.uniqarr.filter(i => {
+          return i.toLowerCase().includes(topicSearch.toString());
+        });
+      } else if (data.type === 'subtopic') {
+        this.searchText = data.text.toString().toLowerCase();
+      }
     });
   }
 

@@ -9,8 +9,11 @@ export class SearchTextService {
 
   constructor() { }
 
-  sendMessage(textToSearch: string) {
-    this.TopicSubject.next({ text: textToSearch });
+  sendMessage(textToSearch: string, type: string) {
+    this.TopicSubject.next({
+      type: type,
+      text: textToSearch
+     });
   }
 
   clearMessage() {

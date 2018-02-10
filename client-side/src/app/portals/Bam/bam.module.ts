@@ -44,6 +44,7 @@ import { CalendarStatusService } from './services/calendar-status.service';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
+import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { DragDropModule } from 'primeng/primeng';
     ViewAssociatesComponent,
     CalendarComponent,
     AddSubtopicComponent,
-    TopicSearchComponent
+    TopicSearchComponent,
+    SubtopicSearchComponent
   ],
   providers: [
     CurriculumWeekComponent,

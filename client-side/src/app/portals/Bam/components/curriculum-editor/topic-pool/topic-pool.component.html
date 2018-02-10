@@ -14,13 +14,14 @@
 
       <div [attr.id]="i" class="collapse hide fit-content" aria-labelledby="headingOne" data-parent="#accordion">
 
-        <div *ngFor="let sub of subArray[i]">
+        <app-subtopic-search></app-subtopic-search>
+        <div *ngFor="let sub of subArray[i] | search : 'name' : searchText">
           <div pDraggable="subtopicdrag" (onDragStart)="sendCurrentlyDragged(sub)" class="subtopic offset-1 col-9 " data-toggle="tooltip"
             data-placement="right" [attr.title]="sub.name">
             <span>
-               
+
               <i class="fas fa-circle fa-3x outerCircle">
-                  <i class="fas fa-circle fa-1x innerCircle"></i>
+                <i class="fas fa-circle fa-1x innerCircle"></i>
               </i>
             </span>
 
