@@ -50,25 +50,18 @@
     <ngb-alert class="col-12" *ngIf="associateAlertMessage" [type]="associateAlertType" (close)="associateAlertMessage = null">{{ associateAlertMessage }}</ngb-alert>
   </div>
 
-  <div class="row">
+<div class="row">
   <div class="col-12">
-    <ngb-tabset>
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <div (click)="showAddUserTable = false">Remove</div>
-        </ng-template>
-        <ng-template ngbTabContent>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <div (click)="showAddUserTable = true">Add</div>
-        </ng-template>
-        <ng-template ngbTabContent>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-    <div class="row"><input class="float-right" name="searchTerm" [(ngModel)]="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search"></div>  
+    <div class="nav nav-tabs">
+      <div class="nav-item" (click)="showAddUserTable = false"><a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
+      </div>
+      <div class="nav-item" (click)="showAddUserTable = true">
+        <a class="nav-link" [ngClass]="{active : showAddUserTable == true}"> Add </a>
+      </div>
+      <form class="ml-auto">
+        <input name="searchTerm" [(ngModel)]="searchTerm" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">  
+      </form>
+    </div>
   </div>
 </div>
 
