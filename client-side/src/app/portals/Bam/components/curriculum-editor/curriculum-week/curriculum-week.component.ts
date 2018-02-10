@@ -29,7 +29,7 @@ export class CurriculumWeekComponent implements OnInit {
   thursday: DaysDTO = new DaysDTO([]);
   friday: DaysDTO = new DaysDTO([]);
   weekDTO: WeeksDTO = new WeeksDTO([]);
-
+  @Input() readOnly: boolean;
 
   constructor(private dndService: DragndropService,
     private courseStructureComponent: CourseStructureComponent) { }

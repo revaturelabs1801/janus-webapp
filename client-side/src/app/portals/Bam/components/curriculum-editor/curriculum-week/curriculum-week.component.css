@@ -52,7 +52,10 @@ width: 100%;
 }
 
 .putBorder{
-    border: 1px solid black;
+    border: 1px solid black;    
+}
+
+.noTouch {
     opacity: .4;
     pointer-events: none;
 }

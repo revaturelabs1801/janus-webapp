@@ -24,7 +24,6 @@ export class MainCurriculumViewComponent implements OnInit {
     toggleTab = 1;
     selectedCurr: Curriculum;
     isNewVer = false;
-    isNewCurr = false;
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
     constructor(private curriculumService: CurriculumService,

@@ -144,6 +144,11 @@
      color-stop(0.86, rgb(251, 220, 205)));
  }
 
+ .noTouch {
+     opacity: 0.5;
+     pointer-events: none;
+ }
+
 
 
 

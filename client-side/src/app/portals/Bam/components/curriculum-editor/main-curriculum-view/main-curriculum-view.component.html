@@ -26,7 +26,7 @@
 <div class="row">
     <span class="offset-1 col-md-3 col-sm-3 col-4">
         <app-course-structure *ngIf="toggleTab === 1" (messageEvent)="receiveMessage($event)"></app-course-structure>
-        <app-topic-pool *ngIf="toggleTab === 2"></app-topic-pool>
+        <app-topic-pool [readOnly]="!isNewVer" *ngIf="toggleTab === 2" ></app-topic-pool>
     </span>
 
     <span class="col-8 align style-7" >                
@@ -41,7 +41,7 @@
             </span>        
         <br/>
         <br/>
-        <app-curriculum-week *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1"></app-curriculum-week>
+        <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1"></app-curriculum-week>
     </span>
 </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TopicName } from '../../../models/topicname.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { CurriculumService } from '../../../services/curriculum.service';
@@ -17,10 +17,11 @@ export class TopicPoolComponent implements OnInit {
   uniqarr: string[];
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
   subTopicName: SubtopicName[] = [];
+  @Input() readOnly: boolean;
+
   constructor(private curriculumService: CurriculumService,
               public curriculumWeekComponent: CurriculumWeekComponent,
               private dndService: DragndropService) { }
-
 
 
 
