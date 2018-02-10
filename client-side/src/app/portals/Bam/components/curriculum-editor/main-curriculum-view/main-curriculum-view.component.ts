@@ -107,6 +107,9 @@ export class MainCurriculumViewComponent implements OnInit {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
     }
 
+    /**
+     * When the synch button is clicked, calls the synchBatch method in the curriculum service
+     */
     populateCalendar()
     {
         this.curriculumService.syncBatch(22506).subscribe();
