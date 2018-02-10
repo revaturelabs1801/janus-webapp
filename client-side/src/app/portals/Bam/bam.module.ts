@@ -87,7 +87,8 @@ import { DragDropModule } from 'primeng/primeng';
     FilterBatchPipe,
     ViewAssociatesComponent,
     CalendarComponent,
-    AddSubtopicComponent
+    AddSubtopicComponent,
+    TopicSearchComponent
   ],
   providers: [
     CurriculumWeekComponent,
@@ -106,7 +107,8 @@ import { DragDropModule } from 'primeng/primeng';
     CurriculumService,
     CalendarService,
     AddSubtopicService,
-    CalendarStatusService
+    CalendarStatusService,
+    SearchTextService
   ],
   exports: [
     SearchPipe

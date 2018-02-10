@@ -5,6 +5,7 @@ import { CurriculumService } from '../../../services/curriculum.service';
 import { ViewChild } from '@angular/core/src/metadata/di';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { DragndropService } from '../../../services/dragndrop.service';
+import { SearchTextService } from '../../../services/search-text.service';
 
 @Component({
   selector: 'app-topic-pool',
@@ -15,11 +16,14 @@ import { DragndropService } from '../../../services/dragndrop.service';
 export class TopicPoolComponent implements OnInit {
   topics: string[] = [];
   uniqarr: string[];
+  uniqarrFiltered: string[];
+  searchText: string;
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
   subTopicName: SubtopicName[] = [];
   constructor(private curriculumService: CurriculumService,
-              public curriculumWeekComponent: CurriculumWeekComponent,
-              private dndService: DragndropService) { }
+    public curriculumWeekComponent: CurriculumWeekComponent,
+    private dndService: DragndropService,
+    private searchTextService: SearchTextService) { }
 
 
 
@@ -46,6 +50,7 @@ export class TopicPoolComponent implements OnInit {
         this.initTopics();
         this.uniqueTopics();
         this.getSubTopics();
+        this.initFilterTopicListener();
       },
       err => {
         console.log(err.status);
@@ -53,10 +58,10 @@ export class TopicPoolComponent implements OnInit {
     );
   }
 
-    /** Runs throught subTopicNames array and will extract the topics within the array
-     *  @author Mohamad Alhindi
-     * @batch 1712-Dec11-2017
-     */
+  /** Runs throught subTopicNames array and will extract the topics within the array
+   *  @author Mohamad Alhindi
+   * @batch 1712-Dec11-2017
+   */
   initTopics() {
     for (let i = 0; i < this.subTopicName.length; i++) {
       this.topics.push(this.subTopicName[i].topic.name);
@@ -80,6 +85,25 @@ export class TopicPoolComponent implements OnInit {
     */
   uniqueTopics() {
     this.uniqarr = this.topics.filter(this.onlyUnique);
+    this.uniqarrFiltered = this.uniqarr;
+  }
+
+  /**
+   *  Filters topics by search term
+   * @author Mohamed Swelam
+   * @author Dylan Britton
+   * @author Allan Poindexter
+   * @author David Graves
+   * @author Charlie Harris
+   * @batch 1712-Dec11-2017
+   */
+  initFilterTopicListener() {
+    this.searchTextService.getMessage().subscribe(data => {
+      this.searchText = data.text.toString().toLowerCase();
+      this.uniqarrFiltered = this.uniqarr.filter(i => {
+        return i.toLowerCase().includes(this.searchText.toString());
+      });
+    });
   }
 
   /** Uses the unique topics array to obtain the the subtopics that releate to each topic

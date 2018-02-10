@@ -15,7 +15,7 @@ export class TopicSearchComponent implements OnInit {
 
 
   sendSearchText(event) {
-    this.textService.sendMessage(event.target.value);
+    this.textService.sendMessage(event);
   }
 
 }
