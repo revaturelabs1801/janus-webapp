@@ -43,16 +43,16 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    <ngb-alert class="col-sm-12 col-md-6 col-lg-4" *ngIf="editBatchAlertMessage" [type]="editBatchAlertType" (close)="editBatchAlertMessage = null">{{ editBatchAlertMessage }}</ngb-alert>
+    <ngb-alert class="col-sm-12 col-md-6 col-lg-4" *ngIf="batchAlertMessage" [type]="batchAlertType" (close)="batchAlertMessage = null">{{ batchAlertMessage }}</ngb-alert>
   </div>
   <div class="row justify-content-center">
     <ngb-alert class="col-12" *ngIf="associateAlertMessage" [type]="associateAlertType" (close)="associateAlertMessage = null">{{ associateAlertMessage }}</ngb-alert>
   </div>
 
   <div class="nav nav-tabs">
-    <div class="nav-item" (click)="toggleRemove()"><a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
+    <div class="nav-item" (click)="showAddUserTable = false"><a class="nav-link" [ngClass]="{active : showAddUserTable == false}"> Remove </a>
     </div>
-    <div class="nav-item" (click)="toggleAdd()">
+    <div class="nav-item" (click)="showAddUserTable = true">
       <a class="nav-link" [ngClass]="{active : showAddUserTable == true}"> Add </a>
     </div>
     <form class="ml-auto">
@@ -62,10 +62,10 @@
 
   <div *ngIf="showAddUserTable; then addUser; else removeUser"></div>
   <ng-template #removeUser>
-    <app-remove-associate-from-batch [searchTerm]="searchTerm"></app-remove-associate-from-batch>
+    <app-remove-associate-from-batch [searchTerm]="searchTerm" [associateAlertMessage]="associateAlertMessage" [associateAlertType]="associateAlertType"></app-remove-associate-from-batch>
   </ng-template>
   <ng-template #addUser>
-    <app-add-associate-to-batch [searchTerm]="searchTerm"></app-add-associate-to-batch>
+    <app-add-associate-to-batch [searchTerm]="searchTerm" [associateAlertMessage]="associateAlertMessage" [associateAlertType]="associateAlertType"></app-add-associate-to-batch>
   </ng-template>
 
 

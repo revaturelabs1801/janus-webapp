@@ -23,36 +23,18 @@ export class EditBatchComponent implements OnInit {
   batchTypes: BatchType[];
   showAddUserTable: boolean = false;
 
-  editBatchAlertType: string;
-  editBatchAlertMessage: string;
+  batchAlertType: string;
+  batchAlertMessage: string;
 
-  associateAlertType: string;
-  associateAlertMessage: string;
+  @Input() associateAlertType: string;
+  @Input() associateAlertMessage: string;
 
   constructor(private batchService: BatchService, private sessionService: SessionService) {
-    this.editBatchAlertType = "danger";
-    this.editBatchAlertMessage = "Warning!";
-
-    this.associateAlertType = "success";
-    this.associateAlertMessage = "Success!";
-  }
-
-  /**
-   * Toggle to the table to remove an associate from the batch.
-   */
-  toggleRemove() {
-    this.showAddUserTable = false;
-  }
-
-  /**
-   * Toggle to the table to add an associate to the batch.
-   */
-  toggleAdd() {
-    this.showAddUserTable = true;
   }
 
   /**
    * Submit and persist updated changes to the batch.
+   * Persist updated changes to the session storage.
    *
    * @param      {number}  typeId  The type id the batch wil change to.
    */
@@ -68,20 +50,22 @@ export class EditBatchComponent implements OnInit {
 
     this.batch.type = selectedType;
     this.batchService.updateBatch(this.batch).subscribe( status => {
-      this.batchAlert("success", "Updated: " + this.batch.name + " successfully! ");
+      this.batchAlert("success", `Updated:  ${this.batch.name} successfully! `);
+      this.sessionService.putSelectedBatchIntoSession(this.batch);
     }, error => {
-      console.log(error);
-      this.batchAlert("danger", "Error: Update " + this.batch.name + " unsuccessful! ");
+      this.batchAlert("danger", `Error: Update ${this.batch.name} unsuccessful! `);
     });
   }
 
+  /**
+   * Adds a timed notification whether or not the batch was successful.
+   *
+   * @param      {string}  type     The type of notification {danger or success}.
+   * @param      {string}  message  The message for notification.
+   */
   batchAlert(type, message) {
-    this.editBatchAlertMessage = message;
-    this.editBatchAlertType = type;
-  }
-
-  closeEditBatchAlert() {
-    this.editBatchAlertMessage = null;
+    this.batchAlertMessage = message;
+    this.batchAlertType = type;
   }
 
   /**
@@ -103,8 +87,8 @@ export class EditBatchComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.batch = this.sessionService.getSelectedBatch();
-    this.batchService.getBatchById(4).subscribe( batch => this.batch = batch );
+    this.batch = this.sessionService.getSelectedBatch();
+    // this.batchService.getBatchById(4).subscribe( batch => this.batch = batch );
     this.batchService.getAllBatchTypes().subscribe( types => this.batchTypes = types);
   }
 }

@@ -18,6 +18,8 @@ export class AddAssociateToBatchComponent implements OnInit {
 
   associates: BamUser[];
   @Input() searchTerm: string;
+  @Input() associateAlertType: string;
+  @Input() associateAlertMessage: string;
 
   constructor(private usersService: UsersService) {
   }
@@ -35,11 +37,18 @@ export class AddAssociateToBatchComponent implements OnInit {
     let i = 0;
     for (let associate of this.associates) {
       if (associate.userId === user.userId) {
-        this.usersService.addUserToBatch(4, associate.userId).subscribe(users => this.associates = users);
+        this.usersService.addUserToBatch(4, associate.userId).subscribe(users => {
+          this.associates = users;
+          this.associateAlert("success", `Added ${user.fName} ${user.lName} to current batch.`)
+        });
         break;
       }
       i++;
     }
   }
 
+  associateAlert(type, message) {
+    this.associateAlertType = type;
+    this.associateAlertMessage = message;
+  }
 }

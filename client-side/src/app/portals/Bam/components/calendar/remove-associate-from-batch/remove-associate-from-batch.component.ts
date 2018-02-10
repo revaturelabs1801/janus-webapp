@@ -18,6 +18,8 @@ export class RemoveAssociateFromBatchComponent implements OnInit {
 
   associates: BamUser[];
   @Input() searchTerm: string;
+  @Input() associateAlertType: string;
+  @Input() associateAlertMessage: string;
 
   constructor(public usersService: UsersService) {
   }
