@@ -30,6 +30,7 @@ export class CurriculumWeekComponent implements OnInit {
   friday: DaysDTO = new DaysDTO([]);
   weekDTO: WeeksDTO = new WeeksDTO([]);
 
+
   constructor(private dndService: DragndropService,
     private mainCurriculumViewComponent: MainCurriculumViewComponent,
     private courseStructureComponent: CourseStructureComponent) { }

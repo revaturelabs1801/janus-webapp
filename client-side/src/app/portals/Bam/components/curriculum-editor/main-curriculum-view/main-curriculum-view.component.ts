@@ -22,7 +22,6 @@ export class MainCurriculumViewComponent implements OnInit {
 
   ngOnInit() {
     this.displayWeekView();
-    this.getWeeks();
   }
 
   toggle(view) {

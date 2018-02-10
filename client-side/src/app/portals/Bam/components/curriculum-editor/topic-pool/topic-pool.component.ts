@@ -3,7 +3,6 @@ import { TopicName } from '../../../models/topicname.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { ViewChild } from '@angular/core/src/metadata/di';
-import { DragNDropDirective } from '../../../drag-n-drop.directive';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { DragndropService } from '../../../services/dragndrop.service';
 
@@ -30,8 +29,8 @@ export class TopicPoolComponent implements OnInit {
 
   /**  On initializing this component we are calling the getTopic() function
    *   @author: Mohamad Alhindi
-    *  @batch: 1712-Dec11-2017
-    *  */
+   *   @batch: 1712-Dec11-2017
+   **/
   ngOnInit() {
     this.getTopics();
   }
@@ -56,7 +55,7 @@ export class TopicPoolComponent implements OnInit {
 
     /** Runs throught subTopicNames array and will extract the topics within the array
      *  @author Mohamad Alhindi
-     * @batch 1712-Dec11-2017
+     *  @batch 1712-Dec11-2017
      */
   initTopics() {
     for (let i = 0; i < this.subTopicName.length; i++) {
@@ -95,7 +94,7 @@ export class TopicPoolComponent implements OnInit {
 
 
   /**
-   * This method is used to send the currently dragged object 
+   * This method is used to send the currently dragged object
    * @author Mohamad Alhindi
    * @param event
    * @param sub
