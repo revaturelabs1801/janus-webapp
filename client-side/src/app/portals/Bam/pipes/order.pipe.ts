@@ -14,7 +14,8 @@ export class OrderPipe implements PipeTransform {
   /**
    * Returns sorted objects.
    * Leave the order param blank for default, ascending.
-   *
+   * Add "desc" for descending to order param.
+   * 
    * @param      {any[]}  items   The items to sort.
    * @param      {string}  field   The field to sort by.
    * @param      {string}  order    The ordering for items. 

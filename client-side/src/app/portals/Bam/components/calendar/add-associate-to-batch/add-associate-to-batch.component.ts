@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BamUser } from '../../../models/bamuser.model';
 import { UsersService } from '../../../services/users.service';
 
@@ -18,8 +18,7 @@ export class AddAssociateToBatchComponent implements OnInit {
 
   associates: BamUser[];
   @Input() searchTerm: string;
-  @Input() associateAlertType: string;
-  @Input() associateAlertMessage: string;
+  @Output() notify: EventEmitter<any> = new EventEmitter<any>(); 
 
   constructor(private usersService: UsersService) {
   }
@@ -39,7 +38,7 @@ export class AddAssociateToBatchComponent implements OnInit {
       if (associate.userId === user.userId) {
         this.usersService.addUserToBatch(4, associate.userId).subscribe(users => {
           this.associates = users;
-          this.associateAlert("success", `Added ${user.fName} ${user.lName} to current batch.`)
+          this.associateAlert("success", `Added ${user.fName} ${user.lName} to current batch.`);
         });
         break;
       }
@@ -48,7 +47,6 @@ export class AddAssociateToBatchComponent implements OnInit {
   }
 
   associateAlert(type, message) {
-    this.associateAlertType = type;
-    this.associateAlertMessage = message;
+    this.notify.emit({type: type, message: message});
   }
 }

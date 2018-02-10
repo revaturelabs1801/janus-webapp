@@ -62,10 +62,10 @@
 
   <div *ngIf="showAddUserTable; then addUser; else removeUser"></div>
   <ng-template #removeUser>
-    <app-remove-associate-from-batch [searchTerm]="searchTerm" [associateAlertMessage]="associateAlertMessage" [associateAlertType]="associateAlertType"></app-remove-associate-from-batch>
+    <app-remove-associate-from-batch [searchTerm]="searchTerm"></app-remove-associate-from-batch>
   </ng-template>
   <ng-template #addUser>
-    <app-add-associate-to-batch [searchTerm]="searchTerm" [associateAlertMessage]="associateAlertMessage" [associateAlertType]="associateAlertType"></app-add-associate-to-batch>
+    <app-add-associate-to-batch [searchTerm]="searchTerm" (notify)="associateAlert($event)"></app-add-associate-to-batch>
   </ng-template>
 
 

@@ -17,22 +17,24 @@ import { SessionService } from '../../../services/session.service';
  * @author Shane Avery Sistoza | Batch: 1712-Steve
  */
 export class EditBatchComponent implements OnInit {
-
+  
+  // Specific to batch
   @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
-  @Input() searchTerm: string;
   batchTypes: BatchType[];
-  showAddUserTable: boolean = false;
-
   batchAlertType: string;
   batchAlertMessage: string;
 
-  @Input() associateAlertType: string;
-  @Input() associateAlertMessage: string;
+  // Specific to associates that are apart of the batch.
+  @Input() searchTerm: string;
+  showAddUserTable: boolean = false;
+  associateAlertType: string;
+  associateAlertMessage: string;
 
   constructor(private batchService: BatchService, private sessionService: SessionService) {
   }
 
   /**
+   * Get the object of batch type.
    * Submit and persist updated changes to the batch.
    * Persist updated changes to the session storage.
    *
@@ -58,7 +60,7 @@ export class EditBatchComponent implements OnInit {
   }
 
   /**
-   * Adds a timed notification whether or not the batch was successful.
+   * Adds a timed notification whether or not the updating batch was successful.
    *
    * @param      {string}  type     The type of notification {danger or success}.
    * @param      {string}  message  The message for notification.
@@ -66,6 +68,16 @@ export class EditBatchComponent implements OnInit {
   batchAlert(type, message) {
     this.batchAlertMessage = message;
     this.batchAlertType = type;
+  }
+
+  /**
+   * Adds a timed notification whether or not adding or removing an associate was successful.
+   *
+   * @param      {[string, string]}  assoc   Contains 2 string values type and messsage.
+   */
+  associateAlert(assoc) {
+    this.associateAlertType = assoc.type;
+    this.associateAlertMessage = assoc.message;
   }
 
   /**
@@ -88,7 +100,6 @@ export class EditBatchComponent implements OnInit {
 
   ngOnInit() {
     this.batch = this.sessionService.getSelectedBatch();
-    // this.batchService.getBatchById(4).subscribe( batch => this.batch = batch );
     this.batchService.getAllBatchTypes().subscribe( types => this.batchTypes = types);
   }
 }
