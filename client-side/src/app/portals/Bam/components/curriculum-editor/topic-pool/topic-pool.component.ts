@@ -41,6 +41,12 @@ export class TopicPoolComponent implements OnInit {
     *  @batch 1712-Dec11-2017
     */
   getTopics() {
+    let topicPoolCacheData;
+    this.curriculumService.currentTopicPoolData.subscribe(
+      data => topicPoolCacheData = data
+    );
+
+    if ( topicPoolCacheData.length === 0) {
     this.curriculumService.getAllTopicPool().subscribe(
       data => {
         this.subTopicName = data;
@@ -52,6 +58,13 @@ export class TopicPoolComponent implements OnInit {
         console.log(err.status);
       }
     );
+  }else {
+        this.subTopicName = topicPoolCacheData;
+        this.initTopics();
+        this.uniqueTopics();
+        this.getSubTopics();
+    }
+
   }
 
     /** Runs throught subTopicNames array and will extract the topics within the array

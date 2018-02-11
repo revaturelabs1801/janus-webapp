@@ -24,7 +24,7 @@ export class CourseStructureComponent implements OnInit {
   constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.getAllCurriculums();
+      this.getAllCurriculums();
   }
 
    /**
@@ -139,6 +139,13 @@ export class CourseStructureComponent implements OnInit {
    * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    */
   getAllCurriculums() {
+    let apiData;
+    this.curriculumService.currentAllCurriculumData.subscribe(
+      data => apiData = data
+    ).unsubscribe();
+
+    if (apiData.length === 0) {
+      console.log(this.curriculumService.currentAllCurriculumData);
     this.curriculumService.getAllCurriculums().subscribe(
       data => {
         this.allCurriculums = data;
@@ -148,6 +155,13 @@ export class CourseStructureComponent implements OnInit {
         this.getUniqCurrVersions();
       }
     );
+  } else {
+        this.allCurriculums = apiData;
+        this.getCurriculumNames();
+        this.getUniqueCurrNames();
+        this.getCurriculumVersions();
+        this.getUniqCurrVersions();
+  }
   }
 
   /**
