@@ -1,7 +1,6 @@
-<!-- {{batch.name}} -->
-<h3 style="text-align: center;"> *Batch Name* Associates</h3>
+<h3 style="text-align: center;"> {{currentBatch.name}} Associates</h3>
 
-<div>
+<div *ngIf="currentBatch != null; else noBatchSelected ">
   <div class="searchText-container">
     <div class="input-group">
       <span class="input-group-addon">Search</span>
@@ -34,3 +33,7 @@
     <pagination-controls class="my-pagination" (pageChange)="p = $event" autoHide="true"></pagination-controls>
   </div>
 </div>
+
+<ng-template #noBatchSelected>
+  <h2>Batch has not been selected</h2>
+</ng-template>

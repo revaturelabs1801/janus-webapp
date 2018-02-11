@@ -7,6 +7,7 @@ import { Ng2OrderPipe } from 'ng2-order-pipe';
 import { SessionService } from '../../../services/session.service';
 import { BatchService } from '../../../services/batch.service';
 import { Batch } from '../../../models/batch.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-view-associates',
@@ -28,7 +29,8 @@ export class ViewAssociatesComponent implements OnInit {
   constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService) { }
 
   ngOnInit() {
-    //this.loadAssociatesInBatch();
+    // this.loadAssociatesInBatch();
+    console.log(this.currentBatch);
     this.loadAssociates();
   }
 
@@ -36,31 +38,19 @@ export class ViewAssociatesComponent implements OnInit {
    * Gets the trainers associate in the batch
    */
   loadAssociatesInBatch() {
-     this.usersService.getAllAssociates().subscribe(data => { console.log(data); this.associateList = data; });
+    this.usersService.getAllAssociates().subscribe(data => { console.log(data); this.associateList = data; });
   }
 
   loadAssociates() {
-    //  this.usersService.getUsersInBatch(this.sessionService.getUser().userId).subscribe(data => { console.log(data);
-    //  this.associateList = data; });
-    //  this.batchservice.getBatchInProgress(this.sessionService.getUser().email).subscribe(data => { console.log(data);
-    //  this.associateList = data; });
-    this.sessionUser = this.sessionService.getUser();
-    console.log(this.sessionUser);
-    // this.batchservice.getBatchInProgress(this.sessionUser.email).subscribe(data => {
-    //   console.log(data);
-    //   this.currentBatch = data; });
-    // console.log(this.currentBatch);
-    //console.log(this.currentBatch.id);
-    if (this.sessionUser.batch != null) {
-      console.log('inside batch');
+    this.currentBatch = JSON.parse(sessionStorage.getItem('batch'));
+    if (this.currentBatch != null) {
+      // hard coded the batch id because the data in the DB is inconsistent
+      // this.currentBatch.id
+      this.usersService.getUsersInBatch(1).subscribe(data => {
+        console.log(data);
+        this.associateList = data;
+      });
     }
-
-    // if (this.currentBatch.id != null) {
-    //   console.log('inside if');
-    //   this.usersService.getUsersInBatch(this.currentBatch.id).subscribe(data => {
-    //     console.log(data);
-    //     this.associateList = data; });
-    // }
   }
 
   setOrder(value: string) {
