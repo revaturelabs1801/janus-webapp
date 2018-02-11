@@ -19,7 +19,16 @@ export class SubtopicSearchComponent implements OnInit {
       }
     });
   }
-
+/**
+ * To send the search bar text to be searched for the subTopics.
+ * @author Mohamed Swelam
+ * @author Dylan Britton
+ * @author Allan Poindexter
+ * @author David Graves
+ * @author Charlie Harris
+ * @batch 1712-Dec11-2017
+ * @param newSubTopic to add.
+ */
   sendSearchText() {
     this.textService.sendMessage(this.searchText, 'subtopic');
   }

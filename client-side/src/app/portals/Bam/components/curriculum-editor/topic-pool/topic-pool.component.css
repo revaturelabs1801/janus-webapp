@@ -144,6 +144,16 @@
  }
 
 
+ .fa-plus-circle {
+    float: right;
+    font-size: large;
+    margin-right: 10%;
+    margin-top: 2%;
+    transition: .2s ease-in;
+}
 
+.fa-plus-circle:hover {
+    color: #f47f43;
+}
 
 

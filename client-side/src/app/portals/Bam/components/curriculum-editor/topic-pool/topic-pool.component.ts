@@ -9,6 +9,9 @@ import { SearchTextService } from '../../../services/search-text.service';
 import { TopicService } from '../../../services/topic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
 
+
+declare let $: any;
+
 @Component({
   selector: 'app-topic-pool',
   templateUrl: './topic-pool.component.html',
@@ -22,6 +25,8 @@ export class TopicPoolComponent implements OnInit {
   searchText: string;
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
   subTopicName: SubtopicName[] = [];
+  selectedTopicId: number;
+
   constructor(private curriculumService: CurriculumService,
     public curriculumWeekComponent: CurriculumWeekComponent,
     private dndService: DragndropService,
@@ -51,12 +56,12 @@ export class TopicPoolComponent implements OnInit {
   getTopics() {
     this.curriculumService.getAllTopicPool().subscribe(
       data => {
-        console.log(data);
         this.subTopicName = data;
         this.initTopics();
         this.uniqueTopics();
         this.getSubTopics();
         this.initFilterTopicListener();
+        this.clearTopic();
       },
       err => {
         console.log(err.status);
@@ -110,15 +115,38 @@ export class TopicPoolComponent implements OnInit {
         this.uniqarrFiltered = this.uniqarr.filter(i => {
           return i.toLowerCase().includes(topicSearch.toString());
         });
+        this.subArray = new Array<SubtopicName[]>();
+        this.getSubTopics();
       } else if (data.type === 'subtopic') {
         this.searchText = data.text.toString().toLowerCase();
       }
     });
   }
 
+  /**
+   *  Clear  Subtopics.
+   * @author Mohamed Swelam
+   * @author Dylan Britton
+   * @author Allan Poindexter
+   * @author David Graves
+   * @author Charlie Harris
+   * @batch 1712-Dec11-2017
+   */
   clearSubtopicSearch() {
     this.searchText = '';
     this.searchTextService.sendMessage('', 'clear');
+  }
+  /**
+   * clear topic.
+   * @author Mohamed Swelam
+   * @author Dylan Britton
+   * @author Allan Poindexter
+   * @author David Graves
+   * @author Charlie Harris
+   * @batch 1712-Dec11-2017
+   */
+  clearTopic() {
+    this.searchTextService.sendMessage('', 'clearTopic');
   }
 
   /** Uses the unique topics array to obtain the the subtopics that releate to each topic
@@ -126,8 +154,8 @@ export class TopicPoolComponent implements OnInit {
     * @batch 1712-Dec11-2017
     */
   getSubTopics() {
-    for (let i = 0; i < this.uniqarr.length; i++) {
-      this.subArray.push(this.subTopicName.filter(e => this.uniqarr[i] === e.topic.name));
+    for (let i = 0; i < this.uniqarrFiltered.length; i++) {
+      this.subArray.push(this.subTopicName.filter(e => this.uniqarrFiltered[i] === e.topic.name));
     }
   }
 
@@ -142,18 +170,68 @@ export class TopicPoolComponent implements OnInit {
     this.dndService.sendSubtopic(sub);
   }
 
+  /**
+   * Create new topic and calling the API end point to add it.
+   * @author Mohamed Swelam
+   * @author Dylan Britton
+   * @author Allan Poindexter
+   * @author David Graves
+   * @author Charlie Harris
+   * @batch 1712-Dec11-2017
+   * @param newTopic to add.
+   * @param newSubTopic to add.
+   */
   createTopic(newTopic: string, newSubTopic: string) {
     this.topicService.addTopicName(newTopic).subscribe(
       topic => {
-        console.log(topic);
         this.subtopicService.addSubTopicName(newSubTopic, topic.id, 1).subscribe(
           data => {
-            console.log(data);
-            // this.topics.push(topic.name);
+            this.uniqarrFiltered = [];
+            this.subArray = new Array<SubtopicName[]>();
+            this.getTopics();
           }
         );
       }
     );
+  }
+
+  /**
+   *  Set selected topic id and stopping propagation of the event.
+   * @author Mohamed Swelam
+   * @author Dylan Britton
+   * @author Allan Poindexter
+   * @author David Graves
+   * @author Charlie Harris
+   * @batch 1712-Dec11-2017
+   * @param index for the topic to find the right topic.
+   */
+  getNewSubTopicReady(index: number) {
+    event.stopPropagation();
+    $('#addSubTopicModel').modal('show');
+    this.selectedTopicId = this.subArray[index][0].topic.id;
+  }
+
+  /**
+   * Create new subtopic and calling the API end point to add it.
+   * @author Mohamed Swelam
+   * @author Dylan Britton
+   * @author Allan Poindexter
+   * @author David Graves
+   * @author Charlie Harris
+   * @batch 1712-Dec11-2017
+   * @param newSubTopic to add.
+   */
+  createSubTopic(newSubTopic: string) {
+    if (newSubTopic.length > 1) {
+      this.subtopicService.addSubTopicName(newSubTopic, this.selectedTopicId, 1).subscribe(
+        data => {
+          this.uniqarrFiltered = [];
+          this.subArray = new Array<SubtopicName[]>();
+          this.getTopics();
+        }
+      );
+      this.selectedTopicId = 0;
+    }
   }
 
 }
