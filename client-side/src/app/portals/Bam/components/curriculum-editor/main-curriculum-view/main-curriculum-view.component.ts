@@ -106,4 +106,14 @@ export class MainCurriculumViewComponent implements OnInit {
     removeWeek(weekNum: number) {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
     }
+
+    /**
+     * When the synch button is clicked, calls the synchBatch method in the curriculum service
+     * @author: Jordan DeLong
+     * @batch:  1712-Dec11-2017
+     */
+    populateCalendar()
+    {
+        this.curriculumService.syncBatch(22506).subscribe();
+    }
 }

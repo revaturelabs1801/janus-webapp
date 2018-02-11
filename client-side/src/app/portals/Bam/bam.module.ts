@@ -24,6 +24,7 @@ import { AddAssociateToBatchComponent } from './components/calendar/add-associat
 import { RemoveAssociateFromBatchComponent } from './components/calendar/remove-associate-from-batch/remove-associate-from-batch.component';
 import { BatchService } from './services/batch.service';
 import { SearchPipe } from './pipes/search.pipe';
+import { OrderPipe } from './pipes/order.pipe';
 import { SessionService } from './services/session.service';
 import { UsersService } from './services/users.service';
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
@@ -85,7 +86,8 @@ import { DragDropModule } from 'primeng/primeng';
     FilterBatchPipe,
     ViewAssociatesComponent,
     CalendarComponent,
-    AddSubtopicComponent
+    AddSubtopicComponent,
+    OrderPipe
   ],
   providers: [
     CurriculumWeekComponent,
@@ -107,7 +109,8 @@ import { DragDropModule } from 'primeng/primeng';
     CalendarStatusService
   ],
   exports: [
-    SearchPipe
+    SearchPipe,
+    OrderPipe
   ]
 })
 export class BamModule { }

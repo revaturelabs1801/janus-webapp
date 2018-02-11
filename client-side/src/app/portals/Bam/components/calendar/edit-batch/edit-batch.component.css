@@ -1,0 +1,9 @@
+.nav-link {
+    color: #f26925 !important;
+    cursor: pointer; 
+}
+
+.nav-link.active{
+    color: black !important;
+}
+
