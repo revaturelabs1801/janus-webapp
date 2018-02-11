@@ -21,7 +21,7 @@ export class CurriculumService {
   private dataSource = new BehaviorSubject<CurriculumSubtopic[]>([]);
   currentData = this.dataSource.asObservable();
 
-  public allCurriculumData = new BehaviorSubject<Curriculum[]>([]);
+  private allCurriculumData = new BehaviorSubject<Curriculum[]>([]);
   currentAllCurriculumData = this.allCurriculumData.asObservable();
 
   private allTopicPoolData = new BehaviorSubject<SubtopicName[]>([]);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { MainCurriculumViewComponent } from '../main-curriculum-view/main-curriculum-view.component';
@@ -30,6 +30,7 @@ export class CurriculumWeekComponent implements OnInit {
   friday: DaysDTO = new DaysDTO([]);
   weekDTO: WeeksDTO = new WeeksDTO([]);
   @Input() readOnly: boolean;
+  @Output() removeWeekEvent = new EventEmitter<number>();
 
   constructor(private dndService: DragndropService,
     private courseStructureComponent: CourseStructureComponent) { }
@@ -119,6 +120,7 @@ export class CurriculumWeekComponent implements OnInit {
  */
   removeWeekCall(weekNum: number) {
     event.stopPropagation();
-    //this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
+    this.removeWeekEvent.emit(weekNum - 1);
   }
 }
+

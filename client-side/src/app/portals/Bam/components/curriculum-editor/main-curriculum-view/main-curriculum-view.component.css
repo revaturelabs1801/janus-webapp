@@ -1,5 +1,6 @@
 .align{
-    margin-top: 6px;
+
+    padding-top: 6px;
     height: 450px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -29,10 +30,23 @@
 }
 
 .saveCurr{
-    background-color: blue;
     position: relative;
-    right: 655px;
+    right: 35vw;
     top: 10px;
+}
+
+.hoverRed{
+    padding-left: 3px;
+    padding-right: 6px;
+    font-size: 94%;
+}
+
+.hoverRed:hover{
+    background-color: rgb(187, 25, 25);
+    color: white;
+    border-radius: 4px;
+    cursor: url("http://i43.tinypic.com/2n8t1rq.jpg"), auto;
+
 }
 
 :host ::ng-deep ul.nav.nav-tabs.justify-content-start.nav {

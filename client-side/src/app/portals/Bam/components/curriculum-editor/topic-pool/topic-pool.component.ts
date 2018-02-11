@@ -46,7 +46,7 @@ export class TopicPoolComponent implements OnInit {
       data => topicPoolCacheData = data
     );
 
-    if ( topicPoolCacheData.length === 0) {
+    if (topicPoolCacheData.length === 0) {
     this.curriculumService.getAllTopicPool().subscribe(
       data => {
         this.subTopicName = data;

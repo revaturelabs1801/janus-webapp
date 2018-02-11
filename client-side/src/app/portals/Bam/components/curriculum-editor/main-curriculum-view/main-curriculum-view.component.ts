@@ -177,4 +177,14 @@ export class MainCurriculumViewComponent implements OnInit {
         today = mm + '/' + dd + '/' + yyyy;
         return today;
     }
+
+    clearAllWeeks() {
+        this.allWeeks = [];
+    }
+
+    truncateWeeks() {
+         for (let i = 0; i < this.allWeeks.length; i++) {
+                this.allWeeks[i] = [];
+        }
+    }
 }
