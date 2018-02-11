@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BamUser } from '../../../models/bamuser.model';
 import { UsersService } from '../../../services/users.service';
 
@@ -18,6 +18,9 @@ export class RemoveAssociateFromBatchComponent implements OnInit {
 
   associates: BamUser[];
   @Input() searchTerm: string;
+  @Input() associateAlertType: string;
+  @Input() associateAlertMessage: string;
+  @Output() notify: EventEmitter<any> = new EventEmitter<any>(); 
 
   constructor(public usersService: UsersService) {
   }
@@ -35,11 +38,20 @@ export class RemoveAssociateFromBatchComponent implements OnInit {
     let i = 0;
     for (let associate of this.associates) {
       if (associate.userId === user.userId) {
-        this.usersService.removeUserFromBatch(associate.userId).subscribe(users => this.associates = users);
+        this.usersService.removeUserFromBatch(associate.userId).subscribe(users => {
+          this.associates = users;
+          this.associateAlert("success", `Successfully removed ${user.fName} ${user.lName} from current batch.`);
+        }, error => {
+          this.associateAlert("danger", `Error: couldn't remove ${user.fName} ${user.lName} from current batch.`);
+        }); 
         break;
       }
       i++;
     }
+  }
+
+  associateAlert(type, message) {
+    this.notify.emit({type: type, message: message});
   }
 
 }
