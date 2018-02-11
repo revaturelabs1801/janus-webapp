@@ -12,8 +12,8 @@
 
 
 
-<div class = "container">
-<div  class="collapse hide weeksrow row" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
+<div class="container">
+<div class="collapse weeksrow row" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
 
     <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(0)">Monday
         <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"

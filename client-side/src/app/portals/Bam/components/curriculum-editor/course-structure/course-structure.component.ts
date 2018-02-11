@@ -17,6 +17,8 @@ export class CourseStructureComponent implements OnInit {
   uniqCurrNames: string[];
   allCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
   uniqCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
+  selectedCurrVer: any = 0;
+  selectedTypeIndex: any = 0;
   @Output() messageEvent = new EventEmitter<Curriculum>();
 
   constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
@@ -149,23 +151,32 @@ export class CourseStructureComponent implements OnInit {
   }
 
   /**
-   * makes the curriculum object, passed as a parameter, the
-   * master version of its curriculum type.
-   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
+   * opens makeMasterModal which subsequently will call makeMaster() method
+   * if user confirms that they want to make selected version master.
    * @param currVersion - curriculum object selected from view.
    * @param typeIndex - index of curriculum type, allows for faster navigation
    *    through uniqCurrVersions 2D array.
    */
-  makeMaster(currVersion, typeIndex: number) {
-    for (let j = 0; j < this.uniqCurrVersions[typeIndex].length; j++) {
-      if (this.uniqCurrVersions[typeIndex][j].isMaster === 1) {
-        this.uniqCurrVersions[typeIndex][j].isMaster = 0;
+  openMakeMasterModal(currVersion: Curriculum, typeIndex: number) {
+    this.selectedCurrVer = currVersion;
+    this.selectedTypeIndex = typeIndex;
+    (<any>$('#makeMasterModal')).modal('show');
+  }
+
+  /**
+   * makes the curriculum object, passed as a parameter in
+   * openMakeMasterModal method, the master version of its curriculum type.
+   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
+   */
+  makeMaster() {
+    for (let j = 0; j < this.uniqCurrVersions[this.selectedTypeIndex].length; j++) {
+      if (this.uniqCurrVersions[this.selectedTypeIndex][j].isMaster === 1) {
+        this.uniqCurrVersions[this.selectedTypeIndex][j].isMaster = 0;
       }
     }
 
-    currVersion.isMaster = 1;
-    console.log(currVersion);
-    this.curriculumService.markCurriculumAsMaster(currVersion.id).subscribe(
+    this.selectedCurrVer.isMaster = 1;
+    this.curriculumService.markCurriculumAsMaster(this.selectedCurrVer.id).subscribe(
     data => {
       console.log(data);
     },
@@ -208,5 +219,4 @@ export class CourseStructureComponent implements OnInit {
       null, null, null, null, 0);
     this.messageEvent.emit(newCurrVer);
   }
-
 }

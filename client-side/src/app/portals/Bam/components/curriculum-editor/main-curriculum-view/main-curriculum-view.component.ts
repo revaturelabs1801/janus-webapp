@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { CurriculumService } from '../../../services/curriculum.service';
@@ -24,6 +24,7 @@ export class MainCurriculumViewComponent implements OnInit {
     toggleTab = 1;
     selectedCurr: Curriculum;
     isNewVer = false;
+    uniqCurrVersions;
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
     constructor(private curriculumService: CurriculumService,
@@ -41,17 +42,27 @@ export class MainCurriculumViewComponent implements OnInit {
     receiveMessage(event) {
         this.selectedCurr = event;
         if (event.id == null) {
-            console.log('i am new!');
             this.isNewVer = true;
         } else {
             this.isNewVer = false;
         }
     }
 
-    saveCurr() {
+    openSaveCurriculumModal() {
+        (<any>$('#saveCurriculumModal')).modal('show');
+    }
+
+    openMasterModal() {
+        (<any>$('#makeNewVerMasterModal')).modal('show');
+    }
+
+    saveCurr(makeMaster: boolean) {
         this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
         this.selectedCurr.curriculumCreator = this.sessionService.getUser();
         this.selectedCurr.curriculumdateCreated = this.getCurrentDate();
+        if (makeMaster) {
+            this.selectedCurr.isMaster = 1;
+        }
         const meta = new MetaDTO(this.selectedCurr);
 
         const weeksDTO: WeeksDTO[] = [];
@@ -59,8 +70,14 @@ export class MainCurriculumViewComponent implements OnInit {
 
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
-            data => console.log(data),
-            error => console.log(error),
+            response => {
+                console.log(response);
+                this.isNewVer = false;
+            },
+            error => {
+                console.log(error);
+                this.isNewVer = false;
+            },
             () => this.isNewVer = false
         );
     }

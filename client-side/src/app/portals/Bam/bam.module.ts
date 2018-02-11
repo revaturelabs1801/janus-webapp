@@ -43,7 +43,6 @@ import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
 
-
 @NgModule({
   imports: [
     CommonModule,
