@@ -6,7 +6,7 @@ import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
 import { CalendarEvent } from '../models/calendar-event.model';
 import { environment } from '../../../../environments/environment';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs/Observable/of';
 
 
 const httpOptions = {
@@ -132,7 +132,7 @@ export class CalendarService {
   }
 
   mapSubtopicToEvent(subtopic: Subtopic): CalendarEvent {
-    var calendarEvent = new CalendarEvent();
+    let calendarEvent = new CalendarEvent();
     calendarEvent.subtopicId = subtopic.subtopicId;
     calendarEvent.title = subtopic.subtopicName.name;
     calendarEvent.start = new Date(subtopic.subtopicDate);
