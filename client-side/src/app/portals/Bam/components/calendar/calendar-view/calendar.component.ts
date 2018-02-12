@@ -5,11 +5,11 @@ import { Subtopic } from '../../../models/subtopic.model';
 import { CalendarEvent } from '../../../models/calendar-event.model';
 import { CalendarService } from '../../../services/calendar.service';
 import { CalendarStatusService } from '../../../services/calendar-status.service';
-
+import {DragDropModule} from 'primeng/primeng';
 /**
     *	This component will serve as the main calendar view. 
     *   This component leverages the PrimeNG schedule UI component to render a drag and drop calendar for viewing and updating a batch's subtopics
-*	@author Jordan DeLong, Sean Sung (1712-dec10-java-Steve)
+*	@author Francisco Palomino, Jordan DeLong, Sean Sung (1712-dec10-java-Steve)
 *	
 *	
 */
@@ -37,6 +37,8 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
   /* Tooltip data bindings */
   subtopicTooltip: string;
   statusTooltip: string;
+  timeTooltip: string;
+  
 
   constructor(private calendarService: CalendarService, private statusService: CalendarStatusService) { }
 
@@ -68,7 +70,7 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     if (window.innerWidth < 1000) {
       this.fc.defaultView = "listMonth";
       this.fc.header = {
-        left: 'agendaDay,basicWeek,listMonth',
+        left: 'agendaDay,agendaWeek,listMonth',
         center: 'title',
         right: 'today prev,next'
       }
@@ -80,7 +82,7 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
         right: 'today prev,next'
       }
     }
-
+    this.fc.allDaySlot = false;
     this.fc.options = {
       defaultDate: Date.now(),
       nowIndicator: true,
@@ -100,38 +102,43 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
       }
     }
 
-    $('.fc-trash').droppable(
-      {
-        accept: "*",
+    // $( document ).ready(() => {
+    //   //$('.fc-event').css('color','white');
+    //   $('.fc-content .fc-time').remove();
+    // });
 
-        drop: (event, ui) => this.trashDropEvent(event, ui, this.draggedSubtopic),
+    // $('.fc-trash').droppable(
+    //   {
+    //     accept: '.fc-content',
 
-        over: function (event, ui) {
-          event.target.style.opacity = 0.5;
-        },
+    //     drop: (event, ui) => this.trashDropEvent(event, ui, this.draggedSubtopic),
 
-        out: function (event, ui) {
-          event.target.style.opacity = 1;
-        }
-      });
+    //     over: function (event, ui) {
+    //       event.target.style.opacity = 0.5;
+    //     },
+
+    //     out: function (event, ui) {
+    //       event.target.style.opacity = 1;
+    //     }
+    //   });
   }
 
   ngAfterContentChecked() {
-    let draggableElements = this.fc.el.nativeElement.getElementsByClassName('fc-day-grid-event');
-    if (this.numDraggableElements == draggableElements.length) {
-      return;
-    }
-    this.numDraggableElements = draggableElements.length;
+    // let draggableElements = this.fc.el.nativeElement.getElementsByClassName('fc-day-grid-event');
+    // if (this.numDraggableElements == draggableElements.length) {
+    //   return;
+    // }
+    // this.numDraggableElements = draggableElements.length;
 
-    for (var i = 0; i < draggableElements.length; i++) {
-      //console.log(draggableElements[i]);
-      $(draggableElements[i]).draggable(
-        {
-          zIndex: 999,
-          revert: true,      // immediately snap back to original position
-          revertDuration: 0
-        });
-    }
+    // for (var i = 0; i < draggableElements.length; i++) {
+    //   //console.log(draggableElements[i]);
+    //   $(draggableElements[i]).draggable(
+    //     {
+    //       zIndex: 999,
+    //       revert: true,      // immediately snap back to original position
+    //       revertDuration: 0
+    //     });
+    // }
   }
 
   trashDropEvent(event, ui, calendarEvent: CalendarEvent) {
@@ -161,14 +168,18 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
     this.fc.updateEvent(clickedTopic);
     this.addEvent(calendarEvent);
-  }
+    //this.updateEvent(calendarEvent);
 
-  handleEventDragStart(event) {
-    this.draggedSubtopic = this.mapSubtopicFromEvent(event.event);
-    console.log(this.draggedSubtopic);
+    // console.log(event.view.name);
+    // if(event.view.name == 'month')
+    // {
+    //   console.log("made it to conditional");
+    //   $('.fc-content .fc-time').hide();
+    // }
   }
 
   handleEventDrop(calendar) {
+    
     var droppedTopic = calendar.event;
     var calendarEvent = this.mapSubtopicFromEvent(droppedTopic);
     var milliDate = calendarEvent.start.getTime();
@@ -188,6 +199,13 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
       );
     this.fc.updateEvent(droppedTopic);
     this.updateEvent(calendarEvent);
+
+    // console.log(calendar.view.name);
+    // if(calendar.view.name == 'month')
+    // {
+    //   $('.fc-content .fc-time').hide();
+    // }
+    
   }
 
   /**
@@ -198,12 +216,18 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
    * @author Sean Sung, Francisco Palomino (1712-dec10-java-Steve)
    */
   handleEventMouseover(event) {
+    console.log(event.jsEvent.currentTarget);
+    //console.log(event.calEvent.start.format("h:mm a"));
+
     let y = event.jsEvent.target.getBoundingClientRect().top;
     let offsetY = this.body.nativeElement.getBoundingClientRect().top;
     y = y - offsetY + 50;
     let mouseoverTopic = event.calEvent;
     this.subtopicTooltip = mouseoverTopic.title;
     this.statusTooltip = mouseoverTopic.status;
+    this.timeTooltip = mouseoverTopic.start.format("h:mm a");
+
+    console.log(this.timeTooltip);
 
     this.status.nativeElement.style.background = this.statusService.getStatusColor(this.statusTooltip);
     this.tooltip.nativeElement.style.display = 'inline';
@@ -216,10 +240,40 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     this.tooltip.nativeElement.style.display = 'none';
   }
 
+  handleEventDragStart(event) {
+    this.draggedSubtopic = this.mapSubtopicFromEvent(event.event);
+    console.log(this.draggedSubtopic);
+  }
+
   handleEventDragStop(event) {
     //console.log(event);
   }
 
+  handleViewRender($event)
+  {
+    console.log($event);
+    console.log($event.view.name);
+
+    // if($event.view.name == 'month')
+    // {
+    //     $('.fc-time').hide();
+    // }
+    // else{
+    //     $('.fc-time').show();
+    // }
+
+    //$('.fc-event').css('color','white');
+
+  }
+
+  handleDragEnter($event)
+  {
+    console.log("made it to drag enter");
+  }
+
+  handleDrop($event){
+    console.log("made it to handle drop");
+  }
   mapSubtopicFromEvent(event): CalendarEvent {
     let calendarEvent = new CalendarEvent();
     calendarEvent.subtopicId = event.subtopicId;
@@ -253,6 +307,8 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     }
     this.events.push(calendarEvent);
     this.overridenDate = this.events[0].start;
+
+    
   }
 
   /* check if event exists in the array and returns the index if it does or -1 if it doesn't */
@@ -264,4 +320,8 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     }
     return -1;
   }
+
+  mouseEnter(div : string){
+    console.log("mouse enter : " + div);
+ }
 }

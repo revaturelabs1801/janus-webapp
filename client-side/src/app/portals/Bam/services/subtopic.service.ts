@@ -29,10 +29,10 @@ export class SubtopicService {
   }
 
   removeSubtopicFromBatch(subtopicId: number) {
-    return this.http.post(environment.subtopic.removeSubtopic(subtopicId), httpOptions).map(
-      data => {
-        return data;
-      }
-    );
+    // return this.http.post(environment.subtopic.removeSubtopic(subtopicId), httpOptions).map(
+    //   data => {
+    //     return data;
+    //   }
+    // );
   }
 }

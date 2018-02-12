@@ -25,3 +25,33 @@
     border-radius: 3px;
     color: white;
 }
+
+ 
+/deep/ .fc-content
+{
+  color:white;
+  text-align: center;
+}
+
+/deep/ .fc-content .fc-time
+{
+  color:white;
+  display: none;
+}
+
+/deep/ .ui-button{
+    background: #F26925; 
+    border-color: #F26925;
+}
+/*
+/deep/ .ui-state-active
+{
+    background: #F26925; 
+    border-color: #F26925;
+} */
+
+/deep/ .ui-state-highlight{
+    border-color: #F26925;
+    background: #F26925;
+    color: white;
+  }
