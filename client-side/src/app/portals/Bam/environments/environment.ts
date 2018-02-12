@@ -74,6 +74,7 @@ export const environment = {
     },
 
     subtopic: {
-       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${context}/subtopic/${typeId}/${topicId}/${subtopicName}`
+       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) =>
+        `${context}/subtopic/add/${typeId}/${topicId}/${subtopicName}`
     }
 };
