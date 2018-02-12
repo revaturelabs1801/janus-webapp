@@ -6,7 +6,7 @@
         <p *ngIf="readOnly" class="read-only text-center">READ ONLY</p>
         Week #{{weekNum}}
         <div *ngIf="!readOnly" class="removeWeekBtn" (click)="confirmWeekDeletion(weekNum);overlay.toggle($event)" >              
-            <i class="fas fa-times-circle fa-1x"></i>
+            <i class="fa fa-times-circle fa-1x"></i>
         </div>
     </div>   
 </div>

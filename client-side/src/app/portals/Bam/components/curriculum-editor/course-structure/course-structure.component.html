@@ -1,6 +1,6 @@
   <button class="currBtn" data-toggle="modal" data-target="#addCurricModel">
     Add New Curriculum
-    <i class="fas fa-plus"></i>
+    <i class="fa fa-plus"></i>
   </button>
 
 
@@ -10,7 +10,7 @@
       <div class="currType" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
         {{currName}}
         <span (click)="newVersion(currName, i)">
-          <i class="fas fa-plus-circle"></i>
+          <i class="fa fa-plus-circle"></i>
         </span>
       </div>
 
@@ -23,10 +23,10 @@
 
           <span (click)="openMakeMasterModal(currVersion, i)">
             <span *ngIf="currVersion.isMaster">
-              <i class="fas fa-chess-king fa-1x" aria-hidden="true"> </i>
+              <i class="fa fa-diamond fa-1x" aria-hidden="true"> </i>
             </span>
             <span *ngIf="!currVersion.isMaster">
-              <i class="fas fa-chess-king fa-1x crownless" aria-hidden="true"> </i>
+              <i class="fa fa-diamond fa-1x crownless" aria-hidden="true"> </i>
             </span>
           </span>
         </div>

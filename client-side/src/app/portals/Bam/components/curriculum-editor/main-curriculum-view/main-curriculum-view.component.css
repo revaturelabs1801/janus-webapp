@@ -55,6 +55,8 @@
     font-size: 2.2rem;
     cursor: pointer;
     color: #f47f43;
+    position: absolute;
+    left: -9%;
 }
 
 .saveCurr:hover {
@@ -92,3 +94,10 @@
      color-stop(0.86, rgb(251, 220, 205)));
  }
 
+ .saveIcon{
+     position: absolute;
+ }
+
+ 
+  
+  
