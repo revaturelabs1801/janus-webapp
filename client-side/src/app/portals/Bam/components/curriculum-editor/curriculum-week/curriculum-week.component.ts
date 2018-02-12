@@ -49,7 +49,7 @@ export class CurriculumWeekComponent implements OnInit {
    * This method returns the subtopic-topic names for the progress bar and a visual
    * representation of the topics for the bar.
    *
-   * @author James Holzer, Shane Sistoza, Jeffrey Camacho, Jordan DeLong
+   * @author James Holzer, Shane Sistoza, Jeffrey Camacho, Jordan DeLong (1712-Steve)
    */
   progressBar() {
 
