@@ -15,7 +15,7 @@ import { CalendarStatusService } from '../../../services/calendar-status.service
 */
 
 declare var $: any;
-const DRAG_REVERT_DURATION = 200;
+const DRAG_REVERT_DURATION = 300;
 
 @Component({
   selector: 'app-calendar',
