@@ -1,73 +1,13 @@
-.pan{
-	width: auto;
-    background-color: rgba(243, 93, 10, .95);
-    padding: 50px;
-    margin: 10px;
-    border-radius: 7px;
-    font-weight: bold;
-    border-style: inset;
-    color: white;
-    border-color: #e85f12;
-}
-ul.listTitle{
-	font-weight: bold;
-}
+.jumbotron {
+  /* Orange Jumbotron w/ lighten opacity.*/
+  /*background-color: rgba(250, 116, 39, 0.3);*/
+  
+  /* Blue Jumbotron w/ lighten opacity.*/
+  /*background-color: rgba(37, 95, 164, 0.3);*/
 
-li.listItem{
-	font-weight: normal;
-}
-	
-.styled-select {
-   height: 29px;
-   overflow: hidden;
-   width: 240px;
-}
+  /* Font Color Jumbotron w/ lighten opacity.*/
+  /*background-color: rgba(7, 7, 7, 0.1);*/
 
-.semi-square {
-   -webkit-border-radius: 5px;
-   -moz-border-radius: 5px;
-   border-radius: 5px;
-}
-
-ul {
-    padding-left: 15px;
-}
-
-ul.mainList{
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
-}
-
-li {
-	list-style: none;
-}  
-.btnbam {
-       background-color:#B9B9BA;
-   }
-
-   .smallFont{
-	text-align: right;
-	color: #324176;
-}
-
-
-.myAttribute:hover{
-	text-decoration: none;
-	color: #324176;
-}
-
-.myAttribute {
-	text-decoration: none;
-	color: white;
-}
-
-.myAttribute2:hover{
-	text-decoration: none;
-	color: white;
-}
-
-.myAttribute2{
-	text-decoration: none;
-	color: white;
+  /* Footer Color Jumbotron w/ lighten opacity.*/
+  background-color: rgba(71,76,85, 0.1);
 }

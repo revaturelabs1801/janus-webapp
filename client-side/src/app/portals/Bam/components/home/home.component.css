@@ -1,0 +1,13 @@
+::ng-deep h1 {
+  font-weight: 300;
+}
+
+::ng-deep .card {
+  border-color: #fa7427;
+}
+
+::ng-deep .card-header { 
+  background-color: #fa7427; 
+  color: white;
+  font-weight: bold;
+}

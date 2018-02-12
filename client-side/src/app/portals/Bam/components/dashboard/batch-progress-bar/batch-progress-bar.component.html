@@ -1,38 +1,15 @@
-<div id=pan4 class="col-md-12" *ngIf="batchId != null">
-	Batch Progress By Day:
-	<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-
-	
-		<div>
-			<div class="progress" *ngIf="!showSpinner">
-			<span>{{percentCompleted}}% Days Completed</span> 
-			<div class="progress-bar" [style.width]="percentCompleted + '%'" ></div>
-		</div>
-		
-	</div>
-
-	Batch Progress By SubTopic:
-	<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-
-		<div>
-			<div class="progress"  *ngIf="!showSpinner">
-			<span>{{subPercentCompleted}}% Subtopics Completed/Cancelled</span>
-			<div class="progress-bar progress" [style.width]="subPercentCompleted + '%'" > </div>
-		</div>
-
-	</div>
-	
-	<br/>
-	<div *ngIf="subTopicMissed>0">
-		<h4>Topics Missed</h4>
-		<p>{{subTopicMissed}} / {{subTopicTotal}} missed topics</p>
-		<div>
-			<ul *ngFor="let list of topicArray">
-				{{list.listName}}
-				<li *ngFor="let name of list.listItems">
-					<p>{{name}}</p>
-				</li>
-			</ul>
+<div class="row pt-3 pb-3">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<div class="card">
+			<div class="card-header">Batch Progess</div>
+			<div class="card-body">
+				<app-loading-spinner></app-loading-spinner>
+				<h5 class="card-title">Batch Progess By Day</h5>
+				<div class="card-text">
+					<p><ngb-progressbar type="info" [value]="percentCompleted" [height]="20"></ngb-progressbar></p>
+					<h5 class="card-title">Batch Progess By Subtopic</h5>
+					<a href="#" class="btn btn-primary">Go somewhere</a>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
