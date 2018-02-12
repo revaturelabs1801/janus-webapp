@@ -180,8 +180,9 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Unhides the tooltip and positions it above the element
-   * Holds information such as the subtopic and current status
+   * Unhides the tooltip and positions it above the element.
+   * This function also attaches jqueryUI draggable class to allow the event object to interact with 
+   * external components such as the trashcan.
    * 
    * @param event
    * @author Sean Sung, Francisco Palomino (1712-dec10-java-Steve)
@@ -194,9 +195,8 @@ export class CalendarComponent implements OnInit {
         zIndex: -500
       }
     );
-    let mouseoverTopic = event.calEvent;
-    this.subtopicTooltip = mouseoverTopic.title;
-    this.statusTooltip = mouseoverTopic.status;
+    this.subtopicTooltip = event.calEvent.title;
+    this.statusTooltip = event.calEvent.status;
 
     //calculate y point of tooltip to be below mouse
     let y = event.jsEvent.target.getBoundingClientRect().top;
@@ -214,6 +214,11 @@ export class CalendarComponent implements OnInit {
     this.tooltip.nativeElement.style.display = 'none';
   }
 
+  /**
+   * Convert values stored in the event variable back to a CalendarEvent object
+   * @param event
+   * @author Sean Sung
+   */
   mapSubtopicFromEvent(event): CalendarEvent {
     let calendarEvent = new CalendarEvent();
     calendarEvent.subtopicId = event.subtopicId;
@@ -226,6 +231,11 @@ export class CalendarComponent implements OnInit {
     return calendarEvent;
   }
 
+  /**
+   * Updates the event array object to match the calendar view.
+   * This is called on 
+   * @param changedSubtopic 
+   */
   updateEvent(changedSubtopic: CalendarEvent) {
     let index = this.eventExists(changedSubtopic);
     if(index == 0) {
@@ -237,11 +247,10 @@ export class CalendarComponent implements OnInit {
     this.events[index].start = changedSubtopic.start;
     this.events[index].status = changedSubtopic.status;
     this.events[index].color = changedSubtopic.color;
-    console.log(this.events);
   }
 
   /**
-   * Removes event if it already exists and then appends new event to this.events
+   * Removes event if it already exists and then inserts new event to this.events
    * @param calendarEvent 
    */
   addEvent(calendarEvent: CalendarEvent) {
@@ -266,7 +275,10 @@ export class CalendarComponent implements OnInit {
     this.events.splice(index, 1);
   }
 
-  /* check if event exists in the array and returns the index if it does or -1 if it doesn't */
+  /**
+   * check if event exists in the array and returns the index if it does or -1 if it doesn't
+   * @param calendarEvent
+   */
   eventExists(calendarEvent: CalendarEvent): number {
     for (let i = 0; i < this.events.length; i++) {
       if (this.events[i].title == calendarEvent.title) {
