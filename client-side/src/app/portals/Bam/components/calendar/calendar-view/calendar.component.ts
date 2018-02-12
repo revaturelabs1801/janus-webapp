@@ -140,6 +140,7 @@ export class CalendarComponent implements OnInit {
 
     this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
     this.addEvent(calendarEvent);
+    console.log(this.events);
   }
 
   /**
@@ -174,8 +175,8 @@ export class CalendarComponent implements OnInit {
         this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
       }
       );
-    this.fc.updateEvent(droppedTopic);
     this.updateEvent(calendarEvent);
+    this.fc.updateEvent(droppedTopic);
   }
 
   /**
@@ -226,17 +227,17 @@ export class CalendarComponent implements OnInit {
   }
 
   updateEvent(changedSubtopic: CalendarEvent) {
+    let index = this.eventExists(changedSubtopic);
+    if(index == 0) {
+      this.overridenDate = changedSubtopic.start;
+    }
     //reset the first index date that gets overriden on drops
     this.events[0].start = this.overridenDate;
-    let index = this.eventExists(changedSubtopic);
-    //update overridenDate to new date if updating first index
-    if (index == 0) {
-      this.overridenDate = this.events[index].start;
-    }
 
     this.events[index].start = changedSubtopic.start;
     this.events[index].status = changedSubtopic.status;
     this.events[index].color = changedSubtopic.color;
+    console.log(this.events);
   }
 
   /**
@@ -246,9 +247,10 @@ export class CalendarComponent implements OnInit {
   addEvent(calendarEvent: CalendarEvent) {
     let index = this.eventExists(calendarEvent);
     if (index > -1) {
-      this.removeEvent(index);
+      this.events.splice(index, 1, calendarEvent);
+    } else {
+      this.events.push(calendarEvent);
     }
-    this.events.push(calendarEvent);
   }
 
   /**
