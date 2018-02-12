@@ -29,6 +29,11 @@ export class CurriculumWeekComponent implements OnInit {
   thursday: DaysDTO = new DaysDTO([]);
   friday: DaysDTO = new DaysDTO([]);
   weekDTO: WeeksDTO = new WeeksDTO([]);
+  topicType: string[]= [];
+  percentageMap = {};
+  total = 0;
+  percentageNums = [];
+  percentageNames = [];
 
   constructor(private dndService: DragndropService,
     private mainCurriculumViewComponent: MainCurriculumViewComponent,
@@ -38,6 +43,25 @@ export class CurriculumWeekComponent implements OnInit {
 
   ngOnInit() {
     this.sortSubtopics();
+    this.progressBar();
+  }
+
+  progressBar() {
+
+    this.weekDTO.daysDTO.forEach(element => {
+      element.subtopicNames.forEach(subtopic => {
+        // this.topicType.push(subtopic.topic.name);
+        if (this.percentageMap[subtopic.topic.name] === undefined) {
+          this.percentageMap[subtopic.topic.name] = 1 ;
+          this.total++;
+          }else {
+            this.percentageMap[subtopic.topic.name] += 1 ;
+            this.total++;
+          }
+      });
+    });
+    this.percentageNums = Object.values(this.percentageMap);
+    this.percentageNames = Object.keys(this.percentageMap);
   }
 
   /**
