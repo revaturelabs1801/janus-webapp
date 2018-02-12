@@ -27,10 +27,9 @@ export class TopicSearchComponent implements OnInit {
    * @author David Graves
    * @author Charlie Harris
    * @batch 1712-Dec11-2017
-   * @param newSubTopic to add.
    */
-  sendSearchText(topicSerName) {
-    this.textService.sendMessage(topicSerName, 'topic');
+  sendSearchText() {
+    this.textService.sendMessage(this.topicSearch, 'topic');
   }
 
 }

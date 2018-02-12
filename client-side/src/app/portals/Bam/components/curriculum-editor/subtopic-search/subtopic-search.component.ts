@@ -27,7 +27,6 @@ export class SubtopicSearchComponent implements OnInit {
  * @author David Graves
  * @author Charlie Harris
  * @batch 1712-Dec11-2017
- * @param newSubTopic to add.
  */
   sendSearchText() {
     this.textService.sendMessage(this.searchText, 'subtopic');
