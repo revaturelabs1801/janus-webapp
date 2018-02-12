@@ -7,10 +7,11 @@
 
     </div>
     <div class="col-md-2 m-2 calendar-sidebar">
-      <p-calendar #datePicker [(ngModel)]="gotoDateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030"
-        [showIcon]="true" (onSelect)="jumpToDate(gotoDateValue)"></p-calendar>
-      <app-add-subtopic></app-add-subtopic>
-      <img src="/assets/img/delete_orange.png" alt="trashcan" class='fc-trash' [style.opacity]="trashOpacity">
+        <p-calendar #datePicker [(ngModel)]="gotoDateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030"
+          [showIcon]="true" (onSelect)="jumpToDate(gotoDateValue)"></p-calendar>
+        <app-add-subtopic></app-add-subtopic>
+        <img src="/assets/img/delete_orange.png" alt="trashcan" class='fc-trash' [style.opacity]="trashOpacity">
+      
     </div>
   </div>
   <span #tooltip class="tooltiptext">{{subtopicTooltip}}
