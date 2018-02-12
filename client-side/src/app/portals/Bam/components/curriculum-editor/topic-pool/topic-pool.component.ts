@@ -9,7 +9,7 @@ import { SearchTextService } from '../../../services/search-text.service';
 import { TopicService } from '../../../services/topic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
 
-
+// Used below to toggle add subtopic modal
 declare let $: any;
 
 @Component({
@@ -34,10 +34,6 @@ export class TopicPoolComponent implements OnInit {
     private topicService: TopicService,
     private subtopicService: SubtopicService
   ) { }
-
-
-
-
 
   @Output() currentlyDragged = new EventEmitter();
 
