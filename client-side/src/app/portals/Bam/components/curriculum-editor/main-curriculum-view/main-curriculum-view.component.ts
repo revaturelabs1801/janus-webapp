@@ -18,6 +18,7 @@ import { WeeksDTO } from '../../../models/weeksDTO.model';
     templateUrl: './main-curriculum-view.component.html',
     styleUrls: ['./main-curriculum-view.component.css']
 })
+
 export class MainCurriculumViewComponent implements OnInit {
     schedule: CurriculumSubtopic[];
     allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
@@ -33,7 +34,16 @@ export class MainCurriculumViewComponent implements OnInit {
 
     ngOnInit() {
         this.displayWeekView();
+        this.loadScript('https://use.fontawesome.com/releases/v5.0.6/js/all.js')
+        
     }
+
+    public loadScript(url) {
+        let node = document.createElement('script');
+        node.src = url;
+        node.type = 'text/javascript';
+        document.getElementsByTagName('head')[0].appendChild(node);
+     }
 
     toggle(view) {
         this.toggleTab = view;

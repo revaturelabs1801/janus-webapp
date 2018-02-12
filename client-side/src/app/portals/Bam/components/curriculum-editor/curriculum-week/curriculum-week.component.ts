@@ -118,9 +118,17 @@ export class CurriculumWeekComponent implements OnInit {
  * Sends specific weekNum of a CurriculumSuptopic[] to removeWeek, for removal.
  * Also, uses stopPropagation because button is on top of clickable div.
  */
-  removeWeekCall(weekNum: number) {
+
+ confirmWeekDeletion(weekNum: number) {
     event.stopPropagation();
-    this.removeWeekEvent.emit(weekNum - 1);
+    this.weekNum = weekNum;
+    console.log(weekNum);
+ }
+
+  removeWeekCall() {
+    event.stopPropagation();
+    this.removeWeekEvent.emit(this.weekNum - 1);
   }
+
 }
 

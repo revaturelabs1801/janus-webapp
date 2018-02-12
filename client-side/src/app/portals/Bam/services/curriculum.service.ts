@@ -108,7 +108,7 @@ export class CurriculumService {
     * @param: CurriculumSubtopicDTO
     */
   addCurriculum(curriculum: CurriculumSubtopicDTO) {
-    return this.http.post('http://localhost:9001/api/v1/curriculum/addcurriculum', curriculum, httpOptions).map(
+    return this.http.post(environment.curriculum.addCurriculumUrl(), curriculum, httpOptions).map(
       data => {
         return data;
       }

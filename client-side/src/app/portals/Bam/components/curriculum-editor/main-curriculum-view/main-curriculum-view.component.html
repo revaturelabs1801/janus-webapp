@@ -30,21 +30,21 @@
         </span>
 
         <span class="col-8 align style-7">
-            <span *ngIf="isNewVer" class="buttons">
-                <span class="saveCurr">
-                    <button (click)="openSaveCurriculumModal()">Save Curriculum</button>
-                    <button type="text" class="btn btn-danger" (click)="op.toggle($event)">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
-                </span>
+            <span *ngIf="isNewVer">
+                    <span class="saveCurr" (click)="openSaveCurriculumModal()">
+                        <i class="fab fa-phoenix-framework"></i>
+                        Save Curriculum
+                    </span>
+                    <span type="text" class="trashCan" (click)="op.toggle($event)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </span>
+
                 <span class="pushtotop" (click)="addWeek()">
                     <i class="fa fa-plus-square"></i>
                 </span>
             </span>
-            <br/>
-            <br/>
-            <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index"
-                [weekCurrSubtopics]="week" [weekNum]="i + 1" (removeWeekEvent)="removeWeek($event)"></app-curriculum-week>
+            <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1"
+                (removeWeekEvent)="removeWeek($event)"></app-curriculum-week>
         </span>
     </div>
 </div>
@@ -75,7 +75,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <h6 *ngIf="selectedCurr">DO YOU WANT TO MAKE #{{selectedCurr.curriculumVersion}} THE NEW MASTER VERSION OF {{selectedCurr.curriculumName}}?</h6>
+                <h6 *ngIf="selectedCurr">Are you sure you want to make #{{selectedCurr.curriculumVersion}} the new master version of {{selectedCurr.curriculumName}}?</h6>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" data-dismiss="modal" (click)="saveCurr(true)">YES, I AM AWARE THIS WILL BE THE NEW MASTER</button>
@@ -90,13 +90,13 @@
 </p-overlayPanel>
 
 <p-overlayPanel #confirmClear>
-        <p>Are You Sure?</p>
-        <div class="hoverRed"  (click)="clearAllWeeks(); confirmClear.hide($event)">Yes</div>
-        <div class="hoverRed" (click)="confirmClear.hide($event)"> No</div>
+    <p>Are You Sure?</p>
+    <div class="hoverRed" (click)="clearAllWeeks(); confirmClear.hide($event)">Yes</div>
+    <div class="hoverRed" (click)="confirmClear.hide($event)"> No</div>
 </p-overlayPanel>
 
 <p-overlayPanel #confirmTruncate>
-        <p>Are You Sure?</p>
-        <div class="hoverRed"  (click)="truncateWeeks(); confirmTruncate.hide($event)">Yes</div>
-        <div class="hoverRed" (click)="confirmTruncate.hide($event)"> No</div>
+    <p>Are You Sure?</p>
+    <div class="hoverRed" (click)="truncateWeeks(); confirmTruncate.hide($event)">Yes</div>
+    <div class="hoverRed" (click)="confirmTruncate.hide($event)"> No</div>
 </p-overlayPanel>

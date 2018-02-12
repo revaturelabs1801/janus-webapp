@@ -40,15 +40,16 @@ width: 100%;
 }
 
 .removeWeekBtn {
-    color: red;
+    color: #d9534f;
     position: absolute;
     right: 3%;
     top: -2%;
-    font-size: 170%
+    font-size: 170%;
 }
 
 .removeWeekBtn:hover {
-    color: black;
+    color: rgb(172, 19, 14);
+    
 }
 
 .putBorder{
@@ -58,5 +59,19 @@ width: 100%;
 .noTouch {
     opacity: .4;
     pointer-events: none;
+}
+
+.hoverRed{
+    padding-left: 3px;
+    padding-right: 6px;
+    font-size: 94%;
+}
+
+.hoverRed:hover{
+    background-color: rgb(187, 25, 25);
+    color: white;
+    border-radius: 4px;
+    cursor: url("http://i43.tinypic.com/2n8t1rq.jpg"), auto;
+
 }
 

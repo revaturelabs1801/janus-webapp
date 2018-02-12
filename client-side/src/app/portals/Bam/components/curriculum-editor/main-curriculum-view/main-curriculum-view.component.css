@@ -1,5 +1,6 @@
 .align{
 
+    position: relative;
     padding-top: 6px;
     height: 450px;
     overflow-y: scroll;
@@ -8,31 +9,29 @@
     margin-top: 44px;
 }
 
-.buttons{
-    float:right;
-    color:rgb(244, 136, 81);
-    position: relative;
-    bottom: 10px;
-    right: 10px;
-}
-
-.buttons:hover{
-    color: green;
-    cursor: pointer;
-}
-
 .pushtotop{
     position: absolute;
-    float:right;
-    top:0px;
-    right:0px;
+    top: 0;
+    color: #5bd782;
+    right: 7%;
     font-size: 2.5em;
 }
 
-.saveCurr{
-    position: relative;
-    right: 35vw;
-    top: 10px;
+.pushtotop:hover{
+    color: #30b85b;
+    cursor: pointer;
+}
+
+.trashCan{
+    color: rgb(217, 83, 79);
+    position: absolute;
+    right: 12.5%;
+    top: .77%;
+    font-size: 2.2rem;
+}
+
+.trashCan:hover{
+    color: rgb(172, 19, 14);
 }
 
 .hoverRed{
@@ -47,6 +46,16 @@
     border-radius: 4px;
     cursor: url("http://i43.tinypic.com/2n8t1rq.jpg"), auto;
 
+}
+
+.saveCurr {
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: #f47f43;
+}
+
+.saveCurr:hover {
+    color: #bd5e2f;
 }
 
 :host ::ng-deep ul.nav.nav-tabs.justify-content-start.nav {

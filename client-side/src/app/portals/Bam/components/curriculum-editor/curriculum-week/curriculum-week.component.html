@@ -1,15 +1,15 @@
 
+
 <div class = "container">
     <div class="row week" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
         aria-controls="collapseOne">
         <p *ngIf="readOnly" class="read-only text-center">READ ONLY</p>
         Week #{{weekNum}}
-        <div *ngIf="!readOnly" class="removeWeekBtn" (click)="removeWeekCall(weekNum);">              
-            <i class="fas fa-minus-square"></i>
+        <div *ngIf="!readOnly" class="removeWeekBtn" (click)="confirmWeekDeletion(weekNum);overlay.toggle($event)" >              
+                <i class="fas fa-times-circle fa-1x"></i>
         </div>
-    </div>    
+    </div>   
 </div>
-
 
 
 <div class="container">
@@ -52,3 +52,10 @@
 
 </div>
 </div>
+
+<p-overlayPanel [appendTo]="'body'" #overlay>
+    <p>Delete Week #{{weekNum}}?</p>
+        <div class="hoverRed"  (click)="removeWeekCall(); overlay.hide($event)">Yes</div>
+        <div class="hoverRed" (click)="overlay.hide($event)"> No</div>
+</p-overlayPanel>
+
