@@ -56,7 +56,7 @@ width: 100%;
 }
 
 .noTouch {
-    opacity: .4;
+    opacity: .7;
     pointer-events: none;
 }
 
