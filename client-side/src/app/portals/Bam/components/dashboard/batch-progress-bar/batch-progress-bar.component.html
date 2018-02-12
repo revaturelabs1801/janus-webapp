@@ -1,15 +1,26 @@
-<div class="row pt-3 pb-3">
+<div class="row pt-3 pb-3" *ngIf="batchId != null">
 	<div class="col-sm-12 col-md-12 col-lg-12">
 		<div class="card">
-			<div class="card-header">Batch Progess</div>
+			<div class="card-header">Batch Progress</div>
 			<div class="card-body">
-				<app-loading-spinner></app-loading-spinner>
-				<h5 class="card-title">Batch Progess By Day</h5>
-				<div class="card-text">
-					<p><ngb-progressbar type="info" [value]="percentCompleted" [height]="20"></ngb-progressbar></p>
-					<h5 class="card-title">Batch Progess By Subtopic</h5>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
+				<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+				<div *ngIf="!showSpinner">
+					<h5 class="card-title">Progress by Day</h5>
+					{{percentCompleted}}% Days Completed
+					<p><ngb-progressbar type="primary" [value]="percentCompleted" [height]="20">{{percentCompleted}}%</ngb-progressbar></p>
+					<h5 class="card-title">Progress by Subtopic</h5>
+					{{subPercentCompleted}}% Completed/Cancelled
+					<p><ngb-progressbar type="info" [value]="subPercentCompleted" [height]="20">{{subPercentCompleted}}%</ngb-progressbar></p>
+				</div>
+				<div *ngIf="subTopicMissed > 0">
+					<h5 class="card-title">Topics Missed</h5>
+					<p>{{subTopicMissed}} / {{subTopicTotal}} missed topics</p>
+					<div *ngFor="let list of topicArray">
+						{{list.listName}}
+						<ul><li *ngFor="let name of list.listItems">{{name}}</li></ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>

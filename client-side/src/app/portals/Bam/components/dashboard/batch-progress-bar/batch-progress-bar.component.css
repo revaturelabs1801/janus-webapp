@@ -5,3 +5,7 @@
 .card-header {
     background-color: rgba(50,65,118,.95);
 }
+
+::ng-deep .progress-bar {
+	background-color: rgba(50,65,118,.95) !important;	
+}

@@ -2,12 +2,16 @@
   font-weight: 300;
 }
 
-::ng-deep .card {
-  border-color: #fa7427;
-}
-
 ::ng-deep .card-header { 
   background-color: #fa7427; 
   color: white;
   font-weight: bold;
+}
+
+::ng-deep .bg-janus {
+	background-color: #fa7427;
+}
+
+::ng-deep .bg-janus-secondary {
+	background-color: #fa7427;
 }
