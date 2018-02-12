@@ -45,12 +45,16 @@ export class CurriculumWeekComponent implements OnInit {
     this.sortSubtopics();
     this.progressBar();
   }
-
+  /**
+   * This method returns the subtopic-topic names for the progress bar and a visual
+   * representation of the topics for the bar.
+   *
+   * @author James Holzer, Shane Sistoza, Jeffrey Camacho, Jordan DeLong
+   */
   progressBar() {
 
     this.weekDTO.daysDTO.forEach(element => {
       element.subtopicNames.forEach(subtopic => {
-        // this.topicType.push(subtopic.topic.name);
         if (this.percentageMap[subtopic.topic.name] === undefined) {
           this.percentageMap[subtopic.topic.name] = 1 ;
           this.total++;
@@ -63,7 +67,6 @@ export class CurriculumWeekComponent implements OnInit {
     this.percentageNums = Object.values(this.percentageMap);
     this.percentageNames = Object.keys(this.percentageMap);
   }
-
   /**
    * This method is usesd to go through the week and set the subtopics to the correct day
    * of the week
