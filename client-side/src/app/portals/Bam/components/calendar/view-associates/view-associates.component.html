@@ -1,6 +1,5 @@
-<h3 style="text-align: center;"> {{currentBatch.name}} Associates</h3>
-
 <div *ngIf="currentBatch != null; else noBatchSelected ">
+  <h3 style="text-align: center;"> {{currentBatch.name}} Associates</h3>
   <div class="searchText-container">
     <div class="input-group">
       <span class="input-group-addon">Search</span>
@@ -11,7 +10,10 @@
   <table class="table">
     <tbody>
       <tr class="associates-header">
-        <td [class.active]= "order == 'lName'" (click)="setOrder('lName')" class="head">Name<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span></td>
+        <td [class.active]="order == 'lName'" (click)="setOrder('lName')" class="head">Name
+          <span [hidden]="reverse">▼</span>
+          <span [hidden]="!reverse">▲</span>
+        </td>
         <td class="head">Email</td>
         <td class="head">Batch Id</td>
         <td class="head">Main Phone</td>
