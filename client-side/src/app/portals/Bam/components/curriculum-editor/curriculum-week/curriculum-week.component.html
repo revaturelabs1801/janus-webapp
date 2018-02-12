@@ -6,14 +6,15 @@
         <p *ngIf="readOnly" class="read-only text-center">READ ONLY</p>
         Week #{{weekNum}}
         <div *ngIf="!readOnly" class="removeWeekBtn" (click)="confirmWeekDeletion(weekNum);overlay.toggle($event)" >              
-                <i class="fas fa-times-circle fa-1x"></i>
+            <i class="fas fa-times-circle fa-1x"></i>
         </div>
     </div>   
 </div>
 
 
 <div class="container">
-<div class="collapse weeksrow row" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
+<div class="row">
+<div class="collapse weeksrow" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
 
     <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(0)">Monday
         <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
@@ -49,7 +50,7 @@
             *ngFor="let day of friday.subtopics">
             {{day.name}}</div>
     </div>
-
+</div>
 </div>
 </div>
 
