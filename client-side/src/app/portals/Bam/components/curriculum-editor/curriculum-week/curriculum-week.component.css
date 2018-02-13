@@ -44,3 +44,7 @@ width: 100%;
 .putBorder{
     border: 1px solid black;
 }
+.progress{
+    width: 100%;
+    font-size: 15px;
+}

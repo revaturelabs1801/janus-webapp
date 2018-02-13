@@ -34,6 +34,8 @@ import { CurriculumService } from './services/curriculum.service';
 import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
 import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
 import { DragndropService } from './services/dragndrop.service';
+import { TopicSearchComponent } from './components/curriculum-editor/topic-search/topic-search.component';
+import { SearchTextService } from './services/search-text.service';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
@@ -43,6 +45,9 @@ import { CalendarStatusService } from './services/calendar-status.service';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
+import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
+import { TopicService } from './services/topic.service';
+import { SubtopicService } from './services/subtopic.service';
 
 
 @NgModule({
@@ -82,12 +87,14 @@ import { DragDropModule } from 'primeng/primeng';
     DashboardInfoComponent,
     ViewAssociatesComponent,
     CalendarComponent,
-    SearchPipe,
-    FilterBatchPipe,
     ViewAssociatesComponent,
     CalendarComponent,
     AddSubtopicComponent,
-    OrderPipe
+    TopicSearchComponent,
+    SubtopicSearchComponent,
+    OrderPipe,
+    SearchPipe,
+    FilterBatchPipe
   ],
   providers: [
     CurriculumWeekComponent,
@@ -106,7 +113,10 @@ import { DragDropModule } from 'primeng/primeng';
     CurriculumService,
     CalendarService,
     AddSubtopicService,
-    CalendarStatusService
+    CalendarStatusService,
+    SearchTextService,
+    TopicService,
+    SubtopicService
   ],
   exports: [
     SearchPipe,

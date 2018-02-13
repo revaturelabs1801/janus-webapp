@@ -10,7 +10,7 @@ const Status = {
 }
 
 const Color = {
-  PLANNED: "#2a2f60",
+  PLANNED: "#5e8cb2",
   COMPLETED: "green",
   CANCELED: "#912e2e",
   MISSED: "#c48013"
