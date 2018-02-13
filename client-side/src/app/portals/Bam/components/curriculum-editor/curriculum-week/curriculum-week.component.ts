@@ -31,6 +31,11 @@ export class CurriculumWeekComponent implements OnInit {
   weekDTO: WeeksDTO = new WeeksDTO([]);
   @Input() readOnly: boolean;
   @Output() removeWeekEvent = new EventEmitter<number>();
+  topicType: string[]= [];
+  percentageMap = {};
+  total = 0;
+  percentageNums = [];
+  percentageNames = [];
 
   constructor(private dndService: DragndropService,
     private courseStructureComponent: CourseStructureComponent) { }
@@ -39,8 +44,30 @@ export class CurriculumWeekComponent implements OnInit {
 
   ngOnInit() {
     this.sortSubtopics();
+    this.progressBar();
   }
+  /**
+   * This method returns the subtopic-topic names for the progress bar and a visual
+   * representation of the topics for the bar.
+   *
+   * @author James Holzer, Shane Sistoza, Jeffrey Camacho, Jordan DeLong (1712-Steve)
+   */
+  progressBar() {
 
+    this.weekDTO.days.forEach(element => {
+      element.subtopics.forEach(subtopic => {
+        if (this.percentageMap[subtopic.topic.name] === undefined) {
+          this.percentageMap[subtopic.topic.name] = 1 ;
+          this.total++;
+          }else {
+            this.percentageMap[subtopic.topic.name] += 1 ;
+            this.total++;
+          }
+      });
+    });
+    this.percentageNums = Object.values(this.percentageMap);
+    this.percentageNames = Object.keys(this.percentageMap);
+  }
   /**
    * This method is usesd to go through the week and set the subtopics to the correct day
    * of the week

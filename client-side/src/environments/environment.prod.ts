@@ -245,7 +245,8 @@ apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
     },
 
     subtopic: {
-       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${bam}/subtopic/${typeId}/${topicId}/${subtopicName}`
+       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => 
+        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`
     },
 
     addsubtopics: {

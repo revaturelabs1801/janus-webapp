@@ -5,7 +5,7 @@ import { BatchType } from '../../../models/batchtype.model';
 import { BatchService } from '../../../services/batch.service';
 import { SessionService } from '../../../services/session.service';
 import { CalendarService } from '../../../services/calendar.service';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * @author David Graves -- batch: 1712-dec-Java-Steve
