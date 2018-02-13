@@ -2,18 +2,24 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BamComponent } from './bam.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Dependencies } from './bam.test.module';
 
 describe('BamComponent', () => {
   let component: BamComponent;
   let fixture: ComponentFixture<BamComponent>;
 
+
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BamComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
-  }));
+    TestBed.configureTestingModule(Dependencies).compileComponents();
+  }), 1440000);
+
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [ BamComponent ],
+  //     schemas: [ NO_ERRORS_SCHEMA ]
+  //   })
+  //   .compileComponents();
+  // }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BamComponent);

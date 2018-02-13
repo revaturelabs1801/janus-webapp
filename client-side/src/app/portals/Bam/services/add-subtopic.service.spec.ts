@@ -1,13 +1,19 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { async, TestBed, inject } from '@angular/core/testing';
 
 import { AddSubtopicService } from './add-subtopic.service';
+import { Dependencies } from '../bam.test.module';
 
 describe('AddSubtopicService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [AddSubtopicService]
-    });
-  });
+  
+  beforeEach(async(() => {
+    TestBed.configureTestingModule(Dependencies).compileComponents();
+  }), 1440000);
+  
+  // beforeEach(() => {
+  //   TestBed.configureTestingModule({
+  //     providers: [AddSubtopicService]
+  //   });
+  //});
 
   it('should be created', inject([AddSubtopicService], (service: AddSubtopicService) => {
     expect(service).toBeTruthy();

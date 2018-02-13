@@ -1,15 +1,21 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { async, TestBed, inject } from '@angular/core/testing';
 
 import { DragndropService } from './dragndrop.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Dependencies } from '../bam.test.module';
 
 describe('DragndropService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [DragndropService],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    });
-  });
+  
+  beforeEach(async(() => {
+    TestBed.configureTestingModule(Dependencies).compileComponents();
+  }), 1440000);
+  
+  // beforeEach(() => {
+  //   TestBed.configureTestingModule({
+  //     providers: [DragndropService],
+  //     schemas: [ NO_ERRORS_SCHEMA ]
+  //   });
+  // });
 
   it('should be created', inject([DragndropService], (service: DragndropService) => {
     expect(service).toBeTruthy();

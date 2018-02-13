@@ -50,6 +50,7 @@ import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 export const Dependencies = {
@@ -126,5 +127,8 @@ export const Dependencies = {
   exports: [
     SearchPipe,
     OrderPipe
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 };
