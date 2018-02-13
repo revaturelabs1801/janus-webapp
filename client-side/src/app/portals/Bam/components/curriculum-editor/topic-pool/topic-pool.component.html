@@ -1,6 +1,6 @@
 <button class="btn offset-1 col-10 topic" data-toggle="modal" data-target="#addTopicModel">
   Add New Topic
-  <i class="fas fa-plus"></i>
+  <i class="fa fa-plus"></i>
 </button>
 
 
@@ -14,7 +14,7 @@
       <div class="btn offset-1 col-10 topic" data-toggle="collapse" [attr.data-target]="'#'+i" aria-expanded="true" aria-controls="collapseOne">
         <p [ngClass]="{'regularFont':topic.length <= 16, 'mediumFont':topic.length>=16 && topic.length<20 ,'smallFont':topic.length > 20}">
           {{topic}} <span  (click)="getNewSubTopicReady(i)">
-            <i class="fas fa-plus-circle" data-toggle="modal" data-target="#addSubTopicModel"></i>
+            <i class="fa fa-plus-circle" data-toggle="modal" data-target="#addSubTopicModel"></i>
           </span>
         </p>
         
@@ -25,8 +25,7 @@
 
         <app-subtopic-search></app-subtopic-search>
         <div *ngFor="let sub of subArray[i] | search : 'name' : searchText">
-          <div pDraggable="subtopicdrag" (onDragStart)="sendCurrentlyDragged(sub)" [ngClass]="{'noTouch':readOnly}" class="subtopic offset-1 col-9 " data-toggle="tooltip"
-            data-placement="right" [attr.title]="sub.name">
+          <div pDraggable="subtopicdrag" (onDragStart)="sendCurrentlyDragged(sub)" [ngClass]="{'noTouch':readOnly}" class="subtopic offset-1 col-9 " placement="bottom" [ngbTooltip]="sub.name">
             <span>
 
               <i class="fa fa-circle fa-3x outerCircle">
