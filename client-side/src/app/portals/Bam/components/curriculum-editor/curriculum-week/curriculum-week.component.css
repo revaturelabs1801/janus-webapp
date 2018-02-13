@@ -1,23 +1,37 @@
+.percentageBarText {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.read-only{
+    position: absolute;
+    color: red;
+    right: 34%;
+    font-weight: 700;
+}
+
 .days {    
     border: 1px solid black;
-    margin-bottom: 20px;    
-    padding-top: 1%;    
-    width: 18.7%;
-    text-align: center;   
-    float: left;  
+    margin-bottom: 20px;
+    width: 20%;
+    text-align: center;
+    float: left;
     height: 140px;
 }
 
 .week {
     border: 1px solid #f47f43;
     background-color: lightgray;
-    padding: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    height: 80px;
     cursor: pointer;
+    position: relative;
 }
 
 
 .week:hover {
-    font-size: 1.2vw;
+    font-size: 103%;
 }
 
 .giveHeight{
@@ -25,22 +39,47 @@
 }
 
 .weeksrow {
+position: relative;
 width: 100%;
 }
 
 .removeWeekBtn {
-    float: center;
-    color: red;
-    position: relative;
-    /* left: 670px; */
-    left: 88%;
-    font-size: 2.1em;
+    color: #d9534f;
+    position: absolute;
+    right: 3%;
+    top: -2%;
+    font-size: 170%;
 }
 
 .removeWeekBtn:hover {
-    color: black;
+    color: rgb(172, 19, 14);
+    
 }
 
 .putBorder{
-    border: 1px solid black;
+    border: 1px solid black;    
+}
+
+.noTouch {
+    opacity: .7;
+    pointer-events: none;
+}
+
+.hoverRed{
+    padding-left: 3px;
+    padding-right: 6px;
+    font-size: 94%;
+}
+
+.hoverRed:hover{
+    background-color: rgb(187, 25, 25);
+    color: white;
+    border-radius: 4px;
+    cursor: url("http://i43.tinypic.com/2n8t1rq.jpg"), auto;
+
+}
+
+.progress{
+    width: 100%;
+    font-size: 15px;
 }

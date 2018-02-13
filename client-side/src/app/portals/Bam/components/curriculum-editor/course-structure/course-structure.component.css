@@ -55,7 +55,7 @@
    color: #f47f43;
 }
 
-.fa-chess-king {
+.fa-diamond {
     color: #f47f43;
 }
 
@@ -78,3 +78,24 @@
 .fa-plus-circle:hover {
     color: #f47f43;
 }
+
+.btn-warning {
+    background-color: red;
+    border: red;
+    color: white;
+}
+
+.btn-warning:active {
+    background-color: rgb(192, 6, 6);
+}
+
+.btn-warning:focus {
+    background-color: rgb(192, 6, 6);
+}
+
+.btn-warning:hover {
+    background-color: rgb(192, 6, 6);
+}
+
+
+    

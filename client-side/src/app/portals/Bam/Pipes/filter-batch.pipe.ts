@@ -16,7 +16,7 @@ export class FilterBatchPipe implements PipeTransform {
     constructor() { }
 
     /**
-     * Filters [items] by [searchText]. Checks trainer's full name (first + last), start and end dates, 
+     * Filters [items] by [searchText]. Checks trainer's full name (first + last),
      * batch name, and batch type, not case sensitive
      * @param items List of Batch items to be filtered
      * @param searchText Text [items] is filtered by
@@ -32,15 +32,10 @@ export class FilterBatchPipe implements PipeTransform {
         searchText = searchText.toLowerCase();
         return items.filter((batch: Batch) => {
             const trainerName = `${batch.trainer.fName} ${batch.trainer.lName}`;
-            const startDate = this.datePipe.transform(batch.startDate, 'MM-dd-yyyy');
-            const endDate = this.datePipe.transform(batch.endDate, 'MM-dd-yyyy');
-            const searchTextForDate = searchText.split('/').join('-');
             return (
                 batch.type.name.toLowerCase().includes(searchText) ||
                 batch.name.toLowerCase().includes(searchText) ||
-                trainerName.toLowerCase().includes(searchText) ||
-                startDate.toLowerCase().includes(searchTextForDate) ||
-                endDate.toLowerCase().includes(searchTextForDate));
+                trainerName.toLowerCase().includes(searchText));
         }
         );
     }

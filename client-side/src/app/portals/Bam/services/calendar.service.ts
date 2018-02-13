@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subtopic } from '../models/subtopic.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
 import { CalendarEvent } from '../models/calendar-event.model';
 import { environment } from '../../../../environments/environment';
+import { of } from 'rxjs/observable/of';
 
 
 const httpOptions = {
@@ -15,12 +16,15 @@ const httpOptions = {
 
 @Injectable()
 export class CalendarService {
+  @Output()
+  addCalendarEvent = new EventEmitter<CalendarEvent>();
+
   constructor(private http: HttpClient) { }
 
   /**
    * Gets subtopics by batch and uses pagination to limit the results
    * apposed to getting them all at one time
-   * @author James Holzer | Batch: 1712-dec10-java-steve
+   * @author James Holzer Jordan DeLong| Batch: 1712-dec10-java-steve
    * @returns SubTopic[]
    * @param batchId number
    * @param pageNumber: number
@@ -122,4 +126,28 @@ export class CalendarService {
     );
   }
 
+  /**
+   * Adds subtopic sent from the add-subtopic component and emits it to the calendar component
+   * @param subtopic
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
+  addSubtopicToCalendar(subtopic: Subtopic) {
+    var newCalendarSubtopic = this.mapSubtopicToEvent(subtopic);
+    this.addCalendarEvent.emit(newCalendarSubtopic);
+  }
+
+  /**
+   * maps Subtopic object to CalendarEvent object
+   * @param subtopic
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
+  mapSubtopicToEvent(subtopic: Subtopic): CalendarEvent {
+    let calendarEvent = new CalendarEvent();
+    calendarEvent.subtopicId = subtopic.subtopicId;
+    calendarEvent.title = subtopic.subtopicName.name;
+    calendarEvent.start = new Date(subtopic.subtopicDate);
+    calendarEvent.status = subtopic.status.name;
+
+    return calendarEvent;
+  }
 }

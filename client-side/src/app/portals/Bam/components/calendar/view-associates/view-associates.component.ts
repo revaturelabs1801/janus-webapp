@@ -30,7 +30,7 @@ export class ViewAssociatesComponent implements OnInit {
 
   ngOnInit() {
     // this.loadAssociatesInBatch();
-    console.log(this.currentBatch);
+    // console.log(this.currentBatch);
     this.loadAssociates();
   }
 
