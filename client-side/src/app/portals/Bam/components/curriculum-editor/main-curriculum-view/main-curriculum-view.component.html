@@ -62,7 +62,8 @@
                 <h6 *ngIf="selectedCurr">Save version #{{selectedCurr.curriculumVersion}} as new {{selectedCurr.curriculumName}} curriculum?</h6>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal" (click)="openMasterModal()">Save</button>
+                <button *ngIf="isFirstVer" class="btn btn-success" data-dismiss="modal" (click)="saveCurr(true)">Save</button>
+                <button *ngIf="!isFirstVer" class="btn btn-success" data-dismiss="modal" (click)="openMasterModal()">Save</button>
                 <button class="btn btn-warning" data-dismiss="modal">Close</button>
             </div>
         </div>

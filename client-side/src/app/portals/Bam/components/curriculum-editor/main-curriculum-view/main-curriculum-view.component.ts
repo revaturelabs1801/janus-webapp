@@ -25,6 +25,7 @@ export class MainCurriculumViewComponent implements OnInit {
     toggleTab = 1;
     selectedCurr: Curriculum;
     isNewVer = false;
+    isFirstVer = false;
     uniqCurrVersions;
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
@@ -34,12 +35,11 @@ export class MainCurriculumViewComponent implements OnInit {
 
     ngOnInit() {
         this.displayWeekView();
-        this.loadScript('https://use.fontawesome.com/releases/v5.0.6/js/all.js')
-        
+        this.loadScript('https://use.fontawesome.com/releases/v5.0.6/js/all.js');
     }
 
     public loadScript(url) {
-        let node = document.createElement('script');
+        const node = document.createElement('script');
         node.src = url;
         node.type = 'text/javascript';
         document.getElementsByTagName('head')[0].appendChild(node);
@@ -56,6 +56,12 @@ export class MainCurriculumViewComponent implements OnInit {
         } else {
             this.isNewVer = false;
         }
+
+        if (event.curriculumVersion === 1) {
+            this.isFirstVer = true;
+        } else {
+            this.isFirstVer = false;
+            }
     }
 
     openSaveCurriculumModal() {
