@@ -196,9 +196,12 @@ export class TopicPoolComponent implements OnInit {
       topic => {
         this.subtopicService.addSubTopicName(newSubTopic, topic.id, 1).subscribe(
           data => {
-            this.uniqarrFiltered = [];
+            // this.uniqarrFiltered = [];
+            this.uniqarrFiltered.push(topic.name);
+            this.subTopicName.push(data);
             this.subArray = new Array<SubtopicName[]>();
-            this.getTopics();
+            this.getSubTopics();
+            // this.getTopics();
           }
         );
       }
@@ -235,9 +238,13 @@ export class TopicPoolComponent implements OnInit {
     if (newSubTopic.length > 1) {
       this.subtopicService.addSubTopicName(newSubTopic, this.selectedTopicId, 1).subscribe(
         data => {
-          this.uniqarrFiltered = [];
+          // this.uniqarrFiltered = [];
           this.subArray = new Array<SubtopicName[]>();
-          this.getTopics();
+          this.subTopicName.push(data);
+          this.getSubTopics();
+          // this.subArray[this.selectedTopicId].push(data);
+          // console.log(this.subArray);
+          // this.getTopics();
         }
       );
       this.selectedTopicId = 0;
