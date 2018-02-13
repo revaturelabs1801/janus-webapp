@@ -24,16 +24,16 @@ export class CourseStructureComponent implements OnInit {
   constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
 
   ngOnInit() {
-      this.getAllCurriculums();
+    this.getAllCurriculums();
   }
 
-   /**
-   * view the schedule of a specific curriculum.
-   * Sends the schedule (CurriculumSubtopic[])
-   * to BehaviorSubject in CurriculumService
-   * @author Carter Taylor (1712-Steve)
-   * @param currVersion - curriculum object selected from view
-   */
+  /**
+  * view the schedule of a specific curriculum.
+  * Sends the schedule (CurriculumSubtopic[])
+  * to BehaviorSubject in CurriculumService
+  * @author Carter Taylor (1712-Steve)
+  * @param currVersion - curriculum object selected from view
+  */
   viewCurrSchedule(currVersion: Curriculum) {
     this.curriculumService.getSchedualeByCurriculumId(currVersion.id).subscribe(
       data => {
@@ -135,7 +135,8 @@ export class CourseStructureComponent implements OnInit {
   /**
    * requests all curriculums by calling apporopiate API endpoint.
    * Then calls all methods associated with getting
-   * the unique list of curriculum types & their versions
+   * the unique list of curriculum types & their versions. Loads
+   * schedule of Java master version by default.
    * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    */
   getAllCurriculums() {
@@ -145,23 +146,27 @@ export class CourseStructureComponent implements OnInit {
     ).unsubscribe();
 
     if (apiData.length === 0) {
-      console.log(this.curriculumService.currentAllCurriculumData);
-    this.curriculumService.getAllCurriculums().subscribe(
-      data => {
-        this.allCurriculums = data;
-        this.getCurriculumNames();
-        this.getUniqueCurrNames();
-        this.getCurriculumVersions();
-        this.getUniqCurrVersions();
-      }
-    );
-  } else {
-        this.allCurriculums = apiData;
-        this.getCurriculumNames();
-        this.getUniqueCurrNames();
-        this.getCurriculumVersions();
-        this.getUniqCurrVersions();
-  }
+      this.curriculumService.getAllCurriculums().subscribe(
+        data => {
+          this.allCurriculums = data;
+          this.getCurriculumNames();
+          this.getUniqueCurrNames();
+          this.getCurriculumVersions();
+          this.getUniqCurrVersions();
+          this.uniqCurrVersions[0].forEach(e => {
+            if (e.isMaster === 1) {
+              this.viewCurrSchedule(e);
+            }
+          });
+        }
+      );
+    } else {
+      this.allCurriculums = apiData;
+      this.getCurriculumNames();
+      this.getUniqueCurrNames();
+      this.getCurriculumVersions();
+      this.getUniqCurrVersions();
+    }
   }
 
   /**
@@ -191,16 +196,16 @@ export class CourseStructureComponent implements OnInit {
 
     this.selectedCurrVer.isMaster = 1;
     this.curriculumService.markCurriculumAsMaster(this.selectedCurrVer.id).subscribe(
-    data => {
-      console.log(data);
-    },
-    error => {
-      console.log(error);
-    });
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   createCurr(curTitle: string) {
-    const curric = new Curriculum(0, null , 0, null, null, null, null, 0);
+    const curric = new Curriculum(0, null, 0, null, null, null, null, 0);
     curric.curriculumName = curTitle;
     curric.curriculumVersion = 1;
     this.messageEvent.emit(curric);
