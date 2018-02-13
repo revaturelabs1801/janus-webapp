@@ -76,10 +76,6 @@
     max-width: 40px;
 }
 
-.fit-content{
-
-}
-
 
 .scrollbar
 {
@@ -148,7 +144,6 @@
      opacity: 0.7;
      pointer-events: none;
  }
-
 
  .fa-plus-circle {
     float: right;

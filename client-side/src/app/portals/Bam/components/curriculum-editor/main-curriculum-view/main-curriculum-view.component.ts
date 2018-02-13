@@ -36,10 +36,20 @@ export class MainCurriculumViewComponent implements OnInit {
         this.displayWeekView();
     }
 
+    /**
+     * Toggles between topic view and course structure
+     * @author: Mohamad Alhindi
+     * @batch:  1712-Dec11-2017
+     */
     toggle(view) {
         this.toggleTab = view;
     }
 
+    /**
+     * Receives the curriculum object from the course structure
+     * @author: Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     receiveMessage(event) {
         this.selectedCurr = event;
         if (event.id == null) {
@@ -49,14 +59,32 @@ export class MainCurriculumViewComponent implements OnInit {
         }
     }
 
+    /**
+     * Opens save curriculum modal
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     openSaveCurriculumModal() {
         (<any>$('#saveCurriculumModal')).modal('show');
     }
 
+    /**
+     * Opens make master curriculum modal
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     openMasterModal() {
         (<any>$('#makeNewVerMasterModal')).modal('show');
     }
 
+    /**
+     * Update curriculum
+     * Saves the new master curriculum version and persist to database
+     * Depending on if it already is true or false
+     * @author: Carter Taylor
+     * @batch:  1712-Dec11-2017
+     * @param makeMaster: boolean
+     */
     saveCurr(makeMaster: boolean) {
         this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
         this.selectedCurr.curriculumCreator = this.sessionService.getUser();
@@ -104,6 +132,11 @@ export class MainCurriculumViewComponent implements OnInit {
         );
     }
 
+    /**
+     * Generates weeks depending on how many weeks in CurriculumSubtopic[]
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
+     */
     getWeeks() {
         if (this.schedule) {
             let week: CurriculumSubtopic[] = [];
@@ -122,6 +155,8 @@ export class MainCurriculumViewComponent implements OnInit {
     }
     /**
      * Discovers the amount of weeks in a given curriculum
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     getMaxWeeks() {
         let maxWeek = 0;
@@ -136,6 +171,8 @@ export class MainCurriculumViewComponent implements OnInit {
 
     /**
      * Adds and array of CurriculumSubtopics as a week to the week view
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
 
     addWeek() {
@@ -146,6 +183,8 @@ export class MainCurriculumViewComponent implements OnInit {
      *
      * @param weekNum
      * Selects week by its weekNum and returns the corresponding week object
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     getWeekById(weekNum: number): CurriculumSubtopic[] {
         const week: CurriculumSubtopic[] = this.allWeeks[weekNum];
@@ -153,14 +192,20 @@ export class MainCurriculumViewComponent implements OnInit {
     }
 
     /**
-     *
      * @param weekNum
      * Removes a week object from view by its corresponding weekNum
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     removeWeek(weekNum: number) {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
     }
 
+    /**
+     * Used to match date created property for the DB
+     * @author: Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     getCurrentDate(): string {
         let today: any = new Date();
         let dd: any = today.getDate();
@@ -179,10 +224,20 @@ export class MainCurriculumViewComponent implements OnInit {
         return today;
     }
 
+    /**
+     * Clear all weeks while editing
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     clearAllWeeks() {
         this.allWeeks = [];
     }
 
+    /**
+     * Truncates the subtopics from all weeks
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
+     */
     truncateWeeks() {
          for (let i = 0; i < this.allWeeks.length; i++) {
                 this.allWeeks[i] = [];
