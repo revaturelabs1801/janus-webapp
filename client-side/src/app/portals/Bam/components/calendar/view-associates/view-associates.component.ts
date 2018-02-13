@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
  */
 export class ViewAssociatesComponent implements OnInit {
   p: number = 1;
-  associateList: BamUser[];
+  associateList: BamUser[] = [] ;
   searchTerm: string;
   order: string = 'fName';
   reverse: boolean = false;
@@ -29,23 +29,15 @@ export class ViewAssociatesComponent implements OnInit {
   constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService) { }
 
   ngOnInit() {
-    // this.loadAssociatesInBatch();
-    // console.log(this.currentBatch);
     this.loadAssociates();
   }
 
   /**
    * Gets the trainers associate in the batch
    */
-  loadAssociatesInBatch() {
-    this.usersService.getAllAssociates().subscribe(data => { console.log(data); this.associateList = data; });
-  }
-
   loadAssociates() {
     this.currentBatch = JSON.parse(sessionStorage.getItem('batch'));
     if (this.currentBatch != null) {
-      // hard coded the batch id because the data in the DB is inconsistent
-      // this.currentBatch.id
       this.usersService.getUsersInBatch(this.currentBatch.id).subscribe(data => {
         console.log(data);
         this.associateList = data;
