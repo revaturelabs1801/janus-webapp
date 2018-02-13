@@ -206,5 +206,31 @@ export class CourseStructureComponent implements OnInit {
     curric.curriculumVersion = 1;
     this.messageEvent.emit(curric);
 
-}
+
+  }
+
+  /**
+   * creates a new curriculum version and sends schedule (CurriculumSubtopic[])
+   * of the master version of this curriculum curriculum service to be sent to curriculum-week component
+   * @author Carter Taylor (1712-Steve)
+   * @param currName - curriculum name
+   * @param index - index of curriculum type, allows for faster navigation
+   *    through uniqCurrVersions 2D array.
+   */
+  newVersion(currName: string, typeIndex: number) {
+    event.stopPropagation();
+    let newVersionNum = 0;
+    this.uniqCurrVersions[typeIndex].forEach(elem => {
+      if (elem.curriculumVersion > newVersionNum) {
+        newVersionNum = elem.curriculumVersion;
+      }
+    });
+
+    const master = this.uniqCurrVersions[typeIndex].filter(e => e.isMaster === 1);
+    this.viewCurrSchedule(master[0]);
+
+    const newCurrVer: Curriculum = new Curriculum(null, currName, ++newVersionNum,
+      null, null, null, null, 0);
+    this.messageEvent.emit(newCurrVer);
+  }
 }
