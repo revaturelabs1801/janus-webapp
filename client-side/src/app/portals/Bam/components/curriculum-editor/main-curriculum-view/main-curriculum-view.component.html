@@ -1,3 +1,7 @@
+
+
+<button class="btn btn-dark float-right" (click)="populateCalendar()">Populate My Calendar</button>
+
 <div *ngIf="selectedCurr" class="offset-7">{{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
 
 <div class="container">
@@ -20,13 +24,13 @@
             </ngb-tabset>
         </div>
 
-        <div class="makeRelative col-9" *ngIf="isNewVer">
+        <div class="makeRelative col-9 fontawesome-i2svg-active fontawesome-i2svg-complete" *ngIf="isNewVer">
             
                 <span type="text" class="trashCan" (click)="op.toggle($event)">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </span>
+                <img class="saveIcon" src="http://i67.tinypic.com/21mf91z.png" width="100px" height="100px" >
                 <span class="saveCurr" (click)="openSaveCurriculumModal()">
-                    <i class="fab fa-phoenix-framework"></i>
                     Save Curriculum
                 </span>
             <span class="pushtotop" (click)="addWeek()">

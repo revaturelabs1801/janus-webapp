@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList} from '@angular/core';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { CurriculumService } from '../../../services/curriculum.service';
@@ -35,16 +35,13 @@ export class MainCurriculumViewComponent implements OnInit {
 
     ngOnInit() {
         this.displayWeekView();
-        this.loadScript('https://use.fontawesome.com/releases/v5.0.6/js/all.js');
     }
 
-    public loadScript(url) {
-        const node = document.createElement('script');
-        node.src = url;
-        node.type = 'text/javascript';
-        document.getElementsByTagName('head')[0].appendChild(node);
-    }
-
+    /**
+     * Toggles between topic view and course structure
+     * @author: Mohamad Alhindi
+     * @batch:  1712-Dec11-2017
+     */
     toggle(view) {
         this.toggleTab = view;
     }
@@ -70,14 +67,32 @@ export class MainCurriculumViewComponent implements OnInit {
         }
     }
 
+    /**
+     * Opens save curriculum modal
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     openSaveCurriculumModal() {
         (<any>$('#saveCurriculumModal')).modal('show');
     }
 
+    /**
+     * Opens make master curriculum modal
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     openMasterModal() {
         (<any>$('#makeNewVerMasterModal')).modal('show');
     }
 
+    /**
+     * Update curriculum
+     * Saves the new master curriculum version and persist to database
+     * Depending on if it already is true or false
+     * @author: Carter Taylor
+     * @batch:  1712-Dec11-2017
+     * @param makeMaster: boolean
+     */
     saveCurr(makeMaster: boolean) {
         this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
         this.selectedCurr.curriculumCreator = this.sessionService.getUser();
@@ -125,6 +140,11 @@ export class MainCurriculumViewComponent implements OnInit {
         );
     }
 
+    /**
+     * Generates weeks depending on how many weeks in CurriculumSubtopic[]
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
+     */
     getWeeks() {
         if (this.schedule) {
             let week: CurriculumSubtopic[] = [];
@@ -143,6 +163,8 @@ export class MainCurriculumViewComponent implements OnInit {
     }
     /**
      * Discovers the amount of weeks in a given curriculum
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     getMaxWeeks() {
         let maxWeek = 0;
@@ -157,6 +179,8 @@ export class MainCurriculumViewComponent implements OnInit {
 
     /**
      * Adds and array of CurriculumSubtopics as a week to the week view
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
 
     addWeek() {
@@ -167,6 +191,8 @@ export class MainCurriculumViewComponent implements OnInit {
      *
      * @param weekNum
      * Selects week by its weekNum and returns the corresponding week object
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     getWeekById(weekNum: number): CurriculumSubtopic[] {
         const week: CurriculumSubtopic[] = this.allWeeks[weekNum];
@@ -174,14 +200,20 @@ export class MainCurriculumViewComponent implements OnInit {
     }
 
     /**
-     *
      * @param weekNum
      * Removes a week object from view by its corresponding weekNum
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     removeWeek(weekNum: number) {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
     }
 
+    /**
+     * Used to match date created property for the DB
+     * @author: Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     getCurrentDate(): string {
         let today: any = new Date();
         let dd: any = today.getDate();
@@ -200,13 +232,32 @@ export class MainCurriculumViewComponent implements OnInit {
         return today;
     }
 
+    /**
+     * Clear all weeks while editing
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
     clearAllWeeks() {
         this.allWeeks = [];
     }
 
+    /**
+     * Truncates the subtopics from all weeks
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
+     */
     truncateWeeks() {
         for (let i = 0; i < this.allWeeks.length; i++) {
             this.allWeeks[i] = [];
         }
+    }
+
+    /**
+     * When the synch button is clicked, calls the synchBatch method in the curriculum service
+     * @author: Jordan DeLong
+     * @batch:  1712-Dec11-2017
+     */
+    populateCalendar() {
+        this.curriculumService.syncBatch(22506).subscribe();
     }
 }
