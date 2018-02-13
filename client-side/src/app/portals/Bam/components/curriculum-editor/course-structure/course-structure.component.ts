@@ -199,13 +199,12 @@ export class CourseStructureComponent implements OnInit {
     });
   }
 
+
   createCurr(curTitle: string) {
     const curric = new Curriculum(null, null , 0, null, null, null, null, 1);
     curric.curriculumName = curTitle;
     curric.curriculumVersion = 1;
-    // this.curriculumService.retainString(curric);
     this.messageEvent.emit(curric);
-    // this.viewCurrSchedule();
 
 
   }

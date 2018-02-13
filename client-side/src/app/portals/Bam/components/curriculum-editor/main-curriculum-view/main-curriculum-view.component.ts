@@ -43,12 +43,18 @@ export class MainCurriculumViewComponent implements OnInit {
         node.src = url;
         node.type = 'text/javascript';
         document.getElementsByTagName('head')[0].appendChild(node);
-     }
+    }
 
     toggle(view) {
         this.toggleTab = view;
     }
 
+    /** If the selected curriculum version has a null ID, it's new. For ngIf to trigger modal asking user
+    * if they want to set it to master. If the version number is 1, this is a new curricumul entirely
+    * and its first version will be master by default. Set isFirstVer to true so that our ngIf can bypass
+    * the modal
+    *  @author Dylan Britton, Carter Taylor,Olayinka Ewumi (1712-Steve)
+    */
     receiveMessage(event) {
         this.selectedCurr = event;
         if (event.id == null) {
@@ -61,7 +67,7 @@ export class MainCurriculumViewComponent implements OnInit {
             this.isFirstVer = true;
         } else {
             this.isFirstVer = false;
-            }
+        }
     }
 
     openSaveCurriculumModal() {
@@ -199,8 +205,8 @@ export class MainCurriculumViewComponent implements OnInit {
     }
 
     truncateWeeks() {
-         for (let i = 0; i < this.allWeeks.length; i++) {
-                this.allWeeks[i] = [];
+        for (let i = 0; i < this.allWeeks.length; i++) {
+            this.allWeeks[i] = [];
         }
     }
 }
