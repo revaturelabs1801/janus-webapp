@@ -46,7 +46,7 @@ export class ViewAssociatesComponent implements OnInit {
     if (this.currentBatch != null) {
       // hard coded the batch id because the data in the DB is inconsistent
       // this.currentBatch.id
-      this.usersService.getUsersInBatch(1).subscribe(data => {
+      this.usersService.getUsersInBatch(this.currentBatch.id).subscribe(data => {
         console.log(data);
         this.associateList = data;
       });

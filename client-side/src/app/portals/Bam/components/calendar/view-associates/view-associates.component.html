@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <table class="table">
+  <table *ngIf="associateList; else noAssociates" class="table">
     <tbody>
       <tr class="associates-header">
         <td [class.active]="order == 'lName'" (click)="setOrder('lName')" class="head">Name
@@ -37,5 +37,9 @@
 </div>
 
 <ng-template #noBatchSelected>
-  <h2>Batch has not been selected</h2>
+  <h2>Batch Has Not Been Selected</h2>
+</ng-template>
+
+<ng-template #noAssociates>
+  <h2>No Associates In Batch</h2>
 </ng-template>
