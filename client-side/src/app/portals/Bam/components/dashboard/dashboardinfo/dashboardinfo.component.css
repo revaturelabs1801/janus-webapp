@@ -1,39 +1,20 @@
-
-.pan{
-	width: auto;
-    margin: 10px;
-    font-weight: bold;
+.card {
+  border-color: var(--orange);
 }
 
-#pan-container{
-    width: auto;
-    background-color: rgba(243, 93, 10, .95);
-    padding: 10px;
-    margin: 10px;
-    border-radius: 7px;
-    border-style: inset;
-    color: white;
-    border-color: #e85f12;
-}
+@media (max-width: 768px) {
+	.mobile-removal div:nth-child(even) .card .card-header {
+		display: none;
+	}
 
-#pan2{
-	width: auto;
-    margin-left: 1px;
-    font-weight: bold;
-}
+	.mobile-removal div:nth-child(even) .card {
+		border-top-right-radius: 0px; 
+		border-top-left-radius:0px;
+	}
 
-#pan3{
-	width: auto;
-    float: right;
-    margin-right: 40px;
-    font-weight: bold;
-}
-
-@media all and (max-width: 600px) {
-    #pan3 { display: none; }
-}
-
-#bWeek {
-    position: absolute;
-    right: 0;
+	.mobile-removal div:nth-child(odd) .card {
+		border-bottom-right-radius: 0px; 
+		border-bottom-left-radius:0px;
+		border-bottom: none;
+	}
 }
