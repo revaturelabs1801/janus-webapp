@@ -25,6 +25,7 @@ export class TopicPoolComponent implements OnInit {
   searchText: string;
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
   subTopicName: SubtopicName[] = [];
+  topicPoolCacheData: SubtopicName[] = [];
   @Input() readOnly: boolean;
   selectedTopicId: number;
 
@@ -51,12 +52,11 @@ export class TopicPoolComponent implements OnInit {
     *  @batch 1712-Dec11-2017
     */
   getTopics() {
-    let topicPoolCacheData;
     this.curriculumService.currentTopicPoolData.subscribe(
-      data => topicPoolCacheData = data
+      data => this.topicPoolCacheData = data
     );
 
-    if (topicPoolCacheData.length === 0) {
+    if (this.topicPoolCacheData.length === 0) {
     this.curriculumService.getAllTopicPool().subscribe(
       data => {
         this.subTopicName = data;
@@ -71,7 +71,7 @@ export class TopicPoolComponent implements OnInit {
       }
     );
   }else {
-        this.subTopicName = topicPoolCacheData;
+        this.subTopicName = this.topicPoolCacheData;
         this.initTopics();
         this.uniqueTopics();
         this.getSubTopics();
@@ -240,7 +240,8 @@ export class TopicPoolComponent implements OnInit {
         data => {
           // this.uniqarrFiltered = [];
           this.subArray = new Array<SubtopicName[]>();
-          this.subTopicName.push(data);
+          // this.subTopicName.push(data);
+          this.topicPoolCacheData.push(data);
           this.getSubTopics();
           // this.subArray[this.selectedTopicId].push(data);
           // console.log(this.subArray);
