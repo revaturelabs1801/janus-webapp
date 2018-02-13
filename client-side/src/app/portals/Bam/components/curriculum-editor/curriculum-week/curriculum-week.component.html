@@ -24,28 +24,28 @@
     <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(0)">Monday
         <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
             *ngFor="let day of monday.subtopics">
-            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 0)" class="close">&times;</button></div>
+            {{day.name}}</div>
     </div>
 
     <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(1)">
         Tuesday
         <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 1)" (onDragEnd)="putItDown(day, 1)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
             *ngFor="let day of tuesday.subtopics">
-            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 1)" class="close">&times;</button></div>
+            {{day.name}}</div>
     </div>
 
     <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(2)">
         Wednesday
         <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 2)" (onDragEnd)="putItDown(day, 2)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
             *ngFor="let day of wednesday.subtopics">
-            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 2)" class="close">&times;</button></div>
+            {{day.name}}</div>
     </div>
 
     <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(3)">
         Thursday
         <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 3)" (onDragEnd)="putItDown(day, 3)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
             *ngFor="let day of thursday.subtopics">
-            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 3)" class="close">&times;</button></div>
+            {{day.name}}</div>
     </div>
 
     
@@ -53,7 +53,7 @@
         Friday
         <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 4)" (onDragEnd)="putItDown(day, 4)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
             *ngFor="let day of friday.subtopics">
-            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 4)" class="close">&times;</button></div>
+            {{day.name}}</div>
     </div>
 </div>
 </div>
