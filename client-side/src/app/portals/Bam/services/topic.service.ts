@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { TopicName } from '../models/topicname.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'}),
@@ -18,7 +19,7 @@ export class TopicService {
    * @param name string
    */
   addTopicName(name: string) {
-    return this.http.post(environment.topic.addTopicName(name), httpOptions).map(
+    return this.http.post<TopicName>(environment.topic.addTopicName(name), httpOptions).map(
       data => {
         return data;
       }

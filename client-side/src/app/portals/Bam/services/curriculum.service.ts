@@ -21,8 +21,14 @@ export class CurriculumService {
   private dataSource = new BehaviorSubject<CurriculumSubtopic[]>([]);
   currentData = this.dataSource.asObservable();
 
-  constructor(private http: HttpClient, private modalService: NgbModal) { }
+  private allCurriculumData = new BehaviorSubject<Curriculum[]>([]);
+  currentAllCurriculumData = this.allCurriculumData.asObservable();
 
+  private allTopicPoolData = new BehaviorSubject<SubtopicName[]>([]);
+  currentTopicPoolData = this.allTopicPoolData.asObservable();
+
+
+  constructor(private http: HttpClient, private modalService: NgbModal) { }
 
   changeData(data: CurriculumSubtopic[]) {
     this.dataSource.next(data);
@@ -35,6 +41,7 @@ export class CurriculumService {
   getAllCurriculums(): Observable<Curriculum[]> {
     return this.http.get<Curriculum[]>(environment.curriculum.getCurriculumAllUrl()).map(
       data => {
+        this.allCurriculumData.next(data);
         return data;
       }
     );
@@ -76,6 +83,7 @@ export class CurriculumService {
   getAllTopicPool(): Observable<SubtopicName[]> {
     return this.http.get<SubtopicName[]>(environment.curriculum.getTopicPoolAllUrl()).map(
       data => {
+        this.allTopicPoolData.next(data);
         return data;
       }
     );
@@ -132,17 +140,4 @@ export class CurriculumService {
       }
     );
   }
-
-
-
-
-
-retainString(curric: Curriculum) {
-
-// const  curric.curriculumName;
-// curric.curriculumVersion;
-
-}
-
-
 }

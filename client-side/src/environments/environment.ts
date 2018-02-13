@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/';
-const bam = 'http://18.219.98.213:9001/api/v1';
+const bam = 'http://18.219.59.193:9001/api/v1';
 export const environment = {
   production: false,
   context: context, // change for what the production environment would actually be
@@ -201,6 +201,7 @@ export const environment = {
         getBatchByIdURL: (batchId: number) => `${bam}/batches/byid/${batchId}/`,
         updateBatchUrl: () => `${bam}/batches/updatebatch`,
         getAllBatchTypesUrl: () => `${bam}/batches/batchtypes`,
+        removeSubtopicFromBatchUrl: (subtopicId: number) => `${bam}/batches/${subtopicId}`
     },
 
     curriculum: {
@@ -251,7 +252,8 @@ export const environment = {
     },
 
     subtopic: {
-       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${bam}/subtopic/${typeId}/${topicId}/${subtopicName}`
+       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${bam}/subtopic/${typeId}/${topicId}/${subtopicName}`,
+       removeSubtopic: (subtopicId: number) => `${bam}/subtopic/${subtopicId}`,
     },
 
     addsubtopics: {

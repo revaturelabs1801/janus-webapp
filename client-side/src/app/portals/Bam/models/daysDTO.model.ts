@@ -1,10 +1,10 @@
 import { SubtopicName } from './subtopicname.model';
 
 export class DaysDTO {
-    subtopicNames: SubtopicName[] = [];
+    subtopics: SubtopicName[] = [];
 
-    constructor(subtopicNames: SubtopicName[]) {
+    constructor(subtopics: SubtopicName[]) {
 
-        this.subtopicNames = subtopicNames;
+        this.subtopics = subtopics;
     }
 }

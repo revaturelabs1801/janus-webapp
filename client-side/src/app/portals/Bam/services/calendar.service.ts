@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subtopic } from '../models/subtopic.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
 import { CalendarEvent } from '../models/calendar-event.model';
 import { environment } from '../../../../environments/environment';
+import { of } from 'rxjs/Observable/of';
 
 
 const httpOptions = {
@@ -15,6 +16,9 @@ const httpOptions = {
 
 @Injectable()
 export class CalendarService {
+  @Output()
+  addCalendarEvent = new EventEmitter<CalendarEvent>();
+
   constructor(private http: HttpClient) { }
 
   /**
@@ -122,4 +126,28 @@ export class CalendarService {
     );
   }
 
+  /**
+   * Adds subtopic sent from the add-subtopic component and emits it to the calendar component
+   * @param subtopic
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
+  addSubtopicToCalendar(subtopic: Subtopic) {
+    var newCalendarSubtopic = this.mapSubtopicToEvent(subtopic);
+    this.addCalendarEvent.emit(newCalendarSubtopic);
+  }
+
+  /**
+   * maps Subtopic object to CalendarEvent object
+   * @param subtopic
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
+  mapSubtopicToEvent(subtopic: Subtopic): CalendarEvent {
+    let calendarEvent = new CalendarEvent();
+    calendarEvent.subtopicId = subtopic.subtopicId;
+    calendarEvent.title = subtopic.subtopicName.name;
+    calendarEvent.start = new Date(subtopic.subtopicDate);
+    calendarEvent.status = subtopic.status.name;
+
+    return calendarEvent;
+  }
 }
