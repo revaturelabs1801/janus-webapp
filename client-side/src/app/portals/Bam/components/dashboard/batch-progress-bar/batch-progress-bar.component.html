@@ -10,7 +10,7 @@
 					<p><ngb-progressbar type="primary" [value]="percentCompleted" [height]="20">{{percentCompleted}}%</ngb-progressbar></p>
 					<h5 class="card-title">Progress by Subtopic</h5>
 					{{subPercentCompleted}}% Completed/Cancelled
-					<p><ngb-progressbar type="info" [value]="subPercentCompleted" [height]="20">{{subPercentCompleted}}%</ngb-progressbar></p>
+					<p><ngb-progressbar type="info" [value]="subPercentCompleted" [height]="20"><span *ngIf="subPercentCompleted == 0">{{subPercentCompleted}}%</span></ngb-progressbar></p>
 				</div>
 				<div *ngIf="subTopicMissed > 0">
 					<h5 class="card-title">Topics Missed</h5>
