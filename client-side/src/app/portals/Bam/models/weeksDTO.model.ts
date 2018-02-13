@@ -1,10 +1,10 @@
 import { DaysDTO } from './daysDTO.model';
 
 export class WeeksDTO {
-daysDTO: DaysDTO[];
+days: DaysDTO[];
 
-    constructor(daysDTO: DaysDTO[]) {
+    constructor(days: DaysDTO[]) {
 
-        this.daysDTO = daysDTO;
+        this.days = days;
     }
 }

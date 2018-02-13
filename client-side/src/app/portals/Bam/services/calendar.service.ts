@@ -126,13 +126,23 @@ export class CalendarService {
     );
   }
 
+  /**
+   * Adds subtopic sent from the add-subtopic component and emits it to the calendar component
+   * @param subtopic
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
   addSubtopicToCalendar(subtopic: Subtopic) {
     var newCalendarSubtopic = this.mapSubtopicToEvent(subtopic);
     this.addCalendarEvent.emit(newCalendarSubtopic);
   }
 
+  /**
+   * maps Subtopic object to CalendarEvent object
+   * @param subtopic
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
   mapSubtopicToEvent(subtopic: Subtopic): CalendarEvent {
-    var calendarEvent = new CalendarEvent();
+    let calendarEvent = new CalendarEvent();
     calendarEvent.subtopicId = subtopic.subtopicId;
     calendarEvent.title = subtopic.subtopicName.name;
     calendarEvent.start = new Date(subtopic.subtopicDate);

@@ -10,26 +10,16 @@
 
     
     <div class="col-md-2 m-2 calendar-sidebar">
-        
-      <div>View a particular date</div>
-         
-      <p-calendar #datePicker [(ngModel)]="gotoDateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030"
-        [showIcon]="false" (onSelect)="jumpToDate(gotoDateValue)"></p-calendar>
-
-      <app-add-subtopic></app-add-subtopic>
+        <p-calendar #datePicker [(ngModel)]="gotoDateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030"
+          [showIcon]="true" (onSelect)="jumpToDate(gotoDateValue)"></p-calendar>
+        <app-add-subtopic></app-add-subtopic>
+        <img src="/assets/img/delete_orange.png" alt="trashcan" class='fc-trash' [style.opacity]="trashOpacity">
       
-      <div class="row">
-          <div class="col-md-12">
-            <img (onDragEnter)="handleDragEnter($event)" src="/assets/img/delete_orange.png" alt="trashcan" class='fc-trash'>
-          </div>
-    </div>
-
-     
     </div>
   </div>
   <span #tooltip class="tooltiptext">
-    <div class="bg-secondary text-white text-center mb-2">{{subtopicTooltip}}</div> 
-     Time: {{timeTooltip}}
+    <div class="text-center mb-2"><strong>{{subtopicTooltip}}</strong></div> 
+    Time: {{timeTooltip}}
     <br>Status:
     <span #status>{{statusTooltip}}</span>
   </span>

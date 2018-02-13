@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, AfterContentInit, AfterContentChecked, ViewChild, ElementRef, ContentChild, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ScheduleModule, Schedule, } from 'primeng/primeng';
 import { CalendarModule, Calendar } from 'primeng/primeng';
 import { Subtopic } from '../../../models/subtopic.model';
@@ -15,13 +15,15 @@ import {DragDropModule} from 'primeng/primeng';
 */
 
 declare var $: any;
+const DRAG_REVERT_DURATION = 300;
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit, AfterContentChecked {
+
+export class CalendarComponent implements OnInit {
   @ViewChild('fc') fc: Schedule;
   @ViewChild('datePicker') datePicker: Calendar;
   @ViewChild('tooltip') tooltip: ElementRef;
@@ -31,14 +33,15 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
   events: CalendarEvent[] = [];
   gotoDateValue: Date;
   overridenDate: Date;
-  numDraggableElements: number = 0;
-  draggedSubtopic: CalendarEvent;
+  draggedCalendarEvent: CalendarEvent;
 
   /* Tooltip data bindings */
   subtopicTooltip: string;
   statusTooltip: string;
   timeTooltip: string;
   
+
+  trashOpacity: number;
 
   constructor(private calendarService: CalendarService, private statusService: CalendarStatusService) { }
 
@@ -65,7 +68,6 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     //event handler for newly added topics
     this.calendarService.addCalendarEvent
       .subscribe(calendarEvent => {
-        console.log(calendarEvent);
         this.addEvent(calendarEvent);
       });
 
@@ -95,6 +97,7 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
       droppable: true,
       eventLimit: 3,
       longPressDelay: 100,
+      dragRevertDuration: 0,
       scrollTime: '09:00:00',
       businessHours: {
         // days of week. an array of zero-based day of week integers (0=Sunday)
@@ -110,43 +113,19 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     //   $('.fc-content .fc-time').remove();
     // });
 
-    // $('.fc-trash').droppable(
-    //   {
-    //     accept: '.fc-content',
+    $('.fc-trash').droppable(
+      {
+        accept: "*",
+        drop: (event, ui) => this.trashDropEvent(event, ui, this.draggedCalendarEvent),
 
-    //     drop: (event, ui) => this.trashDropEvent(event, ui, this.draggedSubtopic),
+        over: function (event, ui) {
+          event.target.style.opacity = 0.5;
+        },
 
-    //     over: function (event, ui) {
-    //       event.target.style.opacity = 0.5;
-    //     },
-
-    //     out: function (event, ui) {
-    //       event.target.style.opacity = 1;
-    //     }
-    //   });
-  }
-
-  ngAfterContentChecked() {
-    // let draggableElements = this.fc.el.nativeElement.getElementsByClassName('fc-day-grid-event');
-    // if (this.numDraggableElements == draggableElements.length) {
-    //   return;
-    // }
-    // this.numDraggableElements = draggableElements.length;
-
-    // for (var i = 0; i < draggableElements.length; i++) {
-    //   //console.log(draggableElements[i]);
-    //   $(draggableElements[i]).draggable(
-    //     {
-    //       zIndex: 999,
-    //       revert: true,      // immediately snap back to original position
-    //       revertDuration: 0
-    //     });
-    // }
-  }
-
-  trashDropEvent(event, ui, calendarEvent: CalendarEvent) {
-    event.target.style.opacity = 1;
-    console.log('TRIGGER DELETE');
+        out: function (event, ui) {
+          event.target.style.opacity = 1;
+        }
+      });
   }
 
   /*Date Picker Event*/
@@ -169,19 +148,31 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     calendarEvent.color = clickedTopic.color;
 
     this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
-    this.fc.updateEvent(clickedTopic);
     this.addEvent(calendarEvent);
-
+   
   }
 
+  /**
+   * Resets drag duration to original value and tracks currently dragged target
+   * @param event 
+   */
+  handleEventDragStart(calendar) {
+    this.draggedCalendarEvent = this.mapSubtopicFromEvent(calendar.event);
+  }
+
+  /**
+   * Updates date and status based on new date.
+   * Also updates reference that we keep
+   * @param calendar 
+   */
   handleEventDrop(calendar) {
-    
-    var droppedTopic = calendar.event;
-    var calendarEvent = this.mapSubtopicFromEvent(droppedTopic);
-    var milliDate = calendarEvent.start.getTime();
+    let droppedTopic = calendar.event;
+    let calendarEvent = this.mapSubtopicFromEvent(droppedTopic);
+    let milliDate = calendarEvent.start.getTime();
 
     droppedTopic.status = this.statusService.updateMovedStatus(calendarEvent);
     droppedTopic.color = this.statusService.getStatusColor(droppedTopic.status);
+    calendarEvent.color = droppedTopic.color;
 
     //update date and status synchronously
     this.calendarService.changeTopicDate(droppedTopic.subtopicId, 22506, milliDate)
@@ -193,29 +184,33 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
         this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
       }
       );
-    this.fc.updateEvent(droppedTopic);
     this.updateEvent(calendarEvent);
-   
+    this.fc.updateEvent(droppedTopic);
   }
 
   /**
-   * Unhides the tooltip and positions it above the element
-   * Holds information such as the subtopic and current status
+   * Unhides the tooltip and positions it above the element.
+   * This function also attaches jqueryUI draggable class to allow the event object to interact with 
+   * external components such as the trashcan.
    * 
    * @param event
    * @author Sean Sung, Francisco Palomino (1712-dec10-java-Steve)
    */
   handleEventMouseover(event) {
-    console.log(event.calEvent.id);
-    console.log(this.events[event.calEvent.id]);
-
+    $(event.jsEvent.currentTarget).draggable(
+      {
+        revert: true,
+        revertDuration: DRAG_REVERT_DURATION,
+        zIndex: -500
+      }
+    );
+    this.subtopicTooltip = event.calEvent.title;
+    this.statusTooltip = event.calEvent.status;
+    this.timeTooltip = event.calEvent.start.format("h:mm a");
+    //calculate y point of tooltip to be below mouse
     let y = event.jsEvent.target.getBoundingClientRect().top;
     let offsetY = this.body.nativeElement.getBoundingClientRect().top;
-    y = y - offsetY + 50;
-    let mouseoverTopic = event.calEvent;
-    this.subtopicTooltip = mouseoverTopic.title;
-    this.statusTooltip = mouseoverTopic.status;
-    this.timeTooltip = mouseoverTopic.start.format("h:mm a");
+    y = y - offsetY + 140;
 
     this.status.nativeElement.style.background = this.statusService.getStatusColor(this.statusTooltip);
     this.tooltip.nativeElement.style.display = 'inline';
@@ -228,10 +223,6 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     this.tooltip.nativeElement.style.display = 'none';
   }
 
-  handleEventDragStart(event) {
-    this.draggedSubtopic = this.mapSubtopicFromEvent(event.event);
-    console.log(this.draggedSubtopic);
-  }
 
   handleEventDragStop(event) {
     //console.log(event);
@@ -244,14 +235,14 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
 
   }
 
-  handleDragEnter($event)
-  {
-    console.log("made it to drag enter");
-  }
-
   handleDrop($event){
     console.log("made it to handle drop");
   }
+  /**
+   * Convert values stored in the event variable back to a CalendarEvent object
+   * @param event
+   * @author Sean Sung
+   */
   mapSubtopicFromEvent(event): CalendarEvent {
     let calendarEvent = new CalendarEvent();
     calendarEvent.subtopicId = event.subtopicId;
@@ -264,32 +255,54 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     return calendarEvent;
   }
 
+  /**
+   * Updates the event array object to match the calendar view.
+   * This is called on 
+   * @param changedSubtopic 
+   */
   updateEvent(changedSubtopic: CalendarEvent) {
+    let index = this.eventExists(changedSubtopic);
+    if(index == 0) {
+      this.overridenDate = changedSubtopic.start;
+    }
     //reset the first index date that gets overriden on drops
     this.events[0].start = this.overridenDate;
-    let index = this.eventExists(changedSubtopic);
-    //update overridenDate to new date if updating first index
-    if (index == 0) {
-      this.overridenDate = this.events[index].start;
-    }
 
     this.events[index].start = changedSubtopic.start;
     this.events[index].status = changedSubtopic.status;
     this.events[index].color = changedSubtopic.color;
   }
 
+  /**
+   * Removes event if it already exists and then inserts new event to this.events
+   * @param calendarEvent 
+   */
   addEvent(calendarEvent: CalendarEvent) {
     let index = this.eventExists(calendarEvent);
     if (index > -1) {
-      this.events.splice(index, 1);
+      this.events.splice(index, 1, calendarEvent);
+    } else {
+      this.events.push(calendarEvent);
     }
-    this.events.push(calendarEvent);
-    this.overridenDate = this.events[0].start;
-
-    
   }
 
-  /* check if event exists in the array and returns the index if it does or -1 if it doesn't */
+  /**
+   * Removes event at given index,
+   * If index is 0, then overridenDate must be updated to the next index 
+   * to keep a reference to the date when calendar overwrites it
+   * @param index
+   */
+  removeEvent(index: number) {
+    if (index == 0) {
+      this.overridenDate = this.events[1].start;
+    }
+    this.events.splice(index, 1);
+  }
+
+  /**
+   * check if event exists in the array and returns the index if it does or -1 if it doesn't
+   * @param calendarEvent
+   */
   eventExists(calendarEvent: CalendarEvent): number {
     for (let i = 0; i < this.events.length; i++) {
       if (this.events[i].title == calendarEvent.title) {
@@ -299,7 +312,16 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     return -1;
   }
 
-  mouseEnter(div : string){
-    console.log("mouse enter : " + div);
- }
+    /**
+   * Callback function to handle drop events that land on the trash icon
+   * Deletes existing subtopics from the batch
+   * 
+   * @param event 
+   * @param ui 
+   * @param calendarEvent 
+   */
+  trashDropEvent(event, ui, calendarEvent: CalendarEvent) {
+    event.target.style.opacity = 1;
+    this.removeEvent(this.eventExists(calendarEvent));
+  }
 }

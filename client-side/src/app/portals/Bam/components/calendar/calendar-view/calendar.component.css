@@ -1,10 +1,11 @@
 .calendar-sidebar {
     padding-left: 20px;
     text-align: center;
+    border-left: 1px solid rgba(12, 12, 12, 0.1);
 }
 
 .tooltiptext {
-    z-index: 1;
+    z-index: -1;
     max-width: 150px;
     display: none;
     position: absolute;
@@ -20,6 +21,8 @@
 }
 
 .tooltiptext span {
+    z-index: -1;
+    position: absolute;
     padding-left: 3px;
     padding-right: 3px;
     border-radius: 3px;
@@ -42,6 +45,12 @@
     background: #F26925; 
     border-color: #F26925;
 }
+
+/deep/ .ui-button-icon-left .ui-clickable .fa .fa-fw .fa-calendar
+{
+    background: #F26925; 
+    border-color: #F26925;
+}
 /*
 /deep/ .ui-state-active
 {
@@ -54,3 +63,6 @@
     background: #F26925;
     color: white;
   }
+.fc-trash {
+    float: left;
+}

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Curriculum } from '../../../models/curriculum.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
+
 
 @Component({
   selector: 'app-course-structure',
@@ -16,23 +17,25 @@ export class CourseStructureComponent implements OnInit {
   uniqCurrNames: string[];
   allCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
   uniqCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
+  selectedCurrVer: any = 0;
+  selectedTypeIndex: any = 0;
+  @Output() messageEvent = new EventEmitter<Curriculum>();
 
   constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.getAllCurriculums();
+      this.getAllCurriculums();
   }
 
    /**
-   * view the schedule of a specific curriculum identified
-   * by its curriculum Id. Sends the schedule (CurriculumSubtopic[])
+   * view the schedule of a specific curriculum.
+   * Sends the schedule (CurriculumSubtopic[])
    * to BehaviorSubject in CurriculumService
    * @author Carter Taylor (1712-Steve)
-   * @param curId - id of curriculum selected from view
+   * @param currVersion - curriculum object selected from view
    */
-  viewCurrSchedule(curId: number) {
-
-    this.curriculumService.getSchedualeByCurriculumId(curId).subscribe(
+  viewCurrSchedule(currVersion: Curriculum) {
+    this.curriculumService.getSchedualeByCurriculumId(currVersion.id).subscribe(
       data => {
         this.curriculumService.changeData(data);
 
@@ -41,6 +44,7 @@ export class CourseStructureComponent implements OnInit {
         console.log(error);
       }
     );
+    this.messageEvent.emit(currVersion);
   }
 
   /**
@@ -135,6 +139,13 @@ export class CourseStructureComponent implements OnInit {
    * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    */
   getAllCurriculums() {
+    let apiData;
+    this.curriculumService.currentAllCurriculumData.subscribe(
+      data => apiData = data
+    ).unsubscribe();
+
+    if (apiData.length === 0) {
+      console.log(this.curriculumService.currentAllCurriculumData);
     this.curriculumService.getAllCurriculums().subscribe(
       data => {
         this.allCurriculums = data;
@@ -144,26 +155,42 @@ export class CourseStructureComponent implements OnInit {
         this.getUniqCurrVersions();
       }
     );
+  } else {
+        this.allCurriculums = apiData;
+        this.getCurriculumNames();
+        this.getUniqueCurrNames();
+        this.getCurriculumVersions();
+        this.getUniqCurrVersions();
+  }
   }
 
   /**
-   * makes the curriculum object, passed as a parameter, the
-   * master version of its curriculum type.
-   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
+   * opens makeMasterModal which subsequently will call makeMaster() method
+   * if user confirms that they want to make selected version master.
    * @param currVersion - curriculum object selected from view.
    * @param typeIndex - index of curriculum type, allows for faster navigation
    *    through uniqCurrVersions 2D array.
    */
-  makeMaster(currVersion, typeIndex: number) {
-    for (let j = 0; j < this.uniqCurrVersions[typeIndex].length; j++) {
-      if (this.uniqCurrVersions[typeIndex][j].isMaster === 1) {
-        this.uniqCurrVersions[typeIndex][j].isMaster = 0;
+  openMakeMasterModal(currVersion: Curriculum, typeIndex: number) {
+    this.selectedCurrVer = currVersion;
+    this.selectedTypeIndex = typeIndex;
+    (<any>$('#makeMasterModal')).modal('show');
+  }
+
+  /**
+   * makes the curriculum object, passed as a parameter in
+   * openMakeMasterModal method, the master version of its curriculum type.
+   * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
+   */
+  makeMaster() {
+    for (let j = 0; j < this.uniqCurrVersions[this.selectedTypeIndex].length; j++) {
+      if (this.uniqCurrVersions[this.selectedTypeIndex][j].isMaster === 1) {
+        this.uniqCurrVersions[this.selectedTypeIndex][j].isMaster = 0;
       }
     }
 
-    currVersion.isMaster = 1;
-    console.log(currVersion);
-    this.curriculumService.markCurriculumAsMaster(currVersion.curriculumId).subscribe(
+    this.selectedCurrVer.isMaster = 1;
+    this.curriculumService.markCurriculumAsMaster(this.selectedCurrVer.id).subscribe(
     data => {
       console.log(data);
     },
@@ -172,17 +199,19 @@ export class CourseStructureComponent implements OnInit {
     });
   }
 
+
   createCurr(curTitle: string) {
-    const curric = new Curriculum(0, null , 0, null, null, null, null, 0);
+    const curric = new Curriculum(null, null , 0, null, null, null, null, 1);
     curric.curriculumName = curTitle;
     curric.curriculumVersion = 1;
-    this.curriculumService.retainString(curric);
+    this.messageEvent.emit(curric);
+
 
   }
 
   /**
-   * creates a new curriculum version and sends data to
-   * curriculum service to be sent to curriculum-week component
+   * creates a new curriculum version and sends schedule (CurriculumSubtopic[])
+   * of the master version of this curriculum curriculum service to be sent to curriculum-week component
    * @author Carter Taylor (1712-Steve)
    * @param currName - curriculum name
    * @param index - index of curriculum type, allows for faster navigation
@@ -196,9 +225,12 @@ export class CourseStructureComponent implements OnInit {
         newVersionNum = elem.curriculumVersion;
       }
     });
-    newVersionNum++;
 
-    console.log('New ' + currName + ' curriculum version#' + newVersionNum);
+    const master = this.uniqCurrVersions[typeIndex].filter(e => e.isMaster === 1);
+    this.viewCurrSchedule(master[0]);
+
+    const newCurrVer: Curriculum = new Curriculum(null, currName, ++newVersionNum,
+      null, null, null, null, 0);
+    this.messageEvent.emit(newCurrVer);
   }
-
 }

@@ -28,11 +28,17 @@ export class SubtopicService {
     );
   }
 
+  /**
+   * Calls API to remove subtopic from the batch
+   * subtopicId is unique to the subtopic and batch relationship
+   * @param subtopicId 
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
   removeSubtopicFromBatch(subtopicId: number) {
-    // return this.http.post(environment.subtopic.removeSubtopic(subtopicId), httpOptions).map(
-    //   data => {
-    //     return data;
-    //   }
-    // );
+    return this.http.post(environment.subtopic.removeSubtopic(subtopicId), httpOptions).map(
+      data => {
+        return data;
+      }
+    );
   }
 }
