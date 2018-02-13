@@ -25,7 +25,7 @@
 
         <app-subtopic-search></app-subtopic-search>
         <div *ngFor="let sub of subArray[i] | search : 'name' : searchText">
-          <div pDraggable="subtopicdrag" (onDragStart)="sendCurrentlyDragged(sub)" class="subtopic noTouch offset-1 col-9 " data-toggle="tooltip"
+          <div pDraggable="subtopicdrag" (onDragStart)="sendCurrentlyDragged(sub)" [ngClass]="{'noTouch':readOnly}" class="subtopic offset-1 col-9 " data-toggle="tooltip"
             data-placement="right" [attr.title]="sub.name">
             <span>
 
