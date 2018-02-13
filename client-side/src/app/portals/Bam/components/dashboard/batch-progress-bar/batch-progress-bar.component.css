@@ -1,11 +1,11 @@
 .card {
-    border-color: rgba(50,65,118,.95);
+    border-color: var(--dark-grey);
 }
 
 .card-header {
-    background-color: rgba(50,65,118,.95);
+    background-color:  var(--dark-grey);
 }
 
 ::ng-deep .progress-bar {
-	background-color: rgba(50,65,118,.95) !important;	
+	background-color:  var(--dark-grey) !important;	
 }

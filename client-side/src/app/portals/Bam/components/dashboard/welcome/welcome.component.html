@@ -16,7 +16,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <ngb-alert type="warning">{{this.message}}</ngb-alert>
+            <ngb-alert [dismissible]="false" type="warning">{{this.message}}</ngb-alert>
           </div>
         </div>
       </div> <!-- batchCount > 1 --> 
@@ -28,7 +28,7 @@
       </div>
       <div class="row" *ngIf="this.batchCount === 0">
           <div class="col">
-            <ngb-alert type="warning">{{this.message}}</ngb-alert>
+            <ngb-alert [dismissible]="false" type="warning">{{this.message}}</ngb-alert>
           </div>
       </div>
 </div>

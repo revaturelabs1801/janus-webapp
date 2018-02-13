@@ -3,15 +3,7 @@
 }
 
 ::ng-deep .card-header { 
-  background-color: #fa7427; 
+  background-color: var(--orange); 
   color: white;
   font-weight: bold;
-}
-
-::ng-deep .bg-janus {
-	background-color: #fa7427;
-}
-
-::ng-deep .bg-janus-secondary {
-	background-color: #fa7427;
 }
