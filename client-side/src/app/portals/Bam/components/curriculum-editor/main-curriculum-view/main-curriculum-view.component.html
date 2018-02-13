@@ -1,45 +1,108 @@
 
+
 <button class="btn btn-dark float-right" (click)="populateCalendar()">Populate My Calendar</button>
 
-<div class="row">
-    <div class="offset-1 col-3 noWrapDog">
-        <ngb-tabset>
-            <ngb-tab>
-                <ng-template ngbTabTitle>
-                    <div (click)="toggle(1)">Course Structures</div>
-                </ng-template>
-                <ng-template ngbTabContent></ng-template>
-            </ngb-tab>
+<div *ngIf="selectedCurr" class="offset-7">{{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
 
-            <ngb-tab>
-                <ng-template ngbTabTitle>
-                    <div (click)="toggle(2)">Topic Pool</div>
-                </ng-template>
-                <ng-template ngbTabContent></ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+<div class="container">
+    <div class="row tabRow">
+        <div class="col-3 noWrapDog">
+            <ngb-tabset>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <div (click)="toggle(1)">Course Structures</div>
+                    </ng-template>
+                    <ng-template ngbTabContent></ng-template>
+                </ngb-tab>
+
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <div (click)="toggle(2)">Topic Pool</div>
+                    </ng-template>
+                    <ng-template ngbTabContent></ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+
+        <div class="makeRelative col-9 fontawesome-i2svg-active fontawesome-i2svg-complete" *ngIf="isNewVer">
+            
+                <span type="text" class="trashCan" (click)="op.toggle($event)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </span>
+                <img class="saveIcon" src="http://i67.tinypic.com/21mf91z.png" width="100px" height="100px" >
+                <span class="saveCurr" (click)="openSaveCurriculumModal()">
+                    Save Curriculum
+                </span>
+            <span class="pushtotop" (click)="addWeek()">
+                <i class="fa fa-plus-square"></i>
+            </span>
+        </div>
+
     </div>
 </div>
 
-<div class="row">
-    <span class="offset-1 col-md-3 col-sm-3 col-4">
-        <app-course-structure *ngIf="toggleTab === 1"></app-course-structure>
-        <app-topic-pool *ngIf="toggleTab === 2"></app-topic-pool>
-    </span>
+<div class="container">
+    <div class="row">
+        <span class="col-md-3 col-sm-3 col-4">
+            <app-course-structure *ngIf="toggleTab === 1" (messageEvent)="receiveMessage($event)"></app-course-structure>
+            <app-topic-pool [readOnly]="!isNewVer" *ngIf="toggleTab === 2"></app-topic-pool>
+        </span>
 
-    <span class="col-8 align " id="style-7">                
-            <span *ngIf="allWeeks.length !== 0" class="buttons">
-                <span class="saveCurr">
-                        <button>Save Curriculum</button>
-                </span>
-                    
-                <span class="pushtotop" (click)="addWeek()">
-                    <i class="fa fa-plus-square"></i>
-                </span>
-            </span>        
-        <br/>
-        <br/>
-
-        <app-curriculum-week (noWeeks)="false" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1"></app-curriculum-week>
-    </span>
+        <span class="col-9 align style-7">
+            <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1"
+                (removeWeekEvent)="removeWeek($event)"></app-curriculum-week>
+        </span>
+    </div>
 </div>
+
+<div id="saveCurriculumModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Saving Curriculum</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h6 *ngIf="selectedCurr">Save version #{{selectedCurr.curriculumVersion}} as new {{selectedCurr.curriculumName}} curriculum?</h6>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" (click)="openMasterModal()">Save</button>
+                <button class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="makeNewVerMasterModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">CHANGE MASTER VERSION</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h6 *ngIf="selectedCurr">Would you like to make #{{selectedCurr.curriculumVersion}} the new master version of {{selectedCurr.curriculumName}}?</h6>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" (click)="saveCurr(true)">YES, I WOULD LIKE THIS TO BE THE NEW MASTER</button>
+                <button class="btn btn-warning" data-dismiss="modal" (click)="saveCurr(false)">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+<p-overlayPanel #op>
+    <div class="hoverRed" (click)="confirmClear.toggle($event)">Clear All Weeks</div>
+    <div class="hoverRed" (click)="confirmTruncate.toggle($event)">Clear All Subtopics</div>
+</p-overlayPanel>
+
+<p-overlayPanel #confirmClear>
+    <p>Are You Sure?</p>
+    <div class="hoverRed" (click)="clearAllWeeks(); confirmClear.hide($event)">Yes</div>
+    <div class="hoverRed" (click)="confirmClear.hide($event)"> No</div>
+</p-overlayPanel>
+
+<p-overlayPanel #confirmTruncate>
+    <p>Are You Sure?</p>
+    <div class="hoverRed" (click)="truncateWeeks(); confirmTruncate.hide($event)">Yes</div>
+    <div class="hoverRed" (click)="confirmTruncate.hide($event)"> No</div>
+</p-overlayPanel>
