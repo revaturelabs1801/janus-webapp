@@ -64,7 +64,7 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
           if ((this.currentDate.valueOf() - this.batch.startDate.valueOf() >
               this.batch.endDate.valueOf() - this.batch.startDate.valueOf())) {
               this.completedDate = this.batch.endDate.valueOf() - this.batch.startDate.valueOf();
-          }else {
+          }else { 
             this.completedDate = (this.currentDate.valueOf() - this.batch.startDate.valueOf());
           }
           this.percentCompleted = Math.floor(this.completedDate.valueOf() /
@@ -72,10 +72,12 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
         });
       this.subTopicObs.subscribe(
         data2 => {
+          this.subTopics=null;
           this.subTopics = data2;
+          
           this.topicArray = [];
           if (this.subTopics == null) {
-            this.subTopicCompleted = 0;
+            this.subTopicCompleted = null;
             this.subTopicMissed = 0;
           }else {
             this.subTopicMissed = 0;
