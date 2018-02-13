@@ -45,9 +45,10 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
   ngOnInit() {
     this.calendarService.getSubtopicsByBatchPagination(22506, 0, 34).subscribe(
       subtopics => {
+        let index = 0;
         for (let subtopic of subtopics) {
           let calendarEvent = new CalendarEvent();
-
+          calendarEvent.id = index;
           calendarEvent.subtopicId = subtopic.subtopicId;
           calendarEvent.title = subtopic.subtopicName.name;
           calendarEvent.start = new Date(subtopic.subtopicDate);
@@ -55,6 +56,7 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
           calendarEvent.color = this.statusService.getStatusColor(calendarEvent.status);
 
           this.events.push(calendarEvent);
+          index++;
         }
         this.overridenDate = this.events[0].start;
       }
@@ -83,6 +85,7 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
       }
     }
     this.fc.allDaySlot = false;
+    this.fc.eventDurationEditable = false;
     this.fc.options = {
       defaultDate: Date.now(),
       nowIndicator: true,
@@ -168,14 +171,7 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
     this.fc.updateEvent(clickedTopic);
     this.addEvent(calendarEvent);
-    //this.updateEvent(calendarEvent);
 
-    // console.log(event.view.name);
-    // if(event.view.name == 'month')
-    // {
-    //   console.log("made it to conditional");
-    //   $('.fc-content .fc-time').hide();
-    // }
   }
 
   handleEventDrop(calendar) {
@@ -199,13 +195,7 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
       );
     this.fc.updateEvent(droppedTopic);
     this.updateEvent(calendarEvent);
-
-    // console.log(calendar.view.name);
-    // if(calendar.view.name == 'month')
-    // {
-    //   $('.fc-content .fc-time').hide();
-    // }
-    
+   
   }
 
   /**
@@ -216,8 +206,8 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
    * @author Sean Sung, Francisco Palomino (1712-dec10-java-Steve)
    */
   handleEventMouseover(event) {
-    console.log(event.jsEvent.currentTarget);
-    //console.log(event.calEvent.start.format("h:mm a"));
+    console.log(event.calEvent.id);
+    console.log(this.events[event.calEvent.id]);
 
     let y = event.jsEvent.target.getBoundingClientRect().top;
     let offsetY = this.body.nativeElement.getBoundingClientRect().top;
@@ -226,8 +216,6 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
     this.subtopicTooltip = mouseoverTopic.title;
     this.statusTooltip = mouseoverTopic.status;
     this.timeTooltip = mouseoverTopic.start.format("h:mm a");
-
-    console.log(this.timeTooltip);
 
     this.status.nativeElement.style.background = this.statusService.getStatusColor(this.statusTooltip);
     this.tooltip.nativeElement.style.display = 'inline';
@@ -253,16 +241,6 @@ export class CalendarComponent implements OnInit, AfterContentChecked {
   {
     console.log($event);
     console.log($event.view.name);
-
-    // if($event.view.name == 'month')
-    // {
-    //     $('.fc-time').hide();
-    // }
-    // else{
-    //     $('.fc-time').show();
-    // }
-
-    //$('.fc-event').css('color','white');
 
   }
 
