@@ -13,6 +13,10 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Subtopic } from '../../../models/subtopic.model';
 import { AddSubtopicService } from '../../../services/add-subtopic.service';
 
+//for jquery
+declare var $: any;
+var selectedSubtopic;
+
 @Component({
   selector: 'app-add-subtopic',
   templateUrl: './add-subtopic.component.html',
@@ -85,6 +89,7 @@ export class AddSubtopicComponent implements OnInit {
       }
     );
   }
+
   /**
     * Loads current batch information and all the subtopics of the batch
 		*	@author Francisco Palomino | Batch: 1712-dec10-java-steve
@@ -149,6 +154,7 @@ export class AddSubtopicComponent implements OnInit {
       return 0;
     });
   }
+
   /**
    * Method is called once the subtopic list is changed which
    * obtains all the necessary properties of the subtopic to be
@@ -168,6 +174,22 @@ export class AddSubtopicComponent implements OnInit {
         }
       }
     }
+  }
+
+  setDraggableOnSubtopic(event) {
+    $(event.target).draggable(
+      {
+        revert: true,
+        revertDuration: 200,
+        zIndex: 999,
+        scroll: false,
+        helper: "clone",
+
+        start: function() {
+          $(this).data = {}
+        }
+      }
+    );
   }
   /**
    * Method verifies selection inputs and the date and sends the appropriate
@@ -310,5 +332,15 @@ export class AddSubtopicComponent implements OnInit {
           );
         }
       }, (reason) => { });
+  }
+
+  selectSubtopic(subtopic: Subtopic) {
+    if(selectedSubtopic != undefined) {
+      $(selectedSubtopic).css('opacity', 1);
+    }
+    selectedSubtopic = event.target;
+    $(selectedSubtopic).css('opacity', 0.5);
+    //this.selectedSubtopic = subtopic.subtopicName.name;
+    console.log(subtopic);
   }
 }
