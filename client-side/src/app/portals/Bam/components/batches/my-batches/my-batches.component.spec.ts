@@ -3,18 +3,23 @@ import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { MyBatchesComponent } from './my-batches.component';
+import { Dependencies } from '../../../bam.test.module';
 
 describe('MyBatchesComponent', () => {
   let component: MyBatchesComponent;
   let fixture: ComponentFixture<MyBatchesComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MyBatchesComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
-  }));
+    TestBed.configureTestingModule(Dependencies).compileComponents();
+  }), 1440000);
+  
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [ MyBatchesComponent ],
+  //     schemas: [ NO_ERRORS_SCHEMA ]
+  //   })
+  //   .compileComponents();
+  // }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MyBatchesComponent);

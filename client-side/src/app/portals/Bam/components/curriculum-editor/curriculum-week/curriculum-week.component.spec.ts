@@ -2,18 +2,23 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CurriculumWeekComponent } from './curriculum-week.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Dependencies } from '../../../bam.test.module';
 
 describe('CurriculumWeekComponent', () => {
   let component: CurriculumWeekComponent;
   let fixture: ComponentFixture<CurriculumWeekComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CurriculumWeekComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
-  }));
+    TestBed.configureTestingModule(Dependencies).compileComponents();
+  }), 1440000);
+
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [ CurriculumWeekComponent ],
+  //     schemas: [ NO_ERRORS_SCHEMA ]
+  //   })
+  //   .compileComponents();
+  // }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CurriculumWeekComponent);
