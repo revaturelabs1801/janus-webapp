@@ -24,48 +24,4 @@
 		</div>
 	</div>
 </div>
-<div>
-		<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
-		<div *ngIf="!showSpinner" >
-				<div id=pan4 class="col-md-12" *ngIf="batchId != null && this.batch.startDate != null" >
-					Batch Progress By Day:
-						<div>
-							<div class="progress" >
-							<span>{{percentCompleted}}% Days Completed</span> 
-							<div class="progress-bar" [style.width]="percentCompleted + '%'" ></div>
-						</div>
-					</div>
-				
-					<div *ngIf="this.subTopics !=null">
-							Batch Progress By SubTopic:
-						
-								<div>
-									<div class="progress">
-									<span>{{subPercentCompleted}}% Subtopics Completed/Cancelled</span>
-									<div class="progress-bar progress" [style.width]="subPercentCompleted + '%'" > </div>
-								</div>
-						
-							</div>
-							
-					</div>
-					
-					
-					<br/>
-					<div *ngIf="subTopicMissed>0">
-						<h4>Topics Missed</h4>
-						<p>{{subTopicMissed}} / {{subTopicTotal}} missed topics</p>
-						<div>
-							<ul *ngFor="let list of topicArray">
-								{{list.listName}}
-								<li *ngFor="let name of list.listItems">
-									<p>{{name}}</p>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 
-		</div>
-		
-
-</div>
