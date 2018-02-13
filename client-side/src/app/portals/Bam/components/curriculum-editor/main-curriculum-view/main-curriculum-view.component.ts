@@ -24,6 +24,7 @@ export class MainCurriculumViewComponent implements OnInit {
     allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
     toggleTab = 1;
     selectedCurr: Curriculum;
+    addedCurr: Curriculum;
     isNewVer = false;
     isFirstVer = false;
     uniqCurrVersions;
@@ -108,7 +109,7 @@ export class MainCurriculumViewComponent implements OnInit {
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
             response => {
-                console.log(response);
+                this.addedCurr = <Curriculum>response.body;
                 this.isNewVer = false;
             },
             error => {
@@ -116,6 +117,13 @@ export class MainCurriculumViewComponent implements OnInit {
                 this.isNewVer = false;
             },
             () => this.isNewVer = false
+        );
+
+        this.curriculumService.currentAllCurriculumData.subscribe(
+            currList => {
+                currList.push(this.addedCurr);
+                this.curriculumService.refreshCurriculums(currList);
+            }
         );
     }
 

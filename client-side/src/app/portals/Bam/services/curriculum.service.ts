@@ -33,6 +33,10 @@ export class CurriculumService {
   changeData(data: CurriculumSubtopic[]) {
     this.dataSource.next(data);
   }
+
+  refreshCurriculums(data: Curriculum[]) {
+    this.allCurriculumData.next(data);
+}
   /**  This gets all curriculums from the API
    *   @author: Mohamad Alhindi
     *  @batch: 1712-Dec11-2017
@@ -107,8 +111,8 @@ export class CurriculumService {
     * @batch: 1712-Dec11-2017
     * @param: CurriculumSubtopicDTO
     */
-  addCurriculum(curriculum: CurriculumSubtopicDTO) {
-    return this.http.post(environment.curriculum.addCurriculumUrl(), curriculum, httpOptions).map(
+   addCurriculum(curriculum: CurriculumSubtopicDTO) {
+    return this.http.post('http://localhost:9001/api/v1/curriculum/addcurriculum', curriculum, httpOptions).map(
       data => {
         return data;
       }

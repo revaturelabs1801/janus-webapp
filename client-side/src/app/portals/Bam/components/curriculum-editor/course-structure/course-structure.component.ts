@@ -143,7 +143,6 @@ export class CourseStructureComponent implements OnInit {
     this.curriculumService.currentAllCurriculumData.subscribe(
       data => apiData = data
     ).unsubscribe();
-
     if (apiData.length === 0) {
       this.curriculumService.getAllCurriculums().subscribe(
         data => {
@@ -160,11 +159,14 @@ export class CourseStructureComponent implements OnInit {
         }
       );
     } else {
-      this.allCurriculums = apiData;
-      this.getCurriculumNames();
-      this.getUniqueCurrNames();
-      this.getCurriculumVersions();
-      this.getUniqCurrVersions();
+      this.curriculumService.currentAllCurriculumData.subscribe(
+        data => {
+          this.allCurriculums = data;
+          this.getCurriculumNames();
+          this.getUniqueCurrNames();
+          this.getCurriculumVersions();
+          this.getUniqCurrVersions();
+        });
     }
   }
 
