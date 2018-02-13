@@ -1,13 +1,13 @@
-
-
 <div class = "container">
     <div class="row week" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
         aria-controls="collapseOne">
         <p *ngIf="readOnly" class="read-only text-center">READ ONLY</p>
         Week #{{weekNum}}
-        <div class="progress" >
-            <div  *ngFor="let topic of percentageNums; let i = index" class="progress-bar" role="progressbar" [style.background-color]=" i%2 ? '#474c55': '#f47f43' "[style.width]="((topic/total)*100)+'%'">
-                {{percentageNames[i] | uppercase}}
+        <div *ngIf="readOnly" class="progress">
+            <div  *ngFor="let topic of percentageNums; let i = index" class="progress-bar" 
+                role="progressbar" [style.background-color]=" i%2 ? '#474c55': '#f47f43' "
+                [style.width]="((topic/total)*100)+'%'" placement="top" [ngbTooltip]="percentageNames[i]">
+                <span class="percentageBarText">{{percentageNames[i] | uppercase}}</span>
             </div>
         </div>
         <div *ngIf="!readOnly" class="removeWeekBtn" (click)="confirmWeekDeletion(weekNum);overlay.toggle($event)" >              
