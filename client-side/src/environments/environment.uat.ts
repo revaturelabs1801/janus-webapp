@@ -251,7 +251,8 @@ export const environment = {
 
     subtopic: {
        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) =>
-        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`
+        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`,
+        removeSubtopic: (subtopicId: number) => `${bam}/subtopic/${subtopicId}`,
     },
 
     addsubtopics: {

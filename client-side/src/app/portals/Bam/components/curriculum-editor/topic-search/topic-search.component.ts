@@ -9,7 +9,7 @@ import { SearchTextService } from '../../../services/search-text.service';
 })
 export class TopicSearchComponent implements OnInit {
 
-  private topicSearch: string;
+  public topicSearch: string;
   constructor(private textService: SearchTextService) { }
 
   ngOnInit() {
