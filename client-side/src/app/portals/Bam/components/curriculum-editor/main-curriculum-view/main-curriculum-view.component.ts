@@ -25,6 +25,7 @@ export class MainCurriculumViewComponent implements OnInit {
     toggleTab = 1;
     selectedCurr: Curriculum;
     isNewVer = false;
+    isFirstVer = false;
     uniqCurrVersions;
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
@@ -45,17 +46,24 @@ export class MainCurriculumViewComponent implements OnInit {
         this.toggleTab = view;
     }
 
-    /**
-     * Receives the curriculum object from the course structure
-     * @author: Carter Taylor
-     * @batch:  1712-Dec11-2017
-     */
+    /** If the selected curriculum version has a null ID, it's new. For ngIf to trigger modal asking user
+    * if they want to set it to master. If the version number is 1, this is a new curricumul entirely
+    * and its first version will be master by default. Set isFirstVer to true so that our ngIf can bypass
+    * the modal
+    *  @author Dylan Britton, Carter Taylor,Olayinka Ewumi (1712-Steve)
+    */
     receiveMessage(event) {
         this.selectedCurr = event;
         if (event.id == null) {
             this.isNewVer = true;
         } else {
             this.isNewVer = false;
+        }
+
+        if (event.curriculumVersion === 1) {
+            this.isFirstVer = true;
+        } else {
+            this.isFirstVer = false;
         }
     }
 
@@ -239,8 +247,8 @@ export class MainCurriculumViewComponent implements OnInit {
      * @batch:  1712-Dec11-2017
      */
     truncateWeeks() {
-         for (let i = 0; i < this.allWeeks.length; i++) {
-                this.allWeeks[i] = [];
+        for (let i = 0; i < this.allWeeks.length; i++) {
+            this.allWeeks[i] = [];
         }
     }
 
