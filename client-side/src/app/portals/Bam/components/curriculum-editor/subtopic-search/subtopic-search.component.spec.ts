@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubtopicSearchComponent } from './subtopic-search.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SubtopicSearchComponent', () => {
   let component: SubtopicSearchComponent;
@@ -8,7 +9,8 @@ describe('SubtopicSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubtopicSearchComponent ]
+      declarations: [ SubtopicSearchComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

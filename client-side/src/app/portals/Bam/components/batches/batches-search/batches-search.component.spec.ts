@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BatchesSearchComponent } from './batches-search.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('BatchesSearchComponent', () => {
   let component: BatchesSearchComponent;
@@ -8,7 +9,8 @@ describe('BatchesSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BatchesSearchComponent ]
+      declarations: [ BatchesSearchComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BatchProgressBarComponent } from './batch-progress-bar.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('BatchProgressBarComponent', () => {
   let component: BatchProgressBarComponent;
@@ -8,7 +9,8 @@ describe('BatchProgressBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BatchProgressBarComponent ]
+      declarations: [ BatchProgressBarComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

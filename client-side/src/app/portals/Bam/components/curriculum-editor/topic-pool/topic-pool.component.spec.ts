@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopicPoolComponent } from './topic-pool.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TopicPoolComponent', () => {
   let component: TopicPoolComponent;
@@ -8,7 +9,8 @@ describe('TopicPoolComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopicPoolComponent ]
+      declarations: [ TopicPoolComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

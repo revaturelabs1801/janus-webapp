@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopicSearchComponent } from './topic-search.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TopicSearchComponent', () => {
   let component: TopicSearchComponent;
@@ -8,7 +9,8 @@ describe('TopicSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopicSearchComponent ]
+      declarations: [ TopicSearchComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

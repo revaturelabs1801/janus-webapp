@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BatchesTableComponent } from './batches-table.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('BatchesTableComponent', () => {
   let component: BatchesTableComponent;
@@ -8,7 +9,8 @@ describe('BatchesTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BatchesTableComponent ]
+      declarations: [ BatchesTableComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RemoveAssociateFromBatchComponent } from './remove-associate-from-batch.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('RemoveAssociateFromBatchComponent', () => {
   let component: RemoveAssociateFromBatchComponent;
@@ -8,7 +9,8 @@ describe('RemoveAssociateFromBatchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RemoveAssociateFromBatchComponent ]
+      declarations: [ RemoveAssociateFromBatchComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

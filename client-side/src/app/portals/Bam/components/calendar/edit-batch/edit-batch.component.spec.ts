@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditBatchComponent } from './edit-batch.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('EditBatchComponent', () => {
   let component: EditBatchComponent;
@@ -8,7 +9,8 @@ describe('EditBatchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditBatchComponent ]
+      declarations: [ EditBatchComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

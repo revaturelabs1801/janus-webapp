@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainCurriculumViewComponent } from './main-curriculum-view.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('MainCurriculumViewComponent', () => {
   let component: MainCurriculumViewComponent;
@@ -8,7 +9,8 @@ describe('MainCurriculumViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainCurriculumViewComponent ]
+      declarations: [ MainCurriculumViewComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

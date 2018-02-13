@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { SessionService } from './session.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('UsersessionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SessionService]
+      providers: [SessionService],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
   });
 

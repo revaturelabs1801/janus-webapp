@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { SubtopicService } from './subtopic.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SubtopicService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SubtopicService]
+      providers: [SubtopicService],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
   });
 

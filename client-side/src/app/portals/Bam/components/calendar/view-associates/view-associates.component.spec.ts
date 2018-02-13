@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewAssociatesComponent } from './view-associates.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ViewAssociatesComponent', () => {
   let component: ViewAssociatesComponent;
@@ -7,7 +8,8 @@ describe('ViewAssociatesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewAssociatesComponent ]
+      declarations: [ ViewAssociatesComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

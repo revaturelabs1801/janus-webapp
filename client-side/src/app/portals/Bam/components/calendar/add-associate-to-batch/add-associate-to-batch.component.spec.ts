@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddAssociateToBatchComponent } from './add-associate-to-batch.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AddAssociateToBatchComponent', () => {
   let component: AddAssociateToBatchComponent;
@@ -8,7 +9,8 @@ describe('AddAssociateToBatchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddAssociateToBatchComponent ]
+      declarations: [ AddAssociateToBatchComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));
