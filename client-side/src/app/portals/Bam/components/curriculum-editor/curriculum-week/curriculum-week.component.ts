@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { MainCurriculumViewComponent } from '../main-curriculum-view/main-curriculum-view.component';
@@ -29,6 +29,8 @@ export class CurriculumWeekComponent implements OnInit {
   thursday: DaysDTO = new DaysDTO([]);
   friday: DaysDTO = new DaysDTO([]);
   weekDTO: WeeksDTO = new WeeksDTO([]);
+  @Input() readOnly: boolean;
+  @Output() removeWeekEvent = new EventEmitter<number>();
   topicType: string[]= [];
   percentageMap = {};
   total = 0;
@@ -36,7 +38,6 @@ export class CurriculumWeekComponent implements OnInit {
   percentageNames = [];
 
   constructor(private dndService: DragndropService,
-    private mainCurriculumViewComponent: MainCurriculumViewComponent,
     private courseStructureComponent: CourseStructureComponent) { }
 
   currentlyDragged;
@@ -53,8 +54,8 @@ export class CurriculumWeekComponent implements OnInit {
    */
   progressBar() {
 
-    this.weekDTO.daysDTO.forEach(element => {
-      element.subtopicNames.forEach(subtopic => {
+    this.weekDTO.days.forEach(element => {
+      element.subtopics.forEach(subtopic => {
         if (this.percentageMap[subtopic.topic.name] === undefined) {
           this.percentageMap[subtopic.topic.name] = 1 ;
           this.total++;
@@ -76,23 +77,23 @@ export class CurriculumWeekComponent implements OnInit {
     this.weekCurrSubtopics.forEach(elem => {
       switch (elem.curriculumSubtopicDay) {
         case 1:
-          this.monday.subtopicNames.push(elem.curriculumSubtopicNameId);
+          this.monday.subtopics.push(elem.curriculumSubtopicNameId);
           break;
         case 2:
-          this.tuesday.subtopicNames.push(elem.curriculumSubtopicNameId);
+          this.tuesday.subtopics.push(elem.curriculumSubtopicNameId);
           break;
         case 3:
-          this.wednesday.subtopicNames.push(elem.curriculumSubtopicNameId);
+          this.wednesday.subtopics.push(elem.curriculumSubtopicNameId);
           break;
         case 4:
-          this.thursday.subtopicNames.push(elem.curriculumSubtopicNameId);
+          this.thursday.subtopics.push(elem.curriculumSubtopicNameId);
           break;
         case 5:
-          this.friday.subtopicNames.push(elem.curriculumSubtopicNameId);
+          this.friday.subtopics.push(elem.curriculumSubtopicNameId);
           break;
       }
     });
-    this.weekDTO.daysDTO.push(this.monday, this.tuesday, this.wednesday, this.thursday, this.friday);
+    this.weekDTO.days.push(this.monday, this.tuesday, this.wednesday, this.thursday, this.friday);
   }
 
   /**This method is triggered when a object is droped into a droppable zone, it will find
@@ -103,8 +104,7 @@ export class CurriculumWeekComponent implements OnInit {
   dropIt(dayNum: number) {
     this.dndService.currentSubtopic.subscribe(
       data => {
-        console.log(data);
-        this.weekDTO.daysDTO[dayNum].subtopicNames.push(data);
+        this.weekDTO.days[dayNum].subtopics.push(data);
       }
     ).unsubscribe();
   }
@@ -128,8 +128,8 @@ export class CurriculumWeekComponent implements OnInit {
    * @param dayNum
    */
   putItDown(subtopic, dayNum: number) {
-    this.weekDTO.daysDTO[dayNum].subtopicNames =
-      this.weekDTO.daysDTO[dayNum].subtopicNames.filter(elem => elem !== subtopic);
+    this.weekDTO.days[dayNum].subtopics =
+      this.weekDTO.days[dayNum].subtopics.filter(elem => elem !== subtopic);
   }
 
   /**
@@ -145,8 +145,17 @@ export class CurriculumWeekComponent implements OnInit {
  * Sends specific weekNum of a CurriculumSuptopic[] to removeWeek, for removal.
  * Also, uses stopPropagation because button is on top of clickable div.
  */
-  removeWeekCall(weekNum: number) {
+
+ confirmWeekDeletion(weekNum: number) {
     event.stopPropagation();
-    this.mainCurriculumViewComponent.removeWeek(weekNum - 1);
+    this.weekNum = weekNum;
+    console.log(weekNum);
+ }
+
+  removeWeekCall() {
+    event.stopPropagation();
+    this.removeWeekEvent.emit(this.weekNum - 1);
   }
+
 }
+

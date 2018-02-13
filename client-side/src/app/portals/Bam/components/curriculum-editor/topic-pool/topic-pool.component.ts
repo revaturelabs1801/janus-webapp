@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TopicName } from '../../../models/topicname.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { ViewChild } from '@angular/core/src/metadata/di';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { DragndropService } from '../../../services/dragndrop.service';
-import { SearchTextService } from '../../../services/search-text.service';
 import { TopicService } from '../../../services/topic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
+import { SearchTextService } from '../../../services/search-text.service';
 
 // Used below to toggle add subtopic modal
 declare let $: any;
@@ -25,6 +25,7 @@ export class TopicPoolComponent implements OnInit {
   searchText: string;
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
   subTopicName: SubtopicName[] = [];
+  @Input() readOnly: boolean;
   selectedTopicId: number;
 
   constructor(private curriculumService: CurriculumService,
@@ -39,8 +40,8 @@ export class TopicPoolComponent implements OnInit {
 
   /**  On initializing this component we are calling the getTopic() function
    *   @author: Mohamad Alhindi
-    *  @batch: 1712-Dec11-2017
-    *  */
+   *   @batch: 1712-Dec11-2017
+   **/
   ngOnInit() {
     this.getTopics();
   }
@@ -50,6 +51,12 @@ export class TopicPoolComponent implements OnInit {
     *  @batch 1712-Dec11-2017
     */
   getTopics() {
+    let topicPoolCacheData;
+    this.curriculumService.currentTopicPoolData.subscribe(
+      data => topicPoolCacheData = data
+    );
+
+    if (topicPoolCacheData.length === 0) {
     this.curriculumService.getAllTopicPool().subscribe(
       data => {
         this.subTopicName = data;
@@ -63,12 +70,19 @@ export class TopicPoolComponent implements OnInit {
         console.log(err.status);
       }
     );
+  }else {
+        this.subTopicName = topicPoolCacheData;
+        this.initTopics();
+        this.uniqueTopics();
+        this.getSubTopics();
+    }
+
   }
 
-  /** Runs throught subTopicNames array and will extract the topics within the array
-   *  @author Mohamad Alhindi
-   * @batch 1712-Dec11-2017
-   */
+    /** Runs throught subTopicNames array and will extract the topics within the array
+     *  @author Mohamad Alhindi
+     *  @batch 1712-Dec11-2017
+     */
   initTopics() {
     for (let i = 0; i < this.subTopicName.length; i++) {
       this.topics.push(this.subTopicName[i].topic.name);
