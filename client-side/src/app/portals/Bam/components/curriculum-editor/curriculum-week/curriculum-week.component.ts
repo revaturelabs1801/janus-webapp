@@ -7,7 +7,6 @@ import { Curriculum } from '../../../models/curriculum.model';
 import { DragndropService } from '../../../services/dragndrop.service';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { DaysDTO } from '../../../models/daysDTO.model';
-import { Subtopic } from '../../../models/subtopic.model';
 
 /**
  * Authors: Daniel Robinson, Tyler Dresselhouse, Dylan Britton
@@ -37,7 +36,6 @@ export class CurriculumWeekComponent implements OnInit {
   total = 0;
   percentageNums = [];
   percentageNames = [];
-  pickUpDay = -1;
 
   constructor(private dndService: DragndropService,
     private courseStructureComponent: CourseStructureComponent) { }
@@ -119,7 +117,6 @@ export class CurriculumWeekComponent implements OnInit {
    * @param dayNum
    */
   pickItUp(subtopic, dayNum: number) {
-    this.pickUpDay = dayNum;
     this.dndService.sendSubtopic(subtopic);
   }
 
@@ -131,8 +128,8 @@ export class CurriculumWeekComponent implements OnInit {
    * @param dayNum
    */
   putItDown(subtopic, dayNum: number) {
-    const index = this.weekDTO.days[dayNum].subtopics.indexOf(subtopic);
-    this.weekDTO.days[dayNum].subtopics.splice(index, 1);
+    this.weekDTO.days[dayNum].subtopics =
+      this.weekDTO.days[dayNum].subtopics.filter(elem => elem !== subtopic);
   }
 
   /**
@@ -152,16 +149,12 @@ export class CurriculumWeekComponent implements OnInit {
  confirmWeekDeletion(weekNum: number) {
     event.stopPropagation();
     this.weekNum = weekNum;
+    console.log(weekNum);
  }
 
   removeWeekCall() {
     event.stopPropagation();
     this.removeWeekEvent.emit(this.weekNum - 1);
-  }
-
-  removeSubtopic(subtopic, dayNum) {
-    this.weekDTO.days[dayNum].subtopics =
-      this.weekDTO.days[dayNum].subtopics.filter(e => e !== subtopic);
   }
 
 }
