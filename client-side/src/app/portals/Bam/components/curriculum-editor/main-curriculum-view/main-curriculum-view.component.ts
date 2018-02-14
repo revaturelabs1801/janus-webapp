@@ -125,17 +125,27 @@ export class MainCurriculumViewComponent implements OnInit {
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
             response => {
-                console.log(response);
+                this.refreshList(<Curriculum>response.body);
                 this.isNewVer = false;
             },
             error => {
                 console.log(error);
                 this.isNewVer = false;
-            },
-            () => this.isNewVer = false
+            }
         );
     }
 
+    /**
+     * Adds the newly saved curriculum object to the curriculum services'
+     * behavior subject.
+     * @author James Holzer, Carter Taylor, Mohamad Alhindi (1712-Steve)
+     * @param curr
+     */
+    refreshList(curr: Curriculum) {
+        const currList = this.curriculumService.allCurriculumData.getValue();
+        currList.push(curr);
+        this.curriculumService.refreshCurriculums(currList);
+    }
     /**
      * Subscribes to the BehaviorSubject in Curriculum Service
      * which holds the currently selected curriculum's
