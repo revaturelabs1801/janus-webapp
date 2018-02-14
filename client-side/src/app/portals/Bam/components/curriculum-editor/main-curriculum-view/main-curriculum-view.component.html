@@ -1,6 +1,9 @@
 <button class="btn btn-dark float-right" (click)="populateCalendar()">
 
     Populate My Calendar</button>
+ 
+    <button (click)="download()">Export Curriculum</button>
+
 
 <div *ngIf="selectedCurr" class="offset-7">{{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
 
