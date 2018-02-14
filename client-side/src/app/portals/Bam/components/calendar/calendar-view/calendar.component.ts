@@ -7,6 +7,8 @@ import { CalendarService } from '../../../services/calendar.service';
 import { CalendarStatusService } from '../../../services/calendar-status.service';
 import { AddSubtopicService } from '../../../services/add-subtopic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
+import { Batch } from '../../../models/Batch.model';
+import { SessionService } from '../../../services/session.service';
 
 /**
     *	This component will serve as the main calendar view. 
@@ -39,6 +41,7 @@ export class CalendarComponent implements OnInit {
   //reference to subtopic being added that already exists
   existingSubtopic: Subtopic;
   subtopicToDelete: CalendarEvent;
+  selectedBatch: Batch;
 
   /* Tooltip data bindings */
   subtopicTooltip: string;
@@ -47,10 +50,12 @@ export class CalendarComponent implements OnInit {
   trashOpacity: number;
 
   constructor(private calendarService: CalendarService, private statusService: CalendarStatusService,
-    private addSubtopicService: AddSubtopicService, private subtopicService: SubtopicService) { }
+    private addSubtopicService: AddSubtopicService, private subtopicService: SubtopicService,
+    private sessionService: SessionService) { }
 
   ngOnInit() {
-    this.calendarService.getSubtopicsByBatchPagination(22506, 0, 34).subscribe(
+    this.selectedBatch = this.sessionService.getSelectedBatch();
+    this.calendarService.getSubtopicsByBatchPagination(this.selectedBatch.id, 0, 34).subscribe(
       subtopics => {
         for (let subtopic of subtopics) {
           let calendarEvent = this.calendarService.mapSubtopicToEvent(subtopic);
@@ -138,7 +143,7 @@ export class CalendarComponent implements OnInit {
     clickedTopic.color = this.statusService.getStatusColor(calendarEvent.status);
     calendarEvent.color = clickedTopic.color;
 
-    this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+    this.calendarService.updateTopicStatus(calendarEvent, this.selectedBatch.id).subscribe();
     this.addEvent(calendarEvent);
   }
 
@@ -165,13 +170,13 @@ export class CalendarComponent implements OnInit {
     calendarEvent.color = droppedTopic.color;
 
     //update date and status synchronously
-    this.calendarService.changeTopicDate(droppedTopic.subtopicId, 22506, milliDate)
+    this.calendarService.changeTopicDate(droppedTopic.subtopicId, this.selectedBatch.id, milliDate)
       .subscribe(
       response => {
-        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+        this.calendarService.updateTopicStatus(calendarEvent, this.selectedBatch.id).subscribe();
       },
       error => {
-        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+        this.calendarService.updateTopicStatus(calendarEvent, this.selectedBatch.id).subscribe();
       }
       );
     this.updateEvent(calendarEvent);
@@ -193,10 +198,12 @@ export class CalendarComponent implements OnInit {
       newSubtopic.subtopicDate = new Date(event.date.format() + "T09:00:00-05:00");
     }
     let calendarEvent = this.calendarService.mapSubtopicToEvent(newSubtopic);
-
-    if (this.eventExists(calendarEvent) > -1) {
+    let existingIndex;
+    
+    if ((existingIndex = this.eventExists(calendarEvent)) > -1) {
       this.existingSubtopic = newSubtopic;
-      $('existing-subtopic-modal').modal('show');
+      this.existingSubtopic.subtopicId = this.events[existingIndex].subtopicId;
+      $('#add-existing-subtopic-modal').modal('show');
       return;
     }
 
@@ -354,7 +361,7 @@ export class CalendarComponent implements OnInit {
    */
   handleAddExistingSubtopic(subtopic: Subtopic) {
     let index = this.addEvent(this.calendarService.mapSubtopicToEvent(subtopic));
-    this.calendarService.changeTopicDate(subtopic.subtopicId, 22506, subtopic.subtopicDate.getTime())
+    this.calendarService.changeTopicDate(subtopic.subtopicId, this.selectedBatch.id, subtopic.subtopicDate.getTime())
       .subscribe();
   }
 }
