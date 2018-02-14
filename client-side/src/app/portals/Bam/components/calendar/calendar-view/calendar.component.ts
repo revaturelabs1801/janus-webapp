@@ -5,6 +5,8 @@ import { Subtopic } from '../../../models/subtopic.model';
 import { CalendarEvent } from '../../../models/calendar-event.model';
 import { CalendarService } from '../../../services/calendar.service';
 import { CalendarStatusService } from '../../../services/calendar-status.service';
+import { AddSubtopicService } from '../../../services/add-subtopic.service';
+import { SubtopicService } from '../../../services/subtopic.service';
 
 /**
     *	This component will serve as the main calendar view. 
@@ -34,6 +36,9 @@ export class CalendarComponent implements OnInit {
   gotoDateValue: Date;
   overridenDate: Date;
   draggedCalendarEvent: CalendarEvent;
+  //reference to subtopic being added that already exists
+  existingSubtopic: Subtopic;
+  subtopicToDelete: CalendarEvent;
 
   /* Tooltip data bindings */
   subtopicTooltip: string;
@@ -41,20 +46,14 @@ export class CalendarComponent implements OnInit {
 
   trashOpacity: number;
 
-  constructor(private calendarService: CalendarService, private statusService: CalendarStatusService) { }
+  constructor(private calendarService: CalendarService, private statusService: CalendarStatusService,
+    private addSubtopicService: AddSubtopicService, private subtopicService: SubtopicService) { }
 
   ngOnInit() {
     this.calendarService.getSubtopicsByBatchPagination(22506, 0, 34).subscribe(
       subtopics => {
         for (let subtopic of subtopics) {
-          let calendarEvent = new CalendarEvent();
-
-          calendarEvent.subtopicId = subtopic.subtopicId;
-          calendarEvent.title = subtopic.subtopicName.name;
-          calendarEvent.start = new Date(subtopic.subtopicDate);
-          calendarEvent.status = subtopic.status.name;
-          calendarEvent.color = this.statusService.getStatusColor(calendarEvent.status);
-
+          let calendarEvent = this.calendarService.mapSubtopicToEvent(subtopic);
           this.events.push(calendarEvent);
         }
         this.overridenDate = this.events[0].start;
@@ -94,6 +93,7 @@ export class CalendarComponent implements OnInit {
       longPressDelay: 100,
       dragRevertDuration: 0,
       scrollTime: '09:00:00',
+      zIndex: 1,
       businessHours: {
         // days of week. an array of zero-based day of week integers (0=Sunday)
         dow: [1, 2, 3, 4, 5], // Monday - Friday
@@ -105,7 +105,7 @@ export class CalendarComponent implements OnInit {
 
     $('.fc-trash').droppable(
       {
-        accept: "*",
+        scope: "fc-deletable",
 
         drop: (event, ui) => this.trashDropEvent(event, ui, this.draggedCalendarEvent),
 
@@ -140,7 +140,6 @@ export class CalendarComponent implements OnInit {
 
     this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
     this.addEvent(calendarEvent);
-    console.log(this.events);
   }
 
   /**
@@ -180,6 +179,35 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
+  * This function handles new external subtopics being dropped onto the calendar.
+  * The event.jsEvent.target has data attached to it under the key "subtopic" and comes in as a Subtopic object
+  * Check if the subtopic already exists on the calendar before adding.
+  * @param event
+  */
+  handleDrop(event) {
+    let newSubtopic = $(event.jsEvent.target).data("subtopic");
+    //time not needed for non-month views
+    if (event.resourceId.name != "month") {
+      newSubtopic.subtopicDate = new Date(event.date.format());
+    } else {
+      newSubtopic.subtopicDate = new Date(event.date.format() + "T09:00:00-05:00");
+    }
+    let calendarEvent = this.calendarService.mapSubtopicToEvent(newSubtopic);
+
+    if (this.eventExists(calendarEvent) > -1) {
+      this.existingSubtopic = newSubtopic;
+      $('existing-subtopic-modal').modal('show');
+      return;
+    }
+
+    let index = this.addEvent(calendarEvent);
+    this.addSubtopicService.addSubtopic(newSubtopic)
+      .subscribe(subtopic => {
+        this.addEvent(this.calendarService.mapSubtopicToEvent(subtopic));
+      });
+  }
+
+  /**
    * Unhides the tooltip and positions it above the element.
    * This function also attaches jqueryUI draggable class to allow the event object to interact with 
    * external components such as the trashcan.
@@ -188,13 +216,16 @@ export class CalendarComponent implements OnInit {
    * @author Sean Sung, Francisco Palomino (1712-dec10-java-Steve)
    */
   handleEventMouseover(event) {
-    $(event.jsEvent.currentTarget).draggable(
-      {
-        revert: true,
-        revertDuration: DRAG_REVERT_DURATION,
-        zIndex: -500
-      }
-    );
+    if (event.view.name == "month") {
+      $(event.jsEvent.currentTarget).draggable(
+        {
+          scope: "fc-deletable",
+          revert: true,
+          revertDuration: DRAG_REVERT_DURATION,
+          zIndex: 1
+        }
+      );
+    }
     this.subtopicTooltip = event.calEvent.title;
     this.statusTooltip = event.calEvent.status;
 
@@ -221,6 +252,7 @@ export class CalendarComponent implements OnInit {
    */
   mapSubtopicFromEvent(event): CalendarEvent {
     let calendarEvent = new CalendarEvent();
+    calendarEvent.subtopicNameId = event.subtopicNameId;
     calendarEvent.subtopicId = event.subtopicId;
     calendarEvent.title = event.title;
     calendarEvent.color = event.color;
@@ -233,12 +265,12 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Updates the event array object to match the calendar view.
-   * This is called on 
+   * This is called on internal drop events
    * @param changedSubtopic 
    */
   updateEvent(changedSubtopic: CalendarEvent) {
     let index = this.eventExists(changedSubtopic);
-    if(index == 0) {
+    if (index == 0) {
       this.overridenDate = changedSubtopic.start;
     }
     //reset the first index date that gets overriden on drops
@@ -251,15 +283,19 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Removes event if it already exists and then inserts new event to this.events
+   * Returns index where event was added
    * @param calendarEvent 
    */
-  addEvent(calendarEvent: CalendarEvent) {
+  addEvent(calendarEvent: CalendarEvent): number {
     let index = this.eventExists(calendarEvent);
+
     if (index > -1) {
       this.events.splice(index, 1, calendarEvent);
     } else {
       this.events.push(calendarEvent);
+      index = this.events.length - 1;
     }
+    return index;
   }
 
   /**
@@ -281,23 +317,44 @@ export class CalendarComponent implements OnInit {
    */
   eventExists(calendarEvent: CalendarEvent): number {
     for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i].title == calendarEvent.title) {
+      if (this.events[i].subtopicNameId == calendarEvent.subtopicNameId) {
         return i;
       }
     }
     return -1;
   }
 
-    /**
-   * Callback function to handle drop events that land on the trash icon
-   * Deletes existing subtopics from the batch
-   * 
-   * @param event 
-   * @param ui 
-   * @param calendarEvent 
-   */
+  /**
+ * Callback function to handle drop events that land on the trash icon
+ * Opens modal to confirm delete
+ * 
+ * @param event 
+ * @param ui 
+ * @param calendarEvent 
+ */
   trashDropEvent(event, ui, calendarEvent: CalendarEvent) {
     event.target.style.opacity = 1;
+    this.subtopicToDelete = calendarEvent;
+    $('#delete-subtopic-modal').modal('show');
+  }
+
+  /**
+   * Event handler for deleting subtopics when a user clicks yes in modal popup.
+   * @param calendarEvent 
+   */
+  handleDeleteSubtopic(calendarEvent: CalendarEvent) {
     this.removeEvent(this.eventExists(calendarEvent));
+    this.subtopicService.removeSubtopicFromBatch(calendarEvent.subtopicId).subscribe();
+  }
+
+  /**
+   * Event handler for adding existing subtopics when a user clicks yes in modal popup.
+   * Simply updates the date.
+   * @param subtopic 
+   */
+  handleAddExistingSubtopic(subtopic: Subtopic) {
+    let index = this.addEvent(this.calendarService.mapSubtopicToEvent(subtopic));
+    this.calendarService.changeTopicDate(subtopic.subtopicId, 22506, subtopic.subtopicDate.getTime())
+      .subscribe();
   }
 }

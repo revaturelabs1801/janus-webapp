@@ -12,6 +12,7 @@ import { Batch } from '../../../models/batch.model';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Subtopic } from '../../../models/subtopic.model';
 import { AddSubtopicService } from '../../../services/add-subtopic.service';
+import { CalendarStatusService } from '../../../services/calendar-status.service';
 
 //for jquery
 declare var $: any;
@@ -43,7 +44,7 @@ export class AddSubtopicComponent implements OnInit {
 
   public uniqueTopics = new Set();
   public topicMap = new Map();
-  public subtopicList: Object[] = [];
+  public subtopicList: Object[] = []; //strings
   public selectedTopic: string;
   public selectedSubtopic: string;
   public selectedDate: any;
@@ -70,8 +71,8 @@ export class AddSubtopicComponent implements OnInit {
   public alertMessage: string;
   public successMessage: string;
 
-  constructor(private subtopicsService: AddSubtopicService,
-    private modalService: NgbModal, private calendarService: CalendarService) { }
+  constructor(private subtopicsService: AddSubtopicService, private modalService: NgbModal, 
+    private calendarService: CalendarService, private statusService: CalendarStatusService) { }
 
   ngOnInit() {
     this.selectedTopic = 'Select a Topic';
@@ -176,21 +177,6 @@ export class AddSubtopicComponent implements OnInit {
     }
   }
 
-  setDraggableOnSubtopic(event) {
-    $(event.target).draggable(
-      {
-        revert: true,
-        revertDuration: 200,
-        zIndex: 999,
-        scroll: false,
-        helper: "clone",
-
-        start: function() {
-          $(this).data = {}
-        }
-      }
-    );
-  }
   /**
    * Method verifies selection inputs and the date and sends the appropriate
    * message to the user if something is missing or incorrect. Once all validation
@@ -334,13 +320,46 @@ export class AddSubtopicComponent implements OnInit {
       }, (reason) => { });
   }
 
-  selectSubtopic(subtopic: Subtopic) {
-    if(selectedSubtopic != undefined) {
+  selectSubtopic(subtopic: string) {
+    if (selectedSubtopic != undefined) {
       $(selectedSubtopic).css('opacity', 1);
     }
+    //html DOM object
     selectedSubtopic = event.target;
     $(selectedSubtopic).css('opacity', 0.5);
-    //this.selectedSubtopic = subtopic.subtopicName.name;
-    console.log(subtopic);
+    this.selectedSubtopic = subtopic;
+    this.onChangeGetSubtopicInfo();
+  }
+
+  getSubtopicName(subtopic: string): SubtopicName {
+    for (let subtopicName of this.subtopics) {
+      if (subtopic == subtopicName.name) {
+        return subtopicName;
+      }
+    }
+    return null;
+  }
+
+  setDraggableOnSubtopic(event, subtopic: string) {
+    let subtopicData = new Subtopic(
+      null,
+      this.getSubtopicName(subtopic),
+      this.currentBatch,
+      this.statusService.getDefaultStatus(),
+      null
+    );
+
+    //attach data to draggable element
+    $(event.target).data("subtopic", subtopicData);
+    //set draggable
+    $(event.target).draggable(
+      {
+        revert: true,
+        revertDuration: 0,
+        zIndex: 999,
+        scroll: false,
+        helper: "clone"
+      }
+    );
   }
 }

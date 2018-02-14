@@ -15,13 +15,9 @@
     </div>
     <div class="form-group row">
       <div class="form-label">Choose Subtopic:</div>
-      <div class="select-box">
-        <div *ngFor="let subtopic of subtopicList" class="fc-select-subtopic" (click)="selectSubtopic(subtopic)" (mouseover)="setDraggableOnSubtopic($event)">{{subtopic}}</div>
+      <div class="select-box" (change)="onChangeGetSubtopicInfo()">
+        <div *ngFor="let subtopic of subtopicList" class="fc-select-subtopic" (click)="selectSubtopic(subtopic)" (mouseover)="setDraggableOnSubtopic($event, subtopic)">{{subtopic}}</div>
       </div>
-      <!--
-        <select size="5" [(ngModel)]="selectedSubtopic" class="form-control select-subtopic" id="subtopics" (change)="onChangeGetSubtopicInfo()">
-          <option *ngFor="let subtopic of subtopicList" value="{{subtopic}}">{{subtopic}}</option>
-        </select> -->
     </div>
     <div class="form-group row">
       <label for="date" class="form-label">Start:</label>

@@ -1,0 +1,13 @@
+<div class="modal fade" id="delete-subtopic-modal" #deletesubtopicmodal>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p *ngIf="subtopic != undefined">Are you sure you want to delete {{subtopic.title}} from the calendar?</p>
+        <div class="modal-body-buttons">
+          <button type="button" class="btn btn-primary" (click)="deleteSubtopic()">Yes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

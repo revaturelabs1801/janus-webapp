@@ -31,3 +31,8 @@
 .fc-trash {
     float: left;
 }
+
+.modal-body-buttons {
+    margin: auto;
+    text-align: center;
+}

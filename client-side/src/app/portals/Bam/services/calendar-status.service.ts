@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CalendarEvent } from '../models/calendar-event.model';
+import { SubtopicStatus } from '../models/subtopicstatus.model';
 
 
 const Status = {
@@ -83,5 +84,9 @@ export class CalendarStatusService {
     }
 
     return event.status;
+  }
+
+  public getDefaultStatus(): SubtopicStatus {
+    return new SubtopicStatus(1, Status.PLANNED)
   }
 }
