@@ -40,7 +40,6 @@ export class CalendarComponent implements OnInit {
   draggedCalendarEvent: CalendarEvent;
   //reference to subtopic being added that already exists
   existingSubtopic: Subtopic;
-  subtopicToDelete: CalendarEvent;
   selectedBatch: Batch;
 
   /* Tooltip data bindings */
@@ -340,16 +339,6 @@ export class CalendarComponent implements OnInit {
  */
   trashDropEvent(event, ui, calendarEvent: CalendarEvent) {
     event.target.style.opacity = 1;
-    this.subtopicToDelete = calendarEvent;
-    this.removeEvent(this.eventExists(calendarEvent));
-    this.subtopicService.removeSubtopicFromBatch(calendarEvent.subtopicId).subscribe();
-  }
-
-  /**
-   * Event handler for deleting subtopics when a user clicks yes in modal popup.
-   * @param calendarEvent 
-   */
-  handleDeleteSubtopic(calendarEvent: CalendarEvent) {
     this.removeEvent(this.eventExists(calendarEvent));
     this.subtopicService.removeSubtopicFromBatch(calendarEvent.subtopicId).subscribe();
   }
