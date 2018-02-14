@@ -52,7 +52,6 @@ export class TopicPoolComponent implements OnInit {
     *  @batch 1712-Dec11-2017
     */
   getTopics() {
-    console.log('called again');
     this.curriculumService.currentTopicPoolData.subscribe(
       data => this.topicPoolCacheData = data
     );
