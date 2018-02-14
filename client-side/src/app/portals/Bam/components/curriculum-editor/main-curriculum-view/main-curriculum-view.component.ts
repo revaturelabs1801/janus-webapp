@@ -143,6 +143,11 @@ export class MainCurriculumViewComponent implements OnInit {
      */
     refreshList(curr: Curriculum) {
         const currList = this.curriculumService.allCurriculumData.getValue();
+        if (curr.isMaster === 1) {
+            const masterIndex = currList.findIndex(
+                elem => (elem.isMaster === 1 && elem.curriculumName === curr.curriculumName));
+            currList[masterIndex].isMaster = 0;
+        }
         currList.push(curr);
         this.curriculumService.refreshCurriculums(currList);
     }
