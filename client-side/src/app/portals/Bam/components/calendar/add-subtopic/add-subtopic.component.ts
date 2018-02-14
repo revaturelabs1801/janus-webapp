@@ -321,6 +321,11 @@ export class AddSubtopicComponent implements OnInit {
       }, (reason) => { });
   }
 
+  /**
+   * Sets the selected subtopic when a subtopic is clicked in the DOM.
+   * @param subtopic
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
   selectSubtopic(subtopic: string) {
     if (selectedSubtopic != undefined) {
       $(selectedSubtopic).css('opacity', 1);
@@ -332,6 +337,13 @@ export class AddSubtopicComponent implements OnInit {
     this.onChangeGetSubtopicInfo();
   }
 
+  /**
+   * Returns the SubtopicName object associated with the subtopic name
+   * Returns null if it cannot find it.
+   * 
+   * @param subtopic 
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
   getSubtopicName(subtopic: string): SubtopicName {
     for (let subtopicName of this.subtopics) {
       if (subtopic == subtopicName.name) {
@@ -341,6 +353,14 @@ export class AddSubtopicComponent implements OnInit {
     return null;
   }
 
+  /**
+   * Sets draggable on subtopic elements in the DOM to be dragged onto the calendar
+   * Date is not known until it is placed on the calendar
+   * 
+   * @param event 
+   * @param subtopic 
+   * @author Sean Sung | Batch: 1712-dec10-java-steve
+   */
   setDraggableOnSubtopic(event, subtopic: string) {
     let subtopicData = new Subtopic(
       null,

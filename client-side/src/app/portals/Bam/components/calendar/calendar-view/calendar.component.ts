@@ -199,7 +199,7 @@ export class CalendarComponent implements OnInit {
     }
     let calendarEvent = this.calendarService.mapSubtopicToEvent(newSubtopic);
     let existingIndex;
-    
+
     if ((existingIndex = this.eventExists(calendarEvent)) > -1) {
       this.existingSubtopic = newSubtopic;
       this.existingSubtopic.subtopicId = this.events[existingIndex].subtopicId;
@@ -333,7 +333,6 @@ export class CalendarComponent implements OnInit {
 
   /**
  * Callback function to handle drop events that land on the trash icon
- * Opens modal to confirm delete
  * 
  * @param event 
  * @param ui 
@@ -342,7 +341,8 @@ export class CalendarComponent implements OnInit {
   trashDropEvent(event, ui, calendarEvent: CalendarEvent) {
     event.target.style.opacity = 1;
     this.subtopicToDelete = calendarEvent;
-    $('#delete-subtopic-modal').modal('show');
+    this.removeEvent(this.eventExists(calendarEvent));
+    this.subtopicService.removeSubtopicFromBatch(calendarEvent.subtopicId).subscribe();
   }
 
   /**
