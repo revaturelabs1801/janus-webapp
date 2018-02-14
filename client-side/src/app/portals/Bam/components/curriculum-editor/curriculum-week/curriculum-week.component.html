@@ -10,8 +10,14 @@
                 <span class="percentageBarText">{{percentageNames[i] | uppercase}}</span>
             </div>
         </div>
-        <div *ngIf="!readOnly" class="removeWeekBtn" (click)="confirmWeekDeletion(weekNum);overlay.toggle($event)" >              
+
+        <div *ngIf="!readOnly" class="removeWeekBtn" data-toggle="dropdown" >              
             <i class="fa fa-times-circle fa-1x"></i>
+            <div class = "dropdown-menu" role="menu" >
+                   <p>Delete Week #{{weekNum}}?</p>
+                   <div class="hoverRed"  (click)="removeWeekCall()">Yes</div>
+                    <div class="hoverRed"> No</div>
+            </div>
         </div>
     </div>   
 </div>
@@ -59,9 +65,19 @@
 </div>
 </div>
 
-<p-overlayPanel [appendTo]="'body'" #overlay>
+<div class = "dropdown-menu">
     <p>Delete Week #{{weekNum}}?</p>
         <div class="hoverRed"  (click)="removeWeekCall(); overlay.hide($event)">Yes</div>
         <div class="hoverRed" (click)="overlay.hide($event)"> No</div>
-</p-overlayPanel>
+</div>
 
+<!-- <div *ngIf="!readOnly" class="dropdown">  
+        <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div> -->

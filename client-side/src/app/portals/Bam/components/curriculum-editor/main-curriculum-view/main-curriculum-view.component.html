@@ -1,6 +1,6 @@
+<button class="btn btn-dark float-right" (click)="populateCalendar()">
 
-
-<button class="btn btn-dark float-right" (click)="populateCalendar()">Populate My Calendar</button>
+    Populate My Calendar</button>
 
 <div *ngIf="selectedCurr" class="offset-7">{{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
 
@@ -24,22 +24,48 @@
             </ngb-tabset>
         </div>
 
-        <div class="makeRelative col-9 fontawesome-i2svg-active fontawesome-i2svg-complete" *ngIf="isNewVer">
-            
-                <span type="text" class="trashCan" (click)="op.toggle($event)">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </span>
-                <img class="saveIcon" src="http://i67.tinypic.com/21mf91z.png" width="100px" height="100px" >
-                <span class="saveCurr" (click)="openSaveCurriculumModal()">
-                    Save Curriculum
-                </span>
+        <div class="makeRelative col-9" *ngIf="isNewVer">
+
+            <div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle trashCan" type="button" data-toggle="dropdown">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <div class="dropdown-menu">
+
+
+                        <li class="dropdown-submenu">
+                            <a class="test">Clear All Weeks</a>
+                            <ul class="dropdown-menu">
+                                <p>Are You Sure?</p>
+                                <li>Yes</li>
+                                <li>No</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown-submenu">
+                            <a class="test">Clear All Weeks</a>
+                            <ul class="dropdown-menu">
+                                <p>Are You Sure?</p>
+                                <li>Yes</li>
+                                <li>No</li>
+                            </ul>
+                        </li>
+
+                    </div>
+                </div>
+            </div>
+            <img class="saveIcon" src="http://i67.tinypic.com/21mf91z.png" width="100px" height="100px">
+            <span class="saveCurr" (click)="openSaveCurriculumModal()">
+                Save Curriculum
+            </span>
             <span class="pushtotop" (click)="addWeek()">
                 <i class="fa fa-plus-square"></i>
             </span>
         </div>
-
     </div>
 </div>
+
 
 <div class="container">
     <div class="row">
@@ -89,20 +115,20 @@
             </div>
         </div>
     </div>
+    <span type="text" class="" data-toggle="dropdown">
+        <i class="fa fa-circle" aria-hidden="true"></i>
+        <div class="dropdown-menu">
+            <div class="hoverRed dropdown-menu" data-toggle="dropdown-submenu">
+                <li class="dropdown-submenu test">
+                    <a class="test"> Clear All Weeks</a>
+                    <ul class="dropdown-menu">
+                        <p>Are You Sure?</p>
+                        <li class="hoverRed" (click)="clearAllWeeks()">Yes</li>
+                        <li class="hoverRed"> No</li>
+                    </ul>
+                </li>
+            </div>
+            <div class="hoverRed">Clear All Subtopics</div>
+        </div>
+    </span>
 </div>
-<p-overlayPanel #op>
-    <div class="hoverRed" (click)="confirmClear.toggle($event)">Clear All Weeks</div>
-    <div class="hoverRed" (click)="confirmTruncate.toggle($event)">Clear All Subtopics</div>
-</p-overlayPanel>
-
-<p-overlayPanel #confirmClear>
-    <p>Are You Sure?</p>
-    <div class="hoverRed" (click)="clearAllWeeks(); confirmClear.hide($event)">Yes</div>
-    <div class="hoverRed" (click)="confirmClear.hide($event)"> No</div>
-</p-overlayPanel>
-
-<p-overlayPanel #confirmTruncate>
-    <p>Are You Sure?</p>
-    <div class="hoverRed" (click)="truncateWeeks(); confirmTruncate.hide($event)">Yes</div>
-    <div class="hoverRed" (click)="confirmTruncate.hide($event)"> No</div>
-</p-overlayPanel>
