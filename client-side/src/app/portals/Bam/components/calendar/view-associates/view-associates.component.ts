@@ -15,8 +15,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./view-associates.component.css']
 })
 /**
- * @author Cristian Hermida
- * @author Jeffery Camacho
+ * This component is for viewing all the associates in a batch.
+ * @author Cristian Hermida | 1712-dec10-java-steve
+ * @author Jeffery Camacho | 1712-dec10-java-steve
  */
 export class ViewAssociatesComponent implements OnInit {
   p: number = 1;
