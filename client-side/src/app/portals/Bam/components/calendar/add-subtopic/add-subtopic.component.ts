@@ -292,7 +292,8 @@ export class AddSubtopicComponent implements OnInit {
         if (result === 'ok') {
           this.subtopic.subtopicId = this.subtopicId;
           this.calendarService.addSubtopicToCalendar(this.subtopic);
-          this.subtopicsService.updateDate(this.subtopicId, 22506, this.slectedDateMiliseconds).subscribe(
+          this.subtopicsService.updateDate(this.subtopicId, this.sessionService.getSelectedBatch().id,
+                                          this.slectedDateMiliseconds).subscribe(
             () => {
               this.changeSuccessMessage(`Successfully updated!`);
               for (let i = 0; i < this.batchSubtopics.length; i++) {

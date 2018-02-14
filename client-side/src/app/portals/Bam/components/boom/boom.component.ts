@@ -6,6 +6,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   templateUrl: './boom.component.html',
   styleUrls: ['./boom.component.css']
 })
+/**
+ * Currently contains mock data. This class creates to charts:
+ * Pie and a bar graph.
+ * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+ */
 export class BoomComponent implements OnInit {
 
   @ViewChild('barChart') barChart: ElementRef;
@@ -50,7 +55,7 @@ export class BoomComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+  // Mock data
   let batch1: any;
   let batch2: any;
   let batch3: any;
@@ -110,10 +115,12 @@ export class BoomComponent implements OnInit {
 
     this.batches = [batch1, batch2, batch3, batch4, batch5];
     this.plotBatch(batch1.trainer);
-    // this.pieChartAvg();
     this.pieChartPercent(this.percent);
   }
-
+  /**
+   * 
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   */
   public plotBatch(trainer) {
     const completedSubtop: any[] = [];
     const missedSubTop: any[] = [];
@@ -136,7 +143,13 @@ export class BoomComponent implements OnInit {
     }
 
   }
-
+  /**
+   * Creates a pie chart from all current active batches and graphs
+   * with a default 90% completion value, which can be changed on
+   * the client view.
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   * @param percent percent value to generate the graph
+   */
   public pieChartPercent(percent) {
     const allCompletedSubtop: any[] = [];
     const allMissedSubTop: any[] = [];
@@ -186,7 +199,13 @@ export class BoomComponent implements OnInit {
 
     this.pieChartDatasets = [{ data : this.pieChartData}];
   }
-
+  /**
+   * Method takes in a a number between 0 and 100 to recreate
+   * the pie chart.
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   * @param event used to prevent input
+   * @param percent percent input
+   */
   changePercent(event: any, percent: Number) {
     if (percent == this.percent && String(percent).length > 1) {
       event.preventDefault();
@@ -203,7 +222,12 @@ export class BoomComponent implements OnInit {
       }, 0);
     }
   }
-
+  /**
+   * Validates that only numbers are entered in the input field
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   * @param event current typed character
+   * @param value the whole input value
+   */
   checkInput(event: any, value) {
     const pattern = /[0-9\ ]/;
     const inputChar = String.fromCharCode(event.charCode);
@@ -216,7 +240,11 @@ export class BoomComponent implements OnInit {
       return;
     }
   }
-
+  /**
+   * Averages all batches completed and missed subtopics
+   * and creates a pie chart.
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   */
   public pieChartAvg() {
     const allCompletedSubtop: any[] = [];
     const allMissedSubTop: any[] = [];
@@ -260,7 +288,11 @@ export class BoomComponent implements OnInit {
 
     this.pieChartDatasets = [{ data : this.pieChartData}];
   }
-
+  /**
+   * Recreates Bar chart with the selected trainer/batch
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   * @param trainer selected trainer/batch
+   */
   changeBatch(trainer) {
     this.chartHeight = $(this.barChart.nativeElement.lastElementChild).height();
     $(this.barChart.nativeElement).css('min-height', this.chartHeight + 'px');
