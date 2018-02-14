@@ -271,7 +271,7 @@ export class MainCurriculumViewComponent implements OnInit {
 
     deleteVersions(selectedCurr) {
         this.curriculumService.deleteCurriculumVersion(selectedCurr).subscribe(data => {
-            
+
         });
     }
 }
