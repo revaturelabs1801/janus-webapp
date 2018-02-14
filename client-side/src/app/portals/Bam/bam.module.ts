@@ -64,12 +64,8 @@ import { SubtopicService } from './services/subtopic.service';
     DragDropModule,
     CalendarModule,
     OverlayPanelModule,
-<<<<<<< HEAD
     ChartsModule,
     NgbModule.forRoot(),
-=======
-    NgbModule.forRoot()
->>>>>>> 94528e72d7fdb1191608fbb7a899e78ebff1100c
   ],
   declarations: [
     BamComponent,
