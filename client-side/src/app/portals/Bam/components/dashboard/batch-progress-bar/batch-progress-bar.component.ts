@@ -72,10 +72,11 @@ export class BatchProgressBarComponent implements OnInit, OnChanges {
         });
       this.subTopicObs.subscribe(
         data2 => {
+          this.subTopics = null;
           this.subTopics = data2;
           this.topicArray = [];
           if (this.subTopics == null) {
-            this.subTopicCompleted = 0;
+            this.subTopicCompleted = null;
             this.subTopicMissed = 0;
           }else {
             this.subTopicMissed = 0;

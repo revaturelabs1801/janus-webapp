@@ -28,6 +28,7 @@ export class TopicPoolComponent implements OnInit {
   topicPoolCacheData: SubtopicName[] = [];
   @Input() readOnly: boolean;
   selectedTopicId: number;
+  topicPoolCacheData;
 
   constructor(private curriculumService: CurriculumService,
     public curriculumWeekComponent: CurriculumWeekComponent,

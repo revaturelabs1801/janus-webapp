@@ -145,23 +145,27 @@ export class CourseStructureComponent implements OnInit {
     ).unsubscribe();
 
     if (apiData.length === 0) {
-      console.log(this.curriculumService.currentAllCurriculumData);
-    this.curriculumService.getAllCurriculums().subscribe(
-      data => {
-        this.allCurriculums = data;
-        this.getCurriculumNames();
-        this.getUniqueCurrNames();
-        this.getCurriculumVersions();
-        this.getUniqCurrVersions();
-      }
-    );
-  } else {
-        this.allCurriculums = apiData;
-        this.getCurriculumNames();
-        this.getUniqueCurrNames();
-        this.getCurriculumVersions();
-        this.getUniqCurrVersions();
-  }
+      this.curriculumService.getAllCurriculums().subscribe(
+        data => {
+          this.allCurriculums = data;
+          this.getCurriculumNames();
+          this.getUniqueCurrNames();
+          this.getCurriculumVersions();
+          this.getUniqCurrVersions();
+          this.uniqCurrVersions[0].forEach(e => {
+            if (e.isMaster === 1) {
+              this.viewCurrSchedule(e);
+            }
+          });
+        }
+      );
+    } else {
+      this.allCurriculums = apiData;
+      this.getCurriculumNames();
+      this.getUniqueCurrNames();
+      this.getCurriculumVersions();
+      this.getUniqCurrVersions();
+    }
   }
 
   /**
@@ -205,8 +209,6 @@ export class CourseStructureComponent implements OnInit {
     curric.curriculumName = curTitle;
     curric.curriculumVersion = 1;
     this.messageEvent.emit(curric);
-
-
   }
 
   /**
