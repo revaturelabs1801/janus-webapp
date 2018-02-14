@@ -1,5 +1,5 @@
 const context = 'http://localhost:9999/';
-const bam = 'http://18.219.98.213:9001/api/v1';
+const bam = 'http://18.219.59.193:9001/api/v1';
 export const environment = {
   production: true,
   context: context, // change for what the production environment would actually be
@@ -246,7 +246,8 @@ apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
 
     subtopic: {
        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => 
-        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`
+        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`,
+        removeSubtopic: (subtopicId: number) => `${bam}/subtopic/${subtopicId}`,
     },
 
     addsubtopics: {

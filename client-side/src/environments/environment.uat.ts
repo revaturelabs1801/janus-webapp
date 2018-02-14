@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const context = 'https://dev-caliber.revature.tech/';
-const bam = 'http://18.219.98.213:9001/api/v1';
+const bam = 'http://18.219.59.193:9001/api/v1';
 export const environment = {
   production: false,
   context: context, // change for what the production environment would actually be
@@ -251,7 +251,8 @@ export const environment = {
 
     subtopic: {
        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) =>
-        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`
+        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`,
+        removeSubtopic: (subtopicId: number) => `${bam}/subtopic/${subtopicId}`,
     },
 
     addsubtopics: {

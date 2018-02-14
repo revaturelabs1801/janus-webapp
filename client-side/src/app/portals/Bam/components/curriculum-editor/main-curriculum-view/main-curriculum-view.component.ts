@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList} from '@angular/core';
 import { CurriculumWeekComponent } from '../curriculum-week/curriculum-week.component';
 import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { CurriculumService } from '../../../services/curriculum.service';
+import { CourseStructureComponent } from '../course-structure/course-structure.component';
+import { Curriculum } from '../../../models/curriculum.model';
+import { CurriculumSubtopicDTO } from '../../../models/curriculumSubtopicDTO.model';
+import { MetaDTO } from '../../../models/metaDTO.model';
+import { SessionService } from '../../../services/session.service';
+import { WeeksDTO } from '../../../models/weeksDTO.model';
 
 /**
  * Author:Daniel Robinson
@@ -12,22 +18,123 @@ import { CurriculumService } from '../../../services/curriculum.service';
     templateUrl: './main-curriculum-view.component.html',
     styleUrls: ['./main-curriculum-view.component.css']
 })
+
 export class MainCurriculumViewComponent implements OnInit {
-  schedule: CurriculumSubtopic[];
-  allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
-  toggleTab = 1;
+    schedule: CurriculumSubtopic[];
+    allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
+    toggleTab = 1;
+    selectedCurr: Curriculum;
+    isNewVer = false;
+    isFirstVer = false;
+    uniqCurrVersions;
+    @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
-    constructor(private curriculumService: CurriculumService) { }
+    constructor(private curriculumService: CurriculumService,
+        private sessionService: SessionService) { }
 
 
-  ngOnInit() {
-    this.displayWeekView();
-    this.getWeeks();
-  }
+    ngOnInit() {
+        this.displayWeekView();
+        this.dropdownScript();
+    }
 
-  toggle(view) {
-    this.toggleTab = view;
-  }
+    /**
+     * This script is used to function the double drop down menu for the deletion of the weeks
+     * @author Mohamad Alhindi, Jeffery Camacho
+     * @batch 1712-Dec11-2017
+     */
+    dropdownScript() {
+        $(document).ready(function(){
+            $('.dropdown-submenu a.test').on('click', function(e){
+              $(this).next('ul').toggle();
+              e.stopPropagation();
+              e.preventDefault();
+            });
+          });
+    }
+
+    /**
+     * Toggles between topic view and course structure
+     * @author: Mohamad Alhindi
+     * @batch:  1712-Dec11-2017
+     */
+    toggle(view) {
+        this.toggleTab = view;
+    }
+
+    /** If the selected curriculum version has a null ID, it's new. For ngIf to trigger modal asking user
+    * if they want to set it to master. If the version number is 1, this is a new curricumul entirely
+    * and its first version will be master by default. Set isFirstVer to true so that our ngIf can bypass
+    * the modal
+    *  @author Dylan Britton, Carter Taylor,Olayinka Ewumi (1712-Steve)
+    */
+    receiveMessage(event) {
+        this.selectedCurr = event;
+        if (event.id == null) {
+            this.isNewVer = true;
+            this.dropdownScript();
+        } else {
+            this.isNewVer = false;
+        }
+
+        if (event.curriculumVersion === 1) {
+            this.isFirstVer = true;
+        } else {
+            this.isFirstVer = false;
+        }
+    }
+
+    /**
+     * Opens save curriculum modal
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
+    openSaveCurriculumModal() {
+        (<any>$('#saveCurriculumModal')).modal('show');
+    }
+
+    /**
+     * Opens make master curriculum modal
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
+    openMasterModal() {
+        (<any>$('#makeNewVerMasterModal')).modal('show');
+    }
+
+    /**
+     * Update curriculum
+     * Saves the new master curriculum version and persist to database
+     * Depending on if it already is true or false
+     * @author: Carter Taylor
+     * @batch:  1712-Dec11-2017
+     * @param makeMaster: boolean
+     */
+    saveCurr(makeMaster: boolean) {
+        this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
+        this.selectedCurr.curriculumCreator = this.sessionService.getUser();
+        this.selectedCurr.curriculumdateCreated = this.getCurrentDate();
+        if (makeMaster) {
+            this.selectedCurr.isMaster = 1;
+        }
+        const meta = new MetaDTO(this.selectedCurr);
+
+        const weeksDTO: WeeksDTO[] = [];
+        this.weeks.forEach(elem => weeksDTO.push(elem.weekDTO));
+
+        const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
+        this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
+            response => {
+                console.log(response);
+                this.isNewVer = false;
+            },
+            error => {
+                console.log(error);
+                this.isNewVer = false;
+            },
+            () => this.isNewVer = false
+        );
+    }
 
     /**
      * Subscribes to the BehaviorSubject in Curriculum Service
@@ -50,6 +157,11 @@ export class MainCurriculumViewComponent implements OnInit {
         );
     }
 
+    /**
+     * Generates weeks depending on how many weeks in CurriculumSubtopic[]
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
+     */
     getWeeks() {
         if (this.schedule) {
             let week: CurriculumSubtopic[] = [];
@@ -68,6 +180,8 @@ export class MainCurriculumViewComponent implements OnInit {
     }
     /**
      * Discovers the amount of weeks in a given curriculum
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     getMaxWeeks() {
         let maxWeek = 0;
@@ -82,6 +196,8 @@ export class MainCurriculumViewComponent implements OnInit {
 
     /**
      * Adds and array of CurriculumSubtopics as a week to the week view
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
 
     addWeek() {
@@ -92,6 +208,8 @@ export class MainCurriculumViewComponent implements OnInit {
      *
      * @param weekNum
      * Selects week by its weekNum and returns the corresponding week object
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     getWeekById(weekNum: number): CurriculumSubtopic[] {
         const week: CurriculumSubtopic[] = this.allWeeks[weekNum];
@@ -99,12 +217,56 @@ export class MainCurriculumViewComponent implements OnInit {
     }
 
     /**
-     *
      * @param weekNum
      * Removes a week object from view by its corresponding weekNum
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
      */
     removeWeek(weekNum: number) {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
+    }
+
+    /**
+     * Used to match date created property for the DB
+     * @author: Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
+    getCurrentDate(): string {
+        let today: any = new Date();
+        let dd: any = today.getDate();
+        let mm: any = today.getMonth() + 1;
+        const yyyy: any = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        today = mm + '/' + dd + '/' + yyyy;
+        return today;
+    }
+
+    /**
+     * Clear all weeks while editing
+     * @author: Mohamad Alhindi, Carter Taylor
+     * @batch:  1712-Dec11-2017
+     */
+    clearAllWeeks() {
+        this.allWeeks = [];
+    }
+
+    /**
+     * Truncates the subtopics from all weeks
+     * @author: Mohamad Alhindi, Carter Taylor, James Holzer
+     * @batch:  1712-Dec11-2017
+     */
+    truncateWeeks() {
+        for (let i = 0; i < this.allWeeks.length; i++) {
+            this.allWeeks[i] = [];
+        }
     }
 
     /**
@@ -112,8 +274,7 @@ export class MainCurriculumViewComponent implements OnInit {
      * @author: Jordan DeLong
      * @batch:  1712-Dec11-2017
      */
-    populateCalendar()
-    {
+    populateCalendar() {
         this.curriculumService.syncBatch(22506).subscribe();
     }
 }

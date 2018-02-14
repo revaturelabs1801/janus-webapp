@@ -1,46 +1,73 @@
-
-<div class="row week offset-1" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
-    aria-controls="collapseOne">
-    Week #{{weekNum}}
-    <div class="progress" >
-        <div  *ngFor="let topic of percentageNums; let i = index" class="progress-bar" role="progressbar" [style.background-color]=" i%2 ? '#474c55': '#f47f43' "[style.width]="((topic/total)*100)+'%'">
-            {{percentageNames[i] | uppercase}}
+<div class = "container">
+    <div class="row week" id="weekAccordion" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'" aria-expanded="true"
+        aria-controls="collapseOne">
+        <p *ngIf="readOnly" class="read-only text-center">READ ONLY</p>
+        Week #{{weekNum}}
+        <div *ngIf="readOnly" class="progress">
+            <div  *ngFor="let topic of percentageNums; let i = index" class="progress-bar" 
+                role="progressbar" [style.background-color]=" i%2 ? '#474c55': '#f47f43' "
+                [style.width]="((topic/total)*100)+'%'" placement="top" [ngbTooltip]="percentageNames[i]">
+                <span class="percentageBarText">{{percentageNames[i] | uppercase}}</span>
+            </div>
         </div>
-    </div>
-    <div class="removeWeekBtn" (click)="removeWeekCall(weekNum);">              
-            <i class="fas fa-minus-square"></i>
-    </div>
-</div>    
-<div class="collapse hide weeksrow row offset-1" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
+
+        <div *ngIf="!readOnly" class="removeWeekBtn" data-toggle="dropdown" >              
+            <i class="fa fa-times-circle fa-1x"></i>
+            <div class = "dropdown-menu" role="menu" >
+                   <p>Delete Week #{{weekNum}}?</p>
+                   <div class="hoverRed"  (click)="removeWeekCall()">Yes</div>
+                    <div class="hoverRed"> No</div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+
+<div class="container">
+<div class="row">
+<div class="collapse weeksrow" [attr.id]="weekNum + 'w'" aria-labelledby="headingOne" data-parent="#weekAccordion">
 
     <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(0)">Monday
-        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" class="putBorder"
-            *ngFor="let day of monday.subtopicNames">
-            {{day.name}}</div>
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
+            *ngFor="let day of monday.subtopics">
+            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 0)" class="close">&times;</button></div>
     </div>
 
-    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(1)">Tuesday
-        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 1)" (onDragEnd)="putItDown(day, 1)" class="putBorder"
-            *ngFor="let day of tuesday.subtopicNames">
-            {{day.name}}</div>
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(1)">
+        Tuesday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 1)" (onDragEnd)="putItDown(day, 1)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
+            *ngFor="let day of tuesday.subtopics">
+            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 1)" class="close">&times;</button></div>
     </div>
 
-    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(2)">Wednesday
-        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 2)" (onDragEnd)="putItDown(day, 2)" class="putBorder"
-            *ngFor="let day of wednesday.subtopicNames">
-            {{day.name}}</div>
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(2)">
+        Wednesday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 2)" (onDragEnd)="putItDown(day, 2)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
+            *ngFor="let day of wednesday.subtopics">
+            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 2)" class="close">&times;</button></div>
     </div>
 
-    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(3)">Thursday
-        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 3)" (onDragEnd)="putItDown(day, 3)" class="putBorder"
-            *ngFor="let day of thursday.subtopicNames">
-            {{day.name}}</div>
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(3)">
+        Thursday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 3)" (onDragEnd)="putItDown(day, 3)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
+            *ngFor="let day of thursday.subtopics">
+            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 3)" class="close">&times;</button></div>
     </div>
 
-    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(4)">Friday
-        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 4)" (onDragEnd)="putItDown(day, 4)" class="putBorder"
-            *ngFor="let day of friday.subtopicNames">
-            {{day.name}}</div>
+    
+    <div class="days" pDroppable="subtopicdrag" (onDrop)="dropIt(4)">
+        Friday
+        <div pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 4)" (onDragEnd)="putItDown(day, 4)" [ngClass]="{'noTouch' : readOnly}" class="putBorder"
+            *ngFor="let day of friday.subtopics">
+            {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 4)" class="close">&times;</button></div>
     </div>
-
 </div>
+</div>
+</div>
+
+<div class = "dropdown-menu">
+    <p>Delete Week #{{weekNum}}?</p>
+        <div class="hoverRed"  (click)="removeWeekCall()">Yes</div>
+        <div class="hoverRed"> No</div>
+</div>
+
