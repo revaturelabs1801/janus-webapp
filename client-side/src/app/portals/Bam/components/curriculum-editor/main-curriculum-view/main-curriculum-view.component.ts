@@ -8,6 +8,12 @@ import { CurriculumSubtopicDTO } from '../../../models/curriculumSubtopicDTO.mod
 import { MetaDTO } from '../../../models/metaDTO.model';
 import { SessionService } from '../../../services/session.service';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import { WeeksExportDTO } from '../../../models/weeksExportDTO';
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 /**
  * Author:Daniel Robinson
@@ -27,6 +33,7 @@ export class MainCurriculumViewComponent implements OnInit {
     isNewVer = false;
     isFirstVer = false;
     uniqCurrVersions;
+
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
     constructor(private curriculumService: CurriculumService,
@@ -277,4 +284,32 @@ export class MainCurriculumViewComponent implements OnInit {
     populateCalendar() {
         this.curriculumService.syncBatch(22506).subscribe();
     }
+
+    /**
+     *
+     * @author John Austin, Patrick Kennedy, Tyler Dresselhouse (1712-Steve)
+     * Downloads the selected curriculum to an Excel file
+     */
+    download() {
+        let ourWeeks: WeeksExportDTO;
+        ourWeeks = new WeeksExportDTO((this.allWeeks), this.selectedCurr.curriculumName + ' v' + this.selectedCurr.curriculumVersion);
+        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ourWeeks.data);
+        const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, 'excelFileName');
+    }
+
+    /**
+     *
+     * @author John Austin (1712-Steve)
+     * @param buffer
+     * @param fileName
+     * Helper method for download()
+     */
+    private saveAsExcelFile(buffer: any, fileName: string): void {
+        const data: Blob = new Blob([buffer], {
+          type: EXCEL_TYPE
+        });
+        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+      }
 }
