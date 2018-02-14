@@ -118,8 +118,9 @@ export class BoomComponent implements OnInit {
     this.pieChartPercent(this.percent);
   }
   /**
-   * 
+   * Creates a bar chart of a trainer/batch's weekly progress.
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   * @param trainer selected trainer/batch
    */
   public plotBatch(trainer) {
     const completedSubtop: any[] = [];
