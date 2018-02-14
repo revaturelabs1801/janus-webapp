@@ -45,6 +45,7 @@ import { CalendarStatusService } from './services/calendar-status.service';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
@@ -58,6 +59,7 @@ import { SubtopicService } from './services/subtopic.service';
     NgbModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
+    Ng2OrderModule,
     ScheduleModule,
     DragDropModule,
     CalendarModule,
