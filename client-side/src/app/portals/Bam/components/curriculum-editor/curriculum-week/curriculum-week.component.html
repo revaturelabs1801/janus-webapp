@@ -59,9 +59,3 @@
 </div>
 </div>
 
-<p-overlayPanel [appendTo]="'body'" #overlay>
-    <p>Delete Week #{{weekNum}}?</p>
-        <div class="hoverRed"  (click)="removeWeekCall(); overlay.hide($event)">Yes</div>
-        <div class="hoverRed" (click)="overlay.hide($event)"> No</div>
-</p-overlayPanel>
-

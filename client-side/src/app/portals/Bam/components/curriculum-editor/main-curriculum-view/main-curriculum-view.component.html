@@ -91,19 +91,3 @@
         </div>
     </div>
 </div>
-<p-overlayPanel #op>
-    <div class="hoverRed" (click)="confirmClear.toggle($event)">Clear All Weeks</div>
-    <div class="hoverRed" (click)="confirmTruncate.toggle($event)">Clear All Subtopics</div>
-</p-overlayPanel>
-
-<p-overlayPanel #confirmClear>
-    <p>Are You Sure?</p>
-    <div class="hoverRed" (click)="clearAllWeeks(); confirmClear.hide($event)">Yes</div>
-    <div class="hoverRed" (click)="confirmClear.hide($event)"> No</div>
-</p-overlayPanel>
-
-<p-overlayPanel #confirmTruncate>
-    <p>Are You Sure?</p>
-    <div class="hoverRed" (click)="truncateWeeks(); confirmTruncate.hide($event)">Yes</div>
-    <div class="hoverRed" (click)="confirmTruncate.hide($event)"> No</div>
-</p-overlayPanel>

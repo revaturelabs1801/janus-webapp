@@ -21,7 +21,7 @@ export class CurriculumService {
   private dataSource = new BehaviorSubject<CurriculumSubtopic[]>([]);
   currentData = this.dataSource.asObservable();
 
-  private allCurriculumData = new BehaviorSubject<Curriculum[]>([]);
+  public allCurriculumData = new BehaviorSubject<Curriculum[]>([]);
   currentAllCurriculumData = this.allCurriculumData.asObservable();
 
   private allTopicPoolData = new BehaviorSubject<SubtopicName[]>([]);
@@ -37,6 +37,7 @@ export class CurriculumService {
   refreshCurriculums(data: Curriculum[]) {
     this.allCurriculumData.next(data);
 }
+
   /**  This gets all curriculums from the API
    *   @author: Mohamad Alhindi
     *  @batch: 1712-Dec11-2017
@@ -45,7 +46,6 @@ export class CurriculumService {
   getAllCurriculums(): Observable<Curriculum[]> {
     return this.http.get<Curriculum[]>(environment.curriculum.getCurriculumAllUrl()).map(
       data => {
-        this.allCurriculumData.next(data);
         return data;
       }
     );
@@ -112,7 +112,7 @@ export class CurriculumService {
     * @param: CurriculumSubtopicDTO
     */
    addCurriculum(curriculum: CurriculumSubtopicDTO) {
-    return this.http.post('http://localhost:9001/api/v1/curriculum/addcurriculum', curriculum, httpOptions).map(
+    return this.http.post(environment.curriculum.addCurriculumUrl(), curriculum, httpOptions).map(
       data => {
         return data;
       }
