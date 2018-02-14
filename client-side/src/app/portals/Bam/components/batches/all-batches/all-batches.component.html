@@ -9,14 +9,27 @@
                     <ng-template ngbTabContent></ng-template>
                 </ngb-tab>
             </ngb-tabset>
+
             <app-batches-search *ngIf="batches" (change)="setFilterText($event)" class="pull-right"></app-batches-search>
         </div>
     </div>
+    <div class="row mt-1 mb-2">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                     Add Associates Batch
+                    </div>
+                    <div class="card-body">
+                            <app-batches-table *ngIf="batches" [batches]="batches" [title]="'All Batches'" [filterText]="filterText">
+                                </app-batches-table>
+                                
+                        <div class="text-center" *ngIf="!batches">
+                        <h3 class="loading">Loading...</h3>
+                             </div>
+                    </div>
+                  </div>
+            </div>
+            </div>
+    
 
-    <app-batches-table *ngIf="batches" [batches]="batches" [title]="'All Batches'" [filterText]="filterText">
-    </app-batches-table>
-
-    <div class="text-center" *ngIf="!batches">
-        <h3 class="loading">Loading...</h3>
-    </div>
 </div>

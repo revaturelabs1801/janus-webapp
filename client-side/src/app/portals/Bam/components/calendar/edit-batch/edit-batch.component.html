@@ -1,9 +1,11 @@
 <div class="container" *ngIf="batch">
-  <div class="row justify-content-center ">
+  <div class="row justify-content-center stripes" >
     <div class="col-sm-12 col-md-6 col-lg-4 pt-3">
 
       <div class="card mb-3">
+          <div class="card-header">Edit Current Batch</div>
         <div class="card-body">
+        
           <form ng-submit="updateBatch()" class="ng-valid-required ng-dirty ng-valid ng-valid-date">
 
             <div class="form-group">
@@ -68,10 +70,41 @@
 
   <div *ngIf="showAddUserTable; then addUser; else removeUser"></div>
   <ng-template #removeUser>
-    <app-remove-associate-from-batch [searchTerm]="searchTerm" (notify)="associateAlert($event)"></app-remove-associate-from-batch>
+    <div class="row mt-1 mb-2">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+              <div class="card-header">
+               Remove Associates From Batch
+              </div>
+              <div class="card-body">
+                  <app-remove-associate-from-batch [searchTerm]="searchTerm" (notify)="associateAlert($event)"></app-remove-associate-from-batch>
+              </div>
+            </div>
+      </div>
+        
+    </div>
+     
+
+
+
+
+   
   </ng-template>
   <ng-template #addUser>
-    <app-add-associate-to-batch [searchTerm]="searchTerm" (notify)="associateAlert($event)"></app-add-associate-to-batch>
+
+      <div class="row mt-1 mb-2">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="card">
+                  <div class="card-header">
+                   Add Associates Batch
+                  </div>
+                  <div class="card-body">
+                      <app-add-associate-to-batch [searchTerm]="searchTerm" (notify)="associateAlert($event)"></app-add-associate-to-batch>
+                  </div>
+                </div>
+          </div>
+          </div>
+   
   </ng-template>
 
 </div>

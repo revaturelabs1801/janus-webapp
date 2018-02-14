@@ -6,3 +6,21 @@
 .nav-link.active{
     color: black !important;
 }
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+/* 
+.stripes{
+    background: repeating-linear-gradient(
+    45deg,
+    var(--dark-grey),
+    var(--dark-grey) 20px,
+    var(--light-grey) 20px,
+    var(--light-grey)40px
+);
+background-image: url(
+
+    '/assets/RevStripes.png')
+} */
