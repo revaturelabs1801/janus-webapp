@@ -9,6 +9,7 @@ import { SubtopicStatus } from '../../../models/subtopicstatus.model';
 import { TopicName } from '../../../models/topicname.model';
 import { Batch } from '../../../models/batch.model';
 
+import { SessionService } from '../../../services/session.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Subtopic } from '../../../models/subtopic.model';
 import { AddSubtopicService } from '../../../services/add-subtopic.service';
@@ -67,7 +68,7 @@ export class AddSubtopicComponent implements OnInit {
   public successMessage: string;
 
   constructor(private subtopicsService: AddSubtopicService,
-    private modalService: NgbModal, private calendarService: CalendarService) { }
+    private modalService: NgbModal, private calendarService: CalendarService, private sessionService: SessionService) { }
 
   ngOnInit() {
     this.selectedTopic = 'Select a Topic';
@@ -90,12 +91,12 @@ export class AddSubtopicComponent implements OnInit {
 		*	@author Francisco Palomino | Batch: 1712-dec10-java-steve
 		*/
   getCurrentBatch() {
-    this.subtopicsService.getBatchById().subscribe(
+    this.subtopicsService.getBatchById(this.sessionService.getSelectedBatch().id).subscribe(
       (service) => {
         this.currentBatch = service;
       }
     );
-    this.subtopicsService.getBatchSubtopics().subscribe(
+    this.subtopicsService.getBatchSubtopics(this.sessionService.getSelectedBatch().id).subscribe(
       service => {
         this.batchSubtopics = service;
       });
