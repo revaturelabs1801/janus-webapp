@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
 
@@ -47,6 +46,7 @@ import { CalendarStatusService } from './services/calendar-status.service';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
@@ -57,15 +57,19 @@ import { SubtopicService } from './services/subtopic.service';
   imports: [
     CommonModule,
     BamRoutingModule,
-    NgbModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
+    Ng2OrderModule,
     ScheduleModule,
     DragDropModule,
     CalendarModule,
     OverlayPanelModule,
+<<<<<<< HEAD
     ChartsModule,
     NgbModule.forRoot(),
+=======
+    NgbModule.forRoot()
+>>>>>>> 94528e72d7fdb1191608fbb7a899e78ebff1100c
   ],
   declarations: [
     BamComponent,
