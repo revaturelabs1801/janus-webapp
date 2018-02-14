@@ -220,8 +220,6 @@ export class CourseStructureComponent implements OnInit {
     curric.curriculumName = curTitle;
     curric.curriculumVersion = 1;
     this.messageEvent.emit(curric);
-
-
   }
 
   /**

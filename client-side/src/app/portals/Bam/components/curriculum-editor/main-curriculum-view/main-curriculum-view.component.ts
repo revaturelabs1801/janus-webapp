@@ -35,6 +35,22 @@ export class MainCurriculumViewComponent implements OnInit {
 
     ngOnInit() {
         this.displayWeekView();
+        this.dropdownScript();
+    }
+
+    /**
+     * This script is used to function the double drop down menu for the deletion of the weeks
+     * @author Mohamad Alhindi, Jeffery Camacho
+     * @batch 1712-Dec11-2017
+     */
+    dropdownScript() {
+        $(document).ready(function(){
+            $('.dropdown-submenu a.test').on('click', function(e){
+              $(this).next('ul').toggle();
+              e.stopPropagation();
+              e.preventDefault();
+            });
+          });
     }
 
     /**
@@ -56,6 +72,7 @@ export class MainCurriculumViewComponent implements OnInit {
         this.selectedCurr = event;
         if (event.id == null) {
             this.isNewVer = true;
+            this.dropdownScript();
         } else {
             this.isNewVer = false;
         }
