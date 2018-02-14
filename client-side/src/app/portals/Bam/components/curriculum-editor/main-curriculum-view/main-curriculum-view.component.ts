@@ -10,6 +10,7 @@ import { SessionService } from '../../../services/session.service';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import * as XLSXStyle from 'xlsx-style';
 import { WeeksExportDTO } from '../../../models/weeksExportDTO';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -311,5 +312,5 @@ export class MainCurriculumViewComponent implements OnInit {
           type: EXCEL_TYPE
         });
         FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-      }
+    }
 }
