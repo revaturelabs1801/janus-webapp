@@ -49,6 +49,7 @@ import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
+import { AlertsComponent } from './components/alerts/alerts.component';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { SubtopicService } from './services/subtopic.service';
     SubtopicSearchComponent,
     OrderPipe,
     SearchPipe,
-    FilterBatchPipe
+    FilterBatchPipe,
+    AlertsComponent
   ],
   providers: [
     CurriculumWeekComponent,
