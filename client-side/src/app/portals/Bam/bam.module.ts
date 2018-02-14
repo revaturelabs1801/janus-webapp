@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
 
@@ -56,7 +55,6 @@ import { SubtopicService } from './services/subtopic.service';
   imports: [
     CommonModule,
     BamRoutingModule,
-    NgbModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
     Ng2OrderModule,
@@ -64,7 +62,7 @@ import { SubtopicService } from './services/subtopic.service';
     DragDropModule,
     CalendarModule,
     OverlayPanelModule,
-    NgbModule.forRoot(),
+    NgbModule.forRoot()
   ],
   declarations: [
     BamComponent,

@@ -10,8 +10,14 @@
                 <span class="percentageBarText">{{percentageNames[i] | uppercase}}</span>
             </div>
         </div>
-        <div *ngIf="!readOnly" class="removeWeekBtn" (click)="confirmWeekDeletion(weekNum);overlay.toggle($event)" >              
+
+        <div *ngIf="!readOnly" class="removeWeekBtn" data-toggle="dropdown" >              
             <i class="fa fa-times-circle fa-1x"></i>
+            <div class = "dropdown-menu" role="menu" >
+                   <p>Delete Week #{{weekNum}}?</p>
+                   <div class="hoverRed"  (click)="removeWeekCall()">Yes</div>
+                    <div class="hoverRed"> No</div>
+            </div>
         </div>
     </div>   
 </div>
@@ -59,9 +65,9 @@
 </div>
 </div>
 
-<p-overlayPanel [appendTo]="'body'" #overlay>
+<div class = "dropdown-menu">
     <p>Delete Week #{{weekNum}}?</p>
         <div class="hoverRed"  (click)="removeWeekCall(); overlay.hide($event)">Yes</div>
         <div class="hoverRed" (click)="overlay.hide($event)"> No</div>
-</p-overlayPanel>
+</div>
 
