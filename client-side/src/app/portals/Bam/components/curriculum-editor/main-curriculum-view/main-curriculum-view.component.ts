@@ -260,4 +260,18 @@ export class MainCurriculumViewComponent implements OnInit {
     populateCalendar() {
         this.curriculumService.syncBatch(22506).subscribe();
     }
+
+    areYouSureDeleteCurr() {
+        (<any>$('#areYouSure')).modal('show');
+    }
+
+    areYouReallySureDeleteCurr() {
+        (<any>$('#areYouReallySure')).modal('show');
+    }
+
+    deleteVersions(selectedCurr) {
+        this.curriculumService.deleteCurriculumVersion(selectedCurr).subscribe(data => {
+            
+        });
+    }
 }
