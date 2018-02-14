@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Dependencies } from '../../bam.test.module';
+import { Dependencies } from '../../bam.test-observable.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

@@ -49,9 +49,9 @@ import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
-import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ChildrenOutletContexts } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 export const Dependencies = {
@@ -67,6 +67,7 @@ export const Dependencies = {
     OverlayPanelModule,
     NgbModule.forRoot(),
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   declarations: [
     BamComponent,
@@ -122,10 +123,7 @@ export const Dependencies = {
     CalendarStatusService,
     SearchTextService,
     TopicService,
-    SubtopicService,
-    HttpClient,
-    HttpHandler,
-    ChildrenOutletContexts
+    SubtopicService
   ],
   exports: [
     SearchPipe,

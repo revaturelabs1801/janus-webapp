@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddSubtopicComponent } from './add-subtopic.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Dependencies } from '../../../bam.test.module';
+import { Dependencies } from '../../../bam.test-observable.module';
 
 describe('AddSubtopicComponent', () => {
   let component: AddSubtopicComponent;

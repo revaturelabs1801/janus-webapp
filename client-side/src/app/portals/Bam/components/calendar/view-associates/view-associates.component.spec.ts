@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewAssociatesComponent } from './view-associates.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Dependencies } from '../../../bam.test.module';
+import { Dependencies } from '../../../bam.test-observable.module';
 
 describe('ViewAssociatesComponent', () => {
   let component: ViewAssociatesComponent;
