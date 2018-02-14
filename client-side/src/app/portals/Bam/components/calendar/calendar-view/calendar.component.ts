@@ -49,19 +49,21 @@ export class CalendarComponent implements OnInit {
     this.calendarService.getSubtopicsByBatchPagination(22506, 0, 34).subscribe(
       subtopics => {
         let index = 0;
-        for (let subtopic of subtopics) {
-          let calendarEvent = new CalendarEvent();
-          calendarEvent.id = index;
-          calendarEvent.subtopicId = subtopic.subtopicId;
-          calendarEvent.title = subtopic.subtopicName.name;
-          calendarEvent.start = new Date(subtopic.subtopicDate);
-          calendarEvent.status = subtopic.status.name;
-          calendarEvent.color = this.statusService.getStatusColor(calendarEvent.status);
+        if(subtopics != null){
+          for (let subtopic of subtopics) {
+            let calendarEvent = new CalendarEvent();
+            calendarEvent.index = index;
+            calendarEvent.subtopicId = subtopic.subtopicId;
+            calendarEvent.title = subtopic.subtopicName.name;
+            calendarEvent.start = new Date(subtopic.subtopicDate);
+            calendarEvent.status = subtopic.status.name;
+            calendarEvent.color = this.statusService.getStatusColor(calendarEvent.status);
 
-          this.events.push(calendarEvent);
-          index++;
+            this.events.push(calendarEvent);
+            index++;
+          }
+          this.overridenDate = this.events[0].start;
         }
-        this.overridenDate = this.events[0].start;
       }
     );
 
@@ -201,7 +203,7 @@ export class CalendarComponent implements OnInit {
       {
         revert: true,
         revertDuration: DRAG_REVERT_DURATION,
-        zIndex: -500
+        zIndex: 500
       }
     );
     this.subtopicTooltip = event.calEvent.title;

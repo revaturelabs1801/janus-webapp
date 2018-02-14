@@ -46,11 +46,27 @@
     border-color: #F26925;
 }
 
-/deep/ .ui-button-icon-left .ui-clickable .fa .fa-fw .fa-calendar
+/deep/ .ui-calendar .ui-calendar-button{
+    background: #F26925; 
+    border-color: #F26925;
+}
+
+/deep/ .ui-calendar .ui-calendar-button:hover{
+    background: #F26925; 
+    border-color: #F26925;
+}
+
+/* /deep/ .ui-clickable
 {
     background: #F26925; 
     border-color: #F26925;
 }
+
+/deep/ .fa-calendar
+{
+    background: #F26925; 
+    border-color: #F26925;
+} */
 /*
 /deep/ .ui-state-active
 {
