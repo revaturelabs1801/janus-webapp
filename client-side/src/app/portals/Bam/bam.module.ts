@@ -36,6 +36,8 @@ import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-sub
 import { DragndropService } from './services/dragndrop.service';
 import { TopicSearchComponent } from './components/curriculum-editor/topic-search/topic-search.component';
 import { SearchTextService } from './services/search-text.service';
+import { BoomComponent } from './components/boom/boom.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
@@ -62,6 +64,7 @@ import { SubtopicService } from './services/subtopic.service';
     DragDropModule,
     CalendarModule,
     OverlayPanelModule,
+    ChartsModule,
     NgbModule.forRoot(),
   ],
   declarations: [
@@ -96,7 +99,8 @@ import { SubtopicService } from './services/subtopic.service';
     SubtopicSearchComponent,
     OrderPipe,
     SearchPipe,
-    FilterBatchPipe
+    FilterBatchPipe,
+    BoomComponent
   ],
   providers: [
     CurriculumWeekComponent,
