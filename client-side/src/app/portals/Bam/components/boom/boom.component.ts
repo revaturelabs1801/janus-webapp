@@ -7,7 +7,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   styleUrls: ['./boom.component.css']
 })
 /**
- * Currently contains mock data. This class creates to charts:
+ * Currently contains mock data. This class creates charts:
  * Pie and a bar graph.
  * @author Francisco Palomino | Batch: 1712-dec10-java-steve
  */
