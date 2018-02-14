@@ -15,11 +15,10 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-subtopic-modal">
-    Launch demo modal
-  </button>
-  <app-delete-subtopic-modal [subtopic]="subtopicToDelete" (addExistingSubtopicEvent)="handleAddExistingSubtopic($event)" (deleteSubtopicEvent)="handleDeleteSubtopic($event)">
+  <app-delete-subtopic-modal [subtopic]="subtopicToDelete" (deleteSubtopicEvent)="handleDeleteSubtopic($event)">
   </app-delete-subtopic-modal>
+  <app-existing-subtopic-modal [subtopic]="existingSubtopic" (addExistingSubtopicEvent)="handleAddExistingSubtopic($event)"> 
+  </app-existing-subtopic-modal>
 
   <span #tooltip class="tooltiptext">{{subtopicTooltip}}
     <br>Status:

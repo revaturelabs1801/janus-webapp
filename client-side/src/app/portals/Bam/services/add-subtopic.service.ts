@@ -24,9 +24,9 @@ export class AddSubtopicService {
    * Retrieves current batch information
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
-  getBatchById(): Observable<Batch> {
+  getBatchById(id: number): Observable<Batch> {
     return this.http
-        .get<Batch>(environment.addsubtopics.getBatchIdUrl(22506))
+        .get<Batch>(environment.addsubtopics.getBatchIdUrl(id))
         .map( data => {
           return data;
         });
@@ -36,9 +36,9 @@ export class AddSubtopicService {
    * Retrieves all the subtopics of the current batch
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
-  getBatchSubtopics(): Observable<Subtopic[]> {
+  getBatchSubtopics(id: number): Observable<Subtopic[]> {
     return this.http
-        .get<Subtopic[]>(environment.addsubtopics.getBatchSubtopicsUrl(22506, 34, 0))
+        .get<Subtopic[]>(environment.addsubtopics.getBatchSubtopicsUrl(id, 34, 0))
         .map( data => {
           return data;
         });

@@ -36,6 +36,7 @@ export class CurriculumWeekComponent implements OnInit {
   total = 0;
   percentageNums = [];
   percentageNames = [];
+  pickUpDay = -1;
 
   constructor(private dndService: DragndropService,
     private courseStructureComponent: CourseStructureComponent) { }
@@ -128,8 +129,8 @@ export class CurriculumWeekComponent implements OnInit {
    * @param dayNum
    */
   putItDown(subtopic, dayNum: number) {
-    this.weekDTO.days[dayNum].subtopics =
-      this.weekDTO.days[dayNum].subtopics.filter(elem => elem !== subtopic);
+    const index = this.weekDTO.days[dayNum].subtopics.indexOf(subtopic);
+    this.weekDTO.days[dayNum].subtopics.splice(index, 1);
   }
 
   /**
@@ -155,6 +156,17 @@ export class CurriculumWeekComponent implements OnInit {
   removeWeekCall() {
     event.stopPropagation();
     this.removeWeekEvent.emit(this.weekNum - 1);
+  }
+
+  /**
+   * Adds ability to individually remove subtopics from days
+   * @author Carter Taylor(1712-Steve)
+   * @param subtopic subtopic object that will be removed
+   * @param dayNum index of day for weekDTO.days array
+   */
+  removeSubtopic(subtopic, dayNum) {
+    this.weekDTO.days[dayNum].subtopics =
+      this.weekDTO.days[dayNum].subtopics.filter(e => e !== subtopic);
   }
 
 }
