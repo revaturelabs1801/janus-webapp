@@ -11,8 +11,12 @@
     color: white;
 }
 
-.view {
-    border: 1px 1px 1px 1px;
+.border {
+    border-color: black !important;
+}
+
+.day-text {
+    font-weight: bolder;
 }
 
 .percentageBarText {

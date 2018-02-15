@@ -1,17 +1,14 @@
 
 <div id="accordian" class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="col-sm-12 col-md-12 col-lg-12 mt-1">
         <div class="card">
         <div class="card-header" data-toggle="collapse" [attr.data-target]="'#' + weekNum + 'w'">
           <div class="row">
-              <div class="col-sm-4 col-md-4 col-lg-4">
-                  <h5 class="mb-0">
-                    Week #{{weekNum}}
-                  </h5> <h6 *ngIf="readOnly" class="read-only">READ ONLY</h6>
+              <div class="col-sm-4 col-md-4 col-lg-4 mb-0 text-nowrap">  
+                <h5>Week #{{weekNum}}
+                    <small *ngIf="readOnly" class="read-only muted">READ ONLY</small>
+                </h5>
               </div>
-               <div class="col">
-                   
-               </div>
           </div>
           <div *ngIf="readOnly" class="row">
               <div  *ngFor="let topic of percentageNums; let i = index" class="progress-bar" 
@@ -24,33 +21,19 @@
         <div [attr.id]="weekNum + 'w'" class="collapse show" data-parent="#accordion">
             <div class="card-body">
                 <div class="row">
-                    <!-- <table class="table table-responsive">
-                        <thead>
-                            <th>Test 1</th>
-                            <th>Test 1</th>
-                            <th>Test 1</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>First Row First Column</td>
-                                <td>First Row First Column</td>
-                                <td>First Row First Column</td>
-                            </tr>
-                        </tbody>
-                    </table> -->
-                    <div class="col border text-center"><span style="font-weight: 2000;">Monday</span>
+                    <div class="col border text-center"><span class="day-text">Monday</span>
                         <div class="row">test</div>
                     </div>
-                    <div class="col border text-center"><p class="font-weight-bold">Tuesday</p>
+                    <div class="col border border-left-0 text-center"><span class="day-text" >Tuesday</span>
                         <div class="row">test</div>
                     </div>
-                    <div class="col border text-center">Wednesday
+                    <div class="col border border-left-0 text-center"><span class="day-text">Wednesday</span>
                         <div class="row">test</div>
                     </div>
-                    <div class="col border text-center">Thursday
+                    <div class="col border border-left-0 border-bottom text-center"><span class="day-text">Thursday</span>
                         <div class="row">test</div>
                     </div>
-                    <div class="col border text-center">Friday
+                    <div class="col border border-left-0 border-bottom border-right text-center"><span class="day-text">Friday</span>
                         <div class="row">test</div>
                     </div>
                 </div>
