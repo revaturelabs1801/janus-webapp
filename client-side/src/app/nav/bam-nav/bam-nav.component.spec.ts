@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BamNavComponent } from './bam-nav.component';
 
-describe('BamNavComponent', () => {
+xdescribe('BamNavComponent', () => {
   let component: BamNavComponent;
   let fixture: ComponentFixture<BamNavComponent>;
 

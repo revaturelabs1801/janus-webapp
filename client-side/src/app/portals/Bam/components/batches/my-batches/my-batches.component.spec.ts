@@ -31,7 +31,7 @@ describe('MyBatchesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call nothing() when button is clicked', async(() => {
+  it('should call loadPast() when div is clicked', async(() => {
     spyOn(component, 'loadPast');
 
     const loadPastDiv = fixture.debugElement.query(By.css('#loadPast')).nativeElement;
@@ -39,6 +39,28 @@ describe('MyBatchesComponent', () => {
 
     fixture.whenStable().then(() => {
       expect(component.loadPast).toHaveBeenCalled();
+    });
+  }));
+
+  it('should call loadCurrent() when div is clicked', async(() => {
+    spyOn(component, 'loadCurrent');
+
+    const loadCurrentDiv = fixture.debugElement.query(By.css('#loadCurrent')).nativeElement;
+    loadCurrentDiv.click();
+
+    fixture.whenStable().then(() => {
+      expect(component.loadCurrent).toHaveBeenCalled();
+    });
+  }));
+
+  it('should call loadFuture() when div is clicked', async(() => {
+    spyOn(component, 'loadFuture');
+
+    const loadFutureDiv = fixture.debugElement.query(By.css('#loadFuture')).nativeElement;
+    loadFutureDiv.click();
+
+    fixture.whenStable().then(() => {
+      expect(component.loadFuture).toHaveBeenCalled();
     });
   }));
 });

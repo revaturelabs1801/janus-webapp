@@ -5,6 +5,8 @@ import { AllBatchesComponent } from './all-batches.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Dependencies } from '../../../bam.test.module';
+import { By } from '@angular/platform-browser';
+
 
 describe('AllBatchesComponent', () => {
   let component: AllBatchesComponent;
@@ -32,4 +34,21 @@ describe('AllBatchesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should call setFilterText() when appBatchesSearch changes', async(() => {
+  //   spyOn(component, 'setFilterText');
+
+  //   // const loadPastDiv = fixture.debugElement.query(By.css('#appBatchesSearch')).nativeElement;
+  //   // loadPastDiv.trigger('change');
+
+  //   // fixture.whenStable().then(() => {
+  //   //   expect(component.setFilterText).toHaveBeenCalled();
+  //   // });
+
+  //   $('#appBatchesSearch').trigger('change');
+
+  //   fixture.whenStable().then(() => {
+  //   expect(component.setFilterText).toHaveBeenCalled();
+  //   });
+  // }));
 });
