@@ -291,8 +291,17 @@ export class MainCurriculumViewComponent implements OnInit {
      * @batch:  1712-Dec11-2017
      */
     truncateWeeks() {
+        let empty = true;
         for (let i = 0; i < this.allWeeks.length; i++) {
+            if (this.allWeeks[i].length > 0) {
+                empty = false;
+            }
             this.allWeeks[i] = [];
+        }
+        if (empty) {
+            this.alertService.alert('danger', 'No Subtopics to Remove');
+        } else {
+            this.alertService.alert('success', 'Successfully Removed All Subtopics from Weeks');
         }
     }
 
