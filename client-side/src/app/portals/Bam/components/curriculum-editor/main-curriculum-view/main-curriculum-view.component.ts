@@ -87,6 +87,7 @@ export class MainCurriculumViewComponent implements OnInit {
 
         if (event.curriculumVersion === 1) {
             this.isFirstVer = true;
+            this.allWeeks = [];
         } else {
             this.isFirstVer = false;
         }
@@ -154,7 +155,9 @@ export class MainCurriculumViewComponent implements OnInit {
         if (curr.isMaster === 1) {
             const masterIndex = currList.findIndex(
                 elem => (elem.isMaster === 1 && elem.curriculumName === curr.curriculumName));
-            currList[masterIndex].isMaster = 0;
+            if (masterIndex !== -1) {
+                currList[masterIndex].isMaster = 0;
+            }
         }
         currList.push(curr);
         this.curriculumService.refreshCurriculums(currList);
