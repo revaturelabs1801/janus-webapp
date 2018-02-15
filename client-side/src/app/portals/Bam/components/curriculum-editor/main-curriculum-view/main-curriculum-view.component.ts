@@ -302,6 +302,40 @@ export class MainCurriculumViewComponent implements OnInit {
     }
 
     /**
+     * @author James Holzer (1712-Steve)
+     * Opens the modal with the id areYouSure
+     */
+    areYouSureDeleteCurr(isMaster) {
+        if (isMaster === 0) {
+        (<any>$('#areYouSure')).modal('show');
+        }
+    }
+
+    /**
+     * @author James Holzer (1712-Steve)
+     * Opens the modal with the id areYouReallySure
+     */
+    areYouReallySureDeleteCurr() {
+        (<any>$('#areYouReallySure')).modal('show');
+    }
+
+    /**
+     * @author James Holzer, Allan Poindexter, Mohamad Alhindi, Carter Taylor (1712-Steve)
+     * @param selectedCurr
+     * Deletes a curriculum, retrieves the curriculum array from service, updates it without
+     *  deleted curriculum and sets the array thats printed to the page and the selected Curriculum
+     *  version header on the page
+     */
+    deleteVersions(selectedCurr) {
+        this.curriculumService.deleteCurriculumVersion(selectedCurr).subscribe((response) => {
+            let currArr = this.curriculumService.allCurriculumData.getValue();
+            currArr = currArr.filter(e => e !== selectedCurr);
+            this.curriculumService.refreshCurriculums(currArr);
+            this.selectedCurr = null;
+            this.allWeeks = [];
+        });
+    }
+    /**
      *
      * @author John Austin, Patrick Kennedy, Tyler Dresselhouse (1712-Steve)
      * Downloads the selected curriculum to an Excel file
@@ -316,7 +350,6 @@ export class MainCurriculumViewComponent implements OnInit {
     }
 
     /**
-     *
      * @author John Austin (1712-Steve)
      * @param buffer
      * @param fileName

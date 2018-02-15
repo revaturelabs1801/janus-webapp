@@ -1,11 +1,11 @@
 <button class="btn btn-dark float-right" (click)="populateCalendar()">
 
     Populate My Calendar</button>
- 
+
+<div *ngIf="selectedCurr" class="offset-7">{{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}
+    <button class="btn btn-danger" (click)="areYouSureDeleteCurr(selectedCurr.isMaster)">Delete Version #{{selectedCurr.curriculumVersion}}</button>
     <button (click)="download()">Export Curriculum</button>
-
-
-<div *ngIf="selectedCurr" class="offset-7">{{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
+</div>
 
 <div class="container">
     <div class="row tabRow">
@@ -116,6 +116,42 @@
             <div class="modal-footer">
                 <button class="btn btn-success" data-dismiss="modal" (click)="saveCurr(true)">YES, I WOULD LIKE THIS TO BE THE NEW MASTER</button>
                 <button class="btn btn-warning" data-dismiss="modal" (click)="saveCurr(false)">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="areYouSure" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 *ngIf="selectedCurr" class="modal-title">DELETE {{selectedCurr.curriculumName}} VERSION #{{selectedCurr.curriculumVersion}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h6 *ngIf="selectedCurr">Are you sure you want to delete the current selected version ({{selectedCurr.curriculumName}} version #{{selectedCurr.curriculumVersion}})?</h6>
+            </div>
+            <div class="modal-footer">
+                <a href="" data-dismiss="modal" (click)="areYouReallySureDeleteCurr()">YES</a>
+                <button class="btn btn-success" data-dismiss="modal">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="areYouReallySure" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 *ngIf="selectedCurr" class="modal-title">DELETE {{selectedCurr.curriculumName}} VERSION #{{selectedCurr.curriculumVersion}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h6 *ngIf="selectedCurr">If you delete this Curriculum Version, you will not be able to get it back</h6>
+            </div>
+            <div class="modal-footer">
+                <a href="" data-dismiss="modal" (click)="deleteVersions(selectedCurr)">Still Delete</a>
+                <button class="btn btn-success" data-dismiss="modal">Nevermind for now</button>
             </div>
         </div>
     </div>
