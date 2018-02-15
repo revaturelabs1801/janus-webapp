@@ -72,7 +72,7 @@ export class DashboardInfoComponent implements OnInit {
    * Subscribes to obtain current batch info to deterime start and end date, as well as current week.
    */
   ngOnInit() {
-    this.user = this.sessionService.getUser();
+    this.user = JSON.parse(localStorage.getItem('bamUser'));
     if (sessionStorage.getItem('batch') != null) {
       this.batch = JSON.parse(sessionStorage.getItem('batch'));
       this.setProperties(this.batch);

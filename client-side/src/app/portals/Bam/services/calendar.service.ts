@@ -7,7 +7,6 @@ import { TopicName } from '../models/topicname.model';
 import { CalendarEvent } from '../models/calendar-event.model';
 import { environment } from '../../../../environments/environment';
 import { of } from 'rxjs/observable/of';
-import { CalendarStatusService } from './calendar-status.service';
 
 
 const httpOptions = {
@@ -20,7 +19,7 @@ export class CalendarService {
   @Output()
   addCalendarEvent = new EventEmitter<CalendarEvent>();
 
-  constructor(private http: HttpClient, private statusService: CalendarStatusService) { }
+  constructor(private http: HttpClient) { }
 
   /**
    * Gets subtopics by batch and uses pagination to limit the results
@@ -144,12 +143,10 @@ export class CalendarService {
    */
   mapSubtopicToEvent(subtopic: Subtopic): CalendarEvent {
     let calendarEvent = new CalendarEvent();
-    calendarEvent.subtopicNameId = subtopic.subtopicName.id;
     calendarEvent.subtopicId = subtopic.subtopicId;
     calendarEvent.title = subtopic.subtopicName.name;
     calendarEvent.start = new Date(subtopic.subtopicDate);
     calendarEvent.status = subtopic.status.name;
-    calendarEvent.color = this.statusService.getStatusColor(calendarEvent.status);
 
     return calendarEvent;
   }

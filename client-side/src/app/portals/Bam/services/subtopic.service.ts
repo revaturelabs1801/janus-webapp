@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { SubtopicName } from '../models/subtopicname.model';
 
 
 const httpOptions = {
@@ -22,7 +21,7 @@ export class SubtopicService {
    * @param typeId number
    */
   addSubTopicName(subtopicName: string, topicId: number, typeId: number) {
-    return this.http.post<SubtopicName>(environment.subtopic.addSubTopicName(subtopicName, topicId, typeId), httpOptions).map(
+    return this.http.post(environment.subtopic.addSubTopicName(subtopicName, topicId, typeId), httpOptions).map(
       data => {
         return data;
       }
