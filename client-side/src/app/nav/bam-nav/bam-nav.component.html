@@ -1,31 +1,39 @@
 <ul class="navbar-nav ml-auto">
+
   <li class="nav-item">
     <a class="nav-link" routerLink="/Bam/home">Home</a>
   </li>
+
   <li class="nav-item" routerLinkActive="activeLink">
     <ul class="navbar-nav mr-auto">
-      <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
-        <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>Batches</a>
-        <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/allbatches" (click) = "myDrop.close(); $event.stopPropagation()">All Batches</button>
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/mybatches" (click) = "myDrop.close(); $event.stopPropagation()">My Batches</button>
+      <li #batchDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle c-pointer" ngbDropdownToggle>Batches</a>
+        <div ngbDropdownMenu (click)="toggleCollapse(); $event.stopPropagation()">
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/allbatches">All Batches</button>
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/mybatches">My Batches</button>
         </div>
       </li>
     </ul>
   </li>
-  <li class="nav-item" routerLinkActive="activeLink">
+
+  <li class="nav-item">
     <a class="nav-link" routerLink="/Bam/calendar">Calendar</a>
+  </li>
+
   <li class="nav-item">
     <a class="nav-link" routerLink="/Bam/curriculum-view">Curriculum Editor</a>
   </li>
+
   <li class="nav-item" routerLinkActive="activeLink">
     <ul class="navbar-nav mr-auto">
-      <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
-        <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>{{ bamUser.fName }}  {{ bamUser.lName }} ({{ roleTitle }})</a>
-        <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
-            <button class="dropdown-item c-pointer f-size" routerLink="/Bam/editbatch" (click) = "myDrop.close(); $event.stopPropagation()">Edit My Batch</button>
-            <button class="dropdown-item c-pointer f-size" routerLink="/Bam/viewassociates" (click) = "myDrop.close(); $event.stopPropagation()">View My Associates</button>
+      <li #trainerDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle c-pointer" ngbDropdownToggle>{{ bamUser.fName }}  {{ bamUser.lName }} ({{ roleTitle }})</a>
+        <div ngbDropdownMenu (click)="toggleCollapse(); $event.stopPropagation()">
+            <button class="dropdown-item c-pointer f-size" routerLink="/Bam/editbatch">Edit My Batch</button>
+            <button class="dropdown-item c-pointer f-size" routerLink="/Bam/viewassociates">View My Associates</button>
         </div>
+      </li>
     </ul>
   </li>
+
 </ul>
