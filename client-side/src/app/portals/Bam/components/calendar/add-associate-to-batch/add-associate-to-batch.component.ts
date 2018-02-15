@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BamUser } from '../../../models/bamuser.model';
 import { UsersService } from '../../../services/users.service';
+import { Batch } from '../../../models/batch.model';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-add-associate-to-batch',
@@ -15,12 +17,13 @@ import { UsersService } from '../../../services/users.service';
  *
  */
 export class AddAssociateToBatchComponent implements OnInit {
+  currentBatch: Batch;
 
   associates: BamUser[];
   @Input() searchTerm: string;
-  @Output() notify: EventEmitter<any> = new EventEmitter<any>(); 
+  @Output() notify: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService, private sessionService: SessionService) {
   }
 
   ngOnInit() {
@@ -34,13 +37,14 @@ export class AddAssociateToBatchComponent implements OnInit {
    */
   addUser(user: BamUser) {
     let i = 0;
+    this.currentBatch = this.sessionService.getSelectedBatch();
     for (let associate of this.associates) {
       if (associate.userId === user.userId) {
-        this.usersService.addUserToBatch(4, associate.userId).subscribe(users => {
+        this.usersService.addUserToBatch(this.currentBatch.id, associate.userId).subscribe(users => {
           this.associates = users;
-          this.associateAlert("success", `Successfully added ${user.fName} ${user.lName} to current batch.`);
+          this.associateAlert('success', `Successfully added ${user.fName} ${user.lName} to current batch.`);
         }, error => {
-          this.associateAlert("danger", `Error: couldn't add ${user.fName} ${user.lName} to current batch.`);
+          this.associateAlert('danger', `Error: couldn't add ${user.fName} ${user.lName} to current batch.`);
         });
         break;
       }
