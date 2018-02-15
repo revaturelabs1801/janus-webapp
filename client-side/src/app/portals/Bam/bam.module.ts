@@ -51,6 +51,7 @@ import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
+import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { SubtopicService } from './services/subtopic.service';
     OrderPipe,
     SearchPipe,
     FilterBatchPipe,
-    BoomComponent
+    BoomComponent,
+    ExistingSubtopicModalComponent
   ],
   providers: [
     CurriculumWeekComponent,
