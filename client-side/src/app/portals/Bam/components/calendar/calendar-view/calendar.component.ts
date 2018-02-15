@@ -7,7 +7,7 @@ import { CalendarService } from '../../../services/calendar.service';
 import { CalendarStatusService } from '../../../services/calendar-status.service';
 import { AddSubtopicService } from '../../../services/add-subtopic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
-import { Batch } from '../../../models/Batch.model';
+import { Batch } from '../../../models/batch.model';
 import { SessionService } from '../../../services/session.service';
 
 /**

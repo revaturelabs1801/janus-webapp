@@ -6,7 +6,7 @@ import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
 import { CalendarEvent } from '../models/calendar-event.model';
 import { environment } from '../../../../environments/environment';
-import { of } from 'rxjs/Observable/of';
+import { of } from 'rxjs/observable/of';
 import { CalendarStatusService } from './calendar-status.service';
 
 
