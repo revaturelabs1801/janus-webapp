@@ -31,7 +31,7 @@
  *  STYLE 7
  */
 
- .style-7::-webkit-scrollbar-track
+/* .style-7::-webkit-scrollbar-track
  {
      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
      background-color: #F5F5F5;
@@ -51,11 +51,8 @@
      color-stop(0.44, rgb(244, 136, 81)),
      color-stop(0.72, rgb(248, 169, 130)), 
      color-stop(0.86, rgb(251, 220, 205)));
- }
+ }*/
 
- .saveIcon{
-     position: absolute;
- }
 
  .cursor {
     cursor: pointer;
