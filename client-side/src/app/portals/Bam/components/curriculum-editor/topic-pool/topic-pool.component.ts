@@ -25,9 +25,9 @@ export class TopicPoolComponent implements OnInit {
   searchText: string;
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
   subTopicName: SubtopicName[] = [];
+  topicPoolCacheData: SubtopicName[] = [];
   @Input() readOnly: boolean;
   selectedTopicId: number;
-  topicPoolCacheData;
 
   constructor(private curriculumService: CurriculumService,
     public curriculumWeekComponent: CurriculumWeekComponent,
@@ -75,6 +75,7 @@ export class TopicPoolComponent implements OnInit {
         this.initTopics();
         this.uniqueTopics();
         this.getSubTopics();
+        this.initFilterTopicListener();
     }
 
   }
@@ -196,9 +197,10 @@ export class TopicPoolComponent implements OnInit {
       topic => {
         this.subtopicService.addSubTopicName(newSubTopic, topic.id, 1).subscribe(
           data => {
-            this.uniqarrFiltered = [];
+            this.uniqarrFiltered.push(topic.name);
             this.subArray = new Array<SubtopicName[]>();
-            this.getTopics();
+            this.topicPoolCacheData.push(data);
+            this.getSubTopics();
           }
         );
       }
@@ -235,9 +237,9 @@ export class TopicPoolComponent implements OnInit {
     if (newSubTopic.length > 1) {
       this.subtopicService.addSubTopicName(newSubTopic, this.selectedTopicId, 1).subscribe(
         data => {
-          this.uniqarrFiltered = [];
           this.subArray = new Array<SubtopicName[]>();
-          this.getTopics();
+          this.topicPoolCacheData.push(data);
+          this.getSubTopics();
         }
       );
       this.selectedTopicId = 0;
