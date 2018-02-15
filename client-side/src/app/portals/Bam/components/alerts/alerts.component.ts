@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime } from 'rxjs/operator/debounceTime';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-alerts',
@@ -8,22 +9,21 @@ import { debounceTime } from 'rxjs/operator/debounceTime';
   styleUrls: ['./alerts.component.css']
 })
 export class AlertsComponent implements OnInit {
-  AlertMessage: string;
-  AlertType: string;
-  Timeout = new Subject<string>();
+  alertMessage: string;
+  alertType: string;
+  timeout = new Subject<string>();
   timeoutTime = 2500;
 
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit() {
-    this.Timeout.subscribe();
-    debounceTime.call(this.Timeout, this.timeoutTime).subscribe(() => this.AlertMessage = null);
-  }
+    this.timeout.subscribe();
+    debounceTime.call(this.timeout, this.timeoutTime).subscribe(() => {this.alertMessage = null; console.log('hello');});
+    this.alertService.messageObservable.subscribe(data => {
 
-  Alert(type, message) {
-    this.Timeout.next();
-    this.AlertMessage = message;
-    this.AlertType = type;
+      this.alertType = data[0];
+      this.alertMessage = data[1];
+    });
   }
 
 }

@@ -5,6 +5,7 @@ import { Batch } from '../../../models/batch.model';
 import { BatchService } from '../../../services/batch.service';
 import { SessionService } from '../../../services/session.service';
 import { Observable } from 'rxjs/Observable';
+import { AlertService } from '../../../services/alert.service';
 
 /**
  * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
@@ -24,7 +25,7 @@ export class WelcomeComponent implements OnInit {
   private batches: Batch [];
   private selectedBatch: Batch;
 
-  constructor(private batchService: BatchService, private sessionService: SessionService) {
+  constructor(private batchService: BatchService, private sessionService: SessionService, private alertService: AlertService) {
 
    }
 
@@ -37,6 +38,12 @@ export class WelcomeComponent implements OnInit {
     } else {
       this.getInProgressBatches();
     }
+    
+  }
+  
+  alert() {
+    
+    this.alertService.alert('danger', "Please work please");
   }
 
   /**

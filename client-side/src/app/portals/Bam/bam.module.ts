@@ -50,6 +50,7 @@ import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
 import { AlertsComponent } from './components/alerts/alerts.component';
+import { AlertService } from './services/alert.service';
 
 
 @NgModule({
@@ -120,7 +121,8 @@ import { AlertsComponent } from './components/alerts/alerts.component';
     CalendarStatusService,
     SearchTextService,
     TopicService,
-    SubtopicService
+    SubtopicService,
+    AlertService
   ],
   exports: [
     SearchPipe,
