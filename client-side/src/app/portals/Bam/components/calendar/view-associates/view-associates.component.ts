@@ -37,7 +37,7 @@ export class ViewAssociatesComponent implements OnInit {
    * Gets the trainers associate in the batch
    */
   loadAssociates() {
-    this.currentBatch = JSON.parse(sessionStorage.getItem('batch'));
+    this.currentBatch = this.sessionService.getSelectedBatch();
     if (this.currentBatch != null) {
       this.usersService.getUsersInBatch(this.currentBatch.id).subscribe(data => {
         console.log(data);
