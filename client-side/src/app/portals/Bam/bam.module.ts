@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
 
@@ -36,6 +35,8 @@ import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-sub
 import { DragndropService } from './services/dragndrop.service';
 import { TopicSearchComponent } from './components/curriculum-editor/topic-search/topic-search.component';
 import { SearchTextService } from './services/search-text.service';
+import { BoomComponent } from './components/boom/boom.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BatchesSearchComponent } from './components/batches/batches-search/batches-search.component';
@@ -45,23 +46,28 @@ import { CalendarStatusService } from './services/calendar-status.service';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
+import { AlertsComponent } from './components/alerts/alerts.component';
+import { AlertService } from './services/alert.service';
+import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule,
-    NgbModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
+    Ng2OrderModule,
     ScheduleModule,
     DragDropModule,
     CalendarModule,
     OverlayPanelModule,
+    ChartsModule,
     NgbModule.forRoot(),
   ],
   declarations: [
@@ -96,7 +102,10 @@ import { SubtopicService } from './services/subtopic.service';
     SubtopicSearchComponent,
     OrderPipe,
     SearchPipe,
-    FilterBatchPipe
+    FilterBatchPipe,
+    AlertsComponent,
+    BoomComponent,
+    ExistingSubtopicModalComponent
   ],
   providers: [
     CurriculumWeekComponent,
@@ -118,7 +127,8 @@ import { SubtopicService } from './services/subtopic.service';
     CalendarStatusService,
     SearchTextService,
     TopicService,
-    SubtopicService
+    SubtopicService,
+    AlertService
   ],
   exports: [
     SearchPipe,

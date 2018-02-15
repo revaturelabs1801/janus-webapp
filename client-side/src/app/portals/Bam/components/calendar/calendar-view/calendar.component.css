@@ -1,5 +1,6 @@
 .calendar-sidebar {
     padding-left: 20px;
+    width: 100%;
     text-align: center;
     border-left: 1px solid rgba(12, 12, 12, 0.1);
 }
@@ -81,4 +82,9 @@
   }
 .fc-trash {
     float: left;
+}
+
+.modal-body-buttons {
+    margin: auto;
+    text-align: center;
 }

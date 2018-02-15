@@ -27,7 +27,7 @@ export class SessionService {
       'pwd2': null,
       'assignForceID': 9
   };
-  localStorage.setItem('bamUser', JSON.stringify(this.bamUser));
+  sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));
    }
 
    /**
@@ -37,7 +37,7 @@ export class SessionService {
    */
   putUserInSession(): Observable<BamUser> {
     return this.userService.updateUser(this.bamUser).map(data => {
-      localStorage.setItem('bamUser', JSON.stringify(this.bamUser));
+      sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));
       return data;
     });
   }
@@ -48,7 +48,7 @@ export class SessionService {
    * @returns BamUser
    */
   getUser(): BamUser {
-    const current: BamUser = JSON.parse(localStorage.getItem('bamUser'));
+    const current: BamUser = JSON.parse(sessionStorage.getItem('bamUser'));
     return current;
   }
 

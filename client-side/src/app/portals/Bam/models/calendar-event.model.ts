@@ -4,6 +4,7 @@
 */
 
 export class CalendarEvent {
+    subtopicNameId: number;
     subtopicId: number;
     title: string;
     start: Date;

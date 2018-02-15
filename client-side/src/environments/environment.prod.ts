@@ -205,7 +205,8 @@ apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
         getSubtopicPoolAllUrl: () => `${bam}/curriculum/subtopicpool`,
         addCurriculumUrl: () => `${bam}/curriculum/addcurriculum`,
         makeCurriculumMasterByIdUrl: (id: number) => `${bam}/curriculum/makemaster/${id}`,
-        syncBatchByIdUrl: (id: number) => `${bam}/curriculum/syncbatch/${id}`
+        syncBatchByIdUrl: (id: number) => `${bam}/curriculum/syncbatch/${id}`,
+        deleteCurriculumVersionUrl: () => `${bam}/curriculum/deleteversion`
     },
 
     calendar: {
