@@ -19,6 +19,16 @@
     font-weight: bolder;
 }
 
+.day {
+    position: relative;
+    width: 20%;
+}
+
+.subtopic-selector {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
 .percentageBarText {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -60,14 +70,6 @@
 .weeksrow {
 position: relative;
 width: 100%;
-}
-
-.removeWeekBtn {
-    color: #d9534f;
-    position: absolute;
-    right: 3%;
-    top: -2%;
-    font-size: 170%;
 }
 
 .removeWeekBtn:hover {
