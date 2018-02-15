@@ -144,4 +144,15 @@ export class CurriculumService {
       }
     );
   }
+
+  /** Delete a curriculum and it's CurriculumSubtopics
+    * @author: Carter Taylor, James Holzer
+    * @batch: 1712-Dec11-2017
+    * @param: Curriculum
+    */
+    deleteCurriculumVersion(curriculumVersion: Curriculum) {
+      return this.http.post(environment.curriculum.deleteCurriculumVersionUrl(), curriculumVersion, {
+        responseType: 'text',
+      });
+    }
 }
