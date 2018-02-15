@@ -14,6 +14,7 @@ import { SessionService } from '../../../services/session.service';
  * Class for adding an associate to the batch.
  * @author Patrick Kennedy | Batch: 1712-Steve
  * @author Shane Avery Sistoza | Batch: 1712-Steve
+ * @author Jeffery Camacho | Batch: 1712-Steve
  *
  */
 export class AddAssociateToBatchComponent implements OnInit {
