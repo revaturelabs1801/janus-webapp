@@ -23,6 +23,11 @@ describe('MyBatchesComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  /**
+   * @author David Graves
+   * @batch 1712
+   * Tests if method is called when div is clicked on.
+   */
   it('should call loadPast() when div is clicked', async(() => {
     spyOn(component, 'loadPast');
 
@@ -34,6 +39,11 @@ describe('MyBatchesComponent', () => {
     });
   }));
 
+  /**
+   * @author David Graves
+   * @batch 1712
+   * Tests if method is called when div is clicked on.
+   */
   it('should call loadCurrent() when div is clicked', async(() => {
     spyOn(component, 'loadCurrent');
 
@@ -45,6 +55,11 @@ describe('MyBatchesComponent', () => {
     });
   }));
 
+  /**
+   * @author David Graves
+   * @batch 1712
+   * Tests if method is called when div is clicked on.
+   */
   it('should call loadFuture() when div is clicked', async(() => {
     spyOn(component, 'loadFuture');
 
