@@ -134,10 +134,13 @@ export class MainCurriculumViewComponent implements OnInit {
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
             response => {
+                this.alertService.alert('success', 'Successfully saved ' +
+                    (<Curriculum>response.body).curriculumName + ' version #' + (<Curriculum>response.body).curriculumVersion);
                 this.refreshList(<Curriculum>response.body);
                 this.isNewVer = false;
             },
             error => {
+                this.alertService.alert('danger', 'Unable to save curriculum');
                 console.log(error);
                 this.isNewVer = false;
             }
@@ -332,6 +335,7 @@ export class MainCurriculumViewComponent implements OnInit {
             let currArr = this.curriculumService.allCurriculumData.getValue();
             currArr = currArr.filter(e => e !== selectedCurr);
             this.curriculumService.refreshCurriculums(currArr);
+            this.alertService.alert('success', 'Successfully deleted version');
             this.selectedCurr = null;
             this.allWeeks = [];
         });
