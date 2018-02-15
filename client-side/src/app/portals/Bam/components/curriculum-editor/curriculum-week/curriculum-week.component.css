@@ -1,12 +1,27 @@
+.card {
+    border-color: var(--light-grey);
+}
+
+.card-header {
+    background-color:  var(--light-grey);
+    cursor: pointer;
+}
+
+.btn-link {
+    color: white;
+}
+
+.view {
+    border: 1px 1px 1px 1px;
+}
+
 .percentageBarText {
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
 .read-only{
-    position: absolute;
     color: red;
-    right: 34%;
     font-weight: 700;
 }
 
