@@ -10,6 +10,5 @@ export class CalendarEvent {
     start: Date;
     status: string;
     color: string;
-    index: number;
     constructor() { }
 }

@@ -57,24 +57,6 @@
     border-color: #F26925;
 }
 
-/* /deep/ .ui-clickable
-{
-    background: #F26925; 
-    border-color: #F26925;
-}
-
-/deep/ .fa-calendar
-{
-    background: #F26925; 
-    border-color: #F26925;
-} */
-/*
-/deep/ .ui-state-active
-{
-    background: #F26925; 
-    border-color: #F26925;
-} */
-
 /deep/ .ui-state-highlight{
     border-color: #F26925;
     background: #F26925;
