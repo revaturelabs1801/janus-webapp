@@ -24,16 +24,16 @@ export class CourseStructureComponent implements OnInit {
   constructor(private curriculumService: CurriculumService, private modalService: NgbModal) { }
 
   ngOnInit() {
-      this.getAllCurriculums();
+    this.getAllCurriculums();
   }
 
-   /**
-   * view the schedule of a specific curriculum.
-   * Sends the schedule (CurriculumSubtopic[])
-   * to BehaviorSubject in CurriculumService
-   * @author Carter Taylor (1712-Steve)
-   * @param currVersion - curriculum object selected from view
-   */
+  /**
+  * view the schedule of a specific curriculum.
+  * Sends the schedule (CurriculumSubtopic[])
+  * to BehaviorSubject in CurriculumService
+  * @author Carter Taylor (1712-Steve)
+  * @param currVersion - curriculum object selected from view
+  */
   viewCurrSchedule(currVersion: Curriculum) {
     this.curriculumService.getSchedualeByCurriculumId(currVersion.id).subscribe(
       data => {
@@ -52,6 +52,7 @@ export class CourseStructureComponent implements OnInit {
    * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    */
   getCurriculumNames() {
+    this.allCurriculumNames = [];
     for (let i = 0; i < this.allCurriculums.length; i++) {
       this.allCurriculumNames.push(this.allCurriculums[i].curriculumName);
     }
@@ -74,6 +75,7 @@ export class CourseStructureComponent implements OnInit {
    * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    */
   getCurriculumVersions() {
+    this.allCurrVersions = [];
     for (let i = 0; i < this.uniqCurrNames.length; i++) {
       this.allCurrVersions.push(this.allCurriculums.filter(e => this.uniqCurrNames[i] === e.curriculumName));
     }
@@ -98,6 +100,7 @@ export class CourseStructureComponent implements OnInit {
    * @author Carter Taylor, Olayinka Ewumi, James Holzer (1712-Steve)
    */
   getUniqCurrVersions() {
+    this.uniqCurrVersions = [];
     let currs: Curriculum[] = [];
     for (let i = 0; i < this.allCurrVersions.length; i++) {
       let version = 1;
@@ -139,33 +142,41 @@ export class CourseStructureComponent implements OnInit {
    * @author Carter Taylor, Olayinka Ewumi (1712-Steve)
    */
   getAllCurriculums() {
-    let apiData;
     this.curriculumService.currentAllCurriculumData.subscribe(
-      data => apiData = data
-    ).unsubscribe();
-
-    if (apiData.length === 0) {
-      this.curriculumService.getAllCurriculums().subscribe(
-        data => {
-          this.allCurriculums = data;
-          this.getCurriculumNames();
-          this.getUniqueCurrNames();
-          this.getCurriculumVersions();
-          this.getUniqCurrVersions();
-          this.uniqCurrVersions[0].forEach(e => {
-            if (e.isMaster === 1) {
-              this.viewCurrSchedule(e);
-            }
-          });
+      data => {
+        if (data.length === 0) {
+          this.callApi();
+        } else {
+        this.allCurriculums = data;
+        this.getCurriculumNames();
+        this.getUniqueCurrNames();
+        this.getCurriculumVersions();
+        this.getUniqCurrVersions();
         }
-      );
-    } else {
-      this.allCurriculums = apiData;
-      this.getCurriculumNames();
-      this.getUniqueCurrNames();
-      this.getCurriculumVersions();
-      this.getUniqCurrVersions();
-    }
+      }
+    );
+  }
+
+  /**
+   * inital call to the api to get all curriculums
+   * @author Carter Taylor, James Holzer, Mohamad Alhindi
+   */
+  callApi() {
+    this.curriculumService.getAllCurriculums().subscribe(
+      data => {
+        this.curriculumService.refreshCurriculums(data);
+        this.allCurriculums = data;
+        this.getCurriculumNames();
+        this.getUniqueCurrNames();
+        this.getCurriculumVersions();
+        this.getUniqCurrVersions();
+        this.uniqCurrVersions[0].forEach(e => {
+          if (e.isMaster === 1) {
+            this.viewCurrSchedule(e);
+          }
+        });
+      }
+    );
   }
 
   /**
@@ -195,17 +206,17 @@ export class CourseStructureComponent implements OnInit {
 
     this.selectedCurrVer.isMaster = 1;
     this.curriculumService.markCurriculumAsMaster(this.selectedCurrVer.id).subscribe(
-    data => {
-      console.log(data);
-    },
-    error => {
-      console.log(error);
-    });
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
   }
 
 
   createCurr(curTitle: string) {
-    const curric = new Curriculum(null, null , 0, null, null, null, null, 1);
+    const curric = new Curriculum(null, null, 0, null, null, null, null, 1);
     curric.curriculumName = curTitle;
     curric.curriculumVersion = 1;
     this.messageEvent.emit(curric);
