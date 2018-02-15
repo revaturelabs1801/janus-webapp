@@ -16,13 +16,17 @@
       <img src="/assets/img/delete_orange.png" alt="trashcan" class='fc-trash' [style.opacity]="trashOpacity">
     </div>
   </div>
+
   <span #tooltip class="tooltiptext">
     <div class="text-center mb-2"><strong>{{subtopicTooltip}}</strong></div> 
     Time: {{timeTooltip}}
-  <span #tooltip class="tooltiptext">{{subtopicTooltip}}
+
     <br>Status:
     <span #status>{{statusTooltip}}</span>
   </span>
 </div>
 <app-existing-subtopic-modal [subtopic]="existingSubtopic" (addExistingSubtopicEvent)="handleAddExistingSubtopic($event)"> 
 </app-existing-subtopic-modal>
+
+
+

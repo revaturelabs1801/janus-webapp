@@ -6,7 +6,7 @@
 }
 
 .tooltiptext {
-    z-index: -1;
+    z-index: 5;
     max-width: 150px;
     display: none;
     position: absolute;
@@ -22,7 +22,7 @@
 }
 
 .tooltiptext span {
-    z-index: -1;
+    z-index: 5;
     position: absolute;
     padding-left: 3px;
     padding-right: 3px;
