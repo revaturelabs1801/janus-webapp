@@ -296,20 +296,40 @@ export class MainCurriculumViewComponent implements OnInit {
         this.curriculumService.syncBatch(22506).subscribe();
     }
 
-<<<<<<< HEAD
-    areYouSureDeleteCurr() {
+    /**
+     * @author James Holzer (1712-Steve)
+     * Opens the modal with the id areYouSure
+     */
+    areYouSureDeleteCurr(isMaster) {
+        if (isMaster === 0) {
         (<any>$('#areYouSure')).modal('show');
+        }
     }
 
+    /**
+     * @author James Holzer (1712-Steve)
+     * Opens the modal with the id areYouReallySure
+     */
     areYouReallySureDeleteCurr() {
         (<any>$('#areYouReallySure')).modal('show');
     }
 
+    /**
+     * @author James Holzer, Allan Poindexter, Mohamad Alhindi, Carter Taylor (1712-Steve)
+     * @param selectedCurr
+     * Deletes a curriculum, retrieves the curriculum array from service, updates it without
+     *  deleted curriculum and sets the array thats printed to the page and the selected Curriculum
+     *  version header on the page
+     */
     deleteVersions(selectedCurr) {
-        this.curriculumService.deleteCurriculumVersion(selectedCurr).subscribe(data => {
-
+        this.curriculumService.deleteCurriculumVersion(selectedCurr).subscribe((response) => {
+            let currArr = this.curriculumService.allCurriculumData.getValue();
+            currArr = currArr.filter(e => e !== selectedCurr);
+            this.curriculumService.refreshCurriculums(currArr);
+            this.selectedCurr = null;
+            this.allWeeks = [];
         });
-=======
+    }
     /**
      *
      * @author John Austin, Patrick Kennedy, Tyler Dresselhouse (1712-Steve)
@@ -325,7 +345,6 @@ export class MainCurriculumViewComponent implements OnInit {
     }
 
     /**
-     *
      * @author John Austin (1712-Steve)
      * @param buffer
      * @param fileName
@@ -336,6 +355,5 @@ export class MainCurriculumViewComponent implements OnInit {
           type: EXCEL_TYPE
         });
         FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
->>>>>>> b5307eda50e61cb2f09b7ecd3155b1e41f181a30
     }
 }

@@ -151,10 +151,8 @@ export class CurriculumService {
     * @param: Curriculum
     */
     deleteCurriculumVersion(curriculumVersion: Curriculum) {
-      return this.http.post(environment.curriculum.deleteCurriculumVersionUrl(), curriculumVersion, httpOptions).map(
-        data => {
-          return data;
-        }
-      );
+      return this.http.post(environment.curriculum.deleteCurriculumVersionUrl(), curriculumVersion, {
+        responseType: 'text',
+      });
     }
 }
