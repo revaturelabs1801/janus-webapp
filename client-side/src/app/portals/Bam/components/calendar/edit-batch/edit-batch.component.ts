@@ -20,7 +20,6 @@ import { AlertService } from '../../../services/alert.service';
  * @author Shane Avery Sistoza | Batch: 1712-Steve
  */
 export class EditBatchComponent implements OnInit {
-  
   // Specific to batch
   @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
   batchTypes: BatchType[];

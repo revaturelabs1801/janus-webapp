@@ -8,6 +8,7 @@ import { CurriculumSubtopicDTO } from '../../../models/curriculumSubtopicDTO.mod
 import { MetaDTO } from '../../../models/metaDTO.model';
 import { SessionService } from '../../../services/session.service';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
+import { AlertService } from '../../../services/alert.service';
 
 /**
  * Author:Daniel Robinson
@@ -30,7 +31,7 @@ export class MainCurriculumViewComponent implements OnInit {
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
     constructor(private curriculumService: CurriculumService,
-        private sessionService: SessionService) { }
+        private sessionService: SessionService, private alertService: AlertService) { }
 
 
     ngOnInit() {
