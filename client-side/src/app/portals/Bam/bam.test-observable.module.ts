@@ -145,8 +145,6 @@ export const Dependencies = {
     SearchTextService,
     TopicService,
     SubtopicService,
-    HttpClient,
-    HttpHandler,
     ChildrenOutletContexts,
     AssignforcesyncService,
     AlertService,
