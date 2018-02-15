@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-sm-12 col-md-8 col-lg-8 text-center" *ngIf="selectedCurr">
-            <img src="http://i67.tinypic.com/21mf91z.png" width="75px" height="75px"> {{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
+            <img src="http://i67.tinypic.com/21mf91z.png" width="100px" height="100px"> {{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-4 col-lg-4">
@@ -25,57 +25,48 @@
         <div class="col-sm-12 col-md-8 col-lg-8">
             <div class="row">
                 <div *ngIf="isNewVer" class="col-sm-12 col-md-6 col-lg-6">
-                    <button (click)="openSaveCurriculumModal()">Save Curriculum</button>
+                    <button class="btn btn-primary" (click)="openSaveCurriculumModal()">Save Curriculum</button>
                 </div>
                 <div *ngIf="isNewVer" class="col-sm-12 col-md-6 col-lg-6 align-self-end">
                    <div class="row">
-                       <div class="col" (click)="addWeek()"><i class="fa fa-plus-square"></i></div>
+                       <div class="col"> </div>
                        <div class="col text-right">
-                            <div class="dropdown">
-                                    <div data-toggle="dropdown">
-                                        <i class="fa fa-trash fa-3x"></i>
-                                    </div>
+                            <span (click)="addWeek()"><i class="cursor fa fa-plus-square fa-2x"></i></span>
+                            <div class="dropdown fa fa-trash fa-2x cursor" data-toggle="dropdown"> 
                                     <div class="dropdown-menu">
-         
-         
                                         <li class="dropdown-submenu">
-                                            <a class="test">Clear All Weeks</a>
+                                            <a class="test hoverRed">Clear All Weeks</a>
                                             <ul class="dropdown-menu">
                                                 <p>Are You Sure?</p>
                                                 <li (click)="clearAllWeeks()">Yes</li>
                                                 <li>No</li>
                                             </ul>
                                         </li>
-         
                                         <li class="dropdown-submenu">
-                                            <a class="test">Clear All Subtopics</a>
+                                            <a class="test hoverRed">Clear All Subtopics</a>
                                             <ul class="dropdown-menu">
                                                 <p>Are You Sure?</p>
                                                 <li (click)="truncateWeeks()">Yes</li>
                                                 <li>No</li>
                                             </ul>
                                         </li>
-         
                                     </div>
                                 </div>
                        </div>
-                      
                    </div>
-                
-                    <!-- <img  src="http://i67.tinypic.com/21mf91z.png" width="100px" height="100px"> -->
-
-
                 </div>
+            </div>
+            
+            <div *ngIf="!isNewVer" class="row">
+                <div class="col"> <button class="btn btn-primary" (click)="download()">Export Curriculum</button></div>
+                <div class="col text-right"><span (click)="areYouSureDeleteCurr(selectedCurr.isMaster)">
+                    <i class="cursor fa fa-trash fa-2x"></i>
+                </span></div>
             </div>
         </div>
 
 
-        <div *ngIf="!isNewVer" class="col-4">
-            <button (click)="download()">Export Curriculum</button>
-            <button (click)="areYouSureDeleteCurr(selectedCurr.isMaster)">
-                <i class="fa fa-trash"></i>
-            </button>
-        </div>
+        
 
 
     </div>
@@ -107,9 +98,9 @@
                     <h6 *ngIf="selectedCurr">Save version #{{selectedCurr.curriculumVersion}} as new {{selectedCurr.curriculumName}} curriculum?</h6>
                 </div>
                 <div class="modal-footer">
-                    <button *ngIf="isFirstVer" class="btn btn-success" data-dismiss="modal" (click)="saveCurr(true)">Save</button>
-                    <button *ngIf="!isFirstVer" class="btn btn-success" data-dismiss="modal" (click)="openMasterModal()">Save</button>
-                    <button class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <button *ngIf="isFirstVer" class="btn btn-primary" data-dismiss="modal" (click)="saveCurr(true)">Save</button>
+                    <button *ngIf="!isFirstVer" class="btn btn-primary" data-dismiss="modal" (click)="openMasterModal()">Save</button>
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -126,8 +117,8 @@
                     <h6 *ngIf="selectedCurr">Would you like to make #{{selectedCurr.curriculumVersion}} the new master version of {{selectedCurr.curriculumName}}?</h6>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" (click)="saveCurr(true)">YES, I WOULD LIKE THIS TO BE THE NEW MASTER</button>
-                    <button class="btn btn-warning" data-dismiss="modal" (click)="saveCurr(false)">NO</button>
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="saveCurr(true)">YES, I WOULD LIKE THIS TO BE THE NEW MASTER</button>
+                    <button class="btn btn-default" data-dismiss="modal" (click)="saveCurr(false)">NO</button>
                 </div>
             </div>
         </div>
@@ -147,7 +138,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="" data-dismiss="modal" (click)="areYouReallySureDeleteCurr()">YES</a>
-                    <button class="btn btn-success" data-dismiss="modal">NO</button>
+                    <button class="btn btn-primary" data-dismiss="modal">NO</button>
                 </div>
             </div>
         </div>
@@ -165,7 +156,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="" data-dismiss="modal" (click)="deleteVersions(selectedCurr)">Still Delete</a>
-                    <button class="btn btn-success" data-dismiss="modal">Nevermind for now</button>
+                    <button class="btn btn-primary" data-dismiss="modal">Nevermind for now</button>
                 </div>
             </div>
         </div>

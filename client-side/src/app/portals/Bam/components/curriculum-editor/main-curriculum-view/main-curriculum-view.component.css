@@ -8,45 +8,7 @@
     margin-top: -1px;
 }
 
-.align{
-
-    padding-top: 6px;
-    height: 450px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.tabRow{
-    position: relative;
-}
-
-.pushtotop{
-    position: absolute;
-    top: 0;
-    color: #5bd782;
-    right: 10.5%;
-    font-size: 2.5em;
-}
-
-.pushtotop:hover{
-    color: #30b85b;
-    cursor: pointer;
-}
-
-.trashCan{
-    color: rgb(217, 83, 79);
-    position: absolute;
-    right: 5.58%;
-    top: 5.45%;
-    font-size: 2.2rem;
-    cursor: pointer;
-}
-
-.trashCan:hover{
-    color: rgb(172, 19, 14);
-}
-
-.hoverRed{
+.hoverRed {
     padding-left: 3px;
     padding-right: 6px;
     font-size: 94%;
@@ -58,18 +20,6 @@
     border-radius: 4px;
     cursor: url("http://i43.tinypic.com/2n8t1rq.jpg"), auto;
 
-}
-
-.saveCurr {
-    font-size: 2.2rem;
-    cursor: pointer;
-    color: #f47f43;
-    position: absolute;
-    left: -9%;
-}
-
-.saveCurr:hover {
-    color: #bd5e2f;
 }
 
 :host ::ng-deep ul.nav.nav-tabs.justify-content-start.nav {
@@ -107,6 +57,21 @@
      position: absolute;
  }
 
+ .cursor {
+    cursor: pointer;
+ }
+
+ .fa-trash:hover {
+    color: var(--light-grey);
+ }
+
+.fa-plus-square {
+    color: var(--orange);
+}
+
+.fa-plus-square:hover {
+    color: #007bff;
+}
  
   
   
