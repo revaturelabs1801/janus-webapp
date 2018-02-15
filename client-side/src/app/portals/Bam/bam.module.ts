@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
 
@@ -45,24 +44,26 @@ import { CalendarStatusService } from './services/calendar-status.service';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
+import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     BamRoutingModule,
-    NgbModule.forRoot(),
     FormsModule,
     NgxPaginationModule,
+    Ng2OrderModule,
     ScheduleModule,
     DragDropModule,
     CalendarModule,
     OverlayPanelModule,
-    NgbModule.forRoot(),
+    NgbModule.forRoot()
   ],
   declarations: [
     BamComponent,
@@ -96,7 +97,8 @@ import { SubtopicService } from './services/subtopic.service';
     SubtopicSearchComponent,
     OrderPipe,
     SearchPipe,
-    FilterBatchPipe
+    FilterBatchPipe,
+    ExistingSubtopicModalComponent
   ],
   providers: [
     CurriculumWeekComponent,

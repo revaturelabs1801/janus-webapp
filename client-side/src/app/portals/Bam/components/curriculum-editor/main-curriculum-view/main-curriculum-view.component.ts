@@ -8,6 +8,13 @@ import { CurriculumSubtopicDTO } from '../../../models/curriculumSubtopicDTO.mod
 import { MetaDTO } from '../../../models/metaDTO.model';
 import { SessionService } from '../../../services/session.service';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import * as XLSXStyle from 'xlsx-style';
+import { WeeksExportDTO } from '../../../models/weeksExportDTO';
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 /**
  * Author:Daniel Robinson
@@ -27,6 +34,7 @@ export class MainCurriculumViewComponent implements OnInit {
     isNewVer = false;
     isFirstVer = false;
     uniqCurrVersions;
+
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
     constructor(private curriculumService: CurriculumService,
@@ -35,6 +43,22 @@ export class MainCurriculumViewComponent implements OnInit {
 
     ngOnInit() {
         this.displayWeekView();
+        this.dropdownScript();
+    }
+
+    /**
+     * This script is used to function the double drop down menu for the deletion of the weeks
+     * @author Mohamad Alhindi, Jeffery Camacho
+     * @batch 1712-Dec11-2017
+     */
+    dropdownScript() {
+        $(document).ready(function(){
+            $('.dropdown-submenu a.test').on('click', function(e){
+              $(this).next('ul').toggle();
+              e.stopPropagation();
+              e.preventDefault();
+            });
+          });
     }
 
     /**
@@ -56,6 +80,7 @@ export class MainCurriculumViewComponent implements OnInit {
         this.selectedCurr = event;
         if (event.id == null) {
             this.isNewVer = true;
+            this.dropdownScript();
         } else {
             this.isNewVer = false;
         }
@@ -108,17 +133,27 @@ export class MainCurriculumViewComponent implements OnInit {
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
             response => {
-                console.log(response);
+                this.refreshList(<Curriculum>response.body);
                 this.isNewVer = false;
             },
             error => {
                 console.log(error);
                 this.isNewVer = false;
-            },
-            () => this.isNewVer = false
+            }
         );
     }
 
+    /**
+     * Adds the newly saved curriculum object to the curriculum services'
+     * behavior subject.
+     * @author James Holzer, Carter Taylor, Mohamad Alhindi (1712-Steve)
+     * @param curr
+     */
+    refreshList(curr: Curriculum) {
+        const currList = this.curriculumService.allCurriculumData.getValue();
+        currList.push(curr);
+        this.curriculumService.refreshCurriculums(currList);
+    }
     /**
      * Subscribes to the BehaviorSubject in Curriculum Service
      * which holds the currently selected curriculum's
@@ -261,6 +296,7 @@ export class MainCurriculumViewComponent implements OnInit {
         this.curriculumService.syncBatch(22506).subscribe();
     }
 
+<<<<<<< HEAD
     areYouSureDeleteCurr() {
         (<any>$('#areYouSure')).modal('show');
     }
@@ -273,5 +309,33 @@ export class MainCurriculumViewComponent implements OnInit {
         this.curriculumService.deleteCurriculumVersion(selectedCurr).subscribe(data => {
 
         });
+=======
+    /**
+     *
+     * @author John Austin, Patrick Kennedy, Tyler Dresselhouse (1712-Steve)
+     * Downloads the selected curriculum to an Excel file
+     */
+    download() {
+        let ourWeeks: WeeksExportDTO;
+        ourWeeks = new WeeksExportDTO((this.allWeeks), this.selectedCurr.curriculumName + ' v' + this.selectedCurr.curriculumVersion);
+        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ourWeeks.data);
+        const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, 'excelFileName');
+    }
+
+    /**
+     *
+     * @author John Austin (1712-Steve)
+     * @param buffer
+     * @param fileName
+     * Helper method for download()
+     */
+    private saveAsExcelFile(buffer: any, fileName: string): void {
+        const data: Blob = new Blob([buffer], {
+          type: EXCEL_TYPE
+        });
+        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+>>>>>>> b5307eda50e61cb2f09b7ecd3155b1e41f181a30
     }
 }
