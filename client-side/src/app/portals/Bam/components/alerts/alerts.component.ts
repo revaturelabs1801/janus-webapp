@@ -18,9 +18,9 @@ export class AlertsComponent implements OnInit {
 
   ngOnInit() {
     this.timeout.subscribe();
-    debounceTime.call(this.timeout, this.timeoutTime).subscribe(() => {this.alertMessage = null; console.log('hello');});
+    debounceTime.call(this.timeout, this.timeoutTime).subscribe(() => this.alertMessage = null);
     this.alertService.messageObservable.subscribe(data => {
-
+      this.timeout.next();
       this.alertType = data[0];
       this.alertMessage = data[1];
     });

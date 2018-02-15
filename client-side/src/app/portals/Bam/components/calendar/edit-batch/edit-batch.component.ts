@@ -120,7 +120,7 @@ export class EditBatchComponent implements OnInit {
     this.batchTimeout.subscribe();
     debounceTime.call(this.batchTimeout, this.timeoutTime).subscribe(() => this.batchAlertMessage = null);
 
-    this.associateTimeout.subscribe(); 
+    this.associateTimeout.subscribe();
     debounceTime.call(this.associateTimeout, this.timeoutTime).subscribe(() => this.associateAlertMessage = null);
 
     this.batch = this.sessionService.getSelectedBatch();

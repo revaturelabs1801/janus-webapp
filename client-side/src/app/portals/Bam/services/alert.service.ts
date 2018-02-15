@@ -11,7 +11,6 @@ export class AlertService {
   constructor() { }
 
   alert(type: string, message: string) {
-    
     this.message.next([type, message]);
   }
 

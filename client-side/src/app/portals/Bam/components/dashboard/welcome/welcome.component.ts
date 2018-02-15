@@ -38,12 +38,6 @@ export class WelcomeComponent implements OnInit {
     } else {
       this.getInProgressBatches();
     }
-    
-  }
-  
-  alert() {
-    
-    this.alertService.alert('danger', "Please work please");
   }
 
   /**
