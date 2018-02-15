@@ -314,7 +314,7 @@ export class MainCurriculumViewComponent implements OnInit {
      * @batch:  1712-Dec11-2017
      */
     populateCalendar() {
-        this.curriculumService.syncBatch(22506).subscribe();
+        this.curriculumService.syncBatch(this.sessionService.getSelectedBatch().id).subscribe();
     }
 
     /**
