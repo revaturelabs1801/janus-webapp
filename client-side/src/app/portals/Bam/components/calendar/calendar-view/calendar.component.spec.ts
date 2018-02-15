@@ -11,14 +11,6 @@ describe('CalendarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
-  
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ CalendarComponent ],
-  //     schemas: [ NO_ERRORS_SCHEMA ]
-  //   })
-  //   .compileComponents();
-  // }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CalendarComponent);

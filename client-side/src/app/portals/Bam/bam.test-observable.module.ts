@@ -1,3 +1,11 @@
+/**
+ * @author David Graves, Cristian Hermida
+ * @batch 1712
+ *
+ * Copy of bam module for unit testing with additional dependencies.
+ * Specifically for components that needed HttpClientModule and not HttpClient or HttpHandler.
+ */
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

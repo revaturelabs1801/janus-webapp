@@ -11,14 +11,6 @@ describe('AddSubtopicComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
-  
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ AddSubtopicComponent ],
-  //     schemas: [ NO_ERRORS_SCHEMA ]
-  //   })
-  //   .compileComponents();
-  // }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AddSubtopicComponent);

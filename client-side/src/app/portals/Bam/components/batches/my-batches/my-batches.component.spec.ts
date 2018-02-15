@@ -12,14 +12,6 @@ describe('MyBatchesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
-  
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ MyBatchesComponent ],
-  //     schemas: [ NO_ERRORS_SCHEMA ]
-  //   })
-  //   .compileComponents();
-  // }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MyBatchesComponent);

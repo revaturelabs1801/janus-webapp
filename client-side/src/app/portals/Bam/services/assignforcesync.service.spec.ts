@@ -7,18 +7,11 @@ import { AssignforcesyncService } from './assignforcesync.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Dependencies } from '../bam.test.module';
 
-xdescribe('AssignforcesyncService', () => {
-  
+describe('AssignforcesyncService', () => {
+
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
-  
-  // beforeEach(() => {
-  //   TestBed.configureTestingModule({
-  //     providers: [AssignforcesyncService],
-  //     schemas: [ NO_ERRORS_SCHEMA ]
-  //   });
-  //});
 
   it('should be created', inject([AssignforcesyncService], (service: AssignforcesyncService) => {
     expect(service).toBeTruthy();

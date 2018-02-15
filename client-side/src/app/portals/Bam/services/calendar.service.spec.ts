@@ -5,17 +5,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Dependencies } from '../bam.test.module';
 
 describe('CalendarService', () => {
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
-  
-  // beforeEach(() => {
-  //   TestBed.configureTestingModule({
-  //     providers: [CalendarService],
-  //     schemas: [ NO_ERRORS_SCHEMA ]
-  //   });
-  // });
 
   it('should be created', inject([CalendarService], (service: CalendarService) => {
     expect(service).toBeTruthy();

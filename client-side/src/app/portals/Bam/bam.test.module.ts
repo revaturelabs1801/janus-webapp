@@ -1,3 +1,11 @@
+/**
+ * @author David Graves, Cristian Hermida
+ * @batch 1712
+ *
+ * Copy of bam module for unit testing with additional dependencies.
+ * Specifically for components that needed HttpClient and HttpHandler.
+ */
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -52,6 +60,7 @@ import { SubtopicService } from './services/subtopic.service';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
+import { AssignforcesyncService } from './services/assignforcesync.service';
 
 
 export const Dependencies = {
@@ -125,7 +134,8 @@ export const Dependencies = {
     SubtopicService,
     HttpClient,
     HttpHandler,
-    ChildrenOutletContexts
+    ChildrenOutletContexts,
+    AssignforcesyncService
   ],
   exports: [
     SearchPipe,

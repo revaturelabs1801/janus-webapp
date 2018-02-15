@@ -12,14 +12,6 @@ describe('BatchProgressBarComponent', () => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ BatchProgressBarComponent ],
-  //     schemas: [ NO_ERRORS_SCHEMA ]
-  //   })
-  //   .compileComponents();
-  // }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(BatchProgressBarComponent);
     component = fixture.componentInstance;

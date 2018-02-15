@@ -14,34 +14,19 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { convertToParamMap, ParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-class RouterStub {
-  navigateByUrl(url: string) { return url; }
-}
-
-class ActivatedRouteStub {
-  private subject = new BehaviorSubject(convertToParamMap(this.testParamMap));
-  paramMap = this.subject.asObservable();
-
-  private _testParamMap: ParamMap;
-  get testParamMap() { return this._testParamMap; }
-  set testParamMap(params: {}) {
-    this._testParamMap = convertToParamMap(params);
-    this.subject.next(this._testParamMap);
-  }
-
-  get snapshot() {
-    return { paramMap: this.testParamMap };
-  }
-}
-// This one was awful!
+/**
+ * @author David Graves
+ * @batch 1712
+ *
+ * This particular component required specific dependencies that were different than other
+ * components. So changes to the Dependencies class in TestModule and TestObservableModule will not
+ * reflect here.
+ *
+ */
 describe('EditBatchComponent', () => {
   let component: EditBatchComponent;
   let fixture: ComponentFixture<EditBatchComponent>;
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule(Dependencies).compileComponents();
-  // }), 1440000);
-  
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
@@ -49,10 +34,7 @@ describe('EditBatchComponent', () => {
       imports: [ HttpClientModule, RouterModule, BrowserAnimationsModule,
       RouterTestingModule.withRoutes([]) ],
       providers: [BatchService, SessionService, UsersService,
-        LocationStrategy,
-       // { provide: Router, useClass: RouterStub },
-       // { provide: ActivatedRoute, useClass: ActivatedRouteStub }
-       ],
+        LocationStrategy, ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();

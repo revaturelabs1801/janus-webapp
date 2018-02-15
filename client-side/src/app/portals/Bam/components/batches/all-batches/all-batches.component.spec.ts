@@ -16,15 +16,6 @@ describe('AllBatchesComponent', () => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ AllBatchesComponent ],
-  //     schemas: [ NO_ERRORS_SCHEMA ],
-  //     providers: [BatchService, HttpClient, HttpHandler ]
-  //   })
-  //   .compileComponents();
-  // }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(AllBatchesComponent);
     component = fixture.componentInstance;
@@ -34,21 +25,4 @@ describe('AllBatchesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  // it('should call setFilterText() when appBatchesSearch changes', async(() => {
-  //   spyOn(component, 'setFilterText');
-
-  //   // const loadPastDiv = fixture.debugElement.query(By.css('#appBatchesSearch')).nativeElement;
-  //   // loadPastDiv.trigger('change');
-
-  //   // fixture.whenStable().then(() => {
-  //   //   expect(component.setFilterText).toHaveBeenCalled();
-  //   // });
-
-  //   $('#appBatchesSearch').trigger('change');
-
-  //   fixture.whenStable().then(() => {
-  //   expect(component.setFilterText).toHaveBeenCalled();
-  //   });
-  // }));
 });
