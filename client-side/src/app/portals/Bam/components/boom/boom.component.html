@@ -53,10 +53,10 @@
 <div class="container">
   <div class="card">
     <div class="row card-body">
-      <div class="col-12" *ngIf="batches.length != 0">
+      <div class="col-12" *ngIf="currentBatches.length != 0">
         <th>View Weekly Progress
           <select (change)="changeBatch($event.target.value)">
-            <option *ngFor="let batch of batches" value="{{batch.trainer}}">{{batch.trainer}}</option>
+            <option *ngFor="let batch of currentBatches" value="{{batch.id}}">{{batch.name}} - {{batch.trainer.fName}}</option>
           </select>
       </div>
       <div #barChart class="col-md-12">

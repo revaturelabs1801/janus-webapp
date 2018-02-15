@@ -127,4 +127,17 @@ export class BatchService {
     );
   }
 
+  /**
+   * Retrieves all active batches
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   * @returns Batch List
+   */
+  getAllInProgress(): Observable<Batch[]> {
+    return this.http.get<Batch[]>(environment.bambatch.getAllInProgressUrl()).map(
+      data => {
+        return data;
+      }
+    );
+  }
+
 }

@@ -5,6 +5,7 @@ import { Subtopic } from '../../../models/subtopic.model';
 import { CalendarEvent } from '../../../models/calendar-event.model';
 import { CalendarService } from '../../../services/calendar.service';
 import { CalendarStatusService } from '../../../services/calendar-status.service';
+import { SessionService } from '../../../services/session.service';
 
 /**
     *	This component will serve as the main calendar view. 
@@ -41,10 +42,11 @@ export class CalendarComponent implements OnInit {
 
   trashOpacity: number;
 
-  constructor(private calendarService: CalendarService, private statusService: CalendarStatusService) { }
+  constructor(private calendarService: CalendarService, private statusService: CalendarStatusService,
+    private sessionService: SessionService) { }
 
   ngOnInit() {
-    this.calendarService.getSubtopicsByBatchPagination(22506, 0, 34).subscribe(
+    this.calendarService.getSubtopicsByBatchPagination(this.sessionService.getSelectedBatch().id, 0, 300).subscribe(
       subtopics => {
         for (let subtopic of subtopics) {
           let calendarEvent = new CalendarEvent();
@@ -138,7 +140,7 @@ export class CalendarComponent implements OnInit {
     clickedTopic.color = this.statusService.getStatusColor(calendarEvent.status);
     calendarEvent.color = clickedTopic.color;
 
-    this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+    this.calendarService.updateTopicStatus(calendarEvent, this.sessionService.getSelectedBatch().id).subscribe();
     this.addEvent(calendarEvent);
     console.log(this.events);
   }
@@ -166,13 +168,13 @@ export class CalendarComponent implements OnInit {
     calendarEvent.color = droppedTopic.color;
 
     //update date and status synchronously
-    this.calendarService.changeTopicDate(droppedTopic.subtopicId, 22506, milliDate)
+    this.calendarService.changeTopicDate(droppedTopic.subtopicId, this.sessionService.getSelectedBatch().id, milliDate)
       .subscribe(
       response => {
-        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+        this.calendarService.updateTopicStatus(calendarEvent, this.sessionService.getSelectedBatch().id).subscribe();
       },
       error => {
-        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+        this.calendarService.updateTopicStatus(calendarEvent, this.sessionService.getSelectedBatch().id).subscribe();
       }
       );
     this.updateEvent(calendarEvent);
