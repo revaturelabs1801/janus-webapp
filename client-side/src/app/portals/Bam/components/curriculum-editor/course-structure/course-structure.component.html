@@ -1,7 +1,7 @@
   <button class="curr-btn btn-block" data-toggle="modal" data-target="#addCurricModel">Add New Curriculum
   </button>
 
-  <div class="" id="accordian" role="tablist">
+  <div id="accordian" role="tablist">
     <div class="col-sm-12 col-md-12 col-lg-12" *ngFor="let currName of uniqCurrNames; let i = index">
 
       <div class="curr-btn" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
