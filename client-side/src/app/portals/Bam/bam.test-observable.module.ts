@@ -3,7 +3,7 @@
  * @batch 1712
  *
  * Copy of bam module for unit testing with additional dependencies.
- * Specifically for components that needed HttpClientModule and not HttpClient or HttpHandler.
+ * Specifically for components that needed HttpClient and HttpHandler.
  */
 
 import { NgModule } from '@angular/core';
@@ -57,10 +57,18 @@ import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ChildrenOutletContexts } from '@angular/router';
+import { AssignforcesyncService } from './services/assignforcesync.service';
+import { BoomComponent } from './components/boom/boom.component';
+//import { OrderByPipe } from '../Caliber/pipes/order-by.pipe';
+import { ChartsModule } from 'ng2-charts/ng2-charts'; 
+import { Ng2OrderModule } from 'ng2-order-pipe'; 
+import { AlertsComponent } from './components/alerts/alerts.component';
+import { AlertService } from './services/alert.service';
+import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
+ 
 
 export const Dependencies = {
   imports: [
@@ -75,7 +83,9 @@ export const Dependencies = {
     OverlayPanelModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    BrowserAnimationsModule,
+    ChartsModule,
+    Ng2OrderModule,
+
   ],
   declarations: [
     BamComponent,
@@ -107,9 +117,12 @@ export const Dependencies = {
     AddSubtopicComponent,
     TopicSearchComponent,
     SubtopicSearchComponent,
+    BoomComponent,
     OrderPipe,
     SearchPipe,
-    FilterBatchPipe
+    FilterBatchPipe,
+    AlertsComponent,
+    ExistingSubtopicModalComponent
   ],
   providers: [
     CurriculumWeekComponent,
@@ -131,11 +144,14 @@ export const Dependencies = {
     CalendarStatusService,
     SearchTextService,
     TopicService,
-    SubtopicService
+    SubtopicService,
+    ChildrenOutletContexts,
+    AssignforcesyncService,
+    AlertService,
   ],
   exports: [
     SearchPipe,
-    OrderPipe
+    OrderPipe,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
