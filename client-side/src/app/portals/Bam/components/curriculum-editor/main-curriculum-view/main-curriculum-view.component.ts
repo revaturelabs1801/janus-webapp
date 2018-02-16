@@ -324,6 +324,8 @@ export class MainCurriculumViewComponent implements OnInit {
     areYouSureDeleteCurr(isMaster) {
         if (isMaster === 0) {
         (<any>$('#areYouSure')).modal('show');
+        } else {
+            this.alertService.alert('danger', 'You Cannot Delete a Master Curriculum');
         }
     }
 
