@@ -31,28 +31,28 @@
                 <div class="row">
                     <div class="day border text-center" pDroppable="subtopicdrag" (onDrop)="dropIt(0)"><span class="day-text">Monday</span>
                         <div class="row subtopic-selector justify-content-center">
-                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of monday.subtopics">{{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 0)" class="close">&times;</button>
+                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of monday.subtopics"><button class="close" *ngIf="!readOnly" (click)="removeSubtopic(day, 0)">&times;</button>{{day.name}}
                             </div>
                         </div>
                     </div>
                     <div class="day border border-left-0 text-center" pDroppable="subtopicdrag" (onDrop)="dropIt(1)"><span class="day-text" >Tuesday</span>
                         <div class="row subtopic-selector justify-content-center">
-                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 1)" (onDragEnd)="putItDown(day, 1)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of tuesday.subtopics">{{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 1)" class="close">&times;</button></div>
+                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 1)" (onDragEnd)="putItDown(day, 1)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of tuesday.subtopics"><button *ngIf="!readOnly" (click)="removeSubtopic(day, 1)" class="close">&times;</button>{{day.name}}</div>
                         </div>
                     </div>
                     <div class="day border border-left-0 text-center" pDroppable="subtopicdrag" (onDrop)="dropIt(2)"><span class="day-text">Wednesday</span>
                         <div class="row subtopic-selector justify-content-center">
-                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 2)" (onDragEnd)="putItDown(day, 2)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of wednesday.subtopics"> {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 2)" class="close">&times;</button></div>
+                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 2)" (onDragEnd)="putItDown(day, 2)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of wednesday.subtopics"><button *ngIf="!readOnly" (click)="removeSubtopic(day, 2)" class="close">&times;</button>{{day.name}}</div>
                         </div>
                     </div>
                     <div class="day border border-left-0 border-bottom text-center" pDroppable="subtopicdrag" (onDrop)="dropIt(3)"><span class="day-text">Thursday</span>
                         <div class="row subtopic-selector justify-content-center">
-                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 3)" (onDragEnd)="putItDown(day, 3)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of thursday.subtopics"> {{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 3)" class="close">&times;</button></div>
+                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 3)" (onDragEnd)="putItDown(day, 3)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of thursday.subtopics"><button *ngIf="!readOnly" (click)="removeSubtopic(day, 3)" class="close">&times;</button>{{day.name}}</div>
                         </div>
                     </div>
                     <div class="day border border-left-0 border-bottom border-right text-center" pDroppable="subtopicdrag" (onDrop)="dropIt(4)"><span class="day-text">Friday</span>
                         <div class="row subtopic-selector justify-content-center">
-                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 4)" (onDragEnd)="putItDown(day, 4)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of friday.subtopics">{{day.name}}<button *ngIf="!readOnly" (click)="removeSubtopic(day, 4)" class="close">&times;</button></div>
+                            <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 4)" (onDragEnd)="putItDown(day, 4)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of friday.subtopics"><button *ngIf="!readOnly" (click)="removeSubtopic(day, 4)" class="close">&times;</button>{{day.name}}</div>
                         </div>
                     </div>
                 </div>
