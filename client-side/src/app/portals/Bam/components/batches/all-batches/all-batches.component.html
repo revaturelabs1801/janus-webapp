@@ -9,7 +9,7 @@
                     <ng-template ngbTabContent></ng-template>
                 </ngb-tab>
             </ngb-tabset>
-            <app-batches-search *ngIf="batches" (change)="setFilterText($event)" class="pull-right"></app-batches-search>
+            <app-batches-search id="appBatchesSearch" *ngIf="batches" (change)="setFilterText($event)" class="pull-right"></app-batches-search>
         </div>
     </div>
 

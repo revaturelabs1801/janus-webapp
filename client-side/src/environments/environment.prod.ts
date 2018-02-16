@@ -205,7 +205,8 @@ apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
         getSubtopicPoolAllUrl: () => `${bam}/curriculum/subtopicpool`,
         addCurriculumUrl: () => `${bam}/curriculum/addcurriculum`,
         makeCurriculumMasterByIdUrl: (id: number) => `${bam}/curriculum/makemaster/${id}`,
-        syncBatchByIdUrl: (id: number) => `${bam}/curriculum/syncbatch/${id}`
+        syncBatchByIdUrl: (id: number) => `${bam}/curriculum/syncbatch/${id}`,
+        deleteCurriculumVersionUrl: () => `${bam}/curriculum/deleteversion`
     },
 
     calendar: {
@@ -247,7 +248,7 @@ apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
     subtopic: {
        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => 
         `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`,
-        removeSubtopic: (subtopicId: number) => `${bam}/subtopic/${subtopicId}`,
+        removeSubtopic: (subtopicId: number) => `${bam}/subtopic/remove/${subtopicId}`,
     },
 
     addsubtopics: {

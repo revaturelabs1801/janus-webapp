@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BamUser } from '../../../models/bamuser.model';
 import { UsersService } from '../../../services/users.service';
+import { Batch } from '../../../models/batch.model';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-remove-associate-from-batch',
@@ -15,18 +17,20 @@ import { UsersService } from '../../../services/users.service';
  * @batch 1712-Steve
  */
 export class RemoveAssociateFromBatchComponent implements OnInit {
+  currentBatch: Batch;
 
   associates: BamUser[];
   @Input() searchTerm: string;
   @Input() associateAlertType: string;
   @Input() associateAlertMessage: string;
-  @Output() notify: EventEmitter<any> = new EventEmitter<any>(); 
+  @Output() notify: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public usersService: UsersService) {
+  constructor(public usersService: UsersService, private sessionService: SessionService) {
   }
 
   ngOnInit() {
-    this.usersService.getUsersInBatch(4).subscribe(users => this.associates = users);
+    this.currentBatch = this.sessionService.getSelectedBatch();
+    this.usersService.getUsersInBatch(this.currentBatch.id).subscribe(users => this.associates = users);
   }
 
   /**
@@ -40,10 +44,10 @@ export class RemoveAssociateFromBatchComponent implements OnInit {
       if (associate.userId === user.userId) {
         this.usersService.removeUserFromBatch(associate.userId).subscribe(users => {
           this.associates = users;
-          this.associateAlert("success", `Successfully removed ${user.fName} ${user.lName} from current batch.`);
+          this.associateAlert('success', `Successfully removed ${user.fName} ${user.lName} from current batch.`);
         }, error => {
-          this.associateAlert("danger", `Error: couldn't remove ${user.fName} ${user.lName} from current batch.`);
-        }); 
+          this.associateAlert('danger', `Error: couldn't remove ${user.fName} ${user.lName} from current batch.`);
+        });
         break;
       }
       i++;
