@@ -23,15 +23,14 @@ import { BatchType } from '../../../models/batchtype.model';
 /**
  * @author David Graves, Cristian Hermida
  * @batch 1712
- * Had to stub SessionService. It retrieved an object from sessionStorage, 
+ * Had to stub SessionService. It retrieved an object from sessionStorage,
  * which is not available during testing. Had to provide mock data.
  */
 
 export class StubSessionService {
   bamUser: BamUser;
   stubBatch: Batch;
-  //public selectedBatchSubject = new Subject<Batch>();
- 
+
   constructor() {
       this.bamUser = {
         'userId': 3,
@@ -63,7 +62,7 @@ export class StubSessionService {
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
   let fixture: ComponentFixture<CalendarComponent>;
-   
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CalendarComponent ],
@@ -75,41 +74,8 @@ describe('CalendarComponent', () => {
     })
     .compileComponents();
   }));
-/*
-beforeEach(async(() => {
-
-    TestBed.configureTestingModule({
-      declarations: [ EditBatchComponent ],
-      imports: [ HttpClientModule, RouterModule, BrowserAnimationsModule,
-      RouterTestingModule.withRoutes([]) ],
-      providers: [BatchService, SessionService, UsersService,
-        LocationStrategy, AlertService],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
-  }));
-*/
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule(Dependencies).compileComponents();
-  // }), 1440000);
 
   beforeEach(() => {
-
-    // let store = {};
-    // const mockLocalStorage = {
-    //   getItem: (key: string): string => {
-    //     return key in store ? store[key] : null;
-    //   },
-    //   setItem: (key: string, value: string) => {
-    //     store[key] = `${value}`;
-    //   },
-    //   removeItem: (key: string) => {
-    //     delete store[key];
-    //   },
-    //   clear: () => {
-    //     store = {};
-    //   }
-    // };
 
     fixture = TestBed.createComponent(CalendarComponent);
     component = fixture.componentInstance;

@@ -63,9 +63,6 @@ describe('RemoveAssociateFromBatchComponent', () => {
       schemas: []
     }).compileComponents();
   }));
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule(Dependencies).compileComponents();
-  // }), 1440000);
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RemoveAssociateFromBatchComponent);
