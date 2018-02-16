@@ -153,7 +153,10 @@ export class CalendarComponent implements OnInit {
     calendarEvent.color = clickedTopic.color;
 
     this.calendarService.updateTopicStatus(calendarEvent, this.selectedBatch.id).subscribe();
-    this.addEvent(calendarEvent);
+    //this.addEvent(calendarEvent);
+    this.updateEvent(calendarEvent);
+    this.fc.updateEvent(event.calEvent);
+    console.log(this.fc.events);
   }
 
   /**
