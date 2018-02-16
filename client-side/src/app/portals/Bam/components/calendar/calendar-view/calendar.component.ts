@@ -56,7 +56,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.selectedBatch = this.sessionService.getSelectedBatch();
-    this.calendarService.getSubtopicsByBatchPagination(this.selectedBatch.id, 0, 34).subscribe(
+    this.calendarService.getSubtopicsByBatchPagination(this.selectedBatch.id, 0, 300).subscribe(
       subtopics => {
         for (let subtopic of subtopics) {
           let calendarEvent = this.calendarService.mapSubtopicToEvent(subtopic);
