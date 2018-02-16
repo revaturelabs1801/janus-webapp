@@ -1,5 +1,5 @@
-
-<app-alerts></app-alerts>
+<app-alerts>
+</app-alerts>
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-sm-12 col-md-8 col-lg-8 text-center" *ngIf="selectedCurr">
@@ -30,40 +30,48 @@
                     <button class="btn btn-primary" (click)="openSaveCurriculumModal()">Save Curriculum</button>
                 </div>
                 <div *ngIf="isNewVer" class="col-sm-12 col-md-6 col-lg-6 align-self-end">
-                   <div class="row">
-                       <div class="col"> </div>
-                       <div class="col text-right">
-                            <span (click)="addWeek()"><i class="cursor fa fa-plus-square fa-2x"></i></span>
-                            <div class="dropdown fa fa-trash fa-2x cursor" data-toggle="dropdown"> 
-                                    <div class="dropdown-menu">
-                                        <li class="dropdown-submenu">
-                                            <a class="test hoverRed">Clear All Weeks</a>
-                                            <ul class="dropdown-menu">
-                                                <p>Are You Sure?</p>
-                                                <li (click)="clearAllWeeks()">Yes</li>
-                                                <li>No</li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown-submenu">
-                                            <a class="test hoverRed">Clear All Subtopics</a>
-                                            <ul class="dropdown-menu">
-                                                <p>Are You Sure?</p>
-                                                <li (click)="truncateWeeks()">Yes</li>
-                                                <li>No</li>
-                                            </ul>
-                                        </li>
-                                    </div>
+                    <div class="row">
+                        <div class="col"> </div>
+                        <div class="col text-right">
+                            <span (click)="addWeek()">
+                                <i class="cursor fa fa-plus-square fa-2x"></i>
+                            </span>
+                            <div class="dropdown fa fa-trash fa-2x cursor dropleft" data-toggle="dropdown">
+                                <div class="dropdown-menu">
+                                    <li class="dropdown-submenu1">
+                                        <a class="test hoverRed">Clear All Weeks</a>
+                                        <ul class="dropdown-menu">
+                                            <p>Are You Sure?</p>
+                                            <li (click)="clearAllWeeks()">Yes</li>
+                                            <li>No</li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu2">
+                                        <a class="test hoverRed">Clear All Subtopics</a>
+                                        <ul class="dropdown-menu">
+                                            <p>Are You Sure?</p>
+                                            <li (click)="truncateWeeks()">Yes</li>
+                                            <li>No</li>
+                                        </ul>
+                                    </li>
                                 </div>
-                       </div>
-                   </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div *ngIf="!isNewVer" class="row">
-                <div class="col"><button class="btn btn-block btn-primary" (click)="download()">Export Curriculum</button></div>
-                <div class="col"><button class="btn btn-block btn-default" (click)="populateCalendar()">Populate my Calendar</button></div>
-                <div class="col text-right"><span (click)="areYouSureDeleteCurr(selectedCurr.isMaster)">
-                    <i class="cursor fa fa-trash fa-2x"></i>
-                </span></div>
+                <div class="col">
+                    <button class="btn btn-block btn-primary" (click)="download()">Export Curriculum</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-block btn-default" (click)="populateCalendar()">Populate my Calendar</button>
+                </div>
+                <div class="col text-right">
+                    <span (click)="areYouSureDeleteCurr(selectedCurr.isMaster)">
+                        <i class="cursor fa fa-trash fa-2x"></i>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -74,9 +82,10 @@
             <app-topic-pool [readOnly]="!isNewVer" *ngIf="toggleTab === 2"></app-topic-pool>
         </div>
         <div class="col-sm-12 col-md-8 col-lg-8 accordian">
-            <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1" (removeWeekEvent)="removeWeek($event)"></app-curriculum-week>
+            <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1"
+                (removeWeekEvent)="removeWeek($event)"></app-curriculum-week>
         </div>
-        
+
     </div>
 
 

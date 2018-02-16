@@ -54,8 +54,17 @@ export class MainCurriculumViewComponent implements OnInit {
      */
     dropdownScript() {
         $(document).ready(function(){
-            $('.dropdown-submenu a.test').on('click', function(e){
+            $('.dropdown-submenu1 a.test').on('click', function(e){
               $(this).next('ul').toggle();
+              $('.dropdown-submenu2 a.test').next('ul').hide();
+              e.stopPropagation();
+              e.preventDefault();
+            });
+          });
+          $(document).ready(function(){
+            $('.dropdown-submenu2 a.test').on('click', function(e){
+              $(this).next('ul').toggle();
+              $('.dropdown-submenu1 a.test').next('ul').hide();
               e.stopPropagation();
               e.preventDefault();
             });
