@@ -20,7 +20,7 @@
           </div>
           <div *ngIf="readOnly" class="row">
               <div  *ngFor="let topic of percentageNums; let i = index" class="progress-bar" 
-              role="progressbar" [style.background-color]=" i%2 ? '#474c55': '#f47f43' "
+              role="progressbar" [style.background-color]=" i%2 ? '#474c55': '#f47f43'"
               [style.width]="((topic/total)*100)+'%'" placement="top" [ngbTooltip]="percentageNames[i]">
                 <span class="text-truncate">{{percentageNames[i] | uppercase}}</span>
               </div>
