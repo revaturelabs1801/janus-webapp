@@ -24,14 +24,16 @@
     width: 20%;
 }
 
+.subtopic {
+    margin-left: 1px;
+    margin-right: -2px;
+    margin-top: 2px;
+    margin-botom: 2px;
+}
+
 .subtopic-selector {
     margin-right: 0px;
     margin-left: 0px;
-}
-
-.percentageBarText {
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
 .read-only{
@@ -39,47 +41,11 @@
     font-weight: 700;
 }
 
-.days {    
-    border: 1px solid black;
-    margin-bottom: 20px;
-    width: 20%;
-    text-align: center;
-    float: left;
-    height: 140px;
-}
-
-.week {
-    border: 1px solid #f47f43;
-    background-color: lightgray;
-    padding-left: 20px;
-    padding-top: 20px;
-    height: 80px;
-    cursor: pointer;
-    position: relative;
-}
-
-
-.week:hover {
-    font-size: 103%;
-}
-
-.giveHeight{
-    height: 750px;      
-}
-
-.weeksrow {
-position: relative;
-width: 100%;
-}
-
 .removeWeekBtn:hover {
     color: rgb(172, 19, 14);
     
 }
 
-.putBorder{
-    border: 1px solid black;    
-}
 
 .noTouch {
     opacity: .7;
