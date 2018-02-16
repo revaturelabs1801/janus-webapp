@@ -195,6 +195,8 @@ apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
         getBatchByIdURL: (batchId: number) => `${bam}/batches/byid/${batchId}/`,
         updateBatchUrl: () => `${bam}/batches/updatebatch`,
         getAllBatchTypesUrl: () => `${bam}/batches/batchtypes`,
+        removeSubtopicFromBatchUrl: (subtopicId: number) => `${bam}/batches/${subtopicId}`,
+        getAllInProgressUrl: () => `${bam}/batches/currentbatches`
     },
 
     curriculum: {

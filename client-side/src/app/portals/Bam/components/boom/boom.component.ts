@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { BatchService } from '../../services/batch.service';
+import { Batch } from '../../models/batch.model';
+import { Subtopic } from '../../models/subtopic.model';
+import { CalendarService } from '../../services/calendar.service';
+import { Boom } from '../../models/boom.model';
 
 @Component({
   selector: 'app-boom',
@@ -7,7 +12,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   styleUrls: ['./boom.component.css']
 })
 /**
- * Currently contains mock data. This class creates charts:
+ * This class creates 2 charts:
  * Pie and a bar graph.
  * @author Francisco Palomino | Batch: 1712-dec10-java-steve
  */
@@ -52,86 +57,149 @@ export class BoomComponent implements OnInit {
   public pieChartHeight: Number = 345;
   public batchOverallArray: any = [];
 
-  constructor() { }
+  public currentBatches: Batch[] = [];
+  public batchSelectionList: Batch[] = [];
+  public allBatchSubtopics: Subtopic[][] = [];
+
+  constructor(private batchService: BatchService, private calendarService: CalendarService) { }
 
   ngOnInit() {
-  // Mock data
-  let batch1: any;
-  let batch2: any;
-  let batch3: any;
-  let batch4: any;
-  let batch5: any;
-    batch1 = {
-      'w': 8, 'trainer': 'Steve', 't': 240, 'topics': [{ 'topic': 'Core Java', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'SQL/JDBC', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'HTML/CSS/AJAX/JavaScript/Servlets', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'Angular/Devops', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'Hibernate', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'MicroServices', 'subtopic': { 'c': 100, 'm': 0 } }
-      ]
-    };
-    batch2 = {
-      'w': 5, 'trainer': 'Trevin', 't': 150, 'topics': [{ 'topic': 'Core Java', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'SQL/JDBC', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'HTML/CSS/AJAX/JavaScript/Servlets', 'subtopic': { 'c': 90, 'm': 10 } },
-      { 'topic': 'Angular/Devops', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'Hibernate', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'MicroServices', 'subtopic': { 'c': 0, 'm': 0 } }]
-    };
-    batch3 = {
-      'w': 2, 'trainer': 'Gail',  't': 60, 'topics': [{ 'topic': 'Core Java', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'SQL/JDBC', 'subtopic': { 'c': 70, 'm': 30 } },
-      { 'topic': 'HTML/CSS/AJAX/JavaScript/Servlets', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'Angular/Devops', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'Hibernate', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'MicroServices', 'subtopic': { 'c': 0, 'm': 0 } }]
-    };
-    batch4 = {
-      'w': 6, 'trainer': 'Larry', 't': 180, 'topics': [{ 'topic': 'Core Java', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'SQL/JDBC', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'HTML/CSS/AJAX/JavaScript/Servlets', 'subtopic': { 'c': 90, 'm': 10 } },
-      { 'topic': 'Angular/Devops', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'Hibernate', 'subtopic': { 'c': 60, 'm': 40 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 50, 'm': 50 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'MicroServices', 'subtopic': { 'c': 0, 'm': 0 } }]
-    };
-    batch5 = {
-      'w': 3, 'trainer': 'Jose', 't': 90, 'topics': [{ 'topic': 'Core Java', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'SQL/JDBC', 'subtopic': { 'c': 100, 'm': 0 } },
-      { 'topic': 'HTML/CSS/AJAX/JavaScript/Servlets', 'subtopic': { 'c': 40, 'm': 60 } },
-      { 'topic': 'Angular/Devops', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'Hibernate', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'Spring', 'subtopic': { 'c': 0, 'm': 0 } },
-      { 'topic': 'MicroServices', 'subtopic': { 'c': 0, 'm': 0 } }]
-    };
-
-    this.batches = [batch1, batch2, batch3, batch4, batch5];
-    this.plotBatch(batch1.trainer);
-    this.pieChartPercent(this.percent);
+    this.batchService.getAllInProgress().subscribe(
+      getBatches => {
+        this.currentBatches = getBatches;
+        this.currentBatches.sort((n1, n2) => {
+          if (n1.startDate > n2.startDate) {
+            return 1;
+          }
+          if (n1.startDate < n2.startDate) {
+            return -1;
+          }
+          return 0;
+        });
+        this.getBatchSubtopics();
+      }
+    );
+  }
+/**
+ * Gets all currently active batches from Bam DB
+ * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+ */
+  getBatchSubtopics() {
+    let count = 1;
+    this.currentBatches.forEach((batch, index) => {
+      this.calendarService.getSubtopicsByBatch(batch.id).subscribe(
+        subtopicsService => {
+          if (subtopicsService != null) {
+            subtopicsService.sort((n1, n2) => {
+              if (n1.subtopicDate > n2.subtopicDate) {
+                return 1;
+              }
+              if (n1.subtopicDate < n2.subtopicDate) {
+                return -1;
+              }
+              return 0;
+            });
+          }
+          this.allBatchSubtopics[index] = subtopicsService;
+          count++;
+          if (count > this.currentBatches.length) {
+            this.setBatchStats();
+            this.plotBatch(this.batchSelectionList[0].id);
+            this.pieChartPercent(this.percent);
+          }
+        }
+      );
+    });
+  }
+  /**
+   * Method returns the week of a current date
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   * @param date 
+   */
+  getWeek(date) {
+    const thisYear = new Date().getFullYear();
+    const subtopicDate: any = new Date(date);
+    const jan4th: any = new Date(`04/jan/${thisYear}`);
+    return Math.ceil((((subtopicDate.setHours(0, 0, 0, 0) -
+          jan4th.setHours(0, 0, 0, 0)) / 86400000) + jan4th.getDay() + 1) / 7);
+  }
+  /**
+   * Method generates all the statistics of all current active batches and
+   * their completedted and missed subtopics
+   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
+   */
+  setBatchStats () {
+    for (let i = 0; i < this.currentBatches.length; i++) {
+      let totalSubtopics = 0, completedSubtopics = 0, missedSubtopics = 0;
+      let currentWeek;
+      if (this.allBatchSubtopics[i] != null) {
+        this.batchSelectionList.push(this.currentBatches[i]);
+        const today = new Date();
+        const startDate = new Date(this.currentBatches[i].startDate);
+        const diffDays = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+        currentWeek = Math.ceil(diffDays / 7);
+        let checkWeek = this.getWeek(startDate);
+        for (let week = 1; week <= currentWeek; week++) {
+          for (let y = 0; y < this.allBatchSubtopics[i].length; y++) {
+            if (checkWeek == this.getWeek(this.allBatchSubtopics[i][y].subtopicDate)) {
+              if (this.allBatchSubtopics[i][y].status.id === 2) {
+                totalSubtopics++;
+                completedSubtopics++;
+              } else if (this.allBatchSubtopics[i][y].status.id === 4) {
+                totalSubtopics++;
+                missedSubtopics++;
+              }
+            }
+          }
+          checkWeek = this.getWeek(startDate.setDate(startDate.getDate() + 7));
+        }
+        let batch: Boom = new Boom();
+        batch.batchName = this.currentBatches[i].name;
+        batch.trainerName  = this.currentBatches[i].trainer.fName + ' ' + this.currentBatches[i].trainer.lName;
+        batch.missed = missedSubtopics;
+        batch.completed = completedSubtopics;
+        batch.total = totalSubtopics;
+        batch.week = currentWeek;
+        this.batches.push(batch);
+      }
+    }
   }
   /**
    * Creates a bar chart of a trainer/batch's weekly progress.
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
-   * @param trainer selected trainer/batch
+   * @param id selected batch/trainer
    */
-  public plotBatch(trainer) {
+   plotBatch(id: Number) {
     const completedSubtop: any[] = [];
     const missedSubTop: any[] = [];
-
-    for (let i = 0; i < this.batches.length; i++) {
-      if (this.batches[i].trainer === trainer) {
-        for (let j = 0; j < this.batches[i].w; j++) {
-          this.barChartLabels.push('Week ' + (j + 1));
-          completedSubtop.push(this.batches[i].topics[j].subtopic.c);
-          missedSubTop.push(this.batches[i].topics[j].subtopic.m);
+    for (let i = 0; i < this.currentBatches.length; i++) {
+      if (this.allBatchSubtopics[i] != null && this.currentBatches[i].id == id) {
+        if ( this.currentBatches[i].id == id) {
+          const today = new Date();
+          const startDate = new Date(this.currentBatches[i].startDate);
+          const diffDays = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+          let currentWeek = Math.ceil(diffDays / 7);
+          let checkWeek = this.getWeek(startDate);
+          for (let week = 1; week <= currentWeek; week++) {
+            let totalSubtopics = 0;
+            let completedSubtopics = 0;
+            let missedSubtopics = 0;
+            this.barChartLabels.push('Week ' + (week));
+            for (let y = 0; y < this.allBatchSubtopics[i].length; y++) {
+              if (checkWeek == this.getWeek(this.allBatchSubtopics[i][y].subtopicDate)) {
+                if (this.allBatchSubtopics[i][y].status.id === 2) {
+                  totalSubtopics++;
+                  completedSubtopics++;
+                } else if (this.allBatchSubtopics[i][y].status.id === 4) {
+                  totalSubtopics++;
+                  missedSubtopics++;
+                }
+              }
+            }
+            checkWeek = this.getWeek(startDate.setDate(startDate.getDate() + 7));
+            completedSubtop.push(Number(completedSubtopics / totalSubtopics * 100).toFixed(2));
+            missedSubTop.push(Number(missedSubtopics / totalSubtopics * 100).toFixed(2));
+          }
         }
         this.barChartData = [
           { data: completedSubtop, label: 'Completed', fill: true,
@@ -142,14 +210,13 @@ export class BoomComponent implements OnInit {
         break;
       }
     }
-
   }
   /**
    * Creates a pie chart from all current active batches and graphs
    * with a default 90% completion value, which can be changed on
    * the client view.
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
-   * @param percent percent value to generate the graph
+   * @param percent percent value to generate the pie graph
    */
   public pieChartPercent(percent) {
     const allCompletedSubtop: any[] = [];
@@ -162,35 +229,27 @@ export class BoomComponent implements OnInit {
     labelMissed.push('Batches');
 
     for (let i = 0; i < this.batches.length; i++) {
-      let totalCompleted: any = 0;
-      let totalMissed: any = 0;
       let totalCompletedAvg: any = 0;
       let totalMissedAvg: any = 0;
 
-      for (let j = 0; j < this.batches[i].w; j++) {
-
-        totalCompleted += this.batches[i].topics[j].subtopic.c;
-        totalMissed += this.batches[i].topics[j].subtopic.m;
-      }
-
-      totalCompletedAvg = Number((totalCompleted / this.batches[i].w).toFixed(2));
-      totalMissedAvg = Number((totalMissed / this.batches[i].w).toFixed(2));
+      totalCompletedAvg = Number((this.batches[i].completed / this.batches[i].total * 100).toFixed(2));
+      totalMissedAvg = Number((this.batches[i].missed / this.batches[i].total * 100).toFixed(2));
 
       const trainer = {
-        bName: 'Batch ' + (i + 1),
-        trainer: this.batches[i].trainer,
-        missed: totalMissed / this.batches[i].w * this.batches[i].t / 100,
-        completed: totalCompleted / this.batches[i].w * this.batches[i].t / 100,
-        total: this.batches[i].t,
-        week: this.batches[i].w
+        bName: this.batches[i].batchName,
+        trainer: this.batches[i].trainerName,
+        missed: this.batches[i].missed,
+        completed: this.batches[i].completed,
+        total: this.batches[i].total,
+        week: this.batches[i].week
       };
 
       this.batchOverallArray.push(trainer);
 
       if (totalCompletedAvg >= percent) {
-        labelComplete.push(this.batches[i].trainer + ' ' + totalCompletedAvg + '%');
+        labelComplete.push(this.batches[i].batchName + ' ' + totalCompletedAvg + '%');
       } else {
-        labelMissed.push(this.batches[i].trainer + ' ' + totalCompletedAvg + '%');
+        labelMissed.push(this.batches[i].batchName + ' ' + totalCompletedAvg + '%');
       }
 
     }
@@ -242,65 +301,17 @@ export class BoomComponent implements OnInit {
     }
   }
   /**
-   * Averages all batches completed and missed subtopics
-   * and creates a pie chart.
-   * @author Francisco Palomino | Batch: 1712-dec10-java-steve
-   */
-  public pieChartAvg() {
-    const allCompletedSubtop: any[] = [];
-    const allMissedSubTop: any[] = [];
-    const labelComplete: any[] = [];
-    const labelMissed: any[] = [];
-    labelComplete.push('Avg Complete');
-    labelMissed.push('Avg Missed');
-
-    for (let i = 0; i < this.batches.length; i++) {
-      let totalCompleted: any = 0;
-      let totalMissed: any = 0;
-      let totalCompletedAvg: any = 0;
-      let totalMissedAvg: any = 0;
-
-      for (let j = 0; j < this.batches[i].w; j++) {
-
-        totalCompleted += this.batches[i].topics[j].subtopic.c;
-        totalMissed += this.batches[i].topics[j].subtopic.m;
-      }
-
-      totalCompletedAvg = Number((totalCompleted / this.batches[i].w).toFixed(2));
-      labelComplete.push(this.batches[i].trainer + ' ' + totalCompletedAvg + '%');
-      allCompletedSubtop.push(totalCompletedAvg);
-
-      totalMissedAvg = Number((totalMissed / this.batches[i].w).toFixed(2));
-      labelMissed.push(this.batches[i].trainer + ' ' + totalMissedAvg + '%');
-      allMissedSubTop.push(totalMissedAvg);
-
-    }
-    let subtopicSumCompleted: any = 0;
-    let subtopicSumMissed: any = 0;
-
-    for (let i = 0; i < allCompletedSubtop.length ; i++) {
-      subtopicSumCompleted += allCompletedSubtop[i];
-      subtopicSumMissed += allMissedSubTop[i];
-    }
-    this.pieChartLabels = [labelComplete, labelMissed];
-
-    this.pieChartData.push(Number((subtopicSumCompleted / allCompletedSubtop.length).toFixed(2)));
-    this.pieChartData.push(Number((subtopicSumMissed / allCompletedSubtop.length) .toFixed(2)));
-
-    this.pieChartDatasets = [{ data : this.pieChartData}];
-  }
-  /**
    * Recreates Bar chart with the selected trainer/batch
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
-   * @param trainer selected trainer/batch
+   * @param id selected batch/trainer
    */
-  changeBatch(trainer) {
+  changeBatch(id) {
     this.chartHeight = $(this.barChart.nativeElement.lastElementChild).height();
     $(this.barChart.nativeElement).css('min-height', this.chartHeight + 'px');
     this.barChartData = [];
     this.barChartLabels = [];
     setTimeout(() => {
-          this.plotBatch(trainer);
+          this.plotBatch(id);
     }, 0);
   }
 }

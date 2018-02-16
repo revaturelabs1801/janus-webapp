@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { convertToParamMap, ParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AlertService } from '../../../services/alert.service';
 
 /**
  * @author David Graves
@@ -34,7 +35,7 @@ describe('EditBatchComponent', () => {
       imports: [ HttpClientModule, RouterModule, BrowserAnimationsModule,
       RouterTestingModule.withRoutes([]) ],
       providers: [BatchService, SessionService, UsersService,
-        LocationStrategy, ],
+        LocationStrategy, AlertService],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
