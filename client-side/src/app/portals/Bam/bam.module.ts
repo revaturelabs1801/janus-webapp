@@ -51,6 +51,8 @@ import { OverlayPanelModule } from 'primeng/primeng';
 import { SubtopicSearchComponent } from './components/curriculum-editor/subtopic-search/subtopic-search.component';
 import { TopicService } from './services/topic.service';
 import { SubtopicService } from './services/subtopic.service';
+import { AlertsComponent } from './components/alerts/alerts.component';
+import { AlertService } from './services/alert.service';
 import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
 
 
@@ -101,6 +103,7 @@ import { ExistingSubtopicModalComponent } from './components/calendar/existing-s
     OrderPipe,
     SearchPipe,
     FilterBatchPipe,
+    AlertsComponent,
     BoomComponent,
     ExistingSubtopicModalComponent
   ],
@@ -124,7 +127,8 @@ import { ExistingSubtopicModalComponent } from './components/calendar/existing-s
     CalendarStatusService,
     SearchTextService,
     TopicService,
-    SubtopicService
+    SubtopicService,
+    AlertService
   ],
   exports: [
     SearchPipe,

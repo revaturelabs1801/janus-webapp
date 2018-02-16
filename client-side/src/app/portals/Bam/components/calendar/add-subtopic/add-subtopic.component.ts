@@ -185,8 +185,7 @@ export class AddSubtopicComponent implements OnInit {
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   saveSubtopic() {
-    this.slectedDateMiliseconds = new Date(this.selectedDate).setHours(0, 0, 0, 0);
-    this.slectedDateMiliseconds += 1000 * 60 * 60 * 24;
+    this.slectedDateMiliseconds = new Date(this.selectedDate+"T09:00:00-05:00").getTime();
 
     if (this.selectedTopic === 'Select a Topic' || this.selectedSubtopic === 'Select a Subtopic'
       || this.selectedTopic === '' || this.selectedSubtopic === '') {
@@ -206,6 +205,7 @@ export class AddSubtopicComponent implements OnInit {
           name: 'Missed'
         };
       }
+      
       this.setSubtopicObject();
       if (this.checkSubtopics()) {
         this.subtopicsService.addSubtopic(this.subtopic).subscribe(

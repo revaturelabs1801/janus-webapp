@@ -6,6 +6,7 @@ import { BatchService } from '../../../services/batch.service';
 import { SessionService } from '../../../services/session.service';
 import {debounceTime} from 'rxjs/operator/debounceTime'; 
 import {Subject} from 'rxjs/Subject';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-edit-batch',
@@ -19,12 +20,9 @@ import {Subject} from 'rxjs/Subject';
  * @author Shane Avery Sistoza | Batch: 1712-Steve
  */
 export class EditBatchComponent implements OnInit {
-  
   // Specific to batch
   @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
   batchTypes: BatchType[];
-  batchAlertType: string;
-  batchAlertMessage: string;
 
   // Specific to associates that are apart of the batch.
   @Input() searchTerm: string;
@@ -32,12 +30,7 @@ export class EditBatchComponent implements OnInit {
   associateAlertType: string;
   associateAlertMessage: string;
 
-  //For the timeout 
-  private batchTimeout = new Subject<string>();
-  private associateTimeout = new Subject<string>(); 
-  private timeoutTime = 2500;
-
-  constructor(private batchService: BatchService, private sessionService: SessionService) {
+  constructor(private batchService: BatchService, private sessionService: SessionService, private alertService: AlertService) {
   }
 
   /**
@@ -82,9 +75,7 @@ export class EditBatchComponent implements OnInit {
    * @param      {string}  message  The message for notification.
    */
   batchAlert(type, message) {
-    this.batchTimeout.next();
-    this.batchAlertMessage = message;
-    this.batchAlertType = type;
+    this.alertService.alert(type, message);
   }
 
   /**
@@ -93,9 +84,7 @@ export class EditBatchComponent implements OnInit {
    * @param      {[string, string]}  assoc   Contains 2 string values type and messsage.
    */
   associateAlert(assoc) {
-    this.associateTimeout.next();
-    this.associateAlertType = assoc.type;
-    this.associateAlertMessage = assoc.message;
+    this.alertService.alert(assoc.type, assoc.message);
   }
 
   /**
@@ -117,12 +106,6 @@ export class EditBatchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.batchTimeout.subscribe();
-    debounceTime.call(this.batchTimeout, this.timeoutTime).subscribe(() => this.batchAlertMessage = null);
-
-    this.associateTimeout.subscribe(); 
-    debounceTime.call(this.associateTimeout, this.timeoutTime).subscribe(() => this.associateAlertMessage = null);
-
     this.batch = this.sessionService.getSelectedBatch();
     this.batchService.getAllBatchTypes().subscribe( types => this.batchTypes = types);
   }

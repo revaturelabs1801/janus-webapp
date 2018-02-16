@@ -1,3 +1,5 @@
+
+<app-alerts></app-alerts>
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-sm-12 col-md-8 col-lg-8 text-center" *ngIf="selectedCurr">
@@ -56,33 +58,25 @@
                    </div>
                 </div>
             </div>
-            
             <div *ngIf="!isNewVer" class="row">
-                <div class="col"> <button class="btn btn-primary" (click)="download()">Export Curriculum</button></div>
+                <div class="col"><button class="btn btn-block btn-primary" (click)="download()">Export Curriculum</button></div>
+                <div class="col"><button class="btn btn-block btn-default" (click)="populateCalendar()">Populate my Calendar</button></div>
                 <div class="col text-right"><span (click)="areYouSureDeleteCurr(selectedCurr.isMaster)">
                     <i class="cursor fa fa-trash fa-2x"></i>
                 </span></div>
             </div>
         </div>
-
-
-        
-
-
     </div>
-    <div class="row">
 
-    </div>
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-sm-12 col-md-4 col-lg-4">
             <app-course-structure *ngIf="toggleTab === 1" (messageEvent)="receiveMessage($event)"></app-course-structure>
             <app-topic-pool [readOnly]="!isNewVer" *ngIf="toggleTab === 2"></app-topic-pool>
         </div>
-        <div class="col-sm-12 col-md-8 col-lg-8">
-            <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1"
-                (removeWeekEvent)="removeWeek($event)"></app-curriculum-week>
+        <div class="col-sm-12 col-md-8 col-lg-8 accordian">
+            <app-curriculum-week [readOnly]="!isNewVer" *ngFor="let week of allWeeks; let i = index" [weekCurrSubtopics]="week" [weekNum]="i + 1" (removeWeekEvent)="removeWeek($event)"></app-curriculum-week>
         </div>
-        <div class="row"></div>
+        
     </div>
 
 

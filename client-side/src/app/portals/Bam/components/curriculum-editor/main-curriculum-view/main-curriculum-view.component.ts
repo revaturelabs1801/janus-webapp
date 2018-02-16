@@ -8,6 +8,7 @@ import { CurriculumSubtopicDTO } from '../../../models/curriculumSubtopicDTO.mod
 import { MetaDTO } from '../../../models/metaDTO.model';
 import { SessionService } from '../../../services/session.service';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
+import { AlertService } from '../../../services/alert.service';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import * as XLSXStyle from 'xlsx-style';
@@ -38,7 +39,7 @@ export class MainCurriculumViewComponent implements OnInit {
     @ViewChildren(CurriculumWeekComponent) weeks: QueryList<CurriculumWeekComponent>;
 
     constructor(private curriculumService: CurriculumService,
-        private sessionService: SessionService) { }
+        private sessionService: SessionService, private alertService: AlertService) { }
 
 
     ngOnInit() {
@@ -87,6 +88,7 @@ export class MainCurriculumViewComponent implements OnInit {
 
         if (event.curriculumVersion === 1) {
             this.isFirstVer = true;
+            this.allWeeks = [];
         } else {
             this.isFirstVer = false;
         }
@@ -133,10 +135,13 @@ export class MainCurriculumViewComponent implements OnInit {
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
             response => {
+                this.alertService.alert('success', 'Successfully saved ' +
+                    (<Curriculum>response.body).curriculumName + ' version #' + (<Curriculum>response.body).curriculumVersion);
                 this.refreshList(<Curriculum>response.body);
                 this.isNewVer = false;
             },
             error => {
+                this.alertService.alert('danger', 'Unable to save curriculum');
                 console.log(error);
                 this.isNewVer = false;
             }
@@ -154,7 +159,9 @@ export class MainCurriculumViewComponent implements OnInit {
         if (curr.isMaster === 1) {
             const masterIndex = currList.findIndex(
                 elem => (elem.isMaster === 1 && elem.curriculumName === curr.curriculumName));
-            currList[masterIndex].isMaster = 0;
+            if (masterIndex !== -1) {
+                currList[masterIndex].isMaster = 0;
+            }
         }
         currList.push(curr);
         this.curriculumService.refreshCurriculums(currList);
@@ -287,8 +294,17 @@ export class MainCurriculumViewComponent implements OnInit {
      * @batch:  1712-Dec11-2017
      */
     truncateWeeks() {
+        let empty = true;
         for (let i = 0; i < this.allWeeks.length; i++) {
+            if (this.allWeeks[i].length > 0) {
+                empty = false;
+            }
             this.allWeeks[i] = [];
+        }
+        if (empty) {
+            this.alertService.alert('danger', 'No Subtopics to Remove');
+        } else {
+            this.alertService.alert('success', 'Successfully Removed All Subtopics from Weeks');
         }
     }
 
@@ -298,7 +314,7 @@ export class MainCurriculumViewComponent implements OnInit {
      * @batch:  1712-Dec11-2017
      */
     populateCalendar() {
-        this.curriculumService.syncBatch(22506).subscribe();
+        this.curriculumService.syncBatch(this.sessionService.getSelectedBatch().id).subscribe();
     }
 
     /**
@@ -331,6 +347,7 @@ export class MainCurriculumViewComponent implements OnInit {
             let currArr = this.curriculumService.allCurriculumData.getValue();
             currArr = currArr.filter(e => e !== selectedCurr);
             this.curriculumService.refreshCurriculums(currArr);
+            this.alertService.alert('success', 'Successfully deleted version');
             this.selectedCurr = null;
             this.allWeeks = [];
         });
