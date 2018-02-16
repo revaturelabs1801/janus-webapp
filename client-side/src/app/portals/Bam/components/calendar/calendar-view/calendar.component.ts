@@ -89,7 +89,7 @@ export class CalendarComponent implements OnInit {
     this.fc.allDaySlot = false;
     this.fc.eventDurationEditable = false;
     this.fc.options = {
-      defaultDate: Date.now(),
+      defaultDate: this.selectedBatch.startDate,
       nowIndicator: true,
       navLinks: true,
       weekNumbers: true,
@@ -98,8 +98,8 @@ export class CalendarComponent implements OnInit {
       eventLimit: 3,
       longPressDelay: 100,
       dragRevertDuration: 0,
-      scrollTime: '09:00:00',
-      zIndex: 1,
+      //scrollTime: '09:00:00',
+      zIndex: -1,
       businessHours: {
         // days of week. an array of zero-based day of week integers (0=Sunday)
         dow: [1, 2, 3, 4, 5], // Monday - Friday
@@ -108,10 +108,13 @@ export class CalendarComponent implements OnInit {
         end: '17:00', // an end time (5pm)
       },
       minTime: '08:00:00',
-      maxTime: '19:00:00'
-
+      maxTime: '18:00:00',
+      defaultTimedEventDuration: '01:00:00',
+      forceEventDuration: true
     }
 
+    //this.gotoDateValue = this.selectedBatch.startDate;
+    //this.datePicker.defaultDate = this.selectedBatch.startDate;
 
     $('.fc-trash').droppable(
       {
@@ -245,7 +248,7 @@ export class CalendarComponent implements OnInit {
     //calculate y point of tooltip to be below mouse
     let y = event.jsEvent.target.getBoundingClientRect().top;
     let offsetY = this.body.nativeElement.getBoundingClientRect().top;
-    y = y - offsetY + 140;
+    y = y - offsetY + 150;
 
     this.status.nativeElement.style.background = this.statusService.getStatusColor(this.statusTooltip);
     this.tooltip.nativeElement.style.display = 'inline';
