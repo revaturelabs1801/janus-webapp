@@ -56,7 +56,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.selectedBatch = this.sessionService.getSelectedBatch();
-    this.calendarService.getSubtopicsByBatchPagination(this.selectedBatch.id, 0, 34).subscribe(
+    this.calendarService.getSubtopicsByBatchPagination(this.selectedBatch.id, 0, 500).subscribe(
       subtopics => {
         for (let subtopic of subtopics) {
           let calendarEvent = this.calendarService.mapSubtopicToEvent(subtopic);
@@ -93,7 +93,7 @@ export class CalendarComponent implements OnInit {
       nowIndicator: true,
       navLinks: true,
       weekNumbers: true,
-      weekends: true,
+      weekends: false,
       droppable: true,
       eventLimit: 3,
       longPressDelay: 100,
@@ -106,7 +106,10 @@ export class CalendarComponent implements OnInit {
 
         start: '9:00', // a start time (9am)
         end: '17:00', // an end time (5pm)
-      }
+      },
+      minTime: '08:00:00',
+      maxTime: '19:00:00'
+
     }
 
 
@@ -248,6 +251,7 @@ export class CalendarComponent implements OnInit {
     this.tooltip.nativeElement.style.display = 'inline';
     this.tooltip.nativeElement.style.top = y + 'px';
     this.tooltip.nativeElement.style.left = event.jsEvent.clientX + 'px';
+    this.tooltip.nativeElement.style.pointerEvents = 'none';
   }
 
   /* Hides tooltip on mouse out */
