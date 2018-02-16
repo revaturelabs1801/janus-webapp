@@ -26,7 +26,9 @@ export class EditBatchComponent implements OnInit {
 
   // Specific to associates that are apart of the batch.
   @Input() searchTerm: string;
-  showAddUserTable: boolean = false;
+  views: number = 0;
+  associateAlertType: string;
+  associateAlertMessage: string;
 
   constructor(private batchService: BatchService, private sessionService: SessionService, private alertService: AlertService) {
   }

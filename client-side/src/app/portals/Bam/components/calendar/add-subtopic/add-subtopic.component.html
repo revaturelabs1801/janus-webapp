@@ -31,12 +31,6 @@
     <ngb-alert *ngIf="alertMessage" type="danger" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
     <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
 
-    <div *ngIf="currentlyAddedSubtopic.length !== 0">
-      <ul class="list-group">
-        Subtopics currrently added:
-        <li *ngFor="let subtopic of currentlyAddedSubtopic" class="list-group-item">{{subtopic.subtopicName.topic.name}} - {{subtopic.subtopicName.name}}</li>
-      </ul>
-    </div>
   </div>
 </div>
 <ng-template #content let-c="close" let-d="dismiss">

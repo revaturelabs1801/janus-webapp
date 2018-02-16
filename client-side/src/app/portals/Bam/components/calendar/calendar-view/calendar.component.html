@@ -7,7 +7,10 @@
       </p-schedule>
 
     </div>
+
+    
     <div class="col-md-2 m-2 calendar-sidebar">
+      <div class="mb-2">Jump to a particular date</div>
       <p-calendar #datePicker [(ngModel)]="gotoDateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030"
         [showIcon]="true" (onSelect)="jumpToDate(gotoDateValue)"></p-calendar>
       <app-add-subtopic></app-add-subtopic>
@@ -15,11 +18,16 @@
     </div>
   </div>
 
-  <app-existing-subtopic-modal [subtopic]="existingSubtopic" (addExistingSubtopicEvent)="handleAddExistingSubtopic($event)"> 
-  </app-existing-subtopic-modal>
+  <span #tooltip class="tooltiptext">
+    <div class="text-center mb-2"><strong>{{subtopicTooltip}}</strong></div> 
+    Time: {{timeTooltip}}
 
-  <span #tooltip class="tooltiptext">{{subtopicTooltip}}
     <br>Status:
     <span #status>{{statusTooltip}}</span>
   </span>
 </div>
+<app-existing-subtopic-modal [subtopic]="existingSubtopic" (addExistingSubtopicEvent)="handleAddExistingSubtopic($event)"> 
+</app-existing-subtopic-modal>
+
+
+

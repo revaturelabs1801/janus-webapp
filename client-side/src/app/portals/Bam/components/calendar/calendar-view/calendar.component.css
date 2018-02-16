@@ -6,8 +6,8 @@
 }
 
 .tooltiptext {
-    z-index: 1;
-    max-width: 150px;
+    z-index: 5;
+    min-width: 150px;
     display: none;
     position: absolute;
     background-color: white;
@@ -22,12 +22,46 @@
 }
 
 .tooltiptext span {
+    z-index: 5;
+    position: absolute;
     padding-left: 3px;
     padding-right: 3px;
     border-radius: 3px;
     color: white;
 }
 
+ 
+/deep/ .fc-content
+{
+  color:white;
+}
+
+/deep/ .fc-content .fc-time
+{
+  color:white;
+  display: none;
+}
+
+/deep/ .ui-button{
+    background: #F26925; 
+    border-color: #F26925;
+}
+
+/deep/ .ui-calendar .ui-calendar-button{
+    background: #F26925; 
+    border-color: #F26925;
+}
+
+/deep/ .ui-calendar .ui-calendar-button:hover{
+    background: #F26925; 
+    border-color: #F26925;
+}
+
+/deep/ .ui-state-highlight{
+    border-color: #F26925;
+    background: #F26925;
+    color: white;
+  }
 .fc-trash {
     float: left;
 }

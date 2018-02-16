@@ -13,7 +13,7 @@ import { SessionService } from '../../../services/session.service';
 /**
     *	This component will serve as the main calendar view. 
     *   This component leverages the PrimeNG schedule UI component to render a drag and drop calendar for viewing and updating a batch's subtopics
-*	@author Jordan DeLong, Sean Sung (1712-dec10-java-Steve)
+*	@author Francisco Palomino, Jordan DeLong, Sean Sung (1712-dec10-java-Steve)
 *	
 *	
 */
@@ -45,6 +45,8 @@ export class CalendarComponent implements OnInit {
   /* Tooltip data bindings */
   subtopicTooltip: string;
   statusTooltip: string;
+  timeTooltip: string;
+  
 
   trashOpacity: number;
 
@@ -60,7 +62,6 @@ export class CalendarComponent implements OnInit {
           let calendarEvent = this.calendarService.mapSubtopicToEvent(subtopic);
           this.events.push(calendarEvent);
         }
-        this.overridenDate = this.events[0].start;
       }
     );
 
@@ -73,7 +74,7 @@ export class CalendarComponent implements OnInit {
     if (window.innerWidth < 1000) {
       this.fc.defaultView = "listMonth";
       this.fc.header = {
-        left: 'agendaDay,basicWeek,listMonth',
+        left: 'agendaDay,agendaWeek,listMonth',
         center: 'title',
         right: 'today prev,next'
       }
@@ -85,7 +86,8 @@ export class CalendarComponent implements OnInit {
         right: 'today prev,next'
       }
     }
-
+    this.fc.allDaySlot = false;
+    this.fc.eventDurationEditable = false;
     this.fc.options = {
       defaultDate: Date.now(),
       nowIndicator: true,
@@ -107,8 +109,10 @@ export class CalendarComponent implements OnInit {
       }
     }
 
+
     $('.fc-trash').droppable(
       {
+        accept: "*",
         scope: "fc-deletable",
 
         drop: (event, ui) => this.trashDropEvent(event, ui, this.draggedCalendarEvent),
@@ -234,7 +238,7 @@ export class CalendarComponent implements OnInit {
     }
     this.subtopicTooltip = event.calEvent.title;
     this.statusTooltip = event.calEvent.status;
-
+    this.timeTooltip = event.calEvent.start.format("h:mm a");
     //calculate y point of tooltip to be below mouse
     let y = event.jsEvent.target.getBoundingClientRect().top;
     let offsetY = this.body.nativeElement.getBoundingClientRect().top;
@@ -250,6 +254,7 @@ export class CalendarComponent implements OnInit {
   handleEventMouseout(event) {
     this.tooltip.nativeElement.style.display = 'none';
   }
+
 
   /**
    * Convert values stored in the event variable back to a CalendarEvent object
