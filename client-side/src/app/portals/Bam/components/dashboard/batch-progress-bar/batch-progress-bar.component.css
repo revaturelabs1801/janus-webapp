@@ -6,6 +6,6 @@
     background-color:  var(--dark-grey);
 }
 
-::ng-deep .progress-bar {
+.progress-bar {
 	background-color:  var(--dark-grey) !important;	
 }
