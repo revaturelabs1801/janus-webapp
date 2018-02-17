@@ -8,5 +8,5 @@
 }
 
 .my-pagination /deep/ .ngx-pagination .current {
-    background: #fa7427;
+    background: var(--orange);
 }

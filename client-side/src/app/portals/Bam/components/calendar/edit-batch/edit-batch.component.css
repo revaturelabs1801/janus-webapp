@@ -1,5 +1,5 @@
 .nav-link {
-    color: #f26925 !important;
+    color: var(--orange) !important;
     cursor: pointer; 
 }
 
@@ -9,10 +9,6 @@
 
 .nav-tabs {
     border-bottom: none;
-}
-
-.stripes {
-    background-color: rgba(71,76,85, 0.2);
 }
 
 #development_icon{
