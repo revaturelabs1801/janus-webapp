@@ -37,16 +37,12 @@ const routes: Routes = [
         component: EditBatchComponent
       },
       {
-        path: 'curriculum-view',
+        path: 'curriculum',
         component: MainCurriculumViewComponent
       },
       {
         path: 'calendar',
         component: CalendarComponent
-      },
-      {
-        path: 'add-subtopic',
-        component: AddSubtopicComponent
       },
       {
         path: 'boom',
