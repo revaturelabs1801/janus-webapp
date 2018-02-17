@@ -115,6 +115,7 @@ export class CalendarComponent implements OnInit {
 
     //this.gotoDateValue = this.selectedBatch.startDate;
     //this.datePicker.defaultDate = this.selectedBatch.startDate;
+    this.datePicker.disabledDays = [0,6];
 
     $('.fc-trash').droppable(
       {
@@ -367,5 +368,11 @@ export class CalendarComponent implements OnInit {
     let index = this.addEvent(this.calendarService.mapSubtopicToEvent(subtopic));
     this.calendarService.changeTopicDate(subtopic.subtopicId, this.selectedBatch.id, subtopic.subtopicDate.getTime())
       .subscribe();
+  }
+
+  handleViewRender($event)
+  {
+    this.gotoDateValue = new Date(this.fc.getDate().format());
+
   }
 }
