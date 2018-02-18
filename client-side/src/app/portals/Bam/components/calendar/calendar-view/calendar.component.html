@@ -1,11 +1,6 @@
 <div class="container-fluid" #body>
   <div class="row">
 
-     <!-- <div class="col-md-1">
-        <img src="/assets/img/delete_orange.png" alt="trashcan" class='fc-trash sticky-top' [style.opacity]="trashOpacity">
-
-    </div>  -->
-
     <div class="col-md-9 calendar-sidebar">
       <p-schedule [droppable]="true" #fc [events]="events" [editable]="true" (onEventClick)="handleEventClick($event)" (onEventDrop)="handleEventDrop($event)"
         (onDrop)="handleDrop($event)" (onEventMouseover)="handleEventMouseover($event)" (onEventMouseout)="handleEventMouseout($event)"
