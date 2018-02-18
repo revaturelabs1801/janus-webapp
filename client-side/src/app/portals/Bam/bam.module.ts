@@ -65,6 +65,7 @@ import { BoomComponent } from './components/boom/boom.component';
 import { FilterBatchPipe } from './Pipes/filter-batch.pipe';
 import { OrderPipe } from './pipes/order.pipe';
 import { SearchPipe } from './pipes/search.pipe';
+import { OrderByPipe } from '../Caliber/pipes/order-by.pipe';
 
 @NgModule({
   imports: [
@@ -138,7 +139,8 @@ import { SearchPipe } from './pipes/search.pipe';
     SearchTextService,
     TopicService,
     SubtopicService,
-    AlertService
+    AlertService,
+    OrderByPipe
   ],
   exports: [
     SearchPipe,
