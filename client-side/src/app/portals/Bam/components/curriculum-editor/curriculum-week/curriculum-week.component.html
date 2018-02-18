@@ -28,7 +28,7 @@
         </div>
         <div [attr.id]="weekNum + 'w'" class="collapse hide" data-parent="#accordion">
             <div class="card-body">
-                <div class="row">
+                <div class="row" style="min-height: 40px;">
                     <div class="day border text-center" pDroppable="subtopicdrag" (onDrop)="dropIt(0)"><span class="day-text">Monday</span>
                         <div class="row subtopic-selector justify-content-center">
                             <div class="col-11 border text-truncate rounded subtopic" pDraggable="subtopicdrag" (onDragStart)="pickItUp(day, 0)" (onDragEnd)="putItDown(day, 0)" [ngClass]="{'noTouch' : readOnly}" *ngFor="let day of monday.subtopics"><button class="close" *ngIf="!readOnly" (click)="removeSubtopic(day, 0)">&times;</button>{{day.name}}
