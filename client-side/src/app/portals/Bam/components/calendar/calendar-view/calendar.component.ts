@@ -62,6 +62,7 @@ export class CalendarComponent implements OnInit {
           let calendarEvent = this.calendarService.mapSubtopicToEvent(subtopic);
           this.events.push(calendarEvent);
         }
+        this.overridenDate = this.events[0].start;
       }
     );
 
@@ -95,10 +96,10 @@ export class CalendarComponent implements OnInit {
       weekNumbers: true,
       weekends: false,
       droppable: true,
-      eventLimit: 3,
+      eventLimit: 5,
       longPressDelay: 100,
       dragRevertDuration: 0,
-      //scrollTime: '09:00:00',
+      scrollTime: '09:00:00',
       zIndex: -1,
       businessHours: {
         // days of week. an array of zero-based day of week integers (0=Sunday)
@@ -110,7 +111,7 @@ export class CalendarComponent implements OnInit {
       minTime: '08:00:00',
       maxTime: '18:00:00',
       defaultTimedEventDuration: '01:00:00',
-      forceEventDuration: true
+      forceEventDuration: false
     }
 
     //date picker options
@@ -156,7 +157,7 @@ export class CalendarComponent implements OnInit {
     //this.addEvent(calendarEvent);
     this.updateEvent(calendarEvent);
     this.fc.updateEvent(event.calEvent);
-    console.log(this.fc.events);
+    
   }
 
   /**
@@ -251,7 +252,7 @@ export class CalendarComponent implements OnInit {
     //calculate y point of tooltip to be below mouse
     let y = event.jsEvent.target.getBoundingClientRect().top;
     let offsetY = this.body.nativeElement.getBoundingClientRect().top;
-    y = y - offsetY + 150;
+    y = y - offsetY + 120;
 
     this.status.nativeElement.style.background = this.statusService.getStatusColor(this.statusTooltip);
     this.tooltip.nativeElement.style.display = 'inline';
@@ -372,9 +373,7 @@ export class CalendarComponent implements OnInit {
   handleViewRender($event)
   {
     
-    //this.datePicker.value = new Date(this.fc.getDate().format());
     this.gotoDateValue = new Date(this.fc.getDate().format());
-    console.log("handleViewRender is being called");
     
   }
 
