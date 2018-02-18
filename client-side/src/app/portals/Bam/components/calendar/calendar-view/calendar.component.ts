@@ -35,7 +35,7 @@ export class CalendarComponent implements OnInit {
   @ViewChild('status') status: ElementRef;
 
   events: CalendarEvent[] = [];
-  gotoDateValue: Date;
+  gotoDateValue: Date = new Date();
   overridenDate: Date;
   draggedCalendarEvent: CalendarEvent;
   //reference to subtopic being added that already exists
@@ -113,8 +113,7 @@ export class CalendarComponent implements OnInit {
       forceEventDuration: true
     }
 
-    //this.gotoDateValue = this.selectedBatch.startDate;
-    //this.datePicker.defaultDate = this.selectedBatch.startDate;
+    //date picker options
     this.datePicker.disabledDays = [0,6];
 
     $('.fc-trash').droppable(
@@ -372,7 +371,12 @@ export class CalendarComponent implements OnInit {
 
   handleViewRender($event)
   {
+    
+    //this.datePicker.value = new Date(this.fc.getDate().format());
     this.gotoDateValue = new Date(this.fc.getDate().format());
-
+    console.log("handleViewRender is being called");
+    
   }
+
+  
 }
