@@ -1,34 +1,48 @@
 <div class="container">
     <div class="row">
-        <div class="col batches-nav">
+        <div class="col">
             <ngb-tabset>
                 <ngb-tab>
                     <ng-template ngbTabTitle>
-                        <div (click)="loadCurrent()">Current Batches</div>
+                        <div id="loadCurrent" (click)="loadCurrent()">Current Batches</div>
                     </ng-template>
                     <ng-template ngbTabContent></ng-template>
                 </ngb-tab>
                 <ngb-tab>
                     <ng-template ngbTabTitle>
-                        <div (click)="loadPast()">Past Batches</div>
+                        <div id="loadPast" (click)="loadPast()">Past Batches</div>
                     </ng-template>
                     <ng-template ngbTabContent></ng-template>
                 </ngb-tab>
                 <ngb-tab>
                     <ng-template ngbTabTitle>
-                        <div (click)="loadFuture()">Future Batches</div>
+                        <div id="loadFuture" (click)="loadFuture()">Future Batches</div>
                     </ng-template>
                     <ng-template ngbTabContent></ng-template>
                 </ngb-tab>
             </ngb-tabset>
+            
+        </div>
+        <div class="col">
             <app-batches-search *ngIf="batches" (change)="setFilterText($event)" class="pull-right"></app-batches-search>
         </div>
     </div>
+    
+    <div class="row mt-1 mb-2">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                 All Batches
+             </div>
+                 <div class="card-body">
+                    <app-batches-table *ngIf="batches" [batches]="batches" [title]="'My Batches'" [filterText]="filterText"></app-batches-table>
 
-    <app-batches-table *ngIf="batches" [batches]="batches" [title]="'My Batches'" [filterText]="filterText"></app-batches-table>
-
-    <div class="text-center" *ngIf="!batches">
-        <h3 class="loading">Loading...</h3>
+                    <div class="text-center" *ngIf="!batches">
+                        <i class="fa fa-spinner fa-pulse fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
