@@ -35,7 +35,7 @@ export class CalendarComponent implements OnInit {
   @ViewChild('status') status: ElementRef;
 
   events: CalendarEvent[] = [];
-  gotoDateValue: Date;
+  gotoDateValue: Date = new Date(Date.now());
   overridenDate: Date;
   draggedCalendarEvent: CalendarEvent;
   //reference to subtopic being added that already exists
@@ -62,6 +62,7 @@ export class CalendarComponent implements OnInit {
           let calendarEvent = this.calendarService.mapSubtopicToEvent(subtopic);
           this.events.push(calendarEvent);
         }
+        this.overridenDate = this.events[0].start;
       }
     );
 
@@ -89,26 +90,29 @@ export class CalendarComponent implements OnInit {
     this.fc.allDaySlot = false;
     this.fc.eventDurationEditable = false;
     this.fc.options = {
-      defaultDate: Date.now(),
+      defaultDate: this.selectedBatch.startDate,
       nowIndicator: true,
       navLinks: true,
       weekNumbers: true,
       weekends: true,
       droppable: true,
-      eventLimit: 3,
+      eventLimit: 5,
       longPressDelay: 100,
       dragRevertDuration: 0,
       scrollTime: '09:00:00',
-      zIndex: 1,
+      zIndex: -1,
       businessHours: {
         // days of week. an array of zero-based day of week integers (0=Sunday)
         dow: [1, 2, 3, 4, 5], // Monday - Friday
 
         start: '9:00', // a start time (9am)
         end: '17:00', // an end time (5pm)
-      }
+      },
+      minTime: '08:00:00',
+      maxTime: '18:00:00',
+      defaultTimedEventDuration: '01:00:00',
+      forceEventDuration: false
     }
-
 
     $('.fc-trash').droppable(
       {
@@ -147,7 +151,9 @@ export class CalendarComponent implements OnInit {
     calendarEvent.color = clickedTopic.color;
 
     this.calendarService.updateTopicStatus(calendarEvent, this.selectedBatch.id).subscribe();
-    this.addEvent(calendarEvent);
+    this.updateEvent(calendarEvent);
+    this.fc.updateEvent(event.calEvent);
+    
   }
 
   /**
@@ -242,12 +248,13 @@ export class CalendarComponent implements OnInit {
     //calculate y point of tooltip to be below mouse
     let y = event.jsEvent.target.getBoundingClientRect().top;
     let offsetY = this.body.nativeElement.getBoundingClientRect().top;
-    y = y - offsetY + 140;
+    y = y - offsetY + 120;
 
     this.status.nativeElement.style.background = this.statusService.getStatusColor(this.statusTooltip);
     this.tooltip.nativeElement.style.display = 'inline';
     this.tooltip.nativeElement.style.top = y + 'px';
     this.tooltip.nativeElement.style.left = event.jsEvent.clientX + 'px';
+    this.tooltip.nativeElement.style.pointerEvents = 'none';
   }
 
   /* Hides tooltip on mouse out */
@@ -358,4 +365,13 @@ export class CalendarComponent implements OnInit {
     this.calendarService.changeTopicDate(subtopic.subtopicId, this.selectedBatch.id, subtopic.subtopicDate.getTime())
       .subscribe();
   }
+
+  handleViewRender($event)
+  {
+    
+    this.gotoDateValue = new Date(this.fc.getDate().stripTime().format()+"T09:00:00-05:00");
+    
+  }
+
+  
 }
