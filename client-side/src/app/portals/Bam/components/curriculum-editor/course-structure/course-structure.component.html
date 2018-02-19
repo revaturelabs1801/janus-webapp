@@ -7,7 +7,7 @@
       <div class="curr-btn" data-toggle="collapse" [attr.data-target]="'#' + i + 'v'" aria-expanded="true" aria-controls="collapseOne">
         {{currName}}
         <span (click)="newVersion(currName, i)">
-          <i class="fa fa-plus-circle"></i>
+          <i class="fa fa-plus-circle mt-1"></i>
         </span>
       </div>
 
@@ -20,10 +20,10 @@
 
           <span (click)="openMakeMasterModal(currVersion, i)">
             <span *ngIf="currVersion.isMaster">
-              <i class="fa fa-diamond fa-1x" aria-hidden="true"> </i>
+              <i class="fa fa-diamond" aria-hidden="true"> </i>
             </span>
             <span *ngIf="!currVersion.isMaster">
-              <i class="fa fa-diamond fa-1x crownless" aria-hidden="true"> </i>
+              <i class="fa fa-diamond crownless" aria-hidden="true"> </i>
             </span>
           </span>
         </div>

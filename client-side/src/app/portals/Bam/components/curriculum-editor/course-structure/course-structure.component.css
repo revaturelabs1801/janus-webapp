@@ -20,7 +20,7 @@
     font-size: 1.2vw;
 }
 
-.fa-diamond, .curr-type-ver:active {
+.fa-diamond, .curr-type-ver:active, .fa-plus-circle:hover {
     color: var(--orange);
 }
 
@@ -36,14 +36,9 @@
 .fa-plus-circle {
     float: right;
     margin-right: 10%;
-    margin-top: 2%;
     transition: .2s ease-in;
 }
 
 .fa-plus-circle {
     color: var(--white);
-}
-
-.fa-plus-circle:hover {
-    color: var(--orange);
 }

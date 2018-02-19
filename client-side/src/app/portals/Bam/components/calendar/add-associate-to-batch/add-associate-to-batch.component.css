@@ -1,7 +1,3 @@
-.btn-link {
-	color: #fa7427;
-}
+.btn-link { color: var(--orange); }
 
-.btn-link:hover {
-	color: #007bff;
-}
+.btn-link:hover { color: var(--primary); }

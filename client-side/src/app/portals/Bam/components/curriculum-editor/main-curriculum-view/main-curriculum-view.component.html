@@ -33,7 +33,7 @@
                         <div class="col"> </div>
                         <div class="col text-right">
                             <span (click)="addWeek()">
-                                <i class="cursor fa fa-plus-square fa-2x"></i>
+                                <i class="cursor fa fa-plus fa-2x"></i>
                             </span>
                             <div id="deleteMenu" class="dropdown fa fa-trash fa-2x cursor dropleft" data-toggle="dropdown">
                                 <div class="dropdown-menu">
@@ -87,8 +87,6 @@
 
     </div>
 
-
-
     <div id="saveCurriculumModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -139,8 +137,8 @@
                     </h6>
                 </div>
                 <div class="modal-footer">
-                    <a href="" data-dismiss="modal" (click)="areYouReallySureDeleteCurr()">YES</a>
-                    <button class="btn btn-primary" data-dismiss="modal">NO</button>
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="areYouReallySureDeleteCurr()">YES</button>
+                    <button class="btn btn-default" data-dismiss="modal">NO</button>
                 </div>
             </div>
         </div>
@@ -157,8 +155,8 @@
                     <h6 *ngIf="selectedCurr">If you delete this Curriculum Version, you will not be able to get it back</h6>
                 </div>
                 <div class="modal-footer">
-                    <a href="" data-dismiss="modal" (click)="deleteVersions(selectedCurr)">Still Delete</a>
-                    <button class="btn btn-primary" data-dismiss="modal">Nevermind for now</button>
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="deleteVersions(selectedCurr)">Continue</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
