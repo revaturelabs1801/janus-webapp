@@ -8,7 +8,6 @@ import { SessionService } from '../../../services/session.service';
 import { BatchService } from '../../../services/batch.service';
 import { Batch } from '../../../models/batch.model';
 import { CommonModule } from '@angular/common';
-import { OrderByPipe } from '../../../../Caliber/pipes/order-by.pipe';
 
 @Component({
   selector: 'app-view-associates',
@@ -29,7 +28,7 @@ export class ViewAssociatesComponent implements OnInit {
   sessionUser: BamUser;
   currentBatch: Batch;
   constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService, 
-    private orderPipe: OrderByPipe ) {
+    private orderPipe: Ng2OrderPipe ) {
     }
   ngOnInit() {
     this.loadAssociates();

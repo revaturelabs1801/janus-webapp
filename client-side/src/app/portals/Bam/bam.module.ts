@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2OrderModule, Ng2OrderPipe } from 'ng2-order-pipe';
 import { OverlayPanelModule } from 'primeng/primeng';
 import { ScheduleModule } from 'primeng/primeng';
 
@@ -65,7 +65,6 @@ import { BoomComponent } from './components/boom/boom.component';
 import { FilterBatchPipe } from './Pipes/filter-batch.pipe';
 import { OrderPipe } from './pipes/order.pipe';
 import { SearchPipe } from './pipes/search.pipe';
-import { OrderByPipe } from '../Caliber/pipes/order-by.pipe';
 
 @NgModule({
   imports: [
@@ -140,7 +139,7 @@ import { OrderByPipe } from '../Caliber/pipes/order-by.pipe';
     TopicService,
     SubtopicService,
     AlertService,
-    OrderByPipe
+    Ng2OrderPipe
   ],
   exports: [
     SearchPipe,
