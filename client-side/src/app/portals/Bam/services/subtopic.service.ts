@@ -42,4 +42,12 @@ export class SubtopicService {
       }
     );
   }
+
+  removeAllSubtopicsFromBatch(batchId: number) {
+    return this.http.post(environment.subtopic.removeAllSubtopics(batchId), httpOptions);
+  }
+
+  isPopulated(batchId: number) {
+    return this.http.get(environment.subtopic.isPopulated(batchId), httpOptions);
+  }
 }

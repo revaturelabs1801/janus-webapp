@@ -4,20 +4,22 @@ import { BamUser } from '../models/bamuser.model';
 import { Batch } from '../models/batch.model';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { BatchType } from '../models/batchtype.model';
 
 @Injectable()
 export class SessionService {
   bamUser: BamUser;
+  batch: Batch;
 
   public selectedBatchSubject = new Subject<Batch>();
 
   constructor(private userService: UsersService) {
     this.bamUser = {
-      'userId': 3,
+      'userId': 18,
       'fName': 'Ryan',
       'mName': null,
       'lName': 'Lessley',
-      'email': 'rl@revature.com',
+      'email': 'petester@revature.com',
       'pwd': '1234',
       'role': 2,
       'batch': null,
@@ -26,15 +28,17 @@ export class SessionService {
       'skype': 'rl_skype',
       'pwd2': null,
       'assignForceID': 9
-  };
-  sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));
-   }
+    };
+    this.batch = new Batch(448, null, null, null, null, new BatchType(1, 'Java', 1));
+    sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));
+    sessionStorage.setItem('batch', JSON.stringify(this.batch));
+  }
 
-   /**
-   * Puts a hard coded user into the session
-   * @author James Holzer | Batch: 1712-dec10-java-steve
-   * @returns
-   */
+  /**
+  * Puts a hard coded user into the session
+  * @author James Holzer | Batch: 1712-dec10-java-steve
+  * @returns
+  */
   putUserInSession(): Observable<BamUser> {
     return this.userService.updateUser(this.bamUser).map(data => {
       sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));

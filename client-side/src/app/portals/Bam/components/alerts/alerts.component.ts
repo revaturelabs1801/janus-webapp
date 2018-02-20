@@ -12,7 +12,7 @@ export class AlertsComponent implements OnInit {
   alertMessage: string;
   alertType: string;
   timeout = new Subject<string>();
-  timeoutTime = 2500;
+  timeoutTime = 5000;
 
   constructor(private alertService: AlertService) { }
 
