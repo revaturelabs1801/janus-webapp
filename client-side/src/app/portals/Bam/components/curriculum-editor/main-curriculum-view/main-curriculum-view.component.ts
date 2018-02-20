@@ -13,7 +13,6 @@ import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import * as XLSXStyle from 'xlsx-style';
 import { WeeksExportDTO } from '../../../models/weeksExportDTO';
-import { Router } from '@angular/router';
 import { SubtopicService } from '../../../services/subtopic.service';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -43,7 +42,7 @@ export class MainCurriculumViewComponent implements OnInit {
 
     constructor(private curriculumService: CurriculumService,
         private sessionService: SessionService, private alertService: AlertService,
-        private subtopicService: SubtopicService, private router: Router) { }
+        private subtopicService: SubtopicService) { }
 
 
     ngOnInit() {
