@@ -348,7 +348,7 @@ export class MainCurriculumViewComponent implements OnInit {
 
 /**
  * Opens the modal with id areYouSurePopulateCalendar
- * @author Charlie Harris | 1712-dec11-java-steve 
+ * @author Charlie Harris | 1712-dec11-java-steve
  * @param isMaster 
  */
 areYouSurePopulateCalendar(isMaster) {
