@@ -11,7 +11,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let batch of batches  | filterBatch: filterText | paginate: { itemsPerPage: 20, currentPage: pageNum}" (click)="viewBatch()" class="clickable">
+				<tr *ngFor="let batch of batches  | filterBatch: filterText | paginate: { itemsPerPage: 20, currentPage: pageNum}" (click)="viewBatch(batch)" class="clickable">
 					<td>{{batch.name}}</td>
 					<td>{{batch.trainer.fName}} {{batch.trainer.lName}}</td>
 					<td>{{batch.type.name}}</td>
