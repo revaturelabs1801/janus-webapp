@@ -9,17 +9,16 @@ import { BatchType } from '../models/batchtype.model';
 @Injectable()
 export class SessionService {
   bamUser: BamUser;
-  batch: Batch;
 
   public selectedBatchSubject = new Subject<Batch>();
 
   constructor(private userService: UsersService) {
     this.bamUser = {
-      'userId': 18,
+      'userId': 3,
       'fName': 'Ryan',
       'mName': null,
       'lName': 'Lessley',
-      'email': 'petester@revature.com',
+      'email': 'rl@revature.com',
       'pwd': '1234',
       'role': 2,
       'batch': null,
@@ -29,9 +28,7 @@ export class SessionService {
       'pwd2': null,
       'assignForceID': 9
     };
-    this.batch = new Batch(448, null, null, null, null, new BatchType(1, 'Java', 1));
     sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));
-    sessionStorage.setItem('batch', JSON.stringify(this.batch));
   }
 
   /**
