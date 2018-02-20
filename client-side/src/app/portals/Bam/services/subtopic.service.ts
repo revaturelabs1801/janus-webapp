@@ -43,10 +43,21 @@ export class SubtopicService {
     );
   }
 
+  /**
+   * Removes all subtopics from the given batch's calendar
+   * @param batchId
+   * @author Charlie Harris | Batch: 1712-dec11-java-steve
+   */
   removeAllSubtopicsFromBatch(batchId: number) {
     return this.http.post(environment.subtopic.removeAllSubtopics(batchId), httpOptions);
   }
 
+  /**
+   * Checks whether the given batch has any subtopics in its calendar
+   * Returns request object with status 200 if the batch contains subtopics, 204 otherwise
+   * @param batchId
+   * @author Charlie Harris | Batch: 1712-dec11-java-steve
+   */
   isPopulated(batchId: number) {
     return this.http.get(environment.subtopic.isPopulated(batchId), httpOptions);
   }
