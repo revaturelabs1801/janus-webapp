@@ -9,11 +9,12 @@
                 </h5>
               </div>
               <div class="col-sm-2 col-md-2 col-lg-2 text-right">
-                  <div *ngIf="!readOnly" class="fa fa-times-circle removeWeekBtn" data-toggle="dropdown">              
+                  <i *ngIf="!readOnly" class="fa fa-times-circle" data-toggle="dropdown"></i>
+                  <div class="removeWeekBtn" >              
                     <div class = "dropdown-menu" role="menu" >
                      <p>Delete Week #{{weekNum}}?</p>
-                     <div class="hoverRed" (click)="removeWeekCall()">Yes</div>
-                     <div class="hoverRed"> No</div>
+                     <button class="btn btn-primary hoverRed" (click)="removeWeekCall()">Yes</button>
+                     <button class="btn btn-primary hoverRed"> No</button>
                     </div>
                 </div>
               </div>
