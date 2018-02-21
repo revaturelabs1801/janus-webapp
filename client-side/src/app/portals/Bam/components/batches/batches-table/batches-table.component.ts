@@ -23,13 +23,4 @@ export class BatchesTableComponent implements OnInit {
     this.filtered = this.batches;
   }
 
-  /**
-   * UNIMPLEMENTED
-   * on-click function for batch
-   * @author Charlie Harris | 1712-dec10-java-steve
-   */
-  viewBatch(batch) {
-    this.sessionService.putSelectedBatchIntoSession(batch);
-  }
-
 }
