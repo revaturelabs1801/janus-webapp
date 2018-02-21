@@ -35,24 +35,23 @@
                             <span (click)="addWeek()">
                                 <i class="cursor fa fa-plus fa-2x"></i>
                             </span>
-                            <div id="deleteMenu" class="dropdown fa fa-trash fa-2x cursor dropleft" data-toggle="dropdown">
-                                <div class="dropdown-menu">
-                                    <li class="dropdown-submenu1">
-                                        <a class="test hoverRed">Clear All Weeks</a>
-                                        <ul class="dropdown-menu">
-                                            <p>Are You Sure?</p>
-                                            <li (click)="clearAllWeeks()">Yes</li>
-                                            <li>No</li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-submenu2">
-                                        <a class="test hoverRed">Clear All Subtopics</a>
-                                        <ul class="dropdown-menu">
-                                            <p>Are You Sure?</p>
-                                            <li (click)="truncateWeeks()">Yes</li>
-                                            <li>No</li>
-                                        </ul>
-                                    </li>
+                            <i id="deleteMenu" class="dropdown fa fa-trash fa-2x cursor dropleft" data-toggle="dropdown"></i>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-submenu1">
+                                    <div class="btn btn-block clear-week hover-delete text-left">Clear All Weeks</div>
+                                    <ul class="dropdown-menu">
+                                        <p class="font-weight-bold">Are You Sure?</p>
+                                        <button class="btn btn-primary" (click)="clearAllWeeks()">Yes</button>
+                                        <button class="btn btn-default" >No</button>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-submenu2">
+                                    <div class="btn btn-block clear-subtopic hover-delete text-left">Clear All Subtopics</div>
+                                    <ul class="dropdown-menu">
+                                        <p class="font-weight-bold">Are You Sure?</p>
+                                        <button class="btn btn-primary" (click)="truncateWeeks()">Yes</button>
+                                        <button class="btn btn-default" >No</button>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

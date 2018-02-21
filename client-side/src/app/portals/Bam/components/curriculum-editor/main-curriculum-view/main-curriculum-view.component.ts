@@ -58,23 +58,23 @@ export class MainCurriculumViewComponent implements OnInit {
     dropdownScript() {
         $(document).ready(function () {
             $('#deleteMenu').on('click', function (e) {
-                $('.dropdown-submenu1 a.test').next('ul').hide();
-                $('.dropdown-submenu2 a.test').next('ul').hide();
+                $('.dropdown-submenu1 div.clear-week').next('ul').hide();
+                $('.dropdown-submenu2 div.clear-subtopic').next('ul').hide();
             });
         });
 
         $(document).ready(function () {
-            $('.dropdown-submenu1 a.test').on('click', function (e) {
+            $('.dropdown-submenu1 div.clear-week').on('click', function (e) {
                 $(this).next('ul').toggle();
-                $('.dropdown-submenu2 a.test').next('ul').hide();
+                $('.dropdown-submenu2 div.clear-subtopic').next('ul').hide();
                 e.stopPropagation();
                 e.preventDefault();
             });
         });
         $(document).ready(function () {
-            $('.dropdown-submenu2 a.test').on('click', function (e) {
+            $('.dropdown-submenu2 div.clear-subtopic').on('click', function (e) {
                 $(this).next('ul').toggle();
-                $('.dropdown-submenu1 a.test').next('ul').hide();
+                $('.dropdown-submenu1 div.clear-week').next('ul').hide();
                 e.stopPropagation();
                 e.preventDefault();
             });
@@ -349,7 +349,7 @@ export class MainCurriculumViewComponent implements OnInit {
 /**
  * Opens the modal with id areYouSurePopulateCalendar
  * @author Charlie Harris | 1712-dec11-java-steve
- * @param isMaster 
+ * @param isMaster
  */
 areYouSurePopulateCalendar(isMaster) {
     if (isMaster === 1) {

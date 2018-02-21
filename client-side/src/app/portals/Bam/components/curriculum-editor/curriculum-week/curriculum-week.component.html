@@ -12,9 +12,9 @@
                   <i *ngIf="!readOnly" class="fa fa-times-circle" data-toggle="dropdown"></i>
                   <div class="removeWeekBtn" >              
                     <div class = "dropdown-menu" role="menu" >
-                     <p>Delete Week #{{weekNum}}?</p>
-                     <button class="btn btn-primary hoverRed" (click)="removeWeekCall()">Yes</button>
-                     <button class="btn btn-primary hoverRed"> No</button>
+                     <p class="font-weight-bold">Delete Week #{{weekNum}}?</p>
+                     <button class="btn btn-primary hover-delete" (click)="removeWeekCall()">Yes</button>
+                     <button class="btn btn-primary hover-delete"> No</button>
                     </div>
                 </div>
               </div>
