@@ -1,7 +1,3 @@
 .my-pagination /deep/ .ngx-pagination .current {
     background: var(--orange);
 }
-
-.page-sel {
-    text-align: center;
-}  
