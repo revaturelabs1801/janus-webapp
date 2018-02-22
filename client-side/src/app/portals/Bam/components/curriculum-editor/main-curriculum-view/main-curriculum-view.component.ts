@@ -48,6 +48,15 @@ export class MainCurriculumViewComponent implements OnInit {
     ngOnInit() {
         this.displayWeekView();
         this.dropdownScript();
+        this.curriculumService.currentSelectedCurr.subscribe(
+            data => { this.selectedCurr = data;
+            if (this.selectedCurr && this.selectedCurr.id == null) {
+                this.isNewVer = true;
+            } else {
+                this.isNewVer = false;
+            }
+        }
+        );
     }
 
     /**

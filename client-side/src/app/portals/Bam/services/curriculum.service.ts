@@ -27,6 +27,8 @@ export class CurriculumService {
   private allTopicPoolData = new BehaviorSubject<SubtopicName[]>([]);
   currentTopicPoolData = this.allTopicPoolData.asObservable();
 
+  private selectedCurrData = new BehaviorSubject<Curriculum>(null);
+  currentSelectedCurr = this.selectedCurrData.asObservable();
 
   constructor(private http: HttpClient, private modalService: NgbModal) { }
 
@@ -36,7 +38,11 @@ export class CurriculumService {
 
   refreshCurriculums(data: Curriculum[]) {
     this.allCurriculumData.next(data);
-}
+  }
+
+  changeCurriculum(data: Curriculum) {
+  this.selectedCurrData.next(data);
+  }
 
   /**  This gets all curriculums from the API
    *   @author: Mohamad Alhindi
