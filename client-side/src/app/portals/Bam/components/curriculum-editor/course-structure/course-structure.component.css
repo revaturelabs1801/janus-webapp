@@ -42,3 +42,7 @@
 .fa-plus-circle {
     color: var(--white);
 }
+
+.new-curriculum {
+    border: 1px solid var(--orange);
+}

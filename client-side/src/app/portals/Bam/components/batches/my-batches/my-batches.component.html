@@ -24,7 +24,7 @@
             
         </div>
         <div class="col">
-            <app-batches-search *ngIf="batches" (change)="setFilterText($event)" class="pull-right"></app-batches-search>
+            <app-batches-search *ngIf="batches" class="pull-right" (change)="setFilterText($event)" ></app-batches-search>
         </div>
     </div>
     
@@ -44,5 +44,4 @@
             </div>
         </div>
     </div>
-
 </div>
