@@ -201,7 +201,8 @@ export const environment = {
         getBatchByIdURL: (batchId: number) => `${bam}/batches/byid/${batchId}/`,
         updateBatchUrl: () => `${bam}/batches/updatebatch`,
         getAllBatchTypesUrl: () => `${bam}/batches/batchtypes`,
-        removeSubtopicFromBatchUrl: (subtopicId: number) => `${bam}/batches/${subtopicId}`
+        removeSubtopicFromBatchUrl: (subtopicId: number) => `${bam}/batches/${subtopicId}`,
+        getAllInProgressUrl: () => `${bam}/batches/currentbatches`
     },
 
     curriculum: {
@@ -212,7 +213,8 @@ export const environment = {
         getSubtopicPoolAllUrl: () => `${bam}/curriculum/subtopicpool`,
         addCurriculumUrl: () => `${bam}/curriculum/addcurriculum`,
         makeCurriculumMasterByIdUrl: (id: number) => `${bam}/curriculum/makemaster/${id}`,
-        syncBatchByIdUrl: (id: number) => `${bam}/curriculum/syncbatch/${id}`
+        syncBatchByIdUrl: (id: number) => `${bam}/curriculum/syncbatch/${id}`,
+        deleteCurriculumVersionUrl: () => `${bam}/curriculum/deleteversion`
     },
 
     calendar: {
@@ -252,8 +254,11 @@ export const environment = {
     },
 
     subtopic: {
-       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) => `${bam}/subtopic/${typeId}/${topicId}/${subtopicName}`,
-       removeSubtopic: (subtopicId: number) => `${bam}/subtopic/${subtopicId}`,
+       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) =>
+        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`,
+       removeSubtopic: (subtopicId: number) => `${bam}/subtopic/remove/${subtopicId}`,
+       removeAllSubtopics: (batchId: number) => `${bam}/subtopic/removebybatch/${batchId}/`,
+       isPopulated: (batchId: number) => `${bam}/subtopic/ispopulated/${batchId}/`
     },
 
     addsubtopics: {

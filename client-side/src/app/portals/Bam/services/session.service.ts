@@ -4,6 +4,7 @@ import { BamUser } from '../models/bamuser.model';
 import { Batch } from '../models/batch.model';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { BatchType } from '../models/batchtype.model';
 
 @Injectable()
 export class SessionService {
@@ -26,18 +27,18 @@ export class SessionService {
       'skype': 'rl_skype',
       'pwd2': null,
       'assignForceID': 9
-  };
-  localStorage.setItem('bamUser', JSON.stringify(this.bamUser));
-   }
+    };
+    sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));
+  }
 
-   /**
-   * Puts a hard coded user into the session
-   * @author James Holzer | Batch: 1712-dec10-java-steve
-   * @returns
-   */
+  /**
+  * Puts a hard coded user into the session
+  * @author James Holzer | Batch: 1712-dec10-java-steve
+  * @returns
+  */
   putUserInSession(): Observable<BamUser> {
     return this.userService.updateUser(this.bamUser).map(data => {
-      localStorage.setItem('bamUser', JSON.stringify(this.bamUser));
+      sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));
       return data;
     });
   }
@@ -48,7 +49,7 @@ export class SessionService {
    * @returns BamUser
    */
   getUser(): BamUser {
-    const current: BamUser = JSON.parse(localStorage.getItem('bamUser'));
+    const current: BamUser = JSON.parse(sessionStorage.getItem('bamUser'));
     return current;
   }
 

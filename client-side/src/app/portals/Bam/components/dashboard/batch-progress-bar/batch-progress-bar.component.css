@@ -1,11 +1,11 @@
-.card {
+/*.card {
     border-color: var(--dark-grey);
-}
+}*/
 
 .card-header {
     background-color:  var(--dark-grey);
 }
 
-::ng-deep .progress-bar {
+::ng-deep .bg-info {
 	background-color:  var(--dark-grey) !important;	
 }

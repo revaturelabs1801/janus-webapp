@@ -9,6 +9,7 @@ import { AllBatchesComponent } from './components/batches/all-batches/all-batche
 import { MainCurriculumViewComponent } from './components/curriculum-editor/main-curriculum-view/main-curriculum-view.component';
 import { CalendarComponent } from './components/calendar/calendar-view/calendar.component';
 import { AddSubtopicComponent } from './components/calendar/add-subtopic/add-subtopic.component';
+import { BoomComponent } from './components/boom/boom.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,7 @@ const routes: Routes = [
         component: EditBatchComponent
       },
       {
-        path: 'curriculum-view',
+        path: 'curriculum',
         component: MainCurriculumViewComponent
       },
       {
@@ -44,8 +45,8 @@ const routes: Routes = [
         component: CalendarComponent
       },
       {
-        path: 'add-subtopic',
-        component: AddSubtopicComponent
+        path: 'boom',
+        component: BoomComponent
       },
       {
         path: '**',

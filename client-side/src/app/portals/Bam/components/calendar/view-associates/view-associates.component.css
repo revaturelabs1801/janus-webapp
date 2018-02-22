@@ -1,15 +1,7 @@
 .my-pagination /deep/ .ngx-pagination .current {
-    background: #fa7427;
-  }
+    background: var(--orange);
+}
 
-.page-sel{
+.page-sel {
     text-align: center;
 }  
-.input-group-addon{
-    background: #fa7427;
-    color: white;
-}
-
-.head{
-font-weight: bold;
-}

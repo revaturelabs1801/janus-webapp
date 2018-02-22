@@ -8,6 +8,7 @@ import { DragndropService } from '../../../services/dragndrop.service';
 import { TopicService } from '../../../services/topic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { SearchTextService } from '../../../services/search-text.service';
+import { AlertService } from '../../../services/alert.service';
 
 // Used below to toggle add subtopic modal
 declare let $: any;
@@ -25,16 +26,17 @@ export class TopicPoolComponent implements OnInit {
   searchText: string;
   subArray: Array<SubtopicName[]> = new Array<SubtopicName[]>();
   subTopicName: SubtopicName[] = [];
+  topicPoolCacheData: SubtopicName[] = [];
   @Input() readOnly: boolean;
   selectedTopicId: number;
-  topicPoolCacheData;
 
   constructor(private curriculumService: CurriculumService,
     public curriculumWeekComponent: CurriculumWeekComponent,
     private dndService: DragndropService,
     private searchTextService: SearchTextService,
     private topicService: TopicService,
-    private subtopicService: SubtopicService
+    private subtopicService: SubtopicService,
+    private alertService: AlertService
   ) { }
 
   @Output() currentlyDragged = new EventEmitter();
@@ -75,6 +77,7 @@ export class TopicPoolComponent implements OnInit {
         this.initTopics();
         this.uniqueTopics();
         this.getSubTopics();
+        this.initFilterTopicListener();
     }
 
   }
@@ -196,10 +199,13 @@ export class TopicPoolComponent implements OnInit {
       topic => {
         this.subtopicService.addSubTopicName(newSubTopic, topic.id, 1).subscribe(
           data => {
-            this.uniqarrFiltered = [];
+            this.uniqarrFiltered.push(topic.name);
             this.subArray = new Array<SubtopicName[]>();
-            this.getTopics();
-          }
+            this.topicPoolCacheData.push(data);
+            this.getSubTopics();
+            this.alertService.alert('success', 'Successfully added Topic');
+          },
+          err => this.alertService.alert('danger', 'Could not add topic')
         );
       }
     );
@@ -235,10 +241,12 @@ export class TopicPoolComponent implements OnInit {
     if (newSubTopic.length > 1) {
       this.subtopicService.addSubTopicName(newSubTopic, this.selectedTopicId, 1).subscribe(
         data => {
-          this.uniqarrFiltered = [];
           this.subArray = new Array<SubtopicName[]>();
-          this.getTopics();
-        }
+          this.topicPoolCacheData.push(data);
+          this.getSubTopics();
+          this.alertService.alert('success', 'Successfully added Subtopic');
+        },
+        err => this.alertService.alert('success', 'Unable to add Subtopic')
       );
       this.selectedTopicId = 0;
     }

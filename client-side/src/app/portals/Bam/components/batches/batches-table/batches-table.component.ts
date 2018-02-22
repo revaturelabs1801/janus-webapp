@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core/';
 import { Batch } from '../../../models/batch.model';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-batches-table',
@@ -16,18 +17,10 @@ export class BatchesTableComponent implements OnInit {
   filtered: Batch[];
   pageNum = 1;
 
-  constructor() { }
+  constructor(private sessionService: SessionService) { }
 
   ngOnInit() {
     this.filtered = this.batches;
-  }
-
-  /**
-   * UNIMPLEMENTED
-   * on-click function for batch
-   * @author Charlie Harris | 1712-dec10-java-steve
-   */
-  viewBatch() {
   }
 
 }

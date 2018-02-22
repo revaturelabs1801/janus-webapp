@@ -1,40 +1,44 @@
-<ul class="navbar-nav ml-auto">
+<ul class="navbar-nav ml-auto margin-nav">
+
   <li class="nav-item">
     <a class="nav-link" routerLink="/Bam/home">Home</a>
   </li>
-  <li class="nav-item" routerLinkActive="activeLink">
-    <ul class="navbar-nav mr-auto">
-      <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
-        <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>Batches</a>
+
+  <li class="nav-item" (click)="$event.stopPropagation()" routerLinkActive="activeLink">
+    <ul class="navbar-nav mr-auto caliber-adj-onresize">
+      <li #batchDrop="ngbDropdown" id="batchMenu" ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle c-pointer" ngbDropdownToggle>Batches</a>
         <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/allbatches" (click) = "myDrop.close(); $event.stopPropagation()">All Batches</button>
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/mybatches" (click) = "myDrop.close(); $event.stopPropagation()">My Batches</button>
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/allbatches" (click)="batchDrop.close()">All Batches</button>
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/mybatches" (click)="batchDrop.close()">My Batches</button>
         </div>
       </li>
     </ul>
   </li>
-  <li class="nav-item" routerLinkActive="activeLink">
-    <ul class="navbar-nav mr-auto">
-      <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
-        <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>Calendar</a>
-        <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/calendar" (click) = "myDrop.close(); $event.stopPropagation()">Calendar</button>
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/editbatch" (click) = "myDrop.close(); $event.stopPropagation()">Edit My Batch</button>
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/viewassociates" (click) = "myDrop.close(); $event.stopPropagation()">View My Associates</button>
-        </div>
-      </li>
-    </ul>
+
+
   <li class="nav-item">
-    <a class="nav-link" routerLink="/Bam/curriculum-view">Curriculum Editor</a>
+    <a class="nav-link" routerLink="/Bam/calendar">Calendar</a>
   </li>
-  <li class="nav-item" routerLinkActive="activeLink">
-    <ul class="navbar-nav mr-auto">
-      <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
-        <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>{{ bamUser.fName }}  {{ bamUser.lName }} ({{ roleTitle }})</a>
+
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/Bam/curriculum">Curriculum Editor</a>
+  </li>
+  
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/Bam/boom">VP/QC</a>
+  </li>
+
+  <li class="nav-item" (click)="$event.stopPropagation()" routerLinkActive="activeLink">
+    <ul class="navbar-nav mr-auto caliber-adj-onresize">
+      <li #myDrop="ngbDropdown" ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle>{{ bamUser.fName }} {{ bamUser.lName }} ({{ roleTitle }})</a>
         <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/update" (click) = "myDrop.close(); $event.stopPropagation()">Update Account</button>
-          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/reset" (click) = "myDrop.close(); $event.stopPropagation()">Reset Password</button> 
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/editbatch" (click)="myDrop.close()"> Edit My Batch </button>
+          <button class="dropdown-item c-pointer f-size" routerLink="/Bam/viewassociates" (click)="myDrop.close()"> View My Associates </button>
         </div>
+      </li>
     </ul>
   </li>
+
 </ul>

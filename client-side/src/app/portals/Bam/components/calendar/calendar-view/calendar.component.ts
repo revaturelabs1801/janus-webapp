@@ -5,11 +5,15 @@ import { Subtopic } from '../../../models/subtopic.model';
 import { CalendarEvent } from '../../../models/calendar-event.model';
 import { CalendarService } from '../../../services/calendar.service';
 import { CalendarStatusService } from '../../../services/calendar-status.service';
+import { AddSubtopicService } from '../../../services/add-subtopic.service';
+import { SubtopicService } from '../../../services/subtopic.service';
+import { Batch } from '../../../models/batch.model';
+import { SessionService } from '../../../services/session.service';
 
 /**
     *	This component will serve as the main calendar view. 
     *   This component leverages the PrimeNG schedule UI component to render a drag and drop calendar for viewing and updating a batch's subtopics
-*	@author Jordan DeLong, Sean Sung (1712-dec10-java-Steve)
+*	@author Francisco Palomino, Jordan DeLong, Sean Sung (1712-dec10-java-Steve)
 *	
 *	
 */
@@ -31,30 +35,31 @@ export class CalendarComponent implements OnInit {
   @ViewChild('status') status: ElementRef;
 
   events: CalendarEvent[] = [];
-  gotoDateValue: Date;
+  gotoDateValue: Date = new Date(Date.now());
   overridenDate: Date;
   draggedCalendarEvent: CalendarEvent;
+  //reference to subtopic being added that already exists
+  existingSubtopic: Subtopic;
+  selectedBatch: Batch;
 
   /* Tooltip data bindings */
   subtopicTooltip: string;
   statusTooltip: string;
+  timeTooltip: string;
+  
 
   trashOpacity: number;
 
-  constructor(private calendarService: CalendarService, private statusService: CalendarStatusService) { }
+  constructor(private calendarService: CalendarService, private statusService: CalendarStatusService,
+    private addSubtopicService: AddSubtopicService, private subtopicService: SubtopicService,
+    private sessionService: SessionService) { }
 
   ngOnInit() {
-    this.calendarService.getSubtopicsByBatchPagination(22506, 0, 34).subscribe(
+    this.selectedBatch = this.sessionService.getSelectedBatch();
+    this.calendarService.getSubtopicsByBatchPagination(this.selectedBatch.id, 0, 300).subscribe(
       subtopics => {
         for (let subtopic of subtopics) {
-          let calendarEvent = new CalendarEvent();
-
-          calendarEvent.subtopicId = subtopic.subtopicId;
-          calendarEvent.title = subtopic.subtopicName.name;
-          calendarEvent.start = new Date(subtopic.subtopicDate);
-          calendarEvent.status = subtopic.status.name;
-          calendarEvent.color = this.statusService.getStatusColor(calendarEvent.status);
-
+          let calendarEvent = this.calendarService.mapSubtopicToEvent(subtopic);
           this.events.push(calendarEvent);
         }
         this.overridenDate = this.events[0].start;
@@ -70,7 +75,7 @@ export class CalendarComponent implements OnInit {
     if (window.innerWidth < 1000) {
       this.fc.defaultView = "listMonth";
       this.fc.header = {
-        left: 'agendaDay,basicWeek,listMonth',
+        left: 'agendaDay,agendaWeek,listMonth',
         center: 'title',
         right: 'today prev,next'
       }
@@ -82,30 +87,37 @@ export class CalendarComponent implements OnInit {
         right: 'today prev,next'
       }
     }
-
+    this.fc.allDaySlot = false;
+    this.fc.eventDurationEditable = false;
     this.fc.options = {
-      defaultDate: Date.now(),
+      defaultDate: this.selectedBatch.startDate,
       nowIndicator: true,
       navLinks: true,
       weekNumbers: true,
       weekends: true,
       droppable: true,
-      eventLimit: 3,
+      eventLimit: 5,
       longPressDelay: 100,
       dragRevertDuration: 0,
       scrollTime: '09:00:00',
+      zIndex: -1,
       businessHours: {
         // days of week. an array of zero-based day of week integers (0=Sunday)
         dow: [1, 2, 3, 4, 5], // Monday - Friday
 
         start: '9:00', // a start time (9am)
         end: '17:00', // an end time (5pm)
-      }
+      },
+      minTime: '08:00:00',
+      maxTime: '18:00:00',
+      defaultTimedEventDuration: '01:00:00',
+      forceEventDuration: false
     }
 
     $('.fc-trash').droppable(
       {
         accept: "*",
+        scope: "fc-deletable",
 
         drop: (event, ui) => this.trashDropEvent(event, ui, this.draggedCalendarEvent),
 
@@ -138,9 +150,10 @@ export class CalendarComponent implements OnInit {
     clickedTopic.color = this.statusService.getStatusColor(calendarEvent.status);
     calendarEvent.color = clickedTopic.color;
 
-    this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
-    this.addEvent(calendarEvent);
-    console.log(this.events);
+    this.calendarService.updateTopicStatus(calendarEvent, this.selectedBatch.id).subscribe();
+    this.updateEvent(calendarEvent);
+    this.fc.updateEvent(event.calEvent);
+    
   }
 
   /**
@@ -166,17 +179,48 @@ export class CalendarComponent implements OnInit {
     calendarEvent.color = droppedTopic.color;
 
     //update date and status synchronously
-    this.calendarService.changeTopicDate(droppedTopic.subtopicId, 22506, milliDate)
+    this.calendarService.changeTopicDate(droppedTopic.subtopicId, this.selectedBatch.id, milliDate)
       .subscribe(
       response => {
-        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+        this.calendarService.updateTopicStatus(calendarEvent, this.selectedBatch.id).subscribe();
       },
       error => {
-        this.calendarService.updateTopicStatus(calendarEvent, 22506).subscribe();
+        this.calendarService.updateTopicStatus(calendarEvent, this.selectedBatch.id).subscribe();
       }
       );
     this.updateEvent(calendarEvent);
     this.fc.updateEvent(droppedTopic);
+  }
+
+  /**
+  * This function handles new external subtopics being dropped onto the calendar.
+  * The event.jsEvent.target has data attached to it under the key "subtopic" and comes in as a Subtopic object
+  * Check if the subtopic already exists on the calendar before adding.
+  * @param event
+  */
+  handleDrop(event) {
+    let newSubtopic = $(event.jsEvent.target).data("subtopic");
+    //time not needed for non-month views
+    if (event.resourceId.name != "month") {
+      newSubtopic.subtopicDate = new Date(event.date.format());
+    } else {
+      newSubtopic.subtopicDate = new Date(event.date.format() + "T09:00:00-05:00");
+    }
+    let calendarEvent = this.calendarService.mapSubtopicToEvent(newSubtopic);
+    let existingIndex;
+
+    if ((existingIndex = this.eventExists(calendarEvent)) > -1) {
+      this.existingSubtopic = newSubtopic;
+      this.existingSubtopic.subtopicId = this.events[existingIndex].subtopicId;
+      $('#add-existing-subtopic-modal').modal('show');
+      return;
+    }
+
+    let index = this.addEvent(calendarEvent);
+    this.addSubtopicService.addSubtopic(newSubtopic)
+      .subscribe(subtopic => {
+        this.addEvent(this.calendarService.mapSubtopicToEvent(subtopic));
+      });
   }
 
   /**
@@ -188,31 +232,36 @@ export class CalendarComponent implements OnInit {
    * @author Sean Sung, Francisco Palomino (1712-dec10-java-Steve)
    */
   handleEventMouseover(event) {
-    $(event.jsEvent.currentTarget).draggable(
-      {
-        revert: true,
-        revertDuration: DRAG_REVERT_DURATION,
-        zIndex: -500
-      }
-    );
+    if (event.view.name == "month") {
+      $(event.jsEvent.currentTarget).draggable(
+        {
+          scope: "fc-deletable",
+          revert: true,
+          revertDuration: DRAG_REVERT_DURATION,
+          zIndex: 1
+        }
+      );
+    }
     this.subtopicTooltip = event.calEvent.title;
     this.statusTooltip = event.calEvent.status;
-
+    this.timeTooltip = event.calEvent.start.format("h:mm a");
     //calculate y point of tooltip to be below mouse
     let y = event.jsEvent.target.getBoundingClientRect().top;
     let offsetY = this.body.nativeElement.getBoundingClientRect().top;
-    y = y - offsetY + 140;
+    y = y - offsetY + 120;
 
     this.status.nativeElement.style.background = this.statusService.getStatusColor(this.statusTooltip);
     this.tooltip.nativeElement.style.display = 'inline';
     this.tooltip.nativeElement.style.top = y + 'px';
     this.tooltip.nativeElement.style.left = event.jsEvent.clientX + 'px';
+    this.tooltip.nativeElement.style.pointerEvents = 'none';
   }
 
   /* Hides tooltip on mouse out */
   handleEventMouseout(event) {
     this.tooltip.nativeElement.style.display = 'none';
   }
+
 
   /**
    * Convert values stored in the event variable back to a CalendarEvent object
@@ -221,6 +270,7 @@ export class CalendarComponent implements OnInit {
    */
   mapSubtopicFromEvent(event): CalendarEvent {
     let calendarEvent = new CalendarEvent();
+    calendarEvent.subtopicNameId = event.subtopicNameId;
     calendarEvent.subtopicId = event.subtopicId;
     calendarEvent.title = event.title;
     calendarEvent.color = event.color;
@@ -233,12 +283,12 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Updates the event array object to match the calendar view.
-   * This is called on 
+   * This is called on internal drop events
    * @param changedSubtopic 
    */
   updateEvent(changedSubtopic: CalendarEvent) {
     let index = this.eventExists(changedSubtopic);
-    if(index == 0) {
+    if (index == 0) {
       this.overridenDate = changedSubtopic.start;
     }
     //reset the first index date that gets overriden on drops
@@ -251,15 +301,19 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Removes event if it already exists and then inserts new event to this.events
+   * Returns index where event was added
    * @param calendarEvent 
    */
-  addEvent(calendarEvent: CalendarEvent) {
+  addEvent(calendarEvent: CalendarEvent): number {
     let index = this.eventExists(calendarEvent);
+
     if (index > -1) {
       this.events.splice(index, 1, calendarEvent);
     } else {
       this.events.push(calendarEvent);
+      index = this.events.length - 1;
     }
+    return index;
   }
 
   /**
@@ -281,23 +335,43 @@ export class CalendarComponent implements OnInit {
    */
   eventExists(calendarEvent: CalendarEvent): number {
     for (let i = 0; i < this.events.length; i++) {
-      if (this.events[i].title == calendarEvent.title) {
+      if (this.events[i].subtopicNameId == calendarEvent.subtopicNameId) {
         return i;
       }
     }
     return -1;
   }
 
-    /**
-   * Callback function to handle drop events that land on the trash icon
-   * Deletes existing subtopics from the batch
-   * 
-   * @param event 
-   * @param ui 
-   * @param calendarEvent 
-   */
+  /**
+ * Callback function to handle drop events that land on the trash icon
+ * 
+ * @param event 
+ * @param ui 
+ * @param calendarEvent 
+ */
   trashDropEvent(event, ui, calendarEvent: CalendarEvent) {
     event.target.style.opacity = 1;
     this.removeEvent(this.eventExists(calendarEvent));
+    this.subtopicService.removeSubtopicFromBatch(calendarEvent.subtopicId).subscribe();
   }
+
+  /**
+   * Event handler for adding existing subtopics when a user clicks yes in modal popup.
+   * Simply updates the date.
+   * @param subtopic 
+   */
+  handleAddExistingSubtopic(subtopic: Subtopic) {
+    let index = this.addEvent(this.calendarService.mapSubtopicToEvent(subtopic));
+    this.calendarService.changeTopicDate(subtopic.subtopicId, this.selectedBatch.id, subtopic.subtopicDate.getTime())
+      .subscribe();
+  }
+
+  handleViewRender($event)
+  {
+    
+    this.gotoDateValue = new Date(this.fc.getDate().stripTime().format()+"T09:00:00-05:00");
+    
+  }
+
+  
 }

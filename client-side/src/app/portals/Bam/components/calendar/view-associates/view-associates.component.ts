@@ -23,12 +23,13 @@ export class ViewAssociatesComponent implements OnInit {
   p: number = 1;
   associateList: BamUser[] = [] ;
   searchTerm: string;
-  order: string = 'fName';
+  order: string = 'lName';
   reverse: boolean = false;
   sessionUser: BamUser;
   currentBatch: Batch;
-  constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService) { }
-
+  constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService, 
+    private orderPipe: Ng2OrderPipe ) {
+    }
   ngOnInit() {
     this.loadAssociates();
   }
@@ -37,7 +38,7 @@ export class ViewAssociatesComponent implements OnInit {
    * Gets the trainers associate in the batch
    */
   loadAssociates() {
-    this.currentBatch = JSON.parse(sessionStorage.getItem('batch'));
+    this.currentBatch = this.sessionService.getSelectedBatch();
     if (this.currentBatch != null) {
       this.usersService.getUsersInBatch(this.currentBatch.id).subscribe(data => {
         console.log(data);

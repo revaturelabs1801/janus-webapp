@@ -7,10 +7,10 @@
 				<div *ngIf="!showSpinner">
 					<h5 class="card-title">Progress by Day</h5>
 					{{percentCompleted}}% Days Completed
-					<p><ngb-progressbar type="primary" [value]="percentCompleted" [height]="20">{{percentCompleted}}%</ngb-progressbar></p>
+					<p><ngb-progressbar class="dashboard-progess" type="info" [value]="percentCompleted" [height]="20">{{percentCompleted}}%</ngb-progressbar></p>
 					<div *ngIf="this.subTopics !=null"><h5 class="card-title">Progress by Subtopic</h5>
 					{{subPercentCompleted}}% Completed/Cancelled
-					<p><ngb-progressbar type="info" [value]="subPercentCompleted" [height]="20">{{subPercentCompleted}}%</ngb-progressbar></p></div>
+					<p><ngb-progressbar class="dashboard-progess" type="info" [value]="subPercentCompleted" [height]="20">{{subPercentCompleted}}%</ngb-progressbar></p></div>
 				</div>
 				<div *ngIf="subTopicMissed > 0">
 					<h5 class="card-title">Topics Missed</h5>
