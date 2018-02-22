@@ -44,7 +44,7 @@ export class CourseStructureComponent implements OnInit {
         console.log(error);
       }
     );
-    this.messageEvent.emit(currVersion);
+    this.curriculumService.changeCurriculum(currVersion);
   }
 
   /**
