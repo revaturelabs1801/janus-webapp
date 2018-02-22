@@ -254,7 +254,7 @@ export class MainCurriculumViewComponent implements OnInit {
 
     addWeek() {
         this.allWeeks.push(new Array<CurriculumSubtopic>());
-        this.alertService.alert('success', 'Successfully add a week to the bottom. Save is required.');
+        this.alertService.alert('success', 'Successfully added a week to the bottom. Save is required.');
     }
 
     /**
@@ -310,7 +310,6 @@ export class MainCurriculumViewComponent implements OnInit {
      */
     clearAllWeeks() {
         this.allWeeks = [];
-        this.alertService.alert('success', 'Successfully removed all weeks. Save is required.');
     }
 
     /**
@@ -329,7 +328,7 @@ export class MainCurriculumViewComponent implements OnInit {
         if (empty) {
             this.alertService.alert('danger', 'No Subtopics to Remove');
         } else {
-            this.alertService.alert('success', 'Successfully removed all subtopics from weeks.Save is required.');
+            this.alertService.alert('success', 'Successfully removed all subtopics from weeks. Save is required.');
         }
     }
 
