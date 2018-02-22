@@ -19,7 +19,7 @@ const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.
 const EXCEL_EXTENSION = '.xlsx';
 
 /**
- * Author:Daniel Robinson
+ * @author Daniel Robinson
  * Creates full view of a curriculum's weeks
  */
 @Component({
@@ -254,6 +254,7 @@ export class MainCurriculumViewComponent implements OnInit {
 
     addWeek() {
         this.allWeeks.push(new Array<CurriculumSubtopic>());
+        this.alertService.alert('success', 'Successfully added a week to the bottom. Save is required.');
     }
 
     /**
@@ -276,6 +277,7 @@ export class MainCurriculumViewComponent implements OnInit {
      */
     removeWeek(weekNum: number) {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
+        this.alertService.alert('success', 'Successfully removed a Week#' + ( weekNum + 1 ) + '. Save is required.');
     }
 
     /**
@@ -326,7 +328,7 @@ export class MainCurriculumViewComponent implements OnInit {
         if (empty) {
             this.alertService.alert('danger', 'No Subtopics to Remove');
         } else {
-            this.alertService.alert('success', 'Successfully Removed All Subtopics from Weeks');
+            this.alertService.alert('success', 'Successfully removed all subtopics from weeks. Save is required.');
         }
     }
 
