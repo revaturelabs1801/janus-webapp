@@ -30,7 +30,6 @@ export class CurriculumService {
   private selectedCurrData = new BehaviorSubject<Curriculum>(null);
   currentSelectedCurr = this.selectedCurrData.asObservable();
 
-
   constructor(private http: HttpClient, private modalService: NgbModal) { }
 
   changeData(data: CurriculumSubtopic[]) {
@@ -42,7 +41,7 @@ export class CurriculumService {
   }
 
   changeCurriculum(data: Curriculum) {
-    this.selectedCurrData.next(data);
+  this.selectedCurrData.next(data);
   }
 
   /**  This gets all curriculums from the API
