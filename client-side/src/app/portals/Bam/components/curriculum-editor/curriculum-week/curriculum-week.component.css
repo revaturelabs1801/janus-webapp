@@ -42,30 +42,21 @@
     font-weight: 700;
 }
 
-.removeWeekBtn:hover {
-    color: rgb(172, 19, 14);
-}
-
 .noTouch {
     opacity: .7;
     pointer-events: none;
 }
 
-.hoverRed{
-    padding-left: 3px;
-    padding-right: 6px;
-    font-size: 94%;
-}
-
-.hoverRed:hover{
-    background-color: rgb(187, 25, 25);
-    color: white;
-    border-radius: 4px;
-    cursor: url("http://i43.tinypic.com/2n8t1rq.jpg"), auto;
-
-}
-
 .progress {
     width: 100%;
     font-size: 15px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    text-align: center;
+}
+
+.fa-times-circle:hover {
+    color: var(--danger);
 }

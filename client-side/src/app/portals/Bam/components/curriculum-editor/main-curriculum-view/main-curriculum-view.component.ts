@@ -19,7 +19,7 @@ const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.
 const EXCEL_EXTENSION = '.xlsx';
 
 /**
- * Author:Daniel Robinson
+ * @author Daniel Robinson
  * Creates full view of a curriculum's weeks
  */
 @Component({
@@ -48,6 +48,15 @@ export class MainCurriculumViewComponent implements OnInit {
     ngOnInit() {
         this.displayWeekView();
         this.dropdownScript();
+        this.curriculumService.currentSelectedCurr.subscribe(
+            data => { this.selectedCurr = data;
+            if (this.selectedCurr && this.selectedCurr.id == null) {
+                this.isNewVer = true;
+            } else {
+                this.isNewVer = false;
+            }
+        }
+        );
     }
 
     /**
@@ -58,23 +67,23 @@ export class MainCurriculumViewComponent implements OnInit {
     dropdownScript() {
         $(document).ready(function () {
             $('#deleteMenu').on('click', function (e) {
-                $('.dropdown-submenu1 a.test').next('ul').hide();
-                $('.dropdown-submenu2 a.test').next('ul').hide();
+                $('.dropdown-submenu1 div.clear-week').next('ul').hide();
+                $('.dropdown-submenu2 div.clear-subtopic').next('ul').hide();
             });
         });
 
         $(document).ready(function () {
-            $('.dropdown-submenu1 a.test').on('click', function (e) {
+            $('.dropdown-submenu1 div.clear-week').on('click', function (e) {
                 $(this).next('ul').toggle();
-                $('.dropdown-submenu2 a.test').next('ul').hide();
+                $('.dropdown-submenu2 div.clear-subtopic').next('ul').hide();
                 e.stopPropagation();
                 e.preventDefault();
             });
         });
         $(document).ready(function () {
-            $('.dropdown-submenu2 a.test').on('click', function (e) {
+            $('.dropdown-submenu2 div.clear-subtopic').on('click', function (e) {
                 $(this).next('ul').toggle();
-                $('.dropdown-submenu1 a.test').next('ul').hide();
+                $('.dropdown-submenu1 div.clear-week').next('ul').hide();
                 e.stopPropagation();
                 e.preventDefault();
             });
@@ -251,6 +260,7 @@ export class MainCurriculumViewComponent implements OnInit {
 
     addWeek() {
         this.allWeeks.push(new Array<CurriculumSubtopic>());
+        this.alertService.alert('success', 'Successfully added a week to the bottom. Save is required.');
     }
 
     /**
@@ -273,6 +283,7 @@ export class MainCurriculumViewComponent implements OnInit {
      */
     removeWeek(weekNum: number) {
         this.allWeeks = this.allWeeks.filter(w => w !== this.getWeekById(weekNum));
+        this.alertService.alert('success', 'Successfully removed a Week#' + ( weekNum + 1 ) + '. Save is required.');
     }
 
     /**
@@ -323,7 +334,7 @@ export class MainCurriculumViewComponent implements OnInit {
         if (empty) {
             this.alertService.alert('danger', 'No Subtopics to Remove');
         } else {
-            this.alertService.alert('success', 'Successfully Removed All Subtopics from Weeks');
+            this.alertService.alert('success', 'Successfully removed all subtopics from weeks. Save is required.');
         }
     }
 
@@ -349,7 +360,7 @@ export class MainCurriculumViewComponent implements OnInit {
 /**
  * Opens the modal with id areYouSurePopulateCalendar
  * @author Charlie Harris | 1712-dec11-java-steve
- * @param isMaster 
+ * @param isMaster
  */
 areYouSurePopulateCalendar(isMaster) {
     if (isMaster === 1) {
