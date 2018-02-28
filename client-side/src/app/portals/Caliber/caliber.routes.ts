@@ -25,13 +25,28 @@ export const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         canActivate: [RoleGuard],
-        data: { roles: [roles.panelRole, roles.qcRole, roles.stagingRole, roles.trainerRole, roles.vpRole] }
+        data: {
+          roles: [
+            roles.panelRole,
+            roles.qcRole,
+            roles.stagingRole,
+            roles.trainerRole,
+            roles.vpRole
+          ]
+        }
       },
       {
         path: 'manage',
         component: ManageComponent,
         canActivate: [RoleGuard],
-        data: { roles: [roles.panelRole, roles.qcRole, roles.trainerRole, roles.vpRole] }
+        data: {
+          roles: [
+            roles.panelRole,
+            roles.qcRole,
+            roles.trainerRole,
+            roles.vpRole
+          ]
+        }
       },
       {
         path: 'assess',
@@ -48,13 +63,29 @@ export const routes: Routes = [
         path: 'quality',
         component: QualityComponent,
         canActivate: [RoleGuard],
-        data: { roles: [roles.panelRole, roles.qcRole, roles.stagingRole, roles.trainerRole, roles.vpRole] }
+        data: {
+          roles: [
+            roles.panelRole,
+            roles.qcRole,
+            roles.stagingRole,
+            roles.trainerRole,
+            roles.vpRole
+          ]
+        }
       },
       {
         path: 'reports',
         component: ReportsComponent,
         canActivate: [RoleGuard],
-        data: { roles: [roles.panelRole, roles.qcRole, roles.stagingRole, roles.trainerRole, roles.vpRole] }
+        data: {
+          roles: [
+            roles.panelRole,
+            roles.qcRole,
+            roles.stagingRole,
+            roles.trainerRole,
+            roles.vpRole
+          ]
+        }
       },
       {
         path: 'panel',
@@ -72,7 +103,13 @@ export const routes: Routes = [
         component: SettingsComponent,
         canActivate: [RoleGuard],
         data: {
-          roles: [roles.panelRole, roles.qcRole, roles.stagingRole, roles.trainerRole, roles.vpRole]
+          roles: [
+            roles.panelRole,
+            roles.qcRole,
+            roles.stagingRole,
+            roles.trainerRole,
+            roles.vpRole
+          ]
         },
         children: [
           {

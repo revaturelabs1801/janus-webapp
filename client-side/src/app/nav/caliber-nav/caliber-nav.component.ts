@@ -13,39 +13,39 @@ import { CookieService } from 'ngx-cookie-service';
   providers: [ RouteService ],
 })
 export class CaliberNavComponent implements OnInit, OnDestroy {
-  @Input()
-  collapsed = false;
+  @Input() collapsed = false;
 
-  willShow(path) {
-    routes.forEach(r => {
-      if (r.path == path) {
-        console.log(r.data.roles);
-        return r.data.roles.includes(this.cookies.get('role'));
-      }
-    });
-    routes[0].children.forEach(r => {
-      if (r.path == path) {
-        console.log(r.data.roles);
-        return r.data.roles.includes(this.cookies.get('role'));
-      }    });
-    return false;
-  }
-
-  @Output()
-  collapse: EventEmitter<any> = new EventEmitter<any>();
+  @Output() collapse: EventEmitter<any> = new EventEmitter<any>();
 
   private routeService: RouteService;
   private routeSubscription: Subscription;
   private userRole= this.cookies.get('role');
 
   showHome= true;
-  showManage: boolean= this.userRole == 'ROLE_VP' || this.userRole == 'ROLE_TRAINER' || this.userRole == 'ROLE_QC' || this.userRole == 'ROLE_PANEL';
-  showAssess: boolean= this.userRole == 'ROLE_VP' || this.userRole == 'ROLE_TRAINER';
-  showQuality: boolean= this.userRole == 'ROLE_VP' || this.userRole == 'ROLE_QC';
-  showPanel: boolean= this.userRole == 'ROLE_VP' || this.userRole == 'ROLE_PANEL';
+  showManage: boolean= this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_TRAINER' ||
+   this.userRole === 'ROLE_QC' || this.userRole === 'ROLE_PANEL';
+  showAssess: boolean= this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_TRAINER';
+  showQuality: boolean= this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_QC';
+  showPanel: boolean= this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_PANEL';
   showReports= true;
 
   routes: Routes;
+
+  willShow(path) {
+    routes.forEach(r => {
+      if (r.path === path) {
+        console.log(r.data.roles);
+        return r.data.roles.includes(this.cookies.get('role'));
+      }
+    });
+    routes[0].children.forEach(r => {
+      if (r.path === path) {
+        console.log(r.data.roles);
+        return r.data.roles.includes(this.cookies.get('role'));
+      }    });
+    return false;
+  }
+
 
   constructor(routeSrv: RouteService, private cookies: CookieService) {
     this.routeService = routeSrv;
@@ -54,7 +54,7 @@ export class CaliberNavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.routeSubscription = this.routeService.getTopNavRoutes()
-      .subscribe( (routes) => this.routes = routes );
+      .subscribe( (navRoutes) => this.routes = navRoutes );
   }
 
   ngOnDestroy(): void {
