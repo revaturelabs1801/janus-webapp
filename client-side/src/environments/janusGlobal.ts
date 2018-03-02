@@ -26,7 +26,6 @@ export const janusGlobal = {
       homeUrl: '/Bam/home',
       baseUrl: '/Bam',
       imgUrl: '../../assets/bam-phoenix.png'
-    
     }
   ]
 };
