@@ -62,6 +62,9 @@ Servers/
 .worksheet 
 # End of https://www.gitignore.io/api/eclipse
 
+# VSCode Workspace
+*.code-workspace
+
 # node modules
 */node_modules/*
 
