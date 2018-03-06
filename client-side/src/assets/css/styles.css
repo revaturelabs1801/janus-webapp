@@ -37,14 +37,14 @@ li {
 	Revature Colors
 ************************/
 :root {
-	/*** Primary Colors ***/ -
-	-orange: #F26925; -
-	-white: #FFFFF; -
-	-dark-grey: #474C55;
-	/*** Secondary Colors ***/ -
-	-blue: #72A4C2; -
-	-yellow: #FCB414; -
-	-light-grey: #B9B9BA;
+	/*** Primary Colors ***/ 
+	--orange: #F26925; 
+	--white: #FFFFF; 
+	--dark-grey: #474C55;
+	/*** Secondary Colors ***/ 
+	--blue: #72A4C2; 
+	--yellow: #FCB414; 
+	--light-grey: #B9B9BA;
 }
 
 .warning {
@@ -545,7 +545,6 @@ a.save-button .fa-floppy-o {
 	#trainer-assess-table input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	appearance: none;
 	margin: 0;
 }
 
