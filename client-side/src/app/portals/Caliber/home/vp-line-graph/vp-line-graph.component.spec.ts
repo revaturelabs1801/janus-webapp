@@ -10,7 +10,7 @@ import { ColorService } from '../../services/colors/color.service';
 import { VpLineGraphComponent } from './vp-line-graph.component';
 
 
-xdescribe('VpLineGraphComponent', () => {
+describe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;
   let fixture: ComponentFixture<VpLineGraphComponent>;
 

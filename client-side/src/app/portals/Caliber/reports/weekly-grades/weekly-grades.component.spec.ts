@@ -4,7 +4,7 @@ import { WeeklyGradesComponent } from './weekly-grades.component';
 import { Dependencies } from '../../caliber.test.module';
 
 
-xdescribe('WeeklyGradesComponent', () => {
+describe('WeeklyGradesComponent', () => {
   let component: WeeklyGradesComponent;
   let fixture: ComponentFixture<WeeklyGradesComponent>;
 

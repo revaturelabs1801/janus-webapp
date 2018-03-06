@@ -4,7 +4,7 @@ import { CannotDeleteModalComponent } from './cannot-delete-modal.component';
 import { Dependencies } from '../../caliber.test.module';
 
 
-xdescribe('CannotDeleteModalComponent', () => {
+describe('CannotDeleteModalComponent', () => {
   let component: CannotDeleteModalComponent;
   let fixture: ComponentFixture<CannotDeleteModalComponent>;
 

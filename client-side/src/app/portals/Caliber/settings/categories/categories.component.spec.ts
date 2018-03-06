@@ -3,7 +3,7 @@ import { Dependencies } from '../../caliber.test.module';
 import { CategoriesComponent } from './categories.component';
 
 
-xdescribe('CategoriesComponent', () => {
+describe('CategoriesComponent', () => {
   let component: CategoriesComponent;
   let fixture: ComponentFixture<CategoriesComponent>;
 

@@ -4,7 +4,7 @@ import { TrainersComponent } from './trainers.component';
 
 
 
-xdescribe('TrainersComponent', () => {
+describe('TrainersComponent', () => {
   let component: TrainersComponent;
   let fixture: ComponentFixture<TrainersComponent>;
 

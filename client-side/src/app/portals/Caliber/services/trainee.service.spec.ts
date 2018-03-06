@@ -3,7 +3,7 @@ import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { AlertsService } from './alerts.service';
 import { TraineeService } from './trainee.service';
 
-xdescribe('TraineeService', () => {
+describe('TraineeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [

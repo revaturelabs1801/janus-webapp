@@ -3,7 +3,7 @@ import { Dependencies } from '../../../caliber.test.module';
 import { DeactivateLocationComponent } from './deactivatelocation.component';
 
 
-xdescribe('DeactivateLocationComponent', () => {
+describe('DeactivateLocationComponent', () => {
   let component: DeactivateLocationComponent;
   let fixture: ComponentFixture<DeactivateLocationComponent>;
 

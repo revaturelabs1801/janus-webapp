@@ -5,7 +5,7 @@ import { Dependencies } from '../../../../app.test.module';
 import { Trainee } from '../../entities/Trainee';
 
 
-xdescribe('WeeklyFeedbackComponent', () => {
+describe('WeeklyFeedbackComponent', () => {
   let component: WeeklyFeedbackComponent;
   let fixture: ComponentFixture<WeeklyFeedbackComponent>;
   let trainee: Trainee;

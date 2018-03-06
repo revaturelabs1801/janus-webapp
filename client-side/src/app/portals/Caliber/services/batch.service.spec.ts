@@ -3,7 +3,7 @@ import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { ApiService } from '../util/api.service';
 import { BatchService } from './batch.service';
 
-xdescribe('BatchService', () => {
+describe('BatchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [

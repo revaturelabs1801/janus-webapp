@@ -4,7 +4,7 @@ import { WeeklyAuditComponent } from './weekly-audit.component';
 import { Dependencies } from '../../caliber.test.module';
 
 
-xdescribe('WeeklyAuditComponent', () => {
+describe('WeeklyAuditComponent', () => {
   let component: WeeklyAuditComponent;
   let fixture: ComponentFixture<WeeklyAuditComponent>;
 

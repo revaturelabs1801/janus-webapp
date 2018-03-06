@@ -4,7 +4,7 @@ import { Dependencies } from '../../../../app.test.module';
 import { VpBarGraphComponent } from './vp-bar-graph.component';
 
 
-xdescribe('VpBarGraphComponent', () => {
+describe('VpBarGraphComponent', () => {
   let component: VpBarGraphComponent;
   let fixture: ComponentFixture<VpBarGraphComponent>;
 

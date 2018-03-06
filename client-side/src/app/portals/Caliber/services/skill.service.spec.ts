@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { SkillService } from './skill.service';
 
-xdescribe('SkillService', () => {
+describe('SkillService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [

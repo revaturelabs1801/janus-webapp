@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { ClientListService } from './client-list.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-xdescribe('ClientListService', () => {
+describe('ClientListService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [

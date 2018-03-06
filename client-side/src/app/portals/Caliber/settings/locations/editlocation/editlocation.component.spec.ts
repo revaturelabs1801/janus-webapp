@@ -3,7 +3,7 @@ import { Dependencies } from '../../../caliber.test.module';
 import { EditlocationComponent } from './editlocation.component';
 
 
-xdescribe('EditlocationComponent', () => {
+describe('EditlocationComponent', () => {
   let component: EditlocationComponent;
   let fixture: ComponentFixture<EditlocationComponent>;
 

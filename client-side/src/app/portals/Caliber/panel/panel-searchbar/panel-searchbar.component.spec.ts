@@ -8,7 +8,7 @@ import { AlertsService } from '../../services/alerts.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Dependencies } from '../../caliber.test.module';
 
-xdescribe('PanelSearchbarComponent', () => {
+describe('PanelSearchbarComponent', () => {
   let component: PanelSearchbarComponent;
   let fixture: ComponentFixture<PanelSearchbarComponent>;
 

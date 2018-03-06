@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../caliber.test.module';
 import { DeleteTraineeModalComponent } from './delete-trainee-modal.component';
 
-xdescribe('DeleteTraineeModalComponent', () => {
+describe('DeleteTraineeModalComponent', () => {
   let component: DeleteTraineeModalComponent;
   let fixture: ComponentFixture<DeleteTraineeModalComponent>;
 

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../app.test.module';
 import { CaliberNavComponent } from './caliber-nav.component';
 
-xdescribe('CaliberNavComponent', () => {
+describe('CaliberNavComponent', () => {
   let component: CaliberNavComponent;
   let fixture: ComponentFixture<CaliberNavComponent>;
 

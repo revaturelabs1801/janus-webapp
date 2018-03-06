@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { AlertsService } from './alerts.service';
 
-xdescribe('AlertsService', () => {
+describe('AlertsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AlertsService]

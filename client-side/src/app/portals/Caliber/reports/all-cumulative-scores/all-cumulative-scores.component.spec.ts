@@ -4,7 +4,7 @@ import { Dependencies } from '../../caliber.test.module';
 import { AllCumulativeScoresComponent } from './all-cumulative-scores.component';
 
 
-xdescribe('AllCumulativeScoresComponent', () => {
+describe('AllCumulativeScoresComponent', () => {
   let component: AllCumulativeScoresComponent;
   let fixture: ComponentFixture<AllCumulativeScoresComponent>;
 
