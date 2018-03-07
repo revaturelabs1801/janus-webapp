@@ -1,0 +1,141 @@
+<div style="margin-top: 5%"></div>
+<mat-card style="margin-bottom: 1%" *ngIf="userInfo.getUser().role === 'VP of Technology'">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span> Global Settings </span>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <mat-card-content class="spaceBottom">
+    <mat-list>
+      <mat-list-item >
+        <div class="mat-list-item-text">
+          <h3>Timeline Trainers Per Page</h3>
+        </div>
+        <span class="fill-space"></span>
+
+        <mat-form-field *ngIf="settings">
+          <input matInput type="number"  min="0" step="1" [(ngModel)]="trainersPerPage">
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="mat-list-item-text">
+          <h3>Reports Outgoing Grads</h3>
+        </div>
+          <span class="fill-space"></span>
+        <mat-form-field *ngIf="settings">
+          <input matInput type="number"  min="0" step="1" [(ngModel)]="reportGrads">
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="mat-list-item-text">
+          <h3>Reports Candidates Incoming</h3>
+        </div>
+        <span class="fill-space"></span>
+        <mat-form-field *ngIf="settings">
+          <input matInput type="number"  min="0" step="1" [(ngModel)]="reportIncomingGrads">
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="mat-list-item-text">
+          <h3>Default Batch Location</h3>
+        </div>
+        <span class="fill-space"></span>
+        <mat-form-field *ngIf="locations">
+          <mat-select [(ngModel)]="selectedLocation" >
+            <div (click)="resetLocation()">
+              <mat-option value="{{selectedLocation}}"  >{{selectedLocation}}</mat-option>
+            </div>
+            <div *ngFor="let locationOption of locations" (click)="choosingLocation(locationOption)">
+              <mat-option *ngIf="locationOption.active && locationOption.name !== selectedLocation" value= "{{locationOption.name}}">
+                {{locationOption.name}}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="mat-list-item-text">
+          <h3>Default Batch Building</h3>
+        </div>
+        <span class="fill-space"></span>
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedBuilding" >
+              <mat-option value="{{selectedBuilding}}">{{selectedBuilding}}</mat-option>
+            <div *ngFor="let buildingOption of building" (click)="choosingBuilding(buildingOption)">
+              <mat-option *ngIf="buildingOption.active && buildingOption.name !== selectedBuilding" value="{{buildingOption.name}}">
+                {{buildingOption.name}}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="mat-list-item-text">
+          <h3>Minimum Batch Size</h3>
+        </div>
+        <span class="fill-space"></span>
+        <mat-form-field *ngIf="settings">
+          <input matInput type="number"  min="0" step="1" [(ngModel)]="minBatchSize">
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="mat-list-item-text">
+          <h3>Maximum Batch Size</h3>
+        </div>
+        <span class="fill-space"></span>
+        <mat-form-field *ngIf="settings">
+          <input matInput type="number"  min="0" step="1" [(ngModel)]="maxBatchSize">
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="mat-list-item-text">
+          <h3>Default Batch Length</h3>
+        </div>
+        <span class="fill-space"></span>
+        <mat-form-field *ngIf="settings">
+          <input matInput type="number"  min="0" step="1" [(ngModel)]="batchLength">
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <div class="mat-list-item-text">
+          <h3>Minimum Day Between Trainer Batches</h3>
+        </div>
+        <span class="fill-space"></span>
+        <mat-form-field *ngIf="settings">
+          <input matInput type="number"  min="0" step="1" [(ngModel)]="trainerBreakDays">
+        </mat-form-field>
+      </mat-list-item>
+
+
+      <mat-list-item style="padding-top: 3%">
+        <div class="mat-list-item-text">
+          <h3>Default Batch Name Pattern</h3>
+        </div>
+        <span class="fill-space"></span>
+        <span *ngIf="settings">{{settings.defaultNamePattern}}</span>
+      </mat-list-item>
+      <div style="margin-left: 2%">
+        <div>$c = curriculum name</div><br/>
+        <div>$m = month</div><br/>
+        <div>$d = day of week</div><br/>
+        <div>$y = year</div>
+      </div>
+    </mat-list>
+  </mat-card-content>
+  <div style="padding-bottom: 1%" >
+    <span style="display: flex;  align-items: center; justify-content: center;">
+      <button mat-raised-button color="warn" (click)="update()">Update</button>
+      <button style="margin-left: 1%" (click)="cancel()" mat-raised-button>Reset</button> </span>
+  </div>
+</mat-card>

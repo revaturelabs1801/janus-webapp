@@ -1,0 +1,225 @@
+<!--&lt;!&ndash;&lt;!&ndash; IMPORTANT READ HERE FIRST  &ndash;&gt;&ndash;&gt;-->
+<!--
+I have created two ng-shows with two different md-cards, find the section where there are  many empty comment blocks
+The top one is only for the user to change their profileCtrl
+The second md-card/ng-show is for other users to look at other trainers profiles but arent allowed to make a change.
+
+ -->
+<div style="margin-top: 5%; margin-bottom: 5%">
+  <!--<mat-card *ngIf="tId == -1" md-whiteframe="8" ng-cloak>-->
+
+  <mat-card *ngIf="!lockProfile; else publicProfile">
+    <mat-toolbar-row>
+      <mat-toolbar class="md-toolbar">
+        <span>Profile</span>
+      </mat-toolbar>
+    </mat-toolbar-row>
+
+    <!--info section-->
+    <mat-card-content *ngIf="trainer != undefined && skills != undefined">
+      <div fxLayout="row">
+        <div style="padding: 8px">
+          <img style="border-radius: 50%;" alt=""
+               ng-src="https://app.revature.com/core/resources/download/default/interns/image?t=1486138020884"
+               id="displayImage" class="width-200 height-200"
+               src="https://app.revature.com/core/resources/download/default/interns/image?t=1486138020884">
+        </div>
+        <div style="padding: 8px">
+          <div>
+            <form class="nameForm" name="nameForm" (submit)="updateName(nameForm.$valid)" novalidate>
+              <mat-form-field flex>
+                <input matInput placeholder="First Name" name="firstName" [(ngModel)]="trainer.firstName" required>
+              </mat-form-field>
+              <mat-form-field flex>
+                <input matInput placeholder="Last Name" name="lastLast" [(ngModel)]="trainer.lastName" required>
+              </mat-form-field>
+            </form>
+          </div>
+          <div>
+            <!--need to figure out accessing the file, as far as permissions go-->
+            <label> Current Resume: </label>
+            <label *ngIf="trainer.resume != null">{{trainer.resume}}</label>
+            <label *ngIf="trainer.resume == null">No resume on file</label> <br>
+          </div>
+          <div fxLayout="row">
+            <div>
+              <button mat-icon-button (click)="inputResume.click()">
+                <input class="inputFile" #inputResume type="file" (change)="getFiles($event)">
+                <mat-icon matTooltip="Add/Update Resume" position="below" class="revOrange">add_circle</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="myFile != undefined">
+              <label>{{myFile[0].name}}</label>
+              <button mat-button (click)="uploadResume()">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <!--skills section-->
+    <mat-toolbar-row *ngIf="trainer != undefined && skills != undefined">
+      <mat-toolbar class="md-toolbar">
+        <span>Skills</span>
+        <span class="md-toolbar-spacer"></span>
+        <button mat-icon-button (click)="saveTSkills()">
+          <mat-icon matTooltip="Save Skills">save</mat-icon>
+        </button>
+      </mat-toolbar>
+    </mat-toolbar-row>
+
+    <mat-card-content *ngIf="trainer != undefined && skills != undefined">
+      <div class="md-padding">
+        <h2 matSubheader>Select a skill:</h2>
+        <mat-chip-list>
+          <mat-chip style="margin: 8px" *ngFor="let skill of skillsList | orderBy: skill" (click)="addSkill(skill)">
+            {{skill}}
+          </mat-chip>
+        </mat-chip-list>
+        <hr>
+        <h2 matSubheader>Current skills:</h2>
+        <mat-list>
+          <button mat-button class="md-list-item" *ngFor="let skill of trainer.skillsObject | orderBy: 'name'" (click)="removeSkill(skill)">
+            <mat-icon style="color: #FB8C00">stars</mat-icon>
+            <h5>{{skill.name}}</h5>
+          </button>
+        </mat-list>
+      </div>
+    </mat-card-content>
+
+    <!--certifications section-->
+    <mat-toolbar-row *ngIf="trainer != undefined && skills != undefined">
+      <mat-toolbar class="md-toolbar">
+        <span>Certifications</span>
+        <span class="md-toolbar-spacer"></span>
+        <button mat-icon-button (click)="inputCert.click()">
+          <input class="inputFile" #inputCert  type="file" (change)="getCert($event)">
+          <mat-icon matTooltip="Add Certification" class="md-toolbar-icon">add_circle</mat-icon>
+        </button>
+      </mat-toolbar>
+    </mat-toolbar-row>
+
+    <mat-card-content *ngIf="trainer != undefined && skills != undefined">
+      <!--see the list of certifications and remove any that exist-->
+      <div class="md-padding" layout="column">
+        <div class="certAddBox" layout="row" *ngIf="certFile != undefined">
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Certification Name" name="certName" [(ngModel)]="certName" required>
+            </mat-form-field>
+            <br>
+            <label>{{certFile[0].name}}</label>
+            <button mat-button (click)="uploadCertification()" *ngIf="certName != undefined">Update</button>
+            <br>
+          </div>
+        </div>
+        <mat-divider *ngIf="certFile != undefined"></mat-divider>
+        <span *ngIf="trainer.certifications.length == 0">
+              <h6>You have no certifications selected. Try adding some.</h6>
+          </span>
+        <mat-list>
+          <mat-list-item *ngFor="let cert of trainer.certifications">
+            <mat-icon matListIcon style="color: black;">insert_drive_file</mat-icon>
+            <h3 matLine>{{cert.name}}</h3>
+            <span class="md-toolbar-spacer"></span>
+            <button mat-icon-button class="md-icon-button" (click)="removeCertification(cert)">
+              <mat-icon matTooltip="Remove Certification" style="color: black">remove_circle</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="trainer == undefined || skills == undefined">
+      <mat-spinner mode="indeterminate"></mat-spinner>
+    </mat-card-content>
+  </mat-card>
+
+
+  <!--  -->
+  <!--  -->
+  <!--  -->
+  <!--  -->
+  <ng-template #publicProfile>
+    <mat-card>
+      <mat-toolbar-row>
+        <mat-toolbar class="md-toolbar">
+          <span>Profile</span>
+          <span class="md-toolbar-spacer"></span>
+          <button mat-icon-button (click)="backClick()">
+            <mat-icon matTooltip="Back" class="md-toolbar-icon">arrow_back</mat-icon>
+          </button>
+        </mat-toolbar>
+      </mat-toolbar-row>
+
+      <!--info section-->
+      <mat-card-content *ngIf="trainer != undefined && skills != undefined">
+        <div fxLayout="row">
+          <div style="padding: 8px">
+            <img style="border-radius: 50%;" alt=""
+                 ng-src="https://app.revature.com/core/resources/download/default/interns/image?t=1486138020884"
+                 id="displayImage" class="width-200 height-200"
+                 src="https://app.revature.com/core/resources/download/default/interns/image?t=1486138020884">
+          </div>
+          <div fxLayout="column" style="padding: 8px">
+            <div>
+              <h3 matLine>{{trainer.firstName}} {{trainer.lastName}}</h3>
+            </div>
+            <div>
+              <label> Current Resume: </label>
+              <label *ngIf="trainer.resume != null"> {{trainer.resume}}</label>
+              <label *ngIf="trainer.resume == null">No resume on file</label> <br>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <!--skills section-->
+      <mat-toolbar-row *ngIf="trainer != undefined && skills != undefined">
+        <mat-toolbar class="md-toolbar">
+          <span>Skills</span>
+        </mat-toolbar>
+      </mat-toolbar-row>
+
+      <mat-card-content *ngIf="trainer != undefined && skills != undefined">
+        <div class="md-padding">
+          <h2 matSubheader>Current Skills:</h2>
+          <mat-list>
+            <button mat-button class="md-list-item" *ngFor="let skill of trainer.skillsObject | orderBy: 'name'">
+              <mat-icon style="color: #FB8C00">stars</mat-icon>
+              <h5>{{skill.name}}</h5>
+            </button>
+          </mat-list>
+        </div>
+      </mat-card-content>
+
+      <!--certifications section-->
+      <mat-toolbar-row *ngIf="trainer != undefined && skills != undefined">
+        <mat-toolbar class="md-toolbar">
+          <span>Certifications</span>
+        </mat-toolbar>
+      </mat-toolbar-row>
+
+        <!--see the list of certifications-->
+        <mat-card-content *ngIf="trainer != undefined && skills != undefined">
+          <div class="md-padding" layout="column">
+            <mat-divider *ngIf="certFile != undefined"></mat-divider>
+            <span *ngIf="trainer.certifications.length == 0">
+                <h6>No certifications on file.</h6>
+            </span>
+            <mat-list>
+              <mat-list-item *ngFor="let cert of trainer.certifications">
+                <mat-icon matListIcon style="color: black;">insert_drive_file</mat-icon>
+                <h3 matLine>{{cert.name}}</h3>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-card-content>
+
+      <mat-card-content *ngIf="trainer == undefined || skills == undefined">
+        <mat-spinner mode="indeterminate"></mat-spinner>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+
+</div>

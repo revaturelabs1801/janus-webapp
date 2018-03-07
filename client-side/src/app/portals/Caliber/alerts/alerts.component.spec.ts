@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertsComponent } from './alerts.component';
-import { SimpleNotificationsModule } from 'angular2-notifications-lite/src/simple-notifications.module';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AlertsService } from '../services/alerts.service';
-import { NotificationsService } from 'angular2-notifications-lite/src/notifications.service';
+import { NotificationsService } from 'angular2-notifications';
 
 xdescribe('AlertsComponent', () => {
   let component: AlertsComponent;
   let fixture: ComponentFixture<AlertsComponent>;
-  let alertService: ComponentFixture<AlertsComponent>;
-  let notificationsService: ComponentFixture<AlertsComponent>;
+  // let alertService: ComponentFixture<AlertsComponent>;
+  // let notificationsService: ComponentFixture<AlertsComponent>;
 
   const mockAlertServce = {};
   const mockNotificationService = {};

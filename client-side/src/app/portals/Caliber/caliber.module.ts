@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { NavModule } from '../../nav/nav.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
-import { SimpleNotificationsModule } from 'angular2-notifications-lite';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 

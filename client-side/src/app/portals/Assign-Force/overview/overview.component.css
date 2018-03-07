@@ -1,0 +1,16 @@
+.mat-paginator-active {
+  outline-color: orangered;
+  color: orangered;
+}
+
+.fill-space{
+  flex: 1 1 auto;
+}
+
+.mat-icon {
+  margin: 4px;
+}
+
+
+
+

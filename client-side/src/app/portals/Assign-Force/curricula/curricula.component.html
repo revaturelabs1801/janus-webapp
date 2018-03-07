@@ -1,0 +1,130 @@
+<div class="container-curricula">
+  <mat-card>
+    <mat-card-content>
+      <mat-toolbar>
+        <span class="mat-toolbar-title">Curricula</span>
+        <span class="fill-space"></span>
+      </mat-toolbar>
+      <!-- Expandable Content Core Curricula-->
+      <mat-card>
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="panel-title-fix">Core Curricula</span>
+            </mat-panel-title>
+            <mat-panel-description>
+              <span class="fill-space"></span>
+              <button mat-icon-button (click)="createCore($event)" [hidden]="!isAdmin">
+                <mat-icon class="icon-margin-fix-header" matTooltip="Add New Core">add_circle_outline</mat-icon>
+              </button>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="mat-panel-content">
+            <mat-list>
+              <div class="item-detail" *ngFor="let curr of curricula">
+                <div *ngIf="curr.active && curr.core">
+                  <mat-list-item>
+                      <div>
+                        <h3> {{curr.name}}</h3>
+                        <p>Skills:
+                          <span class="skill-name-container" *ngFor="let skillObj of curr.skillObjects">
+                            {{skillObj.name}}
+                          </span>
+                        </p>
+                      </div>
+                      <span class="fill-space"></span>
+                      <!--<button mat-icon-button class="button-orange"  >-->
+                        <mat-icon class="icon-margin-fix" matTooltip="Edit Curriculum" (click)="editCurr($event,curr)" [hidden]="!isAdmin">edit</mat-icon>
+                      <!--</button>-->
+                      <!--<button mat-icon-button class="button-orange" >-->
+                        <mat-icon class="icon-margin-fix" matTooltip="Remove Core" (click)="removeCurr($event, curr)" [hidden]="!isAdmin" >remove_circle</mat-icon>
+                      <!--</button>-->
+                  </mat-list-item>
+                  <hr>
+                </div>
+              </div>
+
+            </mat-list>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      </mat-card>
+
+      <!-- Focuses-->
+      <mat-card>
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header >
+              <mat-panel-title>
+                <span class="panel-title-fix">Focuses</span>
+              </mat-panel-title>
+              <mat-panel-description>
+                <span class="fill-space"></span>
+                <button mat-icon-button (click)="createFocus($event)" [hidden]="!isAdmin">
+                  <mat-icon class="icon-margin-fix-header" matTooltip="Add New Focus">add_circle_outline</mat-icon>
+                </button>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="mat-panel-content">
+              <mat-list>
+                <div class="item-detail" *ngFor="let curr of curricula">
+                  <div *ngIf="curr.active && !curr.core">
+                    <mat-list-item>
+                      <div>
+                        <h3> {{curr.name}}</h3>
+                        <p>Skills:
+                          <span class="skill-name-container" *ngFor="let skillObj of curr.skillObjects">
+                            {{skillObj.name}}
+                          </span>
+                        </p>
+                      </div>
+                      <span class="fill-space"></span>
+                      <!--<button mat-icon-button class="button-orange" >-->
+                        <mat-icon class="icon-margin-fix" matTooltip="Edit Curriculum" (click)="editCurr($event, curr)" [hidden]="!isAdmin">edit</mat-icon>
+                      <!--</button>-->
+                      <!--<button mat-icon-button class="button-orange" >-->
+                        <mat-icon class="icon-margin-fix" matTooltip="Remove Focus" (click)="removeCurr($event, curr)" [hidden]="!isAdmin">remove_circle</mat-icon>
+                      <!--</button>-->
+                    </mat-list-item>
+                    <hr>
+                  </div>
+                </div>
+              </mat-list>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card>
+
+      <!-- Skills -->
+      <mat-card>
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header >
+            <mat-panel-title>
+              <span class="panel-title-fix">Skills</span>
+            </mat-panel-title>
+            <mat-panel-description>
+              <span class="fill-space"></span>
+              <button mat-icon-button (click)="createSkill($event)" [hidden]="!isAdmin">
+                <mat-icon class="icon-margin-fix-header" matTooltip="Add New Skill">add_circle_outline</mat-icon>
+              </button>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+            <div class="mat-panel-content">
+              <mat-list>
+                  <button mat-raised-button class="skill-panel-name-container" *ngFor="let skill of skills">
+                            {{skill.name}}
+                  </button>
+              </mat-list>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card>
+
+    </mat-card-content>
+  </mat-card>
+</div>

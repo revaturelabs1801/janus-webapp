@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 import { AlertsService } from '../services/alerts.service';
-import { NotificationsService } from 'angular2-notifications-lite';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id.toString(),
@@ -16,7 +16,7 @@ export class AlertsComponent implements OnInit {
   /**
    * global config for notification
    */
-  public options = {
+  @Input() public options = {
     position: ['bottom', 'left'],
     timeOut: 2500,
     maxStack: 10,
@@ -27,7 +27,7 @@ export class AlertsComponent implements OnInit {
   };
 
   constructor(private alertService: AlertsService,
-    private notif: NotificationsService) { }
+  private notif: NotificationsService) { }
 
   ngOnInit() {
     this.showNotif();
