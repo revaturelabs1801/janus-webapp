@@ -20,7 +20,7 @@ export class ReplogicService {
 
   month= 'September';
   i: number;
-  circula: Curriculum[];
+  curricula: Curriculum[];
   batch: Batch[];
   setting: GlobalSettings[] = [];
   date_parer: string;
@@ -266,7 +266,7 @@ export class ReplogicService {
 
   getElement() {
     this.circ.getAll().subscribe(circula => {
-      this.circula = circula;
+      this.curricula = circula;
       this.batchservice.getAll().subscribe(batch => {
         this.batch = batch;
         this.settingService.getSettings().subscribe(
@@ -282,12 +282,12 @@ export class ReplogicService {
             }
               let y = 0;
               const test = true;
-              for ( let x = 0 ; x < this.circula.length; x++) {
-                if ( this.circula[x].core) {
-                  this.ELEMENT_DATA[y].Curriculum = this.circula[x].name;
+              for ( let x = 0 ; x < this.curricula.length; x++) {
+                if ( this.curricula[x].core) {
+                  this.ELEMENT_DATA[y].Curriculum = this.curricula[x].name;
                   y++;
                   for ( let z = 0 ; z < batch.length ; z++ ) {
-                    if ( this.circula[x].currId === this.batch[z].curriculum ) {
+                    if ( this.curricula[x].currId === this.batch[z].curriculum ) {
                       let count  = 0 ;
                       const mt = y - 1;
                      for ( let td = 0 ; td < batch.length ; td++) {
@@ -371,7 +371,7 @@ export class ReplogicService {
 
   getTrainerElement() {
     this.circ.getAll().subscribe(circula => {
-      this.circula = circula;
+      this.curricula = circula;
       this.batchservice.getAll().subscribe(batch => {
         this.batch = batch;
         this.settingService.getSettings().subscribe(
@@ -388,12 +388,12 @@ export class ReplogicService {
             console.log(this.batch[0].endDate.getMonth());
             let y = 0;
             const test = true;
-            for ( let x = 0; x < this.circula.length; x++) {
-              if ( this.circula[x].core) {
-                this.Trainer_Element[y].Curriculum = this.circula[x].name;
+            for ( let x = 0; x < this.curricula.length; x++) {
+              if ( this.curricula[x].core) {
+                this.Trainer_Element[y].Curriculum = this.curricula[x].name;
                 y++;
                 for ( let z = 0; z < batch.length; z++ ) {
-                  if ( this.circula[x].currId === this.batch[z].curriculum ) {
+                  if ( this.curricula[x].currId === this.batch[z].curriculum ) {
                     const mt = y - 1;
                     let jan = 0;
                     let feb = 0;
