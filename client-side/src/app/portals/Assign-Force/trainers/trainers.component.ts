@@ -42,7 +42,7 @@ export class TrainersComponent implements OnInit {
 
     this.getAll();
     this.s3Service.getCreds().subscribe(response => this.creds = response,
-      () => this.showToast('Failed to fetch Credentials'));
+      () => this.showToast('Failed to fetch credentials'));
   }
 
   // Displays snackbar message notifications

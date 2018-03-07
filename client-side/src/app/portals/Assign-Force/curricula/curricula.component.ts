@@ -132,7 +132,7 @@ export class CurriculaComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
       }, error => {
-        console.log('Failed to fetch Skills through IDs');
+        console.log('Failed to fetch skills through IDs');
       });
   }
 

@@ -26,7 +26,7 @@ export class ReplogicService {
   date_parer: string;
   reportGrads = 13;
   reportIncomingGrads = 18;
-  constructor(private circ: CurriculaService , private batchservice: BatchService , private settingvice: SettingsService) {
+  constructor(private circ: CurriculaService , private batchservice: BatchService , private settingService: SettingsService) {
     this.getAllBatches();
     this.getDefaultSetting();
     this.getElement();
@@ -269,7 +269,7 @@ export class ReplogicService {
       this.circula = circula;
       this.batchservice.getAll().subscribe(batch => {
         this.batch = batch;
-        this.settingvice.getSettings().subscribe(
+        this.settingService.getSettings().subscribe(
           setting => {
             this.setting = setting;
             this.reportIncomingGrads = this.setting[0].reportIncomingGrads;
@@ -374,7 +374,7 @@ export class ReplogicService {
       this.circula = circula;
       this.batchservice.getAll().subscribe(batch => {
         this.batch = batch;
-        this.settingvice.getSettings().subscribe(
+        this.settingService.getSettings().subscribe(
           setting => {
             this.setting = setting;
             this.reportIncomingGrads = this.setting[0].reportIncomingGrads;
@@ -502,7 +502,7 @@ export class ReplogicService {
   }
 
   getDefaultSetting() {
-    this.settingvice.getSettings().subscribe(
+    this.settingService.getSettings().subscribe(
       setting => {
         this.setting = setting;
         this.reportIncomingGrads = this.setting[0].reportIncomingGrads;

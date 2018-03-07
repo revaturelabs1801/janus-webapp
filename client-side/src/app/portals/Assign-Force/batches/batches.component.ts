@@ -138,7 +138,7 @@ export class BatchesComponent implements OnInit, AfterViewInit {
         data: id
       });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('delete batch dialog closed');
+      console.log('Delete batch dialog closed');
       this.reload(evt);
     });
   }
@@ -279,13 +279,13 @@ export class BatchesComponent implements OnInit, AfterViewInit {
           .subscribe(trainerData => {
             entry.trainerName = trainerData.firstName + ' ' + trainerData.lastName;
           }, error => {
-            this.showToast('Failed to fetch Trainers');
+            this.showToast('Failed to fetch trainers');
           });
         this.trainerService.getById(entry.cotrainer)
           .subscribe(cotrainerData => {
             entry.cotrainerName = cotrainerData.firstName + ' ' + cotrainerData.lastName;
           }, error => {
-            this.showToast('Failed to fetch Trainers');
+            this.showToast('Failed to fetch trainers');
           });
 
         this.locationService.getById(entry.batchLocation.locationId)
@@ -293,7 +293,7 @@ export class BatchesComponent implements OnInit, AfterViewInit {
             entry.batchLocation.locationId = locationData.id;
             entry.batchLocation.locationName = locationData.name;
           }, error => {
-            this.showToast('Failed to fetch Locations');
+            this.showToast('Failed to fetch locations');
           });
 
         this.buildingService.getById(entry.batchLocation.buildingId)
@@ -301,7 +301,7 @@ export class BatchesComponent implements OnInit, AfterViewInit {
             entry.batchLocation.buildingId = buildingData.id;
             entry.batchLocation.buildingName = buildingData.name;
           }, error => {
-            this.showToast('Failed to fetch Buildings');
+            this.showToast('Failed to fetch buildings');
           });
 
         this.roomService.getById(entry.batchLocation.roomId)
@@ -309,13 +309,13 @@ export class BatchesComponent implements OnInit, AfterViewInit {
             entry.batchLocation.roomId = roomData.roomID;
             entry.batchLocation.roomName = roomData.roomName;
           }, error => {
-            this.showToast('Failed to fetch Rooms');
+            this.showToast('Failed to fetch rooms');
           });
       }
       this.trainerService.getAll().subscribe(trainerData => {
         this.trainerForm = trainerData;
       }, error => {
-        this.showToast('Failed to fetch Trainers');
+        this.showToast('Failed to fetch trainers');
       });
 
       this.curriculaService.getAll().subscribe(curriculaData => {
@@ -331,25 +331,25 @@ export class BatchesComponent implements OnInit, AfterViewInit {
           }
         }
       }, error => {
-        this.showToast('Failed to fetch Curricula');
+        this.showToast('Failed to fetch curricula');
       });
 
       this.skillService.getAll().subscribe(skillData => {
         this.skillForm = skillData;
       }, error => {
-        this.showToast('Failed to fetch Skill');
+        this.showToast('Failed to fetch skill');
       });
 
       this.locationService.getAll().subscribe(locationData => {
         this.locationForm = locationData;
       }, error => {
-        this.showToast('Failed to fetch Locations');
+        this.showToast('Failed to fetch locations');
       });
       this.batchData = new MatTableDataSource(this.BatchData);
       this.batchData.sort = this.sort;
       this.batchData.paginator = this.paginator;
   }, error => {
-      this.showToast('Failed to fetch Batches');
+      this.showToast('Failed to fetch batches');
     });
   }
 
@@ -358,7 +358,7 @@ export class BatchesComponent implements OnInit, AfterViewInit {
     this.locationService.getById(this.batch.batchLocation.locationId).subscribe(buildingData => {
       this.buildingForm = buildingData.buildings;
     }, error => {
-      this.showToast('Failed to fetch Buildings');
+      this.showToast('Failed to fetch buildings');
     });
   }
   // Gets the rooms of the clicked buildings
@@ -366,7 +366,7 @@ export class BatchesComponent implements OnInit, AfterViewInit {
     this.buildingService.getById(this.batch.batchLocation.buildingId).subscribe(roomData => {
       this.roomForm = roomData.rooms;
     }, error => {
-      this.showToast('Failed to fetch Rooms');
+      this.showToast('Failed to fetch rooms');
     });
   }
   getCurriculumSkills () {
