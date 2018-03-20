@@ -205,7 +205,7 @@ export class AddSubtopicComponent implements OnInit {
           name: 'Missed'
         };
       }
-      
+
       this.setSubtopicObject();
       if (this.checkSubtopics()) {
         this.subtopicsService.addSubtopic(this.subtopic).subscribe(
@@ -282,7 +282,7 @@ export class AddSubtopicComponent implements OnInit {
     this.subtopic = {
       subtopicId: null,
       subtopicName: this.subtopicName,
-      batch: this.currentBatch,
+      batch: this.currentBatch.id,
       status: this.status,
       subtopicDate: this.slectedDateMiliseconds
     };
@@ -341,8 +341,8 @@ export class AddSubtopicComponent implements OnInit {
   /**
    * Returns the SubtopicName object associated with the subtopic name
    * Returns null if it cannot find it.
-   * 
-   * @param subtopic 
+   *
+   * @param subtopic
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   getSubtopicName(subtopic: string): SubtopicName {
@@ -357,16 +357,16 @@ export class AddSubtopicComponent implements OnInit {
   /**
    * Sets draggable on subtopic elements in the DOM to be dragged onto the calendar
    * Date is not known until it is placed on the calendar
-   * 
-   * @param event 
-   * @param subtopic 
+   *
+   * @param event
+   * @param subtopic
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   setDraggableOnSubtopic(event, subtopic: string) {
     let subtopicData = new Subtopic(
       null,
       this.getSubtopicName(subtopic),
-      this.currentBatch,
+      this.currentBatch.id, //Add .id to this thing
       this.statusService.getDefaultStatus(),
       null
     );
