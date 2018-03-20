@@ -91,12 +91,13 @@ export class BatchService {
    * @returns Batch
    * @param bid: number
    */
-  getBatchById(bid: number): Observable<Batch> {
-    return this.http.get<Batch>(environment.bambatch.getBatchByIdURL(bid)).map(
+  getBatchById(bid: number): Observable<any> {
+    console.log(bid);
+    return this.http.get<any>(environment.bambatch.getBatchByIdURL(bid)).map(
       data => {
         return data;
       }
-    );
+    ).do(x => console.log(x));
   }
 
   /**
