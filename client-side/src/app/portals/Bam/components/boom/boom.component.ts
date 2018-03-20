@@ -160,7 +160,7 @@ export class BoomComponent implements OnInit {
         //Getting the user instead of
         //  batch.trainerName  = this.currentBatches[i].trainer.fName
         let batchTrainer: BamUser;
-        this.userService.getUser(this.currentBatches[i].trainer).subscribe(
+        this.userService.getUser(this.currentBatches[i].trainerID).subscribe(
         batchTrainer=> batchTrainer = batchTrainer
         );
         batch.batchName = this.currentBatches[i].name;

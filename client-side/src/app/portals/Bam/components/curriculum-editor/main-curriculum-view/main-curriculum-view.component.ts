@@ -4,7 +4,6 @@ import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { CurriculumService } from '../../../services/curriculum.service';
 import { CourseStructureComponent } from '../course-structure/course-structure.component';
 import { Curriculum } from '../../../models/curriculum.model';
-import { BamUser } from '../../../models/bamuser.model';
 import { CurriculumSubtopicDTO } from '../../../models/curriculumSubtopicDTO.model';
 import { MetaDTO } from '../../../models/metaDTO.model';
 import { SessionService } from '../../../services/session.service';
@@ -152,11 +151,8 @@ export class MainCurriculumViewComponent implements OnInit {
      * @param makeMaster: boolean
      */
     saveCurr(makeMaster: boolean) {
-        let user: BamUser;
-        this.usersService.getUser(50).subscribe(
-          user => user = user
-        );
         this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
+        this.selectedCurr.curriculumCreator = this.sessionService.getUser().userId;
         this.selectedCurr.curriculumdateCreated = this.getCurrentDate();
         if (makeMaster) {
             this.selectedCurr.isMaster = 1;
