@@ -31,7 +31,7 @@ export class SessionService {
       'email': 'rl@revature.com',
       'pwd': '1234',
       'role': 2,
-      'batch': null,
+      'batch': 1,
       'phone': '1234567890',
       'phone2': '8675309',
       'skype': 'rl_skype',

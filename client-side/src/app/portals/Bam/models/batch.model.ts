@@ -6,10 +6,10 @@ export class Batch {
     name: string;
     startDate: Date;
     endDate: Date;
-    trainer: BamUser;
+    trainer: number;
     type: BatchType;
 
-    constructor (id: number, name: string, startDate: Date, endDate: Date, trainer: BamUser, type: BatchType) {
+    constructor (id: number, name: string, startDate: Date, endDate: Date, trainer: number, type: BatchType) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;

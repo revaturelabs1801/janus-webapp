@@ -235,6 +235,7 @@ export const environment = {
     },
 
     users: {
+        getUserByIdUrl: (userId:number) => `${bam}/user/${userId}`,
         getAllUsersUrl: () => `${bam}/user/all`,
         getAllTrainersUrl: () => `${bam}/user/alltrainers`,
         getAllAssociatesUrl: () => `${bam}/user/allassociates`,

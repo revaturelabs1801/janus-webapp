@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BatchService } from '../../services/batch.service';
+import { UsersService } from '../../services/users.service';
 import { Batch } from '../../models/batch.model';
+import { BamUser } from '../../models/bamuser.model';
 import { Subtopic } from '../../models/subtopic.model';
 import { CalendarService } from '../../services/calendar.service';
+import { Observable } from 'rxjs/Observable';
 import { Boom } from '../../models/boom.model';
 
 @Component({
@@ -61,7 +64,7 @@ export class BoomComponent implements OnInit {
   public batchSelectionList: Batch[] = [];
   public allBatchSubtopics: Subtopic[][] = [];
 
-  constructor(private batchService: BatchService, private calendarService: CalendarService) { }
+  constructor(private batchService: BatchService, private calendarService: CalendarService, private userService: UsersService) { }
 
   ngOnInit() {
     this.batchService.getAllInProgress().subscribe(
@@ -114,7 +117,7 @@ export class BoomComponent implements OnInit {
   /**
    * Method returns the week of a current date
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
-   * @param date 
+   * @param date
    */
   getWeek(date) {
     const thisYear = new Date().getFullYear();
@@ -154,8 +157,14 @@ export class BoomComponent implements OnInit {
           checkWeek = this.getWeek(startDate.setDate(startDate.getDate() + 7));
         }
         let batch: Boom = new Boom();
+        //Getting the user instead of
+        //  batch.trainerName  = this.currentBatches[i].trainer.fName
+        let batchTrainer: BamUser;
+        this.userService.getUser(this.currentBatches[i].trainer).subscribe(
+        batchTrainer=> batchTrainer = batchTrainer
+        );
         batch.batchName = this.currentBatches[i].name;
-        batch.trainerName  = this.currentBatches[i].trainer.fName + ' ' + this.currentBatches[i].trainer.lName;
+        batch.trainerName  = batchTrainer.fName + ' ' + batchTrainer.lName;
         batch.missed = missedSubtopics;
         batch.completed = completedSubtopics;
         batch.total = totalSubtopics;

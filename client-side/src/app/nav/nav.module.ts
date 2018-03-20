@@ -10,6 +10,7 @@ import { CaliberNavComponent } from './caliber-nav/caliber-nav.component';
 import { AssignForceComponent } from '../portals/Assign-Force/assign-force.component';
 import { AssignForceNavComponent } from './assign-force-nav/assign-force-nav.component';
 import { TracknForceNavComponent } from './track-force-nav/track-force-nav.component';
+import { BatchService } from '../portals/Bam/services/batch.service';
 import { BamNavComponent } from './bam-nav/bam-nav.component';
 
 
@@ -28,7 +29,7 @@ import { BamNavComponent } from './bam-nav/bam-nav.component';
     TracknForceNavComponent,
     BamNavComponent
   ],
-  providers: [],
+  providers: [BatchService],
   exports: [NavComponent]
 })
 export class NavModule { }
