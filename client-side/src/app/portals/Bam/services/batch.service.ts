@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { Batch } from '../models/batch.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }),
   observe: 'response' as 'response'
 };
 
