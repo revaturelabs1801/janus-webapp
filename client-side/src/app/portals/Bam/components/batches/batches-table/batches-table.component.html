@@ -13,7 +13,7 @@
 			<tbody>
 				<tr *ngFor="let batch of batches  | filterBatch: filterText | paginate: { itemsPerPage: 20, currentPage: pageNum}" class="clickable">
 					<td>{{batch.name}}</td>
-					<td>{{batch.trainerID}} {{batch.trainerID}}</td>
+					<td>{{batch.trainerID | userFirstLastName | async}}</td>
 					<td>{{batch.type.name}}</td>
 					<td>{{batch.startDate | date: 'MM/dd/yyyy'}}</td>
 					<td>{{batch.endDate | date: 'MM/dd/yyyy'}}</td>
