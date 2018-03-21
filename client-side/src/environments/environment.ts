@@ -245,7 +245,7 @@ export const environment = {
         addUserUrl: () => `${bam}/user/register`,
         resetPasswordUrl: () => `${bam}/user/reset`,
         removeUserUrl: (userId: number) => `${bam}/user/remove/${userId}`,
-        addUserToBatchUrl: (batchId: number, userId: number) => `${bam}/user/add/${userId}/${batchId}`,
+        addUserToBatchUrl: (batchId: number, userId: number) => `${bam}/user/addUserToBatch/${userId}/${batchId}`,
         getUsersNotInBatchUrl: () => `${bam}/user/notinabatch`,
         recoverPasswordUrl: () => `${bam}/user/recovery`
     },
