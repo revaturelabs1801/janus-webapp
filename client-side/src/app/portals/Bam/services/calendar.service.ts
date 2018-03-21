@@ -25,7 +25,6 @@ export class CalendarService {
    * @param pageSize: number
    */
   getSubtopicsByBatchPagination(batchId: number, pageNumber: number, pageSize: number): Observable<Subtopic[]> {
-    console.log('zdsjdsjdsksdjsjssjds');
     return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize));
   }
 
