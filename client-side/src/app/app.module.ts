@@ -26,6 +26,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
 import { InterceptorsService } from './portals/Bam/services/interceptors.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -53,7 +54,8 @@ const routes: Routes = [
     NavModule,
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
