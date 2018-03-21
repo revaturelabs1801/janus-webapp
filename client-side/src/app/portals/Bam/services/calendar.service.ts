@@ -11,7 +11,7 @@ import { CalendarStatusService } from './calendar-status.service';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }),
   observe: 'response' as 'response'
 };
 

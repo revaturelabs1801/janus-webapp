@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { Batch } from '../models/batch.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }),
   observe: 'response' as 'response'
 };
 
@@ -91,12 +91,13 @@ export class BatchService {
    * @returns Batch
    * @param bid: number
    */
-  getBatchById(bid: number): Observable<Batch> {
-    return this.http.get<Batch>(environment.bambatch.getBatchByIdURL(bid)).map(
+  getBatchById(bid: number): Observable<any> {
+    console.log(bid);
+    return this.http.get<any>(environment.bambatch.getBatchByIdURL(bid)).map(
       data => {
         return data;
       }
-    );
+    ).do(x => console.log(x));
   }
 
   /**

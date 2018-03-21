@@ -7,6 +7,7 @@ import { Curriculum } from '../../../models/curriculum.model';
 import { CurriculumSubtopicDTO } from '../../../models/curriculumSubtopicDTO.model';
 import { MetaDTO } from '../../../models/metaDTO.model';
 import { SessionService } from '../../../services/session.service';
+import { UsersService } from '../../../services/users.service';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { AlertService } from '../../../services/alert.service';
 import * as FileSaver from 'file-saver';
@@ -42,7 +43,8 @@ export class MainCurriculumViewComponent implements OnInit {
 
     constructor(private curriculumService: CurriculumService,
         private sessionService: SessionService, private alertService: AlertService,
-        private subtopicService: SubtopicService) { }
+        private subtopicService: SubtopicService,
+        private usersService: UsersService) { }
 
 
     ngOnInit() {
@@ -150,7 +152,7 @@ export class MainCurriculumViewComponent implements OnInit {
      */
     saveCurr(makeMaster: boolean) {
         this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
-        this.selectedCurr.curriculumCreator = this.sessionService.getUser();
+        this.selectedCurr.curriculumCreator = this.sessionService.getUser().userId;
         this.selectedCurr.curriculumdateCreated = this.getCurrentDate();
         if (makeMaster) {
             this.selectedCurr.isMaster = 1;

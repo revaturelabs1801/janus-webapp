@@ -14,9 +14,9 @@ export class SessionService {
 
   public selectedBatchSubject = new Subject<Batch>();
 
-  constructor(private userService: UsersService, private batchService: BatchService) {
+  constructor(private userService: UsersService) {
     // Batch batch = new Batch(3, "Java", startDate: Date, endDate: Date, trainer: BamUser, type: BatchType);
-    this.batch = batchService.getBatchById(50);
+    // this.batch = batchService.getBatchById(50);
     // this.id = id;
     // this.name = name;
     // this.startDate = startDate;
@@ -31,7 +31,7 @@ export class SessionService {
       'email': 'rl@revature.com',
       'pwd': '1234',
       'role': 2,
-      'batch': null,
+      'batch': 1,
       'phone': '1234567890',
       'phone2': '8675309',
       'skype': 'rl_skype',

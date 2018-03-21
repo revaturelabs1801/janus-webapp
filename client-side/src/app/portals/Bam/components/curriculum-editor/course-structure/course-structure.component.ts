@@ -170,6 +170,7 @@ export class CourseStructureComponent implements OnInit {
         this.getUniqueCurrNames();
         this.getCurriculumVersions();
         this.getUniqCurrVersions();
+        console.log(this.uniqCurrVersions[0]);
         this.uniqCurrVersions[0].forEach(e => {
           if (e.isMaster === 1) {
             this.viewCurrSchedule(e);

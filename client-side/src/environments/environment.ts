@@ -235,6 +235,7 @@ export const environment = {
     },
 
     users: {
+        getUserByIdUrl: (userId:number) => `${bam}/user/getById/${userId}`,
         getAllUsersUrl: () => `${bam}/user/all`,
         getAllTrainersUrl: () => `${bam}/user/alltrainers`,
         getAllAssociatesUrl: () => `${bam}/user/allassociates`,
@@ -244,7 +245,7 @@ export const environment = {
         addUserUrl: () => `${bam}/user/register`,
         resetPasswordUrl: () => `${bam}/user/reset`,
         removeUserUrl: (userId: number) => `${bam}/user/remove/${userId}`,
-        addUserToBatchUrl: (batchId: number, userId: number) => `${bam}/user/add/${userId}/${batchId}`,
+        addUserToBatchUrl: (batchId: number, userId: number) => `${bam}/user/addUserToBatch/${userId}/${batchId}`,
         getUsersNotInBatchUrl: () => `${bam}/user/notinabatch`,
         recoverPasswordUrl: () => `${bam}/user/recovery`
     },
@@ -264,7 +265,7 @@ export const environment = {
     addsubtopics: {
       getBatchSubtopicsUrl: (batchId: number, pageNumber: number, pageSize: number) =>
                       `${bam}/calendar/subtopicspagination/${batchId}/${pageSize}/${pageNumber}`,
-      getBatchIdUrl: (batchId: number) => `${bam}/batches/byid/${batchId}`,
+      getBatchIdUrl: (batchId: number) => `${bam}/batch/byid/${batchId}`,
       addSubtopicUrl: () => `${bam}/subtopic/addsubtopic`,
       getSubtopicPoolUrl: () => `${bam}/curriculum/topicpool`,
       updateDateUrl: (subtopicId: number, batchId: number, date: number) =>

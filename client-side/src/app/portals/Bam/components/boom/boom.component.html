@@ -5,7 +5,7 @@
     </div>
     <div #pieChart class="col-sm-12">
       <div class="row card-body">
-        <div class="col-lg-6 col-sm-12 p-3">          
+        <div class="col-lg-6 col-sm-12 p-3">
           <h3>Subtopics Completion Chart
             <input type="text" style="width:50px" (keypress)="checkInput($event,$event.target.value)" (keyup)="changePercent($event,$event.target.value)" value="90">%
           </h3>
@@ -17,7 +17,7 @@
               <br><span class="color-missed chart-legend"></span>
               {{pieChartData[1]}} {{(pieChartData[1]==1)?'Batch':'Batches'}} {{(percent==100)?'Missed 1 or more Subtopics':'Completed less than ' + (percent)+'%'}}
             </p>
-            <canvas baseChart 
+            <canvas baseChart
               [options]="pieChartOptions"
               [datasets]="pieChartDatasets"
               [colors]="pieColors"
@@ -56,7 +56,7 @@
       <div class="col-12" *ngIf="batchSelectionList.length != 0">
         <th>View Weekly Progress
           <select (change)="changeBatch($event.target.value)">
-            <option *ngFor="let batch of batchSelectionList" value="{{batch.id}}">{{batch.name}} - {{batch.trainer.fName}}</option>
+            <option *ngFor="let batch of batchSelectionList" value="{{batch.id}}">{{batch.name}} - {{batch.trainer}}</option>
           </select>
       </div>
       <div #barChart class="col-md-12">

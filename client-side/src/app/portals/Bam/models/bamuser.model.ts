@@ -8,7 +8,7 @@ export class BamUser {
     email: string;
     pwd: string;
     role: number;
-    batch: Batch;
+    batch: number;
     phone: string;
     phone2: string;
     skype: string;
@@ -22,7 +22,7 @@ export class BamUser {
         email: string,
         pwd: string,
         role: number,
-        batch: Batch,
+        batch: number,
         phone: string,
         phone2: string,
         skype: string,
