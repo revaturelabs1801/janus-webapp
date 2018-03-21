@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/';
-const bam = 'http://192.168.0.19:8800/api/v2';
+const bam = 'http://ec2-18-217-13-6.us-east-2.compute.amazonaws.com:8800/api/v2';
 export const environment = {
   production: false,
   context: context, // change for what the production environment would actually be
@@ -235,7 +235,7 @@ export const environment = {
     },
 
     users: {
-        getUserByIdUrl: (userId:number) => `${bam}/user/${userId}`,
+        getUserByIdUrl: (userId:number) => `${bam}/user/getById/${userId}`,
         getAllUsersUrl: () => `${bam}/user/all`,
         getAllTrainersUrl: () => `${bam}/user/alltrainers`,
         getAllAssociatesUrl: () => `${bam}/user/allassociates`,
@@ -265,7 +265,7 @@ export const environment = {
     addsubtopics: {
       getBatchSubtopicsUrl: (batchId: number, pageNumber: number, pageSize: number) =>
                       `${bam}/calendar/subtopicspagination/${batchId}/${pageSize}/${pageNumber}`,
-      getBatchIdUrl: (batchId: number) => `${bam}/batches/byid/${batchId}`,
+      getBatchIdUrl: (batchId: number) => `${bam}/batch/byid/${batchId}`,
       addSubtopicUrl: () => `${bam}/subtopic/addsubtopic`,
       getSubtopicPoolUrl: () => `${bam}/curriculum/topicpool`,
       updateDateUrl: (subtopicId: number, batchId: number, date: number) =>

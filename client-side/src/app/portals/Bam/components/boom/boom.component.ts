@@ -161,10 +161,10 @@ export class BoomComponent implements OnInit {
         //  batch.trainerName  = this.currentBatches[i].trainer.fName
         let batchTrainer: BamUser;
         this.userService.getUser(this.currentBatches[i].trainerID).subscribe(
-        batchTrainer=> batchTrainer = batchTrainer
-        );
+        batchTrainer=> {batch.trainerName = batchTrainer.fName + ' ' + batchTrainer.lName}
+      );
         batch.batchName = this.currentBatches[i].name;
-        batch.trainerName  = batchTrainer.fName + ' ' + batchTrainer.lName;
+        // batch.trainerName  = batchTrainer.fName + ' ' + batchTrainer.lName;
         batch.missed = missedSubtopics;
         batch.completed = completedSubtopics;
         batch.total = totalSubtopics;
