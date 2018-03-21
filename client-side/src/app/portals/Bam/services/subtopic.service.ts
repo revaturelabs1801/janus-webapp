@@ -22,6 +22,7 @@ export class SubtopicService {
    * @param typeId number
    */
   addSubTopicName(subtopicName: string, topicId: number, typeId: number) {
+    console.log('heyejsfkdsdsdfs');
     return this.http.post<SubtopicName>(environment.subtopic.addSubTopicName(subtopicName, topicId, typeId), httpOptions).map(
       data => {
         return data;
