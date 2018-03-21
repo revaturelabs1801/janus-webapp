@@ -165,9 +165,11 @@ export class MainCurriculumViewComponent implements OnInit {
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
             response => {
+                console.log('sdjnxdfdjdhhgnshshhxhxhjhs');
+                console.log(response);
                 this.alertService.alert('success', 'Successfully saved ' +
-                    (<Curriculum>response.body).curriculumName + ' version #' + (<Curriculum>response.body).curriculumVersion);
-                this.refreshList(<Curriculum>response.body);
+                    (<Curriculum>response).curriculumName + ' version #' + (<Curriculum>response).curriculumVersion);
+                this.refreshList(<Curriculum>response);
                 this.isNewVer = false;
             },
             error => {
