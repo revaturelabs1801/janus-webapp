@@ -153,7 +153,7 @@ export class MainCurriculumViewComponent implements OnInit {
     saveCurr(makeMaster: boolean) {
         this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
         this.selectedCurr.curriculumCreator = this.sessionService.getUser().userId;
-        this.selectedCurr.curriculumdateCreated = this.getCurrentDate();
+        this.selectedCurr.curriculumDateCreated = this.getCurrentDate();
         if (makeMaster) {
             this.selectedCurr.isMaster = 1;
         }
@@ -165,8 +165,6 @@ export class MainCurriculumViewComponent implements OnInit {
         const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
         this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
             response => {
-                console.log('sdjnxdfdjdhhgnshshhxhxhjhs');
-                console.log(response);
                 this.alertService.alert('success', 'Successfully saved ' +
                     (<Curriculum>response).curriculumName + ' version #' + (<Curriculum>response).curriculumVersion);
                 this.refreshList(<Curriculum>response);
@@ -174,7 +172,6 @@ export class MainCurriculumViewComponent implements OnInit {
             },
             error => {
                 this.alertService.alert('danger', 'Unable to save curriculum');
-                console.log(error);
                 this.isNewVer = false;
             }
         );

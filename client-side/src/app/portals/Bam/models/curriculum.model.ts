@@ -6,7 +6,7 @@ export class Curriculum {
     curriculumVersion: number;
     curriculumCreator: number;
     curriculumModifier: number;
-    curriculumdateCreated: string;
+    curriculumDateCreated: string;
     curriculumNumberOfWeeks: number;
     isMaster: number;
 
@@ -24,8 +24,8 @@ export class Curriculum {
             this.curriculumVersion = curriculumVersion;
             this.curriculumCreator = curriculumCreator;
             this.curriculumModifier = curriculumModifier;
-            this.curriculumdateCreated = curriculumdateCreated;
+            this.curriculumDateCreated = curriculumdateCreated;
             this.curriculumNumberOfWeeks = curriculumNumberOfWeeks;
-            this.isMaster = isMaster;
+            this.isMaster = 2;
     }
 }
