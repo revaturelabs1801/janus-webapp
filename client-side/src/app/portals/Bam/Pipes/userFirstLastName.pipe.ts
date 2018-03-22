@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { BamUser } from '../models/bamUser.model';
+import { BamUser } from '../models/bamuser.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
