@@ -4,7 +4,11 @@ import { BatchType } from '../../../models/batchtype.model';
 import { Output } from '@angular/core/src/metadata/directives';
 import { BatchService } from '../../../services/batch.service';
 import { SessionService } from '../../../services/session.service';
+<<<<<<< HEAD
 import {debounceTime} from 'rxjs/operator/debounceTime';
+=======
+import {debounceTime} from 'rxjs/operator/debounceTime';
+>>>>>>> 1808-bam-dev
 import {Subject} from 'rxjs/Subject';
 import { AlertService } from '../../../services/alert.service';
 
@@ -26,7 +30,11 @@ export class EditBatchComponent implements OnInit {
 
   // Specific to associates that are apart of the batch.
   @Input() searchTerm: string;
+<<<<<<< HEAD
   views = 0;
+=======
+  views: number = 0;
+>>>>>>> 1808-bam-dev
   associateAlertType: string;
   associateAlertMessage: string;
 
@@ -42,6 +50,7 @@ export class EditBatchComponent implements OnInit {
    */
   submit(typeId) {
 
+<<<<<<< HEAD
     // Check dates
     // if dates are not correct
     // alert and return
@@ -49,11 +58,24 @@ export class EditBatchComponent implements OnInit {
       // alert
       this.batchAlert('danger', `Error: End date can't be earlier than start date.`);
       return;
+=======
+    //Check dates
+    //if dates are not correct
+    //alert and return
+    if(this.batch.startDate > this.batch.endDate){
+      //alert
+      this.batchAlert("danger", `Error: End date can't be earlier than start date.`);
+      return;
+>>>>>>> 1808-bam-dev
     }
 
     let selectedType: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
+<<<<<<< HEAD
       if (typeId === this.batchTypes[i].id) {
+=======
+      if (typeId == this.batchTypes[i].id) {
+>>>>>>> 1808-bam-dev
         selectedType = this.batchTypes[i];
         break;
       }
@@ -61,10 +83,17 @@ export class EditBatchComponent implements OnInit {
 
     this.batch.type = selectedType;
     this.batchService.updateBatch(this.batch).subscribe( status => {
+<<<<<<< HEAD
       this.batchAlert('success', `Updated:  ${this.batch.name} successfully! `);
       this.sessionService.putSelectedBatchIntoSession(this.batch);
     }, error => {
       this.batchAlert('danger', `Error: Update ${this.batch.name} unsuccessful! `);
+=======
+      this.batchAlert("success", `Updated:  ${this.batch.name} successfully! `);
+      this.sessionService.putSelectedBatchIntoSession(this.batch);
+    }, error => {
+      this.batchAlert("danger", `Error: Update ${this.batch.name} unsuccessful! `);
+>>>>>>> 1808-bam-dev
     });
   }
 

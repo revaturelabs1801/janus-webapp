@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
  * @author Jeffery Camacho | 1712-dec10-java-steve
  */
 export class ViewAssociatesComponent implements OnInit {
+<<<<<<< HEAD
   p = 1;
   associateList: BamUser[] = [] ;
   searchTerm: string;
@@ -28,6 +29,16 @@ export class ViewAssociatesComponent implements OnInit {
   sessionUser: BamUser;
   currentBatch: Batch;
   constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService,
+=======
+  p: number = 1;
+  associateList: BamUser[] = [] ;
+  searchTerm: string;
+  order: string = 'lName';
+  reverse: boolean = false;
+  sessionUser: BamUser;
+  currentBatch: Batch;
+  constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService,
+>>>>>>> 1808-bam-dev
     private orderPipe: Ng2OrderPipe ) {
     }
   ngOnInit() {

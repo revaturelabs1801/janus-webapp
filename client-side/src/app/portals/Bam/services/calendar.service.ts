@@ -133,7 +133,11 @@ export class CalendarService {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   addSubtopicToCalendar(subtopic: Subtopic) {
+<<<<<<< HEAD
     const newCalendarSubtopic = this.mapSubtopicToEvent(subtopic);
+=======
+    var newCalendarSubtopic = this.mapSubtopicToEvent(subtopic);
+>>>>>>> 1808-bam-dev
     this.addCalendarEvent.emit(newCalendarSubtopic);
   }
 
@@ -143,7 +147,11 @@ export class CalendarService {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   mapSubtopicToEvent(subtopic: Subtopic): CalendarEvent {
+<<<<<<< HEAD
     const calendarEvent = new CalendarEvent();
+=======
+    let calendarEvent = new CalendarEvent();
+>>>>>>> 1808-bam-dev
     calendarEvent.subtopicNameId = subtopic.subtopicName.id;
     calendarEvent.subtopicId = subtopic.subtopicId;
     calendarEvent.title = subtopic.subtopicName.name;

@@ -248,7 +248,11 @@ apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
     },
 
     subtopic: {
+<<<<<<< HEAD
        addSubTopicName: (subtopicName: string, topicId: number, typeId: number) =>
+=======
+       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) =>
+>>>>>>> 1808-bam-dev
         `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`,
         removeSubtopic: (subtopicId: number) => `${bam}/subtopic/remove/${subtopicId}`,
         removeAllSubtopics: (batchId: number) => `${bam}/subtopic/removebybatch/${batchId}/`,

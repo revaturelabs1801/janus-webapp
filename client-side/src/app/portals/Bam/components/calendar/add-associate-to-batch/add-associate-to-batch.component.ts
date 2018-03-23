@@ -39,7 +39,11 @@ export class AddAssociateToBatchComponent implements OnInit {
   addUser(user: BamUser) {
     let i = 0;
     this.currentBatch = this.sessionService.getSelectedBatch();
+<<<<<<< HEAD
     for (const associate of this.associates) {
+=======
+    for (let associate of this.associates) {
+>>>>>>> 1808-bam-dev
       if (associate.userId === user.userId) {
         this.usersService.addUserToBatch(this.currentBatch.id, associate.userId).subscribe(users => {
           this.associates = users;
