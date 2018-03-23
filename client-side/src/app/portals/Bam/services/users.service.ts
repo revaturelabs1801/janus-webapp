@@ -18,6 +18,15 @@ export class UsersService {
    * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @returns BamUser[]
    */
+   getUser(id: number): Observable<BamUser> {
+     return this.http.get<BamUser>(environment.users.getUserByIdUrl(id)).map(
+       data => {
+         return data;
+       }
+     );
+   }
+
+
   getAllUsers(): Observable<BamUser[]> {
     return this.http.get<BamUser[]>(environment.users.getAllUsersUrl()).map(
       data => {
@@ -85,6 +94,7 @@ export class UsersService {
    * @param currentUser BamUser
    */
   updateUser(currentUser: BamUser): Observable<BamUser> {
+    console.log(currentUser);
     return this.http.post<BamUser>(environment.users.updateUserUrl(), currentUser).map(
       data => {
         return data;

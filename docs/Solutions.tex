@@ -1,0 +1,12 @@
+\chapter{Solutions}
+\section{Documentations}
+We started by writing documentation for next teams to work on this project, so they won't run into the same issues we had starting off the project. We have the document you're currently reading (Project design document) and every github repository has its wiki and milestones.
+
+\section{Core Services}
+We rewrote the core three micro-services: hydra-discovery-service, hydra-gateway-service and hydra-config-service. We also created configurations matching our micro-services names and fall back configurations. We also have setup the micro-services for containerization using Docker.
+
+\section{Hardware Limitations}
+We used our own EC2s and RDS to fill the hardware gap.
+
+\section{Front-end solution}
+We fixed the front-end models. They aren't tightly coupled anymore and we have fixed cores using HttpClient interceptors except for calendar service on the front-end because it was referenced everywhere though out the application and changing it in the time given would cause more problems than solve them. For calendar it starts having CORS problems 50 percent of the time.

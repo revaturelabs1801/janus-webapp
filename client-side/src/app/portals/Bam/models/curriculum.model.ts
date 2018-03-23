@@ -4,9 +4,9 @@ export class Curriculum {
     id: number;
     curriculumName: string;
     curriculumVersion: number;
-    curriculumCreator: BamUser;
-    curriculumModifier: BamUser;
-    curriculumdateCreated: string;
+    curriculumCreator: number;
+    curriculumModifier: number;
+    curriculumDateCreated: string;
     curriculumNumberOfWeeks: number;
     isMaster: number;
 
@@ -14,8 +14,8 @@ export class Curriculum {
         id: number,
         curriculumName: string,
         curriculumVersion: number,
-        curriculumCreator: BamUser,
-        curriculumModifier: BamUser,
+        curriculumCreator: number,
+        curriculumModifier: number,
         curriculumdateCreated: string,
         curriculumNumberOfWeeks: number,
         isMaster: number) {
@@ -24,8 +24,8 @@ export class Curriculum {
             this.curriculumVersion = curriculumVersion;
             this.curriculumCreator = curriculumCreator;
             this.curriculumModifier = curriculumModifier;
-            this.curriculumdateCreated = curriculumdateCreated;
+            this.curriculumDateCreated = curriculumdateCreated;
             this.curriculumNumberOfWeeks = curriculumNumberOfWeeks;
-            this.isMaster = isMaster;
+            this.isMaster = 2;
     }
 }

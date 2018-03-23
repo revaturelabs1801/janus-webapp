@@ -4,13 +4,13 @@ import { Batch } from './batch.model';
 export class TopicWeek {
     id: number;
     topic: TopicName;
-    batch: Batch;
+    batchID: number;
     weekNumber: number;
 
-    constructor(id: number, topic: TopicName, batch: Batch, weekNumber: number) {
+    constructor(id: number, topic: TopicName, batchID: number, weekNumber: number) {
         this.id = id;
         this.topic = topic;
-        this.batch = batch;
+        this.batchID = batchID;
         this.weekNumber = weekNumber;
     }
 }

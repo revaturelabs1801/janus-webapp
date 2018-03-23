@@ -1,0 +1,12 @@
+\chapter{Challenges}
+\section{Inadequate Documentation}
+We started off the project without any useful documentation. We only had a SQL script from the previous batches. The code Java code itself had java docs with no concrete definition of goal of the methods and classes.
+\section{Vague definition of business objectives}
+There was no stakeholder for the project, we started off the project by discovering what was the application supposed to do by looking at the code and experimenting with the application itself.
+\section{Revature's Given Services}
+In the beginning of the project, we were handed 4 micro-services that were supposed to kick start the project. They were the core micro-services: service registry and discovery, API gateway and configuration service. They are the projects: hydra-discovery-service, hydra-gateway-service and hydra-config-service. All three of them were never tested. The configuration service was using a gitlab repository that not only didn't have suitable configuration for our micro-services but also no fall back configuration. The API gateway service was copied from another project and had all the filters an swagger classes commented out.
+\section{Hardware limitations}
+Starting off the project, we weren't given any help from Revature. We weren't given enough hardware (EC2 memory) to run our micro-services, or RDS databases or even the ability to create any users on the RDS database that was used in the original monolith.
+
+\section{Front-end Issues}
+The initial front-end wasn't not properly set with CORS, which means that we didn't have the ability to get data from the back-end using the given services. The front-end data models were identical to those of the back-end in the monolith, meaning that they were tightly coupled and most of the methods and models are redundantly used.

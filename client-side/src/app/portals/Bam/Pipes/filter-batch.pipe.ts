@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Batch } from '../models/batch.model';
+import { BamUser } from '../models/bamuser.model';
+import { UsersService } from '../services/users.service';
 import { DatePipe } from '@angular/common';
 
 /**
@@ -13,7 +15,7 @@ export class FilterBatchPipe implements PipeTransform {
 
     datePipe: DatePipe = new DatePipe('en-US');
 
-    constructor() { }
+    constructor(private usersService: UsersService) { }
 
     /**
      * Filters [items] by [searchText]. Checks trainer's full name (first + last),
@@ -22,7 +24,8 @@ export class FilterBatchPipe implements PipeTransform {
      * @param searchText Text [items] is filtered by
      * @author Charlie Harris | 1712-dec10-java-steve
      */
-    transform(items: Batch[], searchText: string): Batch[] {
+    transform(items: Batch[], searchText: string, usersService: UsersService): Batch[] {
+
         if (!items) {
             return [];
         }
@@ -30,8 +33,11 @@ export class FilterBatchPipe implements PipeTransform {
             return items;
         }
         searchText = searchText.toLowerCase();
+
         return items.filter((batch: Batch) => {
-            const trainerName = `${batch.trainer.fName} ${batch.trainer.lName}`;
+            const trainer: BamUser;
+            this.usersService.getUser(batch['id']).subscribe(newTrainer => trainer = newTrainer);
+            const trainerName = `${trainer.fName} ${trainer.lName}`;
             return (
                 batch.type.name.toLowerCase().includes(searchText) ||
                 batch.name.toLowerCase().includes(searchText) ||

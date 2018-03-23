@@ -10,11 +10,6 @@ import { CurriculumSubtopicDTO } from '../models/curriculumSubtopicDTO.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  observe: 'response' as 'response'
-};
-
 @Injectable()
 export class CurriculumService {
 
@@ -50,11 +45,7 @@ export class CurriculumService {
     *  @return: Observable<Curriculum[]>
     */
   getAllCurriculums(): Observable<Curriculum[]> {
-    return this.http.get<Curriculum[]>(environment.curriculum.getCurriculumAllUrl()).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get<Curriculum[]>(environment.curriculum.getCurriculumAllUrl());
   }
 
   /** This will get a specific curriculum by the curriculum id
@@ -64,11 +55,7 @@ export class CurriculumService {
     * @param: Curriculum Id
     */
   getCurriculumById(cid: number): Observable<Curriculum> {
-    return this.http.get<Curriculum>(environment.curriculum.getCurriculumByIdUrl(cid)).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get<Curriculum>(environment.curriculum.getCurriculumByIdUrl(cid));
   }
 
   /** This will get a curriculums schedule based on the curriculum id
@@ -78,11 +65,7 @@ export class CurriculumService {
     * @param: Curriculum Id
     */
   getSchedualeByCurriculumId(cid: number): Observable<CurriculumSubtopic[]> {
-    return this.http.get<CurriculumSubtopic[]>(environment.curriculum.getSchedulesByCurriculumIdUrl(cid)).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get<CurriculumSubtopic[]>(environment.curriculum.getSchedulesByCurriculumIdUrl(cid));
   }
 
   /** Gets the entire topic pool being taught at revature
@@ -91,12 +74,7 @@ export class CurriculumService {
     * @return: Observable<SubtopicName[]>
     */
   getAllTopicPool(): Observable<SubtopicName[]> {
-    return this.http.get<SubtopicName[]>(environment.curriculum.getTopicPoolAllUrl()).map(
-      data => {
-        this.allTopicPoolData.next(data);
-        return data;
-      }
-    );
+    return this.http.get<SubtopicName[]>(environment.curriculum.getTopicPoolAllUrl());
   }
 
   /** Gets entire subtopic pool as well as a relationship to which topic they belong to
@@ -105,11 +83,7 @@ export class CurriculumService {
     * @return: Observable<Subtopic[]>
     */
   getSubtopicPool(): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.curriculum.getSubtopicPoolAllUrl()).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get<Subtopic[]>(environment.curriculum.getSubtopicPoolAllUrl());
   }
 
   /** Allows you to add a curriculum to the backend
@@ -118,11 +92,7 @@ export class CurriculumService {
     * @param: CurriculumSubtopicDTO
     */
    addCurriculum(curriculum: CurriculumSubtopicDTO) {
-    return this.http.post(environment.curriculum.addCurriculumUrl(), curriculum, httpOptions).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.post(environment.curriculum.addCurriculumUrl(), curriculum);
   }
 
   /** This method allows to set a version of a specific curriculum to master
@@ -131,11 +101,7 @@ export class CurriculumService {
     * @param: Curriculum Id
     */
   markCurriculumAsMaster(curriculumId: number) {
-    return this.http.get(environment.curriculum.makeCurriculumMasterByIdUrl(curriculumId)).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get(environment.curriculum.makeCurriculumMasterByIdUrl(curriculumId));
   }
 
   /** Sync batch by batchId getting list of curriculum subtopics related to that batch type
@@ -144,11 +110,7 @@ export class CurriculumService {
     * @param:  Batch Id
     */
   syncBatch(batchId: number) {
-    return this.http.get(environment.curriculum.syncBatchByIdUrl(batchId)).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get(environment.curriculum.syncBatchByIdUrl(batchId));
   }
 
   /** Delete a curriculum and it's CurriculumSubtopics

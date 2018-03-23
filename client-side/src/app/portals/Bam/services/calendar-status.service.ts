@@ -4,18 +4,18 @@ import { SubtopicStatus } from '../models/subtopicstatus.model';
 
 
 const Status = {
-  PLANNED: "Pending",
-  COMPLETED: "Completed",
-  CANCELED: "Canceled",
-  MISSED: "Missed"
-}
+  PLANNED: 'Pending',
+  COMPLETED: 'Completed',
+  CANCELED: 'Canceled',
+  MISSED: 'Missed'
+};
 
 const Color = {
-  PLANNED: "#5e8cb2",
-  COMPLETED: "green",
-  CANCELED: "#912e2e",
-  MISSED: "#c48013"
-}
+  PLANNED: '#5e8cb2',
+  COMPLETED: 'green',
+  CANCELED: '#912e2e',
+  MISSED: '#c48013'
+};
 
 @Injectable()
 export class CalendarStatusService {
@@ -39,24 +39,24 @@ export class CalendarStatusService {
 
   /**
    * This service method determines what the next status in the cycle should be while factoring in when the date of the event is
-   * compared to what date it currently is. 
+   * compared to what date it currently is.
    * The current requirement is for dates in the past to not be able to be in the pending state
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   public updateNextStatus(event: CalendarEvent): string {
-    var today = new Date().setHours(0, 0, 0, 0);
-    var eventDay = event.start.getTime();
-    var later = today < eventDay - 1;
+    const today = new Date().setHours(0, 0, 0, 0);
+    const eventDay = event.start.getTime();
+    const later = today < eventDay - 1;
 
     switch (event.status) {
       case (Status.PLANNED):
-        event.status = Status.COMPLETED; 
+        event.status = Status.COMPLETED;
         break;
       case (Status.COMPLETED):
-        event.status = Status.CANCELED; 
+        event.status = Status.CANCELED;
         break;
       case (Status.CANCELED):
-        event.status = Status.MISSED; 
+        event.status = Status.MISSED;
         break;
       case (Status.MISSED):
         event.status = later ? Status.PLANNED : Status.COMPLETED;
@@ -75,11 +75,11 @@ export class CalendarStatusService {
   * @author Sean Sung | Batch: 1712-dec10-java-steve
   */
   public updateMovedStatus(event: CalendarEvent): string {
-    var today = new Date().setHours(0, 0, 0, 0);
-    var eventDay = event.start.getTime();
-    var later = today < eventDay;
+    const today = new Date().setHours(0, 0, 0, 0);
+    const eventDay = event.start.getTime();
+    const later = today < eventDay;
 
-    if(event.status == Status.PLANNED || event.status == Status.MISSED) {
+    if (event.status === Status.PLANNED || event.status === Status.MISSED) {
       event.status = later ? Status.PLANNED : Status.MISSED;
     }
 
@@ -91,6 +91,6 @@ export class CalendarStatusService {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   public getDefaultStatus(): SubtopicStatus {
-    return new SubtopicStatus(1, Status.PLANNED)
+    return new SubtopicStatus(1, Status.PLANNED);
   }
 }

@@ -5,7 +5,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
@@ -19,15 +18,15 @@ import { ChuckNorrisService } from './services/chuck-norris.service';
 import { CategoriesService } from './portals/Caliber/services/categories.service';
 import { Trainer } from './entities/Trainer';
 
-
 import { ReportingService } from './services/reporting.service';
 import { PDFService } from './services/pdf.service';
 import { CaliberModule } from './portals/Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
-
+import { InterceptorsService } from './portals/Bam/services/interceptors.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -55,15 +54,20 @@ const routes: Routes = [
     NavModule,
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    JanusComponent,
+    JanusComponent
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorsService,
+      multi: true
+    },
     ChuckNorrisService,
     ReportingService,
     PDFService,

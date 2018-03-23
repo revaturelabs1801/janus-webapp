@@ -8,13 +8,6 @@ import { CalendarEvent } from '../models/calendar-event.model';
 import { environment } from '../../../../environments/environment';
 import { of } from 'rxjs/observable/of';
 import { CalendarStatusService } from './calendar-status.service';
-
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  observe: 'response' as 'response'
-};
-
 @Injectable()
 export class CalendarService {
   @Output()
@@ -32,11 +25,7 @@ export class CalendarService {
    * @param pageSize: number
    */
   getSubtopicsByBatchPagination(batchId: number, pageNumber: number, pageSize: number): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize)).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize));
   }
 
   /**
@@ -46,11 +35,7 @@ export class CalendarService {
    * @param batchId number
    */
   getSubtopicsByBatch(batchId: number): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchUrl(batchId)).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchUrl(batchId));
   }
 
   /**
@@ -60,11 +45,7 @@ export class CalendarService {
    * @param batchId number
    */
   getNumberOfSubTopicsByBatch(batchId: number): Observable<number> {
-    return this.http.get<number>(environment.calendar.getNumberOfSubTopicsByBatchUrl(batchId)).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get<number>(environment.calendar.getNumberOfSubTopicsByBatchUrl(batchId));
   }
 
   /**
@@ -74,11 +55,7 @@ export class CalendarService {
    * @param batchId number
    */
   getTopicsByBatchPag(batchId: number): Observable<TopicWeek> {
-    return this.http.get<TopicWeek>(environment.calendar.getTopicsByBatchPagUrl(batchId)).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.get<TopicWeek>(environment.calendar.getTopicsByBatchPagUrl(batchId));
   }
 
   /**
@@ -90,11 +67,7 @@ export class CalendarService {
    * @param status: number
    */
   changeTopicDate(subtopicId: number, batchId: number, date: number) {
-    return this.http.post(environment.calendar.changeTopicDateUrl(subtopicId, batchId, date), null, httpOptions).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.post(environment.calendar.changeTopicDateUrl(subtopicId, batchId, date), null);
   }
 
   /**
@@ -106,11 +79,7 @@ export class CalendarService {
    * @param status: number
    */
   updateTopicStatus(calendarEvent: CalendarEvent, batchId: number): Observable<any> {
-    return this.http.get(environment.calendar.updateTopicStatusUrl(calendarEvent.subtopicId, batchId, calendarEvent.status))
-      .map(data => {
-        return data;
-      }
-    );
+    return this.http.get(environment.calendar.updateTopicStatusUrl(calendarEvent.subtopicId, batchId, calendarEvent.status));
   }
 
   /**
@@ -120,11 +89,7 @@ export class CalendarService {
    * @param topics: TopicName[]
    */
   addTopics(topics: TopicName[]) {
-    return this.http.post(environment.calendar.addTopicsUrl(), topics, httpOptions).map(
-      data => {
-        return data;
-      }
-    );
+    return this.http.post(environment.calendar.addTopicsUrl(), topics);
   }
 
   /**
@@ -133,7 +98,7 @@ export class CalendarService {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   addSubtopicToCalendar(subtopic: Subtopic) {
-    var newCalendarSubtopic = this.mapSubtopicToEvent(subtopic);
+    const newCalendarSubtopic = this.mapSubtopicToEvent(subtopic);
     this.addCalendarEvent.emit(newCalendarSubtopic);
   }
 
@@ -143,7 +108,7 @@ export class CalendarService {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   mapSubtopicToEvent(subtopic: Subtopic): CalendarEvent {
-    let calendarEvent = new CalendarEvent();
+    const calendarEvent = new CalendarEvent();
     calendarEvent.subtopicNameId = subtopic.subtopicName.id;
     calendarEvent.subtopicId = subtopic.subtopicId;
     calendarEvent.title = subtopic.subtopicName.name;

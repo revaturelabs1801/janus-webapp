@@ -65,6 +65,7 @@ import { BoomComponent } from './components/boom/boom.component';
 import { FilterBatchPipe } from './Pipes/filter-batch.pipe';
 import { OrderPipe } from './pipes/order.pipe';
 import { SearchPipe } from './pipes/search.pipe';
+import { UserFirstLastNamePipe } from './Pipes/userFirstLastName.pipe';
 
 @NgModule({
   imports: [
@@ -115,7 +116,8 @@ import { SearchPipe } from './pipes/search.pipe';
     FilterBatchPipe,
     AlertsComponent,
     BoomComponent,
-    ExistingSubtopicModalComponent
+    ExistingSubtopicModalComponent,
+    UserFirstLastNamePipe
   ],
   providers: [
     CurriculumWeekComponent,

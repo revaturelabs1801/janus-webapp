@@ -22,6 +22,7 @@ export class SubtopicService {
    * @param typeId number
    */
   addSubTopicName(subtopicName: string, topicId: number, typeId: number) {
+    console.log('heyejsfkdsdsdfs');
     return this.http.post<SubtopicName>(environment.subtopic.addSubTopicName(subtopicName, topicId, typeId), httpOptions).map(
       data => {
         return data;
@@ -32,7 +33,7 @@ export class SubtopicService {
   /**
    * Calls API to remove subtopic from the batch
    * subtopicId is unique to the subtopic and batch relationship
-   * @param subtopicId 
+   * @param subtopicId
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   removeSubtopicFromBatch(subtopicId: number) {
