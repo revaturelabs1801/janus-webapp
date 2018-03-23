@@ -1,0 +1,63 @@
+\chapter{API routes}
+\section{User Service API routes}
+\subsection{Post request}
+\begin{itemize}
+  \item To drop user: /api/v2/user/drop/{userId}
+  \item To update user: /api/v2/user/update/
+  \item To register user: /api/v2/user/register/
+  \item To remove user: /api/v2/user/remove/{userId}
+  \item To add user to batch: /api/v2/user/addUserToBatch/{userId}/{batchId}
+\end{itemize}
+
+\section{Batch Service API routes}
+\subsection{Get requests}
+\begin{itemize}
+  \item To get all batches: /api/v2/batch/all/
+  \item To get list of all past batches for the trainer:   /api/v2/batch/inprogress?email={email}
+  \item To get all in progress by trainer: /api/v2/batch/allinprogress?email={email}
+  \item To get batch by id: /api/v2/batch/byid/{id}
+  \item To get batch types: /api/v2/batch/batchtypes
+  \item To get current batches: /api/v2/batch/currentbatches
+  \item To get past batch by trainer email: /api/v2/batch/past?email={email}
+  \item To get future batch by trainer email: /api/v2/batch/future?email={email}
+\end{itemize}
+
+
+
+\subsection{Post requests}
+\begin{itemize}
+ \item To update or add batch: /api/v2/batch/updatebatch
+\end{itemize}
+
+\section{Curriculum API routes}
+\subsection{Get requests}
+\begin{itemize}
+    \item To get all curriculum: /api/v2/curriculum/all/
+    \item To get curriculum by id: /api/v2/curriculum/getcurriculum/{id}
+    \item To get curriculum by schedule: /api/v2/curriculum/schedule/{id}
+    \item To get all topic names: /api/v2/curriculum/topicpool/
+    \item To get all subtopics: /api/v2/curriculum/subtopicpool/
+    \item To make master curriculum: /api/v2/curriculum/makemaster/{id}
+    \item To synchronize curriculum with a batch: /api/v2/curriculum/syncbatch/{id}
+\end{itemize}
+
+\subsection{Post requests}
+\begin{itemize}
+    \item To add curriculum: /api/v2/curriculum/addcurriculum/
+    \item To delete curriculum version: /api/v2/curriculum/deleteversion/
+\end{itemize}
+
+\section{Topic API routes}
+\subsection{Get requests}
+\begin{itemize}
+    \item To get list of subtopics depending on what page: /api/v2/calendar/subtopicspagination/{batchId}/{pageNumber}/{pageSize}
+    \item To get list of subtopics for batch: /api/v2/calendar/subtopics/{batchId}
+    \item To get number of subtopics: /api/v2/calendar/getnumberofsubtopics/{batchId}
+    \item To get topics by batch: /api/v2/calendar/topics/{batchId}
+    \item To update status: /api/v2/calendar/statusupdate/{subtopicId}/{batchId}/{status}
+\end{itemize}
+\subsection{Post requests}
+\begin{itemize}
+    \item To update calender date: /api/v2/calendar/dateupdate/{subtopicId}/{batchId}/{date}
+    \item To add topic: /api/v2/calendar/addtopics
+\end{itemize}

@@ -1,0 +1,15 @@
+\chapter{Potential Improvements}
+\section{Use containerization}
+In micro-service architecture using containerization is ideal and save many debugging problems. Use docker swarm or PCF to configure and connect the micro-services.
+
+\section{Use Message Queue}
+In the current implementation we are using rest templates for internal service interaction. It is ideal for micro-service architecture to use streams to exchange data between services.
+
+\section{Add channel to Hystrix dashboard}
+Hystrix dashboard can used Turbine to track the health and circuit breaking of the services.
+
+\section{Use and Add YOUR custom configuration}
+Add your custom configurations to your configuration repository to match your architecture needs.
+
+\section{Front-end}
+Redo all of the services except the interceptors and everything will work flawlessly.
