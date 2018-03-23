@@ -33,7 +33,7 @@ export class SubtopicService {
   /**
    * Calls API to remove subtopic from the batch
    * subtopicId is unique to the subtopic and batch relationship
-   * @param subtopicId 
+   * @param subtopicId
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   removeSubtopicFromBatch(subtopicId: number) {

@@ -4,7 +4,7 @@ import { BatchType } from '../../../models/batchtype.model';
 import { Output } from '@angular/core/src/metadata/directives';
 import { BatchService } from '../../../services/batch.service';
 import { SessionService } from '../../../services/session.service';
-import {debounceTime} from 'rxjs/operator/debounceTime'; 
+import {debounceTime} from 'rxjs/operator/debounceTime';
 import {Subject} from 'rxjs/Subject';
 import { AlertService } from '../../../services/alert.service';
 
@@ -26,7 +26,7 @@ export class EditBatchComponent implements OnInit {
 
   // Specific to associates that are apart of the batch.
   @Input() searchTerm: string;
-  views: number = 0;
+  views = 0;
   associateAlertType: string;
   associateAlertMessage: string;
 
@@ -42,18 +42,18 @@ export class EditBatchComponent implements OnInit {
    */
   submit(typeId) {
 
-    //Check dates
-    //if dates are not correct 
-    //alert and return 
-    if(this.batch.startDate > this.batch.endDate){
-      //alert
-      this.batchAlert("danger", `Error: End date can't be earlier than start date.`);
-      return; 
+    // Check dates
+    // if dates are not correct
+    // alert and return
+    if (this.batch.startDate > this.batch.endDate) {
+      // alert
+      this.batchAlert('danger', `Error: End date can't be earlier than start date.`);
+      return;
     }
 
     let selectedType: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
-      if (typeId == this.batchTypes[i].id) {
+      if (typeId === this.batchTypes[i].id) {
         selectedType = this.batchTypes[i];
         break;
       }
@@ -61,10 +61,10 @@ export class EditBatchComponent implements OnInit {
 
     this.batch.type = selectedType;
     this.batchService.updateBatch(this.batch).subscribe( status => {
-      this.batchAlert("success", `Updated:  ${this.batch.name} successfully! `);
+      this.batchAlert('success', `Updated:  ${this.batch.name} successfully! `);
       this.sessionService.putSelectedBatchIntoSession(this.batch);
     }, error => {
-      this.batchAlert("danger", `Error: Update ${this.batch.name} unsuccessful! `);
+      this.batchAlert('danger', `Error: Update ${this.batch.name} unsuccessful! `);
     });
   }
 

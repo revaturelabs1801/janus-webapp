@@ -18,7 +18,7 @@ export class UsersService {
    * @author Cristian Hermida | Batch: 1712-dec10-java-steve
    * @returns BamUser[]
    */
-   getUser(id:number) : Observable<BamUser> {
+   getUser(id: number): Observable<BamUser> {
      return this.http.get<BamUser>(environment.users.getUserByIdUrl(id)).map(
        data => {
          return data;
