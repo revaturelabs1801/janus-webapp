@@ -35,8 +35,8 @@ export class FilterBatchPipe implements PipeTransform {
         searchText = searchText.toLowerCase();
 
         return items.filter((batch: Batch) => {
-            let trainer: BamUser;
-            this.usersService.getUser(batch["id"]).subscribe(trainer=>trainer=trainer);
+            const trainer: BamUser;
+            this.usersService.getUser(batch['id']).subscribe(newTrainer => trainer = newTrainer);
             const trainerName = `${trainer.fName} ${trainer.lName}`;
             return (
                 batch.type.name.toLowerCase().includes(searchText) ||

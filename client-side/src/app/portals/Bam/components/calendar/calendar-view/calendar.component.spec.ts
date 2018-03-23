@@ -16,6 +16,7 @@ import { CalendarStatusService } from '../../../services/calendar-status.service
 import { AddSubtopicService } from '../../../services/add-subtopic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { BamUser } from '../../../models/bamuser.model';
+// tslint:disable-next-line:import-blacklist
 import { Subject } from 'rxjs';
 import { Batch } from '../../../models/batch.model';
 import { BatchType } from '../../../models/batchtype.model';
@@ -52,7 +53,7 @@ export class StubSessionService {
   getSelectedBatch(): Batch {
 
     this.stubBatch = new Batch(12, 'name', new Date(), new Date(),
-    this.bamUser, new BatchType(11, 'type', 200));
+    this.bamUser.userId, new BatchType(11, 'type', 200));
 
     return this.stubBatch;
   }

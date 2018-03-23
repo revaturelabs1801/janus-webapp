@@ -11,7 +11,7 @@ export class WeeksExportDTO {
         let week_num = 1;
         this.data[row++][0] = nameAndVer;
         // For each week
-        for (let week of weeks) {
+        for (const week of weeks) {
             this.data[row] = [];
             this.data[row++][0] = 'Week ' + week_num;
             this.data[row] = [];
@@ -23,7 +23,7 @@ export class WeeksExportDTO {
             for (let col = 0; col < 5; col++) {
                 // Check if subtopic are in day
                 let diff = 0;
-                for (let subtopic of week) {
+                for (const subtopic of week) {
                     // If they are in day add to day
                     if (subtopic.curriculumSubtopicDay - 1 === col) {
                         // While there is already a topic in this row/col increment row

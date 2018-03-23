@@ -10,7 +10,7 @@ import 'rxjs/add/operator/do';
 export class UserFirstLastNamePipe implements PipeTransform {
   private user: BamUser;
   constructor(private usersService: UsersService) {
-    let user:BamUser;
+    const user: BamUser = null;
   }
   transform(value: number): Observable<String> {
      return this.usersService.getUser(value).map(res => res.fName + ' ' + res.lName);

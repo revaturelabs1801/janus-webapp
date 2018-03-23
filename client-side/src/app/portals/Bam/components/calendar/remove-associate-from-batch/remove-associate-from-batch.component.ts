@@ -40,7 +40,7 @@ export class RemoveAssociateFromBatchComponent implements OnInit {
    */
   removeUser(user: BamUser) {
     let i = 0;
-    for (let associate of this.associates) {
+    for (const associate of this.associates) {
       if (associate.userId === user.userId) {
         this.usersService.removeUserFromBatch(associate.userId).subscribe(users => {
           this.associates = users;

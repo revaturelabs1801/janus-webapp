@@ -20,14 +20,14 @@ import { CommonModule } from '@angular/common';
  * @author Jeffery Camacho | 1712-dec10-java-steve
  */
 export class ViewAssociatesComponent implements OnInit {
-  p: number = 1;
+  p = 1;
   associateList: BamUser[] = [] ;
   searchTerm: string;
-  order: string = 'lName';
-  reverse: boolean = false;
+  order = 'lName';
+  reverse = false;
   sessionUser: BamUser;
   currentBatch: Batch;
-  constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService, 
+  constructor(private usersService: UsersService, private sessionService: SessionService, private batchservice: BatchService,
     private orderPipe: Ng2OrderPipe ) {
     }
   ngOnInit() {
