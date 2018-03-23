@@ -12,7 +12,7 @@ import { RequestService } from '../../services/request-service/request.service';
  * Component for viewing an individual associate and editing as admin.
  */
 @Component({
-    selector: 'form-comp',
+    selector: 'app-form-comp',
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.css']
 })
@@ -27,7 +27,7 @@ export class FormComponent implements OnInit {
     id: number;
 
     constructor(private associateService: AssociateService, private rs: RequestService) {
-        let id = window.location.href.split('form-comp/')[1];
+        const id = window.location.href.split('form-comp/')[1];
         this.id = Number(id);
         this.associateService.getAssociate(this.id).subscribe(data => { this.associate = <Associate>data; });
     }
@@ -45,8 +45,8 @@ export class FormComponent implements OnInit {
             this.associateService.updateAssociate(this.id, this.selectedMarketingStatus, this.selectedClient).subscribe(
                 data => {
                     this.associateService.getAssociate(this.id).subscribe(
-                        data => {
-                            this.associate = <Associate>data;
+                        associate => {
+                            this.associate = <Associate>associate;
                         });
                 }
             );

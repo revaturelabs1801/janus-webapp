@@ -5,10 +5,9 @@ import { Dependencies } from '../../../../app.test.module';
 import { Trainee } from '../../entities/Trainee';
 
 
-describe('WeeklyFeedbackComponent', () => {
+xdescribe('WeeklyFeedbackComponent', () => {
   let component: WeeklyFeedbackComponent;
   let fixture: ComponentFixture<WeeklyFeedbackComponent>;
-  let trainee: Trainee;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies)

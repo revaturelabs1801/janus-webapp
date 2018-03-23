@@ -27,8 +27,8 @@ import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
 import { GranularityService } from './reports/services/granularity.service';
-import { ReportingService } from '../../services/reporting.service';
-import { PDFService } from '../../services/pdf.service';
+import { ReportingService } from './services/reporting.service';
+import { PDFService } from './services/pdf.service';
 import { CategoryService } from './services/category.service';
 import { SkillService } from './services/skill.service';
 import { TrainingTypeService } from './services/training-type.service';
@@ -44,7 +44,7 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 
-//N.T.
+// N.T.
 import { ApiService } from './util/api.service';
 
 // pipes

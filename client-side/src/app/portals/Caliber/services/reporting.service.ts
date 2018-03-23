@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { CacheData } from '../entities/CacheData.entity';
+import { CacheData } from '../../../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
-import { PanelReview } from '../portals/Caliber/entities/PanelReview';
-import { urls } from '../portals/Caliber/services/urls';
+import { PanelReview } from '../entities/PanelReview';
+import { urls } from './urls';
 
 
 
@@ -266,7 +265,7 @@ export class ReportingService {
     };
 
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
-      if (traineeId != 0) {
+      if (traineeId !== 0) {
         this.httpClient.get(endpoint)
         .subscribe(success => this.assessmentBreakdownBarChart.next({ params: params, data: success }));
       }

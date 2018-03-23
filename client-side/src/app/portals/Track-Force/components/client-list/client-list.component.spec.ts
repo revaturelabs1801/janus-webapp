@@ -12,8 +12,12 @@ import { HomeComponent } from '../home/home.component';
 import {AuthenticationService} from '../../services/authentication-service/authentication.service';
 import {RequestService} from '../../services/request-service/request.service';
 
+<<<<<<< HEAD
 describe('ClientListComponent', () => {
+=======
+xdescribe('ClientListComponent', () => {
   let component: ClientListComponent;
+>>>>>>> 1808-bam-dev
   let fixture: ComponentFixture<ClientListComponent>;
 
   beforeEach(async(() => {
@@ -36,7 +40,7 @@ describe('ClientListComponent', () => {
 
 
   it('should create', async(() => {
-    const fixture = TestBed.createComponent(ClientListComponent);
+    fixture = TestBed.createComponent(ClientListComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
