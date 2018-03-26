@@ -39,11 +39,7 @@ export class CalendarStatusService {
 
   /**
    * This service method determines what the next status in the cycle should be while factoring in when the date of the event is
-<<<<<<< HEAD
    * compared to what date it currently is.
-=======
-   * compared to what date it currently is.
->>>>>>> 1808-bam-dev
    * The current requirement is for dates in the past to not be able to be in the pending state
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */

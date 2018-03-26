@@ -14,22 +14,14 @@ import { BatchType } from '../../../models/batchtype.model';
 /**
  * @author David Graves, Cristian Hermida
  * @batch 1712
-<<<<<<< HEAD
  * Had to stub SessionService. It retrieved an object from sessionStorage,
-=======
- * Had to stub SessionService. It retrieved an object from sessionStorage,
->>>>>>> 1808-bam-dev
  * which is not available during testing. Had to provide mock data.
  */
 
 export class StubSessionService {
   bamUser: BamUser;
   stubBatch: Batch;
-<<<<<<< HEAD
 
-=======
-
->>>>>>> 1808-bam-dev
   constructor() {
       this.bamUser = {
         'userId': 3,
