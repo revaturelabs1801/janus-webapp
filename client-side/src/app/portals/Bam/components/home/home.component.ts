@@ -20,8 +20,4 @@ export class HomeComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1808-bam-dev

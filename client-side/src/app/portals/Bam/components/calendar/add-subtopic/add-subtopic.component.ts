@@ -15,15 +15,9 @@ import { Subtopic } from '../../../models/subtopic.model';
 import { AddSubtopicService } from '../../../services/add-subtopic.service';
 import { CalendarStatusService } from '../../../services/calendar-status.service';
 
-<<<<<<< HEAD
 // for jquery
 declare var $: any;
 let selectedSubtopic;
-=======
-//for jquery
-declare var $: any;
-var selectedSubtopic;
->>>>>>> 1808-bam-dev
 
 @Component({
   selector: 'app-add-subtopic',
@@ -51,11 +45,8 @@ export class AddSubtopicComponent implements OnInit {
 
   public uniqueTopics = new Set();
   public topicMap = new Map();
-<<<<<<< HEAD
+
   public subtopicList: Object[] = []; // strings
-=======
-  public subtopicList: Object[] = []; //strings
->>>>>>> 1808-bam-dev
   public selectedTopic: string;
   public selectedSubtopic: string;
   public selectedDate: any;
@@ -127,16 +118,6 @@ export class AddSubtopicComponent implements OnInit {
     * @param subtopics holds the subtopics result from the database call
 		*/
   getSubtopics(subtopics) {
-<<<<<<< HEAD
-    for (const i in subtopics) {
-      if (!this.uniqueTopics.has(subtopics[i].topic.name)) {
-        this.uniqueTopics.add(subtopics[i].topic.name);
-        const array = [];
-        array.push(subtopics[i].name);
-        this.topicMap.set(subtopics[i].topic.name, array);
-      } else {
-        const array = this.topicMap.get(subtopics[i].topic.name);
-=======
     for (let i in subtopics) {
       if (!this.uniqueTopics.has(subtopics[i].topic.name)) {
         this.uniqueTopics.add(subtopics[i].topic.name);
@@ -145,7 +126,6 @@ export class AddSubtopicComponent implements OnInit {
         this.topicMap.set(subtopics[i].topic.name, array);
       } else {
         let array = this.topicMap.get(subtopics[i].topic.name);
->>>>>>> 1808-bam-dev
         this.topicMap.delete(subtopics[i].topic.name);
         array.push(subtopics[i].name);
         this.topicMap.set(subtopics[i].topic.name, array);
@@ -163,11 +143,7 @@ export class AddSubtopicComponent implements OnInit {
     this.subtopicList = [];
     this.selectedSubtopic = 'Select a Subtopic';
     if (this.selectedTopic !== '' && this.selectedTopic !== 'Select a Topic') {
-<<<<<<< HEAD
-      for (const subtopic of Array.from(this.topicMap.get(this.selectedTopic))) {
-=======
       for (let subtopic of Array.from(this.topicMap.get(this.selectedTopic))) {
->>>>>>> 1808-bam-dev
         this.subtopicList.push(subtopic);
       }
     }
@@ -190,11 +166,7 @@ export class AddSubtopicComponent implements OnInit {
    */
   onChangeGetSubtopicInfo() {
     if (this.selectedSubtopic !== '' && this.selectedSubtopic !== 'Select a Subtopic') {
-<<<<<<< HEAD
-      for (const i in this.subtopics) {
-=======
       for (let i in this.subtopics) {
->>>>>>> 1808-bam-dev
         if (this.selectedSubtopic === this.subtopics[i].name) {
           this.topicId = this.subtopics[i].topic.id;
           this.subtopicId = this.subtopics[i].id;
@@ -214,11 +186,7 @@ export class AddSubtopicComponent implements OnInit {
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   saveSubtopic() {
-<<<<<<< HEAD
-    this.slectedDateMiliseconds = new Date(this.selectedDate + 'T09:00:00-05:00').getTime();
-=======
     this.slectedDateMiliseconds = new Date(this.selectedDate+"T09:00:00-05:00").getTime();
->>>>>>> 1808-bam-dev
 
     if (this.selectedTopic === 'Select a Topic' || this.selectedSubtopic === 'Select a Subtopic'
       || this.selectedTopic === '' || this.selectedSubtopic === '') {
@@ -238,20 +206,12 @@ export class AddSubtopicComponent implements OnInit {
           name: 'Missed'
         };
       }
-<<<<<<< HEAD
 
-=======
-
->>>>>>> 1808-bam-dev
       this.setSubtopicObject();
       if (this.checkSubtopics()) {
         this.subtopicsService.addSubtopic(this.subtopic).subscribe(
           (service) => {
-<<<<<<< HEAD
             const arr = [];
-=======
-            let arr = [];
->>>>>>> 1808-bam-dev
             this.batchSubtopics.push(service);
             this.currentlyAddedSubtopic.push(service);
             this.changeSuccessMessage(`Successfully added!`);
@@ -369,17 +329,10 @@ export class AddSubtopicComponent implements OnInit {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   selectSubtopic(subtopic: string) {
-<<<<<<< HEAD
-    if (selectedSubtopic !== undefined) {
-      $(selectedSubtopic).css('opacity', 1);
-    }
-    // html DOM object
-=======
     if (selectedSubtopic != undefined) {
       $(selectedSubtopic).css('opacity', 1);
     }
     //html DOM object
->>>>>>> 1808-bam-dev
     selectedSubtopic = event.target;
     $(selectedSubtopic).css('opacity', 0.5);
     this.selectedSubtopic = subtopic;
@@ -389,23 +342,12 @@ export class AddSubtopicComponent implements OnInit {
   /**
    * Returns the SubtopicName object associated with the subtopic name
    * Returns null if it cannot find it.
-<<<<<<< HEAD
-   *
-   * @param subtopic
-   * @author Sean Sung | Batch: 1712-dec10-java-steve
-   */
-  getSubtopicName(subtopic: string): SubtopicName {
-    for (const subtopicName of this.subtopics) {
-      if (subtopic === subtopicName.name) {
-=======
-   *
    * @param subtopic
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   getSubtopicName(subtopic: string): SubtopicName {
     for (let subtopicName of this.subtopics) {
       if (subtopic == subtopicName.name) {
->>>>>>> 1808-bam-dev
         return subtopicName;
       }
     }
@@ -415,15 +357,6 @@ export class AddSubtopicComponent implements OnInit {
   /**
    * Sets draggable on subtopic elements in the DOM to be dragged onto the calendar
    * Date is not known until it is placed on the calendar
-<<<<<<< HEAD
-   *
-   * @param event
-   * @param subtopic
-   * @author Sean Sung | Batch: 1712-dec10-java-steve
-   */
-  setDraggableOnSubtopic(event, subtopic: string) {
-    const subtopicData = new Subtopic(
-=======
    *
    * @param event
    * @param subtopic
@@ -431,34 +364,22 @@ export class AddSubtopicComponent implements OnInit {
    */
   setDraggableOnSubtopic(event, subtopic: string) {
     let subtopicData = new Subtopic(
->>>>>>> 1808-bam-dev
       null,
       this.getSubtopicName(subtopic),
       this.currentBatch,
       this.statusService.getDefaultStatus(),
       null
     );
-
-<<<<<<< HEAD
-    // attach data to draggable element
-    $(event.target).data('subtopic', subtopicData);
-    // set draggable
-=======
     //attach data to draggable element
     $(event.target).data("subtopic", subtopicData);
     //set draggable
->>>>>>> 1808-bam-dev
     $(event.target).draggable(
       {
         revert: true,
         revertDuration: 0,
         zIndex: 999,
         scroll: false,
-<<<<<<< HEAD
-        helper: 'clone'
-=======
         helper: "clone"
->>>>>>> 1808-bam-dev
       }
     );
   }

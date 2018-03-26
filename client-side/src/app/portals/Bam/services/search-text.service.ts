@@ -3,11 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 /**
-<<<<<<< HEAD
  * Used to communicate between TopicSearch, SubtopicSearch, and TopicPool components. Search components send search bar input to
-=======
- * Used to communicate between TopicSearch, SubtopicSearch, and TopicPool components. Search components send search bar input to
->>>>>>> 1808-bam-dev
  * topic pool to filter displayed topics/subtopics
  * @author Mohamed Swelam
  * @author Dylan Britton
