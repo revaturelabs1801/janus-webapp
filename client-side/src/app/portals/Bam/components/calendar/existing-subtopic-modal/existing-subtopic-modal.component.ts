@@ -3,11 +3,7 @@ import { Subtopic } from '../../../models/subtopic.model';
 
 /**
  *  This component opens a modal that checks if the user wishes to add an existing subtopic to the calendar.
-<<<<<<< HEAD
  *
-=======
- *
->>>>>>> 1808-bam-dev
  * 	@author Sean Sung (1712-dec10-java-Steve)
 **/
 

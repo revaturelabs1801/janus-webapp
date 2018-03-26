@@ -29,17 +29,10 @@ export class SearchPipe implements PipeTransform {
         if (!field || !value) {
             return items;
         }
-<<<<<<< HEAD
-        if (field === 'all') {
-            return items.filter(item => {
-                for (const i in item) {
-                    if (item[i] !== undefined) {
-=======
         if (field == 'all') {
             return items.filter(item => {
                 for (let i in item) {
                     if (item[i] != undefined) {
->>>>>>> 1808-bam-dev
                         if (item[i].toString().toLowerCase().includes(value.toLowerCase())) {
                             return true;
                         }
@@ -47,13 +40,8 @@ export class SearchPipe implements PipeTransform {
                 }
             });
         }
-<<<<<<< HEAD
-        if (field.split(',').length > 1) {
-            const fields = field.split(',');
-=======
         if (field.split(",").length > 1) {
             const fields = field.split(",");
->>>>>>> 1808-bam-dev
             return items.filter(item => {
                 for (const f in fields) {
                     if (item[fields[f].trim()].toLowerCase().includes(value.toLowerCase())) {

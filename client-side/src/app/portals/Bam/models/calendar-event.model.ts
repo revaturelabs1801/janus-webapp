@@ -11,8 +11,5 @@ export class CalendarEvent {
     status: string;
     color: string;
     constructor() { }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 1808-bam-dev
