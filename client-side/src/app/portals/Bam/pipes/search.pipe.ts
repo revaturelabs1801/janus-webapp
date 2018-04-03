@@ -31,7 +31,7 @@ export class SearchPipe implements PipeTransform {
         }
         if (field == 'all') {
             return items.filter(item => {
-                for (let i in item) {
+                for (const i in item) {
                     if (item[i] != undefined) {
                         if (item[i].toString().toLowerCase().includes(value.toLowerCase())) {
                             return true;
@@ -40,8 +40,8 @@ export class SearchPipe implements PipeTransform {
                 }
             });
         }
-        if (field.split(",").length > 1) {
-            const fields = field.split(",");
+        if (field.split(',').length > 1) {
+            const fields = field.split(',');
             return items.filter(item => {
                 for (const f in fields) {
                     if (item[fields[f].trim()].toLowerCase().includes(value.toLowerCase())) {

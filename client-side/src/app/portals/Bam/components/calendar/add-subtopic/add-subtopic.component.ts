@@ -118,14 +118,14 @@ export class AddSubtopicComponent implements OnInit {
     * @param subtopics holds the subtopics result from the database call
 		*/
   getSubtopics(subtopics) {
-    for (let i in subtopics) {
+    for (const i in subtopics) {
       if (!this.uniqueTopics.has(subtopics[i].topic.name)) {
         this.uniqueTopics.add(subtopics[i].topic.name);
-        let array = [];
+        const array = [];
         array.push(subtopics[i].name);
         this.topicMap.set(subtopics[i].topic.name, array);
       } else {
-        let array = this.topicMap.get(subtopics[i].topic.name);
+        const array = this.topicMap.get(subtopics[i].topic.name);
         this.topicMap.delete(subtopics[i].topic.name);
         array.push(subtopics[i].name);
         this.topicMap.set(subtopics[i].topic.name, array);
@@ -143,7 +143,7 @@ export class AddSubtopicComponent implements OnInit {
     this.subtopicList = [];
     this.selectedSubtopic = 'Select a Subtopic';
     if (this.selectedTopic !== '' && this.selectedTopic !== 'Select a Topic') {
-      for (let subtopic of Array.from(this.topicMap.get(this.selectedTopic))) {
+      for (const subtopic of Array.from(this.topicMap.get(this.selectedTopic))) {
         this.subtopicList.push(subtopic);
       }
     }
@@ -166,7 +166,7 @@ export class AddSubtopicComponent implements OnInit {
    */
   onChangeGetSubtopicInfo() {
     if (this.selectedSubtopic !== '' && this.selectedSubtopic !== 'Select a Subtopic') {
-      for (let i in this.subtopics) {
+      for (const i in this.subtopics) {
         if (this.selectedSubtopic === this.subtopics[i].name) {
           this.topicId = this.subtopics[i].topic.id;
           this.subtopicId = this.subtopics[i].id;
@@ -186,7 +186,7 @@ export class AddSubtopicComponent implements OnInit {
    * @author Francisco Palomino | Batch: 1712-dec10-java-steve
    */
   saveSubtopic() {
-    this.slectedDateMiliseconds = new Date(this.selectedDate+"T09:00:00-05:00").getTime();
+    this.slectedDateMiliseconds = new Date(this.selectedDate + 'T09:00:00-05:00').getTime();
 
     if (this.selectedTopic === 'Select a Topic' || this.selectedSubtopic === 'Select a Subtopic'
       || this.selectedTopic === '' || this.selectedSubtopic === '') {
@@ -346,7 +346,7 @@ export class AddSubtopicComponent implements OnInit {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   getSubtopicName(subtopic: string): SubtopicName {
-    for (let subtopicName of this.subtopics) {
+    for (const subtopicName of this.subtopics) {
       if (subtopic == subtopicName.name) {
         return subtopicName;
       }
@@ -363,7 +363,7 @@ export class AddSubtopicComponent implements OnInit {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   setDraggableOnSubtopic(event, subtopic: string) {
-    let subtopicData = new Subtopic(
+    const subtopicData = new Subtopic(
       null,
       this.getSubtopicName(subtopic),
       this.currentBatch,
@@ -371,7 +371,7 @@ export class AddSubtopicComponent implements OnInit {
       null
     );
     //attach data to draggable element
-    $(event.target).data("subtopic", subtopicData);
+    $(event.target).data('subtopic', subtopicData);
     //set draggable
     $(event.target).draggable(
       {
@@ -379,7 +379,7 @@ export class AddSubtopicComponent implements OnInit {
         revertDuration: 0,
         zIndex: 999,
         scroll: false,
-        helper: "clone"
+        helper: 'clone'
       }
     );
   }
