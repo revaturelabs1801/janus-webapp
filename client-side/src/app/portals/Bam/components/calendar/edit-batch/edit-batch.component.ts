@@ -26,7 +26,7 @@ export class EditBatchComponent implements OnInit {
 
   // Specific to associates that are apart of the batch.
   @Input() searchTerm: string;
-  views: number = 0;
+  views = 0;
   associateAlertType: string;
   associateAlertMessage: string;
 
@@ -44,9 +44,9 @@ export class EditBatchComponent implements OnInit {
     //Check dates
     //if dates are not correct
     //alert and return
-    if(this.batch.startDate > this.batch.endDate){
+    if (this.batch.startDate > this.batch.endDate){
       //alert
-      this.batchAlert("danger", `Error: End date can't be earlier than start date.`);
+      this.batchAlert('danger', `Error: End date can't be earlier than start date.`);
       return;
     }
 
@@ -60,10 +60,10 @@ export class EditBatchComponent implements OnInit {
 
     this.batch.type = selectedType;
     this.batchService.updateBatch(this.batch).subscribe( status => {
-      this.batchAlert("success", `Updated:  ${this.batch.name} successfully! `);
+      this.batchAlert('success', `Updated:  ${this.batch.name} successfully! `);
       this.sessionService.putSelectedBatchIntoSession(this.batch);
     }, error => {
-      this.batchAlert("danger", `Error: Update ${this.batch.name} unsuccessful! `);
+      this.batchAlert('danger', `Error: Update ${this.batch.name} unsuccessful! `);
     });
   }
 

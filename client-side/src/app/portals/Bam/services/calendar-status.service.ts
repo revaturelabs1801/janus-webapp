@@ -4,18 +4,18 @@ import { SubtopicStatus } from '../models/subtopicstatus.model';
 
 
 const Status = {
-  PLANNED: "Pending",
-  COMPLETED: "Completed",
-  CANCELED: "Canceled",
-  MISSED: "Missed"
-}
+  PLANNED: 'Pending',
+  COMPLETED: 'Completed',
+  CANCELED: 'Canceled',
+  MISSED: 'Missed'
+};
 
 const Color = {
-  PLANNED: "#5e8cb2",
-  COMPLETED: "green",
-  CANCELED: "#912e2e",
-  MISSED: "#c48013"
-}
+  PLANNED: '#5e8cb2',
+  COMPLETED: 'green',
+  CANCELED: '#912e2e',
+  MISSED: '#c48013'
+};
 
 @Injectable()
 export class CalendarStatusService {
